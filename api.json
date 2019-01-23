@@ -1,0 +1,1000 @@
+{
+  "users": [
+    {
+      "username": "gamma",
+      "password": "gamma",
+      "role": "ADMIN",
+      "fullname": "Gamma Rinaldi",
+      "email": "gammarinaldi@gmail.com",
+      "phone": "0812111111",
+      "img": "https://www.xing.com/assets/frontend_minified/img/users/nobody_m.256x256.jpg",
+      "id": 1
+    },
+    {
+      "username": "freya",
+      "password": "freya",
+      "role": "PRODUCER",
+      "fullname": "Freya Rinaldi",
+      "email": "freya@gmail.com",
+      "phone": "0812111111",
+      "img": "https://www.thedancehouse.co.uk/img/events/gallery/189-freya-ridings/189-freya-ridings-sm-3.jpg",
+      "id": 2
+    },
+    {
+      "username": "marion",
+      "password": "marion",
+      "role": "MEMBER",
+      "fullname": "Marion Jola",
+      "email": "marion@mail.com",
+      "phone": "0812111111",
+      "img": "https://asset-a.grid.id/crop/0x0:0x0/700x465/photo/2018/12/10/1063268109.jpg",
+      "id": 3
+    },
+    {
+      "username": "kezia",
+      "password": "kezia",
+      "role": "PRODUCER",
+      "fullname": "Kezia yang itu",
+      "email": "kezia@mail.com",
+      "phone": "0810110101",
+      "img": "https://i.pinimg.com/236x/09/c3/79/09c379561786a48b18ac6cb5a030aea2--masks.jpg",
+      "id": 4
+    },
+    {
+      "username": "admin",
+      "password": "admin",
+      "role": "ADMIN",
+      "fullname": "Admin",
+      "email": "admin@mail.com",
+      "phone": "000000000",
+      "img": "https://www.xing.com/assets/frontend_minified/img/users/nobody_m.256x256.jpg",
+      "id": 5
+    },
+    {
+      "username": "member",
+      "password": "member",
+      "role": "MEMBER",
+      "fullname": "Sang Member",
+      "email": "member@mail.com",
+      "phone": "0812000000",
+      "img": "https://i.pinimg.com/236x/09/c3/79/09c379561786a48b18ac6cb5a030aea2--masks.jpg",
+      "id": 6
+    },
+    {
+      "username": "angel",
+      "password": "angel",
+      "role": "PRODUCER",
+      "fullname": "Vanessa Angel",
+      "email": "angel@mail.com",
+      "phone": "08997778889",
+      "img": "https://cdn.moneysmart.id/wp-content/uploads/2019/01/06133521/Vanessa-Angel-Blog-min-700x497.jpg",
+      "id": 7
+    }
+  ],
+  "products": [
+    {
+      "idCategory": 1,
+      "idLocation": 1,
+      "item": "JC. Web & Mobile Developer",
+      "price": "15000000",
+      "img": "https://static.wixstatic.com/media/2e6af2_db2e7d5fead14942beafc013e812bbc7~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_db2e7d5fead14942beafc013e812bbc7~mv2.webp",
+      "startDate": "2019-01-21",
+      "endDate": "2019-04-30",
+      "startTime": "09:00",
+      "endTime": "16:00",
+      "desc": "<p>Anda akan belajar bagaimana membangun Full Stack Web Application yaitu front end dan back end development menggunakan teknologi Node JS dan membangun Mobile Application untuk multiplatform Android dan iOS menggunakan teknologi React Native.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS:</strong></p>\n<p><strong>Syllabus Program Jc.Web &amp; Mobile Developer</strong></p>\n<p><strong>Module - 01</strong></p>\n<p><strong>The Fundamental</strong></p>\n<p><strong>Programming Fundamental, Data Structure dan Algoritma</strong></p>\n<p>// 13 Kali Pertemuan</p>\n<p>Modul ini memberikan pengetahuan inti untuk Anda dapat memulai coding dalam bahasa pemograman apa pun. Modul ini menggunakan Javascript sebagai pilihan salah satu bahasa pemrogramannya untuk mengeksplorasi syntax dari sebuah bahasa pemrograman, dan menunjukan cara menulis dan mengkesekusi sebuah aplikasi serta mengertikan cara kerjanya.</p>\n<p>&nbsp;</p>\n<p><strong>Module - 02</strong></p>\n<p><strong>Front-End Development</strong></p>\n<p><strong>Web App Front End Development</strong></p>\n<p><strong>// 17 Kali Pertemuan</strong></p>\n<p>Pada modul ini, Anda akan belajar bagaimana membangun sebuah website yang interaktif dan Indah dengan HTML, CSS dan Javascript. HTML digunakan untuk membuat struktur dari sebuah website, CSS digunakan untuk membuat sebuah website menjadi Indah dari sisi warna, ukuran, dll dan Javascript digunakan untuk membuat sebuah website menjadi interaktif dengan adanya animasi.</p>\n<p>Setelah Anda menyelesaikan modul ini, Anda akan memiliki kemampuan untuk membuat sebuahwebsite yang interaktif.</p>\n<p>HTML, CSS, Javascript (React JS).</p>\n<p>&nbsp;</p>\n<p><strong>Module - 03</strong></p>\n<p><strong>Back-End Development</strong></p>\n<p><strong>Web App Back End Development</strong></p>\n<p><strong>// 21 Kali Pertemuan</strong></p>\n<p>Pada modul ini Anda akan belajar tidak hanya membuat sebuah website informatif tetapi Anda akan belajar membuat sebuah Web Application seperti E-Commerce.</p>\n<p>Anda akan belajar bagaimana sebuah Web dapat melakukan transaksi di dalamnya, bagaimana User dapat melakukan pendaftaran, login dan masih banyak lagi. Anda juga akan belajar bagaimana membuat Database dan fungsi CRUD.</p>\n<p>Node JS, Mongo DB, My SQL.</p>\n<p>&nbsp;</p>\n<p><strong>Module - 04</strong></p>\n<p><strong>Mobile Development</strong></p>\n<p><strong>Mobile App Development</strong></p>\n<p><strong>// 15 Kali Pertemuan</strong></p>\n<p>Tidak selesai sampai di Web App Development, di modul yang terakhir ini Anda akan belajar bagaimana membuat sebuah mobile app dengan menggunakan teknologi React Native yang nantinya aplikasi mobile Anda dapat di implementasikan kedua platform sekaligus yaitu platform Android dan iOS.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE:</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Job Connector</p>\n<p><strong>01</strong></p>\n<p><strong>15 Minggu Full Time Training</strong></p>\n<p>Anda akan belajar selama 15 minggu full time melalui sesi kelas dan workshop bagaimana membangun aplikasi web dan mobile. Di dalam masa belajar ini, Anda juga akan menghadapi ujian dan juga mengerjakan project yang akan menjadi portfolio Anda.</p>\n<p><strong>02</strong></p>\n<p><strong>Coding Bootcamp, Logic Test, Final Presentation</strong></p>\n<p>Setelah Anda selesai mengikuti training, Anda akan mengikuti tahapan akhir dari program ini yang akan menentukan apakah Anda dinyatakan lulus atau tidak dari program Job Connector ini.</p>\n<p>Tahapan akhir terdiri dari 5 hari Coding Challenge, 1 hari Logic Test Bootcamp dan 2 hari presentasi project yang telah dibuat.</p>\n<p><strong>03</strong></p>\n<p><strong>Career Preparation</strong></p>\n<p>Purwadhika juga mempersiapkan para lulusan program Job Connector bukan hanya dari sisi teknikal tapi juga pembekalan akan soft skill seperti bagaimana cara melakukan interview dan juga CV yang baik. Begitu juga tata cara berpakaian dan bersikap.</p>\n<p><strong>04</strong></p>\n<p><strong>Hiring Day</strong></p>\n<p>Inilah tahapan akhir dari program Job Connector , Anda akan dipertemukan dengan Perusahaan Hiring Partner Purwadhika melalui acara Hiring Day. Di dalam acara hiring day ini, Anda biasanya akan menghadapi test dan interview tahap awal dengan para Perusahaan Hiring Partner.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM ACTIVITY:</strong></p>\n<p>3 Jam - Sesi Training</p>\n<p>Anda akan belajar coding melalui sesi kelas bersama dengan Pengajar</p>\n<p>1 Jam - Istirahat / Break</p>\n<p>3 Jam - Self Coding Practice</p>\n<p>Anda akan diberikan coding challenge oleh Pengajar yang harus Anda selesaikan baik secara individual ataupun group selama 3 jam ke depan sebagai latihan dari apa yang telah dipelajari di sesi training.</p>\n<p><em>*Sesi Training terbagi di dua jadwal yaitu sesi Pagi (9 am - 12 pm) atau sesi Siang (1pm - 3 pm)</em></p>",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "id": 1,
+      "creator": "ADMIN",
+      "createdBy": "gamma"
+    },
+    {
+      "idCategory": 1,
+      "idLocation": 2,
+      "item": "JC. Web & Mobile Developer",
+      "price": "15000000",
+      "img": "https://static.wixstatic.com/media/2e6af2_db2e7d5fead14942beafc013e812bbc7~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_db2e7d5fead14942beafc013e812bbc7~mv2.webp",
+      "startDate": "2019-01-21",
+      "endDate": "2019-04-30",
+      "startTime": "09:00",
+      "endTime": "16:00",
+      "desc": "<p>Anda akan belajar bagaimana membangun Full Stack Web Application yaitu front end dan back end development menggunakan teknologi Node JS dan membangun Mobile Application untuk multiplatform Android dan iOS menggunakan teknologi React Native.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS:</strong></p>\n<p><strong>Syllabus Program Jc.Web &amp; Mobile Developer</strong></p>\n<p><strong>Module - 01</strong></p>\n<p><strong>The Fundamental</strong></p>\n<p><strong>Programming Fundamental, Data Structure dan Algoritma</strong></p>\n<p>// 13 Kali Pertemuan</p>\n<p>Modul ini memberikan pengetahuan inti untuk Anda dapat memulai coding dalam bahasa pemograman apa pun. Modul ini menggunakan Javascript sebagai pilihan salah satu bahasa pemrogramannya untuk mengeksplorasi syntax dari sebuah bahasa pemrograman, dan menunjukan cara menulis dan mengkesekusi sebuah aplikasi serta mengertikan cara kerjanya.</p>\n<p>&nbsp;</p>\n<p><strong>Module - 02</strong></p>\n<p><strong>Front-End Development</strong></p>\n<p><strong>Web App Front End Development</strong></p>\n<p><strong>// 17 Kali Pertemuan</strong></p>\n<p>Pada modul ini, Anda akan belajar bagaimana membangun sebuah website yang interaktif dan Indah dengan HTML, CSS dan Javascript. HTML digunakan untuk membuat struktur dari sebuah website, CSS digunakan untuk membuat sebuah website menjadi Indah dari sisi warna, ukuran, dll dan Javascript digunakan untuk membuat sebuah website menjadi interaktif dengan adanya animasi.</p>\n<p>Setelah Anda menyelesaikan modul ini, Anda akan memiliki kemampuan untuk membuat sebuahwebsite yang interaktif.</p>\n<p>HTML, CSS, Javascript (React JS).</p>\n<p>&nbsp;</p>\n<p><strong>Module - 03</strong></p>\n<p><strong>Back-End Development</strong></p>\n<p><strong>Web App Back End Development</strong></p>\n<p><strong>// 21 Kali Pertemuan</strong></p>\n<p>Pada modul ini Anda akan belajar tidak hanya membuat sebuah website informatif tetapi Anda akan belajar membuat sebuah Web Application seperti E-Commerce.</p>\n<p>Anda akan belajar bagaimana sebuah Web dapat melakukan transaksi di dalamnya, bagaimana User dapat melakukan pendaftaran, login dan masih banyak lagi. Anda juga akan belajar bagaimana membuat Database dan fungsi CRUD.</p>\n<p>Node JS, Mongo DB, My SQL.</p>\n<p>&nbsp;</p>\n<p><strong>Module - 04</strong></p>\n<p><strong>Mobile Development</strong></p>\n<p><strong>Mobile App Development</strong></p>\n<p><strong>// 15 Kali Pertemuan</strong></p>\n<p>Tidak selesai sampai di Web App Development, di modul yang terakhir ini Anda akan belajar bagaimana membuat sebuah mobile app dengan menggunakan teknologi React Native yang nantinya aplikasi mobile Anda dapat di implementasikan kedua platform sekaligus yaitu platform Android dan iOS.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE:</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Job Connector</p>\n<p><strong>01</strong></p>\n<p><strong>15 Minggu Full Time Training</strong></p>\n<p>Anda akan belajar selama 15 minggu full time melalui sesi kelas dan workshop bagaimana membangun aplikasi web dan mobile. Di dalam masa belajar ini, Anda juga akan menghadapi ujian dan juga mengerjakan project yang akan menjadi portfolio Anda.</p>\n<p><strong>02</strong></p>\n<p><strong>Coding Bootcamp, Logic Test, Final Presentation</strong></p>\n<p>Setelah Anda selesai mengikuti training, Anda akan mengikuti tahapan akhir dari program ini yang akan menentukan apakah Anda dinyatakan lulus atau tidak dari program Job Connector ini.</p>\n<p>Tahapan akhir terdiri dari 5 hari Coding Challenge, 1 hari Logic Test Bootcamp dan 2 hari presentasi project yang telah dibuat.</p>\n<p><strong>03</strong></p>\n<p><strong>Career Preparation</strong></p>\n<p>Purwadhika juga mempersiapkan para lulusan program Job Connector bukan hanya dari sisi teknikal tapi juga pembekalan akan soft skill seperti bagaimana cara melakukan interview dan juga CV yang baik. Begitu juga tata cara berpakaian dan bersikap.</p>\n<p><strong>04</strong></p>\n<p><strong>Hiring Day</strong></p>\n<p>Inilah tahapan akhir dari program Job Connector , Anda akan dipertemukan dengan Perusahaan Hiring Partner Purwadhika melalui acara Hiring Day. Di dalam acara hiring day ini, Anda biasanya akan menghadapi test dan interview tahap awal dengan para Perusahaan Hiring Partner.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM ACTIVITY:</strong></p>\n<p>3 Jam - Sesi Training</p>\n<p>Anda akan belajar coding melalui sesi kelas bersama dengan Pengajar</p>\n<p>1 Jam - Istirahat / Break</p>\n<p>3 Jam - Self Coding Practice</p>\n<p>Anda akan diberikan coding challenge oleh Pengajar yang harus Anda selesaikan baik secara individual ataupun group selama 3 jam ke depan sebagai latihan dari apa yang telah dipelajari di sesi training.</p>\n<p><em>*Sesi Training terbagi di dua jadwal yaitu sesi Pagi (9 am - 12 pm) atau sesi Siang (1pm - 3 pm)</em></p>",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "id": 2,
+      "creator": "ADMIN",
+      "createdBy": "gamma"
+    },
+    {
+      "idCategory": 1,
+      "idLocation": 2,
+      "item": "JC. Data Science",
+      "price": "15000000",
+      "img": "https://static.wixstatic.com/media/2e6af2_84e8f1a99e4c4aea8b149be4ae05b1f4~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_84e8f1a99e4c4aea8b149be4ae05b1f4~mv2.webp",
+      "startDate": "2019-01-14",
+      "endDate": "2019-03-12",
+      "startTime": "09:00",
+      "endTime": "16:00",
+      "desc": "<p>Program ini mempersiapkan Anda menjadi seorang Data Scientist yang dapat menciptakan program untuk memberikan analisis dan prediksi cerdas berdasarkan data yang ada. Anda akan belajar bahasa pemograman Python untuk Data Science, membuat program dan algoritma untuk menarik, mengolah dan menganalisa data dan hingga terciptanya sebuah prediksi yang akurat untuk kebutuhan sebuah bisnis.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS:</strong></p>\n<p><strong>Module - 01</strong></p>\n<p><strong>Programming Overview</strong></p>\n<p><strong>Python Programming Overview</strong></p>\n<p><strong>// 9 Kali Pertemuan</strong></p>\n<p>Di modul ini Anda akan belajar bagaimana melakukan programming dengan menggunakan Bahasa Python. Anda akan belajar Data Types yang terdapat di Python seperti numbers, strings, lists, Boolean, dll dan Anda akan belajar juga tentang Comparison Operators, if, else if, and else statements, for loops, while loops, functions, lambda expressions, dll.</p>\n<p><strong>Module - 02</strong></p>\n<p><strong>Data Science Programming</strong></p>\n<p><strong>Python for Data Science</strong></p>\n<p><strong>// 17 Kali Pertemuan</strong></p>\n<p>Di modul ini Anda akan belajar coding menggunakan library yang disediakan di Python seperti numpy, pandas, matplotlib, seaborn, dll untuk memanipulasi data dan menganalisa data sesuai yang kita perlukan dan memvisualisasikan data kita ke dalam bentuk yang lebih mudah untuk dimengerti dan indah (contoh: graph dan charts). Salah satu case study yang akan digunakan di dalam modul ini adalah menganalisa data transaksi E-Commerce.​</p>\n<p><strong>Module - 03</strong></p>\n<p><strong>Machine Learning</strong></p>\n<p><strong>Python for Machine Learning</strong></p>\n<p><strong>// 14 Kali Pertemuan</strong></p>\n<p>Di modul ini Anda akan belajar bagaimana cara membuat program yang dapat belajar dari data-data yang kita berikan, supaya program tersebut&nbsp; bisa memberikan sebuah prediksi dan keputusan yang Anda perlukan. Salah satu contoh case study yang akan digunakan di modul ini adalah menciptakan credit scoring: program yang dapat menentukan orang-orang yang dapat dipercaya dalam meminjam duit berdasarkan data history peminjaman dari orang-orang tersebut.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE:</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Job Connector</p>\n<p><strong>01</strong></p>\n<p><strong>9 Minggu Full Time Training</strong></p>\n<p>Anda akan belajar selama 9 minggu full time melalui sesi kelas dan workshop untuk membangun program yang dapat memberikan sebuah analisis dan prediksi cerdas yang diperlukan untuk sebuah bisnis. Di dalam masa belajar ini, Anda juga akan menghadapi ujian dan juga mengerjakan project yang akan menjadi portfolio Anda.</p>\n<p><strong>02</strong></p>\n<p><strong>Coding Bootcamp, Logic Test, Final Presentation</strong></p>\n<p>Setelah Anda selesai mengikuti training, Anda akan mengikuti tahapan akhir dari program ini yang akan menentukan apakah Anda dinyatakan lulus atau tidak dari program Job Connector ini.</p>\n<p>Tahapan akhir terdiri dari 5 hari Coding Challenge, 1 hari Logic Test Bootcamp dan 2 hari presentasi project yang telah dibuat.</p>\n<p><strong>03</strong></p>\n<p><strong>Career Preparation</strong></p>\n<p>Purwadhika juga mempersiapkan para lulusan program Job Connector bukan hanya dari sisi teknikal tapi juga pembekalan akan soft skill seperti bagaimana cara melakukan interview dan juga CV yang baik. Begitu juga tata cara berpakaian dan bersikap.</p>\n<p><strong>04</strong></p>\n<p><strong>Hiring Day</strong></p>\n<p>Inilah tahapan akhir dari program Job Connector, Anda akan dipertemukan dengan Perusahaan Hiring Partner Purwadhika melalui acara Hiring Day. Di dalam acara hiring day ini, Anda biasanya akan menghadapi test dan interview tahap awal dengan para Perusahaan Hiring Partner.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM ACTIVITY:</strong></p>\n<p>3 Jam - Sesi Training</p>\n<p>Anda akan belajar coding melalui sesi kelas bersama dengan Pengajar</p>\n<p>1 Jam - Istirahat / Break</p>\n<p>3 Jam - Self Coding Practice</p>\n<p>Anda akan diberikan coding challenge oleh Pengajar yang harus Anda selesaikan baik secara individual ataupun group selama 3 jam ke depan.</p>\n<p><em>*Sesi Training terbagi di dua jadwal yaitu sesi Pagi (9 am - 12 pm) atau sesi Siang (1pm - 3 pm)</em></p>",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "id": 3,
+      "creator": "ADMIN",
+      "createdBy": "gamma"
+    },
+    {
+      "idCategory": 1,
+      "idLocation": 1,
+      "item": "JC. Digital Marketing",
+      "price": "15000000",
+      "img": "https://static.wixstatic.com/media/2e6af2_f73625c5e4784e0bb4e220b40f67f02e~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_f73625c5e4784e0bb4e220b40f67f02e~mv2.webp",
+      "startDate": "2019-04-08",
+      "endDate": "2019-06-27",
+      "startTime": "09:00",
+      "endTime": "16:00",
+      "desc": "<p>Anda akan belajar Digital Marketing dari awal hingga menguasai teknik marketing menggunakan platform Digital seperti platform Social Media, SEO, Social Ads, Google Ads, Analytics platform, membuat Digital Marketing plan lengkap dari sisi content, budgeting hingga pelaksanaan dan masih banyak lagi.&nbsp;</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS</strong></p>\n<p>Syllabus Program Jc. Digital Marketing</p>\n<p><strong>Module - 01</strong></p>\n<p><strong>The Fundamental</strong></p>\n<p><strong>Digital Marketing Concept, Techniques, and more</strong></p>\n<p><strong>// 5 Kali Pertemuan</strong></p>\n<p>Modul ini akan memberikan Anda fundamental di bidang digital marketing dari platform yang tersedia, teknik yang dapat digunakan, membuat digital marketing plan, menentukan target audience, membuat customer journey&nbsp; mapping dan fundamental lainnya yang akan sangat diperlukan untuk menguasai digital marketing.&nbsp;</p>\n<p><strong>Module - 02</strong></p>\n<p><strong>The Asset</strong></p>\n<p><strong>Digital Marketing Asset</strong></p>\n<p><strong>// 7 Kali Pertemuan</strong></p>\n<p>Pada modul ini, Anda akan belajar bagaimana mempersiapkan Asset yang diperlukan untuk memulai kegiatan digital marketing seperti Web dan Mobile App. Anda juga akan belajar sedikit tentang HTML, CSS dan fundamental coding begitu juga dengan prinsip UI/UX.</p>\n<p><strong>Module - 03</strong></p>\n<p><strong>SEO &amp; SEM</strong></p>\n<p><strong>Search Engine Optimization and Search Engine Marketing</strong></p>\n<p><strong>// 11 Kali Pertemuan</strong></p>\n<p>Pada modul ini Anda akan belajar mengenai Search Engine Optimization yaitu teknik bagaimana membuat website Anda menjadi yang terdepan di halaman lembar pencarian di internet secara organik dan juga Search Engine Marketing yaitu bagaimana melakukan marketing menggunakan keyword.&nbsp;</p>\n<p><strong>Module - 04</strong></p>\n<p><strong>Social Media Marketing</strong></p>\n<p><strong>Social Media Marketing</strong></p>\n<p><strong>// 8 Kali Pertemuan</strong></p>\n<p>Pada Modul ini, Anda akan belajar bagaimana menggunakan platform social media seperti Facebook, Instagram , dan Linkedin untuk kegiatan Digital Marketing Anda baik secara organik ataupun berbayar. Anda juga akan belajar bagaimana membuat social media content planning, kalendar social media, dan juga menggunakan tool social media management.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Job Connector</p>\n<p><strong>01</strong></p>\n<p><strong>9 Minggu Full Time Training</strong></p>\n<p>Anda akan belajar selama 9 minggu full time utuk menjadi seorang professional Digital Marketer yang siap disalurkan bekerja di Perusahaan Hiring Partner Purwadhika.&nbsp;</p>\n<p>Di dalam program training, Anda juga akan diberikan project secara individual dan group untuk mengasah keahlian Digital Marketing Anda.</p>\n<p><strong>02</strong></p>\n<p><strong>Final Project with&nbsp;Real Client</strong></p>\n<p>Setelah Anda selesai mengikuti training, Anda akan mengikuti tahapan akhir dari program ini yang akan menentukan apakah Anda dinyatakan lulus atau tidak dari program Job Connector ini.</p>\n<p>Tahapan akhir ini adalah project akhir dimana Anda akan mengerjakan kegiatan Digital Marketing dari real client.</p>\n<p><strong>03</strong></p>\n<p><strong>Career Preparation</strong></p>\n<p>Purwadhika juga mempersiapkan para lulusan program Job Connector bukan hanya dari sisi teknikal tapi juga pembekalan akan soft skill seperti bagaimana cara melakukan interview dan juga CV yang baik. Begitu juga tata cara berpakaian dan bersikap.</p>\n<p><strong>04</strong></p>\n<p><strong>Hiring Day</strong></p>\n<p>Inilah tahapan akhir dari program Job Connector , Anda akan dipertemukan dengan Perusahaan Hiring Partner Purwadhika melalui acara Hiring Day. Di dalam acara hiring day ini, Anda biasanya akan menghadapi test dan interview tahap awal dengan para Perusahaan Hiring Partner.</p>\n<p>&nbsp;</p>\n<p><strong>Program Activity:</strong></p>\n<p><strong>3 Jam</strong></p>\n<p><strong>Sesi Training</strong></p>\n<p>Anda akan belajar Digital Marketing melalui sesi kelas bersama dengan Pengajar</p>\n<p><strong>1 Jam</strong></p>\n<p><strong>Istirahat / Break</strong></p>\n<p><strong>3 Jam</strong></p>\n<p><strong>Digital Marketing Self/Group Practice</strong></p>\n<p>Anda akan diberikan project baik secara individual ataupun Group untuk mengasah apa yang telah dipelajari di sesi kelas.&nbsp;</p>\n<p><em>*Sesi Training terbagi di dua jadwal yaitu sesi Pagi (9 am - 12 pm) atau sesi Siang (1pm - 3 pm)</em></p>",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "id": 4,
+      "creator": "ADMIN",
+      "createdBy": "gamma"
+    },
+    {
+      "idCategory": 1,
+      "idLocation": 2,
+      "item": "JC. Digital Marketing",
+      "price": "15000000",
+      "img": "https://static.wixstatic.com/media/2e6af2_f73625c5e4784e0bb4e220b40f67f02e~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_f73625c5e4784e0bb4e220b40f67f02e~mv2.webp",
+      "startDate": "2019-04-08",
+      "endDate": "2019-06-27",
+      "startTime": "09:00",
+      "endTime": "16:00",
+      "desc": "<p>Anda akan belajar Digital Marketing dari awal hingga menguasai teknik marketing menggunakan platform Digital seperti platform Social Media, SEO, Social Ads, Google Ads, Analytics platform, membuat Digital Marketing plan lengkap dari sisi content, budgeting hingga pelaksanaan dan masih banyak lagi.&nbsp;</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS</strong></p>\n<p>Syllabus Program Jc. Digital Marketing</p>\n<p><strong>Module - 01</strong></p>\n<p><strong>The Fundamental</strong></p>\n<p><strong>Digital Marketing Concept, Techniques, and more</strong></p>\n<p><strong>// 5 Kali Pertemuan</strong></p>\n<p>Modul ini akan memberikan Anda fundamental di bidang digital marketing dari platform yang tersedia, teknik yang dapat digunakan, membuat digital marketing plan, menentukan target audience, membuat customer journey&nbsp; mapping dan fundamental lainnya yang akan sangat diperlukan untuk menguasai digital marketing.&nbsp;</p>\n<p><strong>Module - 02</strong></p>\n<p><strong>The Asset</strong></p>\n<p><strong>Digital Marketing Asset</strong></p>\n<p><strong>// 7 Kali Pertemuan</strong></p>\n<p>Pada modul ini, Anda akan belajar bagaimana mempersiapkan Asset yang diperlukan untuk memulai kegiatan digital marketing seperti Web dan Mobile App. Anda juga akan belajar sedikit tentang HTML, CSS dan fundamental coding begitu juga dengan prinsip UI/UX.</p>\n<p><strong>Module - 03</strong></p>\n<p><strong>SEO &amp; SEM</strong></p>\n<p><strong>Search Engine Optimization and Search Engine Marketing</strong></p>\n<p><strong>// 11 Kali Pertemuan</strong></p>\n<p>Pada modul ini Anda akan belajar mengenai Search Engine Optimization yaitu teknik bagaimana membuat website Anda menjadi yang terdepan di halaman lembar pencarian di internet secara organik dan juga Search Engine Marketing yaitu bagaimana melakukan marketing menggunakan keyword.&nbsp;</p>\n<p><strong>Module - 04</strong></p>\n<p><strong>Social Media Marketing</strong></p>\n<p><strong>Social Media Marketing</strong></p>\n<p><strong>// 8 Kali Pertemuan</strong></p>\n<p>Pada Modul ini, Anda akan belajar bagaimana menggunakan platform social media seperti Facebook, Instagram , dan Linkedin untuk kegiatan Digital Marketing Anda baik secara organik ataupun berbayar. Anda juga akan belajar bagaimana membuat social media content planning, kalendar social media, dan juga menggunakan tool social media management.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Job Connector</p>\n<p><strong>01</strong></p>\n<p><strong>9 Minggu Full Time Training</strong></p>\n<p>Anda akan belajar selama 9 minggu full time utuk menjadi seorang professional Digital Marketer yang siap disalurkan bekerja di Perusahaan Hiring Partner Purwadhika.&nbsp;</p>\n<p>Di dalam program training, Anda juga akan diberikan project secara individual dan group untuk mengasah keahlian Digital Marketing Anda.</p>\n<p><strong>02</strong></p>\n<p><strong>Final Project with&nbsp;Real Client</strong></p>\n<p>Setelah Anda selesai mengikuti training, Anda akan mengikuti tahapan akhir dari program ini yang akan menentukan apakah Anda dinyatakan lulus atau tidak dari program Job Connector ini.</p>\n<p>Tahapan akhir ini adalah project akhir dimana Anda akan mengerjakan kegiatan Digital Marketing dari real client.</p>\n<p><strong>03</strong></p>\n<p><strong>Career Preparation</strong></p>\n<p>Purwadhika juga mempersiapkan para lulusan program Job Connector bukan hanya dari sisi teknikal tapi juga pembekalan akan soft skill seperti bagaimana cara melakukan interview dan juga CV yang baik. Begitu juga tata cara berpakaian dan bersikap.</p>\n<p><strong>04</strong></p>\n<p><strong>Hiring Day</strong></p>\n<p>Inilah tahapan akhir dari program Job Connector , Anda akan dipertemukan dengan Perusahaan Hiring Partner Purwadhika melalui acara Hiring Day. Di dalam acara hiring day ini, Anda biasanya akan menghadapi test dan interview tahap awal dengan para Perusahaan Hiring Partner.</p>\n<p>&nbsp;</p>\n<p><strong>Program Activity:</strong></p>\n<p><strong>3 Jam</strong></p>\n<p><strong>Sesi Training</strong></p>\n<p>Anda akan belajar Digital Marketing melalui sesi kelas bersama dengan Pengajar</p>\n<p><strong>1 Jam</strong></p>\n<p><strong>Istirahat / Break</strong></p>\n<p><strong>3 Jam</strong></p>\n<p><strong>Digital Marketing Self/Group Practice</strong></p>\n<p>Anda akan diberikan project baik secara individual ataupun Group untuk mengasah apa yang telah dipelajari di sesi kelas.&nbsp;</p>\n<p><em>*Sesi Training terbagi di dua jadwal yaitu sesi Pagi (9 am - 12 pm) atau sesi Siang (1pm - 3 pm)</em></p>",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "id": 5,
+      "creator": "ADMIN",
+      "createdBy": "admin"
+    },
+    {
+      "idCategory": 2,
+      "idLocation": 1,
+      "item": "Digital Startup Incubation",
+      "price": "20000000",
+      "img": "https://static.wixstatic.com/media/2e6af2_afcf8d108fd749ffadf70b9f44cc1aae~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_afcf8d108fd749ffadf70b9f44cc1aae~mv2.webp",
+      "startDate": "2019-03-24",
+      "endDate": "2019-08-18",
+      "startTime": "09:00",
+      "endTime": "16:00",
+      "desc": "<p>Melalui program ini Anda akan melewati proses learning by building dimana Anda akan belajar dan membangun produk Anda di waktu bersamaan dengan bantuan mentor dan koneksi kepada Investor. Tujuan akhir dari program ini adalah Anda akan memiliki prototype dari product Startup Anda yang</p>\n<p>siap untuk dikembangkan ke tahap selanjutnya yaitu pembuatan MVP dan startup Anda siap untuk melakukan pitching kepada para investor. Program ini juga memberikan kesempatan pendanaan awal sebesar @Rp.50 juta kepada 2 Startup terbaik setiap batch-nya.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS</strong></p>\n<p><strong>Syllabus program Startup Incubation</strong></p>\n<p><strong>Module - 01</strong></p>\n<p><strong>The Fundamental</strong></p>\n<p><strong>Startup Fundamental</strong></p>\n<p>Pada modul awal ini, Anda akan belajar tentang Startup Fundamental yaitu pengenalan akan dunia startup digital dan hal-hal apa saja yang harus dipersiapkan dalam membangun sebuah startup digital.&nbsp;</p>\n<p><strong>Module - 02</strong></p>\n<p><strong>Startup Grouping</strong></p>\n<p><strong>Pembentukan Startup</strong></p>\n<p>Anda akan membentuk sebuah Startup dengan maksimal anggota sebanyak 3 orang. Anda akan bersama-sama dengan co founder Startup Anda mencari ide bisnis terbaik, melakukan research dan validasi ide sampai kepada product development yaitu pembuatan prototyping produk aplikasi Startup Anda.</p>\n<p><strong>Module - 03</strong></p>\n<p><strong>Ideation and Validation</strong></p>\n<p><strong>Pencarian dan Validasi Ide Bisnis</strong></p>\n<p>Setelah group Startup terbentuk, Anda akan memasuki tahap dimana Anda akan mencari ide bisnis digital yang ingin dibangun dan Anda akan melakukan research untuk memvalidasi ide tersebut. Pada tahapan ini Anda akan dibantu oleh para mentor yang telah berpengalaman di industri Startup Digital sampai akhirnya Startup Anda akan mendapatkan ide bisnis yang final.</p>\n<p><strong>Module - 04</strong></p>\n<p><strong>Product Design</strong></p>\n<p><strong>Product Design &amp; Business Model</strong></p>\n<p>Ketika Startup Anda telah memiliki ide bisnis yang final, maka tahapan selanjutnya adalah Anda akan masuk ke dalam tahap product design dan bisnis model dimana Anda akan mempersiapkan hal-hal apa saja yang harus dilakukan pada tahapan product development nanti. Pada tahapan ini juga, setiap Startup akan memiliki system design dan rencana pengembangan produk yang solid.</p>\n<p><strong>Module - 05</strong></p>\n<p><strong>Product Development</strong></p>\n<p><strong>Product Development : Prototyping</strong></p>\n<p>Di tahap ini, Startup Anda akan membuat prototype dari ide bisnis yang telah dipilih sebelumnya. Prototype ini sangat diperlukan untuk memberikan gambaran yang jelas&nbsp; tentang product Anda kepada para Investor dan juga kepada Anda sendiri. Prototype juga sangat diperlukan untuk tahapan selanjutnya yaitu pembuatan MVP (Minimum Viable Product).</p>\n<p><strong>Module - 06</strong></p>\n<p><strong>Valuation &amp; Pitching&nbsp;</strong></p>\n<p><strong>Preparation</strong></p>\n<p><strong>Startup Valuation &amp; Pitching Preparation</strong></p>\n<p>Di tahap ini, Startup Anda akan diajarkan cara menghitung valuasi awal yang benar dan yang menarik bagi para Investor. Tidak hanya itu , Anda juga akan belajar bagaimana melakukan startup pitching dari persiapan pitch deck dan juga cara mempresentasikan (pitching) Startup Anda.&nbsp;</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Startup Incubation</p>\n<p><strong>01</strong></p>\n<p><strong>Business Idea</strong></p>\n<p>Anda akan dibantu oleh mentor yang telah berpengalaman di industri Startup Digital untuk mencari ide bisnis terbaik melalui proses research dan validasi. Proses ini merupakan tahapan awal yang sangat penting dan menentukan kesuksesan Startup Anda.</p>\n<p><strong>02</strong></p>\n<p><strong>Product Design</strong></p>\n<p>Setelah Startup Anda telah mendapatkan ide bisnis terbaik, Anda akan belajar bagaimana menciptakan bisnis model dan product design yang tepat.</p>\n<p><strong>03</strong></p>\n<p><strong>Product Development&nbsp;&nbsp;</strong></p>\n<p>Di tahap akhir ini, Startup Anda akan mempresentasikan prototype yang diperlukan untuk melakukan pitching kepada para Investor awal dan juga tahapan selanjutnya yaitu proses development MVP (Minimum Viable Product)</p>\n<p>&nbsp;</p>\n<p><strong>STARTUP INCUBATION ACTIVITIES</strong></p>\n<p><img src=\"https://static.wixstatic.com/media/2e6af2_0a329bf69bd2408dbdc4e3f28d3299fd~mv2_d_6130_2103_s_2.png/v1/fill/w_313,h_108,al_c,q_80,usm_0.66_1.00_0.01/2e6af2_0a329bf69bd2408dbdc4e3f28d3299fd~mv2_d_6130_2103_s_2.webp\" alt=\"Startup Connect\" width=\"313\" height=\"108\" /></p>\n<p><strong>Tentang Startup Connect</strong></p>\n<p>Startup Connect adalah sesi khusus yang diberikan kepada peserta Startup Incubation untuk dapat belajar langsung dari praktisi Startup yaitu para Startup Founder dan Venture Capital mengenai hal-hal yang diperlukan dalam membangun Startup yang sukses.</p>\n<p>&nbsp;</p>\n<p><img src=\"https://static.wixstatic.com/media/2e6af2_a04b047c391e4907ab4e0342de396469~mv2_d_6130_2103_s_2.png/v1/crop/x_8,y_0,w_6113,h_2103/fill/w_313,h_108,al_c,q_80,usm_0.66_1.00_0.01/2e6af2_a04b047c391e4907ab4e0342de396469~mv2_d_6130_2103_s_2.webp\" alt=\"Startup Talk\" width=\"313\" height=\"108\" /></p>\n<p><strong>Tentang Startup Talk</strong></p>\n<p>Startup Talk adalah sesi seminar yang terbuka untuk para Startup Enthusiast dimana di sesi seminar ini para pelaku dunia Startup akan membagi pengalamannya dalam menjalankan sebuah Startup di bidang mereka masing-masing.</p>\n<p>&nbsp;</p>\n<p><img src=\"https://static.wixstatic.com/media/2e6af2_af51e49e03c84e73ba04e6197ebb5637~mv2_d_6130_2103_s_2.png/v1/crop/x_8,y_0,w_6113,h_2103/fill/w_313,h_108,al_c,q_80,usm_0.66_1.00_0.01/2e6af2_af51e49e03c84e73ba04e6197ebb5637~mv2_d_6130_2103_s_2.webp\" alt=\"Startup Meetup\" width=\"313\" height=\"108\" /></p>\n<p><strong>Tentang Startup Meetup</strong></p>\n<p>Startup Meetup adalah wadah untuk komunitas dunia Startup bisa saling berbagi dan sharing mengenai hal-hal apa saja yang menjadi kendala dan juga berbagi tips bagaimana mengembangkan sebuah bisnis. Startup Meetup juga akan mendatangkan narasumber yaitu pelaku di dunia Startup.</p>\n<p>&nbsp;</p>\n<p><img src=\"https://static.wixstatic.com/media/2e6af2_5cc3f12f829b4606950ee13f21dc0057~mv2.jpg/v1/crop/x_21,y_0,w_659,h_393/fill/w_713,h_448,al_c,lg_1,q_80/2e6af2_5cc3f12f829b4606950ee13f21dc0057~mv2.webp\" alt=\"Kerja sama Purwadhika dengan Plug &amp; Play Indonesia\" width=\"713\" height=\"448\" /></p>\n<p><strong>Kerja sama Purwadhika dengan Plug &amp; Play Indonesia</strong></p>\n<p>Purwadhika Startup &amp; Coding School bekerja sama dengan Plug and Play Indonesia, Startup Accelerator dari Silicon Valley untuk mendukung pertumbuhan Startup Digital di Indonesia.&nbsp;</p>\n<p>​</p>\n<p>Kerja sama yang dilakukan adalah lulusan Startup dari program Startup Incubation Purwadhika akan dihubungkan kepada Plug &amp; Play Indonesia untuk dapat masuk ke dalam tahapan selanjutnya. Melalui program Startup Accelerator dari Plug &amp; Play, Startup akan dibantu untuk mengembangkan bisnis ke tingkat selanjutnya. Baca selengkapnya disini.&nbsp;</p>",
+      "days": [
+        "Sunday"
+      ],
+      "id": 6,
+      "creator": "ADMIN",
+      "createdBy": "admin"
+    },
+    {
+      "idCategory": 2,
+      "idLocation": 1,
+      "item": "Programming Fundamental",
+      "price": "7500000",
+      "img": "https://static.wixstatic.com/media/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.webp",
+      "startDate": "2019-01-27",
+      "endDate": "2019-02-24",
+      "startTime": "19:00",
+      "endTime": "22:00",
+      "desc": "<p>Programming Fundamental adalah program yang tepat bagi Anda yang ingin mulai belajar coding tanpa background IT sebelumnya. Program ini juga sangat sesuai untuk Anda yang ingin mendapatkan gambaran terlebih dahulu apakah Anda menyukai atau dapat menguasai Coding sebelum Anda terjun lebih dalam untuk mempelajarinya. Melalui training ini, Anda akan dilatih untuk membuat web app sederhana salah satunya seperti kalkulator.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS</strong></p>\n<p>Syllabus Program Programming Fundamental</p>\n<p><strong>The Fundamental</strong></p>\n<p><strong>Module - 01</strong></p>\n<p>Programming Fundamental, Data Structure &amp; Algoritma</p>\n<p>Di modul ini, Anda akan belajar dasar programming dengan menggunakan Bahasa pemograman Javascript.</p>\n<p>Anda akan dilatih untuk menyelesaikan masalah-masalah sebagai seorang programmer dan Anda juga akan belajar bagaimana menciptakan algoritma yang sistematis untuk menyelesaikan masalah tersebut.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Programming Fundamental</p>\n<p><strong>01</strong></p>\n<p><strong>05 Minggu Part Time Training</strong></p>\n<p>Anda akan belajar fundamental programming selama 5 minggu part time baik itu jadwal di hari weekend atau after hours.&nbsp;</p>\n<p><strong>02</strong></p>\n<p><strong>Simple Programming Practice</strong></p>\n<p>Selama training ini, Anda akan membuat portfolio aplikasi web sederhana seperti kalkulator, data form, dan masih banyak lagi.</p>\n<p>Di akhir program, Anda akan menguasai basic programming dengan bahasa pemograman Javascript dan memiliki cara berpikir logic yang lebih tajam dalam memecahkan sebuah masalah.</p>",
+      "days": [
+        "Tuesday",
+        "Thursday"
+      ],
+      "id": 7,
+      "creator": "ADMIN",
+      "createdBy": "admin"
+    },
+    {
+      "idCategory": 2,
+      "idLocation": 1,
+      "item": "Programming Fundamental",
+      "price": "7500000",
+      "img": "https://static.wixstatic.com/media/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.webp",
+      "startDate": "2019-03-24",
+      "endDate": "2019-04-21",
+      "startTime": "09:00",
+      "endTime": "16:00",
+      "desc": "<p>Programming Fundamental adalah program yang tepat bagi Anda yang ingin mulai belajar coding tanpa background IT sebelumnya. Program ini juga sangat sesuai untuk Anda yang ingin mendapatkan gambaran terlebih dahulu apakah Anda menyukai atau dapat menguasai Coding sebelum Anda terjun lebih dalam untuk mempelajarinya. Melalui training ini, Anda akan dilatih untuk membuat web app sederhana salah satunya seperti kalkulator.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS</strong></p>\n<p>Syllabus Program Programming Fundamental</p>\n<p><strong>The Fundamental</strong></p>\n<p><strong>Module - 01</strong></p>\n<p>Programming Fundamental, Data Structure &amp; Algoritma</p>\n<p>Di modul ini, Anda akan belajar dasar programming dengan menggunakan Bahasa pemograman Javascript.</p>\n<p>Anda akan dilatih untuk menyelesaikan masalah-masalah sebagai seorang programmer dan Anda juga akan belajar bagaimana menciptakan algoritma yang sistematis untuk menyelesaikan masalah tersebut.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Programming Fundamental</p>\n<p><strong>01</strong></p>\n<p><strong>05 Minggu Part Time Training</strong></p>\n<p>Anda akan belajar fundamental programming selama 5 minggu part time baik itu jadwal di hari weekend atau after hours.&nbsp;</p>\n<p><strong>02</strong></p>\n<p><strong>Simple Programming Practice</strong></p>\n<p>Selama training ini, Anda akan membuat portfolio aplikasi web sederhana seperti kalkulator, data form, dan masih banyak lagi.</p>\n<p>Di akhir program, Anda akan menguasai basic programming dengan bahasa pemograman Javascript dan memiliki cara berpikir logic yang lebih tajam dalam memecahkan sebuah masalah.</p>",
+      "days": [
+        "Tuesday",
+        "Thursday",
+        "Sunday"
+      ],
+      "id": 8,
+      "creator": "ADMIN",
+      "createdBy": "admin"
+    },
+    {
+      "idCategory": 2,
+      "idLocation": 1,
+      "item": "Web App Development",
+      "price": "7500000",
+      "img": "https://static.wixstatic.com/media/2e6af2_1141bd4a8ddf45a3badd9a24cb3f0aa0~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_1141bd4a8ddf45a3badd9a24cb3f0aa0~mv2.webp",
+      "startDate": "2019-03-24",
+      "endDate": "2019-09-29",
+      "startTime": "09:00",
+      "endTime": "16:00",
+      "desc": "<p>Program Web App Development adalah program belajar Coding dari Awal dan membangun Aplikasi web secara lengkap dari Front end dan Back end development (Full Stack). Di akhir course ini, Anda akan dapat membangun sebuah aplikasi web yang lengkap dan dapat berfungsi dengan baik.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS</strong></p>\n<p>Syllabus Program Web App Development</p>\n<p><strong>Module - 01</strong></p>\n<p><strong>The Fundamental</strong></p>\n<p><strong>Programming Fundamental, Data Structure &amp; Algoritma</strong></p>\n<p>Di modul ini, Anda akan belajar dasar programming dengan menggunakan Bahasa pemograman Javascript.</p>\n<p>Anda akan dilatih untuk menyelesaikan masalah-masalah sebagai seorang programmer dan Anda juga akan belajar bagaimana menciptakan algoritma yang sistematis untuk menyelesaikan masalah tersebut.</p>\n<p><strong>Module - 02</strong></p>\n<p><strong>Front-End Development</strong></p>\n<p><strong>Web App Front End Development</strong></p>\n<p>Pada modul ini, Anda akan belajar bagaimana membangun sebuah website yang interaktif dan Indah dengan HTML, CSS dan Javascript. HTML digunakan untuk membuat struktur dari sebuah website, CSS digunakan untuk membuat sebuah website menjadi Indah dari sisi warna, ukuran, dll dan Javascript digunakan untuk membuat sebuah website menjadi interaktif dengan adanya animasi.</p>\n<p>Setelah Anda menyelesaikan modul ini, Anda akan memiliki kemampuan untuk membuat sebuah website yang interaktif.</p>\n<p>HTML, CSS, Javascript (React JS).</p>\n<p><strong>Module - 03</strong></p>\n<p><strong>Back-End Development</strong></p>\n<p><strong>Web App Back End Development</strong></p>\n<p>Pada modul ini Anda akan belajar tidak hanya membuat sebuah website informatif tetapi Anda akan belajar membuat sebuah Web Application seperti E-Commerce.</p>\n<p>Anda akan belajar bagaimana sebuah Web dapat melakukan transaksi di dalamnya, bagaimana User dapat melakukan pendaftaran, login dan masih banyak lagi. Anda juga akan belajar bagaimana membuat Database dan fungsi CRUD.</p>\n<p>Node JS, Mongo DB, My SQL</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Web App Development</p>\n<p><strong>01</strong></p>\n<p><strong>06 Bulan Part Time Training</strong></p>\n<p>Anda akan belajar selama 06 bulan part time melalui sesi kelas bagaimana membangun aplikasi web baik front end dan back end development menggunakan teknologi Node JS.</p>\n<p><strong>02</strong></p>\n<p><strong>Project Portfolio</strong></p>\n<p>Selama training ini, Anda akan membuat portfolio aplikasi web yaitu E-Commerce sesuai dengan tahapan modul yang Anda ikuti.</p>\n<p>&nbsp;</p>\n<p>Di akhir program , Anda sudah dapat menguasai coding dan membangun sebuah aplikasi web seperti E-Commerce.</p>",
+      "days": [
+        "Tuesday",
+        "Thursday",
+        "Sunday"
+      ],
+      "id": 9,
+      "creator": "ADMIN",
+      "createdBy": "admin"
+    },
+    {
+      "idCategory": 2,
+      "idLocation": 2,
+      "item": "Web App Development",
+      "price": "7500000",
+      "img": "https://static.wixstatic.com/media/2e6af2_1141bd4a8ddf45a3badd9a24cb3f0aa0~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_1141bd4a8ddf45a3badd9a24cb3f0aa0~mv2.webp",
+      "startDate": "2019-01-27",
+      "endDate": "2019-08-04",
+      "startTime": "09:00",
+      "endTime": "16:00",
+      "desc": "<p>Program Web App Development adalah program belajar Coding dari Awal dan membangun Aplikasi web secara lengkap dari Front end dan Back end development (Full Stack). Di akhir course ini, Anda akan dapat membangun sebuah aplikasi web yang lengkap dan dapat berfungsi dengan baik.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS</strong></p>\n<p>Syllabus Program Web App Development</p>\n<p><strong>Module - 01</strong></p>\n<p><strong>The Fundamental</strong></p>\n<p><strong>Programming Fundamental, Data Structure &amp; Algoritma</strong></p>\n<p>Di modul ini, Anda akan belajar dasar programming dengan menggunakan Bahasa pemograman Javascript.</p>\n<p>Anda akan dilatih untuk menyelesaikan masalah-masalah sebagai seorang programmer dan Anda juga akan belajar bagaimana menciptakan algoritma yang sistematis untuk menyelesaikan masalah tersebut.</p>\n<p><strong>Module - 02</strong></p>\n<p><strong>Front-End Development</strong></p>\n<p><strong>Web App Front End Development</strong></p>\n<p>Pada modul ini, Anda akan belajar bagaimana membangun sebuah website yang interaktif dan Indah dengan HTML, CSS dan Javascript. HTML digunakan untuk membuat struktur dari sebuah website, CSS digunakan untuk membuat sebuah website menjadi Indah dari sisi warna, ukuran, dll dan Javascript digunakan untuk membuat sebuah website menjadi interaktif dengan adanya animasi.</p>\n<p>Setelah Anda menyelesaikan modul ini, Anda akan memiliki kemampuan untuk membuat sebuah website yang interaktif.</p>\n<p>HTML, CSS, Javascript (React JS).</p>\n<p><strong>Module - 03</strong></p>\n<p><strong>Back-End Development</strong></p>\n<p><strong>Web App Back End Development</strong></p>\n<p>Pada modul ini Anda akan belajar tidak hanya membuat sebuah website informatif tetapi Anda akan belajar membuat sebuah Web Application seperti E-Commerce.</p>\n<p>Anda akan belajar bagaimana sebuah Web dapat melakukan transaksi di dalamnya, bagaimana User dapat melakukan pendaftaran, login dan masih banyak lagi. Anda juga akan belajar bagaimana membuat Database dan fungsi CRUD.</p>\n<p>Node JS, Mongo DB, My SQL</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Web App Development</p>\n<p><strong>01</strong></p>\n<p><strong>06 Bulan Part Time Training</strong></p>\n<p>Anda akan belajar selama 06 bulan part time melalui sesi kelas bagaimana membangun aplikasi web baik front end dan back end development menggunakan teknologi Node JS.</p>\n<p><strong>02</strong></p>\n<p><strong>Project Portfolio</strong></p>\n<p>Selama training ini, Anda akan membuat portfolio aplikasi web yaitu E-Commerce sesuai dengan tahapan modul yang Anda ikuti.</p>\n<p>&nbsp;</p>\n<p>Di akhir program , Anda sudah dapat menguasai coding dan membangun sebuah aplikasi web seperti E-Commerce.</p>",
+      "days": [
+        "Tuesday",
+        "Thursday"
+      ],
+      "id": 10,
+      "creator": "PRODUCER",
+      "createdBy": "angel"
+    },
+    {
+      "idCategory": 2,
+      "idLocation": 2,
+      "item": "Web App Development",
+      "price": "7500000",
+      "img": "https://static.wixstatic.com/media/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.webp",
+      "startDate": "2019-02-26",
+      "endDate": "2019-09-03",
+      "startTime": "19:00",
+      "endTime": "22:00",
+      "desc": "<p>Program Web App Development adalah program belajar Coding dari Awal dan membangun Aplikasi web secara lengkap dari Front end dan Back end development (Full Stack). Di akhir course ini, Anda akan dapat membangun sebuah aplikasi web yang lengkap dan dapat berfungsi dengan baik.</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM SYLLABUS</strong></p>\n<p>Syllabus Program Web App Development</p>\n<p><strong>Module - 01</strong></p>\n<p><strong>The Fundamental</strong></p>\n<p><strong>Programming Fundamental, Data Structure &amp; Algoritma</strong></p>\n<p>Di modul ini, Anda akan belajar dasar programming dengan menggunakan Bahasa pemograman Javascript.</p>\n<p>Anda akan dilatih untuk menyelesaikan masalah-masalah sebagai seorang programmer dan Anda juga akan belajar bagaimana menciptakan algoritma yang sistematis untuk menyelesaikan masalah tersebut.</p>\n<p><strong>Module - 02</strong></p>\n<p><strong>Front-End Development</strong></p>\n<p><strong>Web App Front End Development</strong></p>\n<p>Pada modul ini, Anda akan belajar bagaimana membangun sebuah website yang interaktif dan Indah dengan HTML, CSS dan Javascript. HTML digunakan untuk membuat struktur dari sebuah website, CSS digunakan untuk membuat sebuah website menjadi Indah dari sisi warna, ukuran, dll dan Javascript digunakan untuk membuat sebuah website menjadi interaktif dengan adanya animasi.</p>\n<p>Setelah Anda menyelesaikan modul ini, Anda akan memiliki kemampuan untuk membuat sebuah website yang interaktif.</p>\n<p>HTML, CSS, Javascript (React JS).</p>\n<p><strong>Module - 03</strong></p>\n<p><strong>Back-End Development</strong></p>\n<p><strong>Web App Back End Development</strong></p>\n<p>Pada modul ini Anda akan belajar tidak hanya membuat sebuah website informatif tetapi Anda akan belajar membuat sebuah Web Application seperti E-Commerce.</p>\n<p>Anda akan belajar bagaimana sebuah Web dapat melakukan transaksi di dalamnya, bagaimana User dapat melakukan pendaftaran, login dan masih banyak lagi. Anda juga akan belajar bagaimana membuat Database dan fungsi CRUD.</p>\n<p>Node JS, Mongo DB, My SQL</p>\n<p>&nbsp;</p>\n<p><strong>PROGRAM STRUCTURE</strong></p>\n<p>Tahapan program yang akan Anda lewati di program Web App Development</p>\n<p><strong>01</strong></p>\n<p><strong>06 Bulan Part Time Training</strong></p>\n<p>Anda akan belajar selama 06 bulan part time melalui sesi kelas bagaimana membangun aplikasi web baik front end dan back end development menggunakan teknologi Node JS.</p>\n<p><strong>02</strong></p>\n<p><strong>Project Portfolio</strong></p>\n<p>Selama training ini, Anda akan membuat portfolio aplikasi web yaitu E-Commerce sesuai dengan tahapan modul yang Anda ikuti.</p>\n<p>&nbsp;</p>\n<p>Di akhir program , Anda sudah dapat menguasai coding dan membangun sebuah aplikasi web seperti E-Commerce.</p>",
+      "days": [
+        "Tuesday",
+        "Thursday"
+      ],
+      "id": 11,
+      "creator": "PRODUCER",
+      "createdBy": "angel"
+    }
+  ],
+  "supercart": [
+    {
+      "idProduct": 11,
+      "category": "Part Time Training",
+      "item": "Web App Development",
+      "price": "7500000",
+      "qty": 1,
+      "img": "https://static.wixstatic.com/media/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.webp",
+      "username": "admin",
+      "id": 1
+    },
+    {
+      "idProduct": 7,
+      "category": "Part Time Training",
+      "item": "Programming Fundamental",
+      "price": "7500000",
+      "qty": 1,
+      "img": "https://static.wixstatic.com/media/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.webp",
+      "username": "admin",
+      "id": 2
+    },
+    {
+      "idProduct": 9,
+      "category": "Part Time Training",
+      "item": "Web App Development",
+      "price": "7500000",
+      "qty": 1,
+      "img": "https://static.wixstatic.com/media/2e6af2_1141bd4a8ddf45a3badd9a24cb3f0aa0~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_1141bd4a8ddf45a3badd9a24cb3f0aa0~mv2.webp",
+      "username": "admin",
+      "id": 3
+    }
+  ],
+  "category": [
+    {
+      "name": "Job Connector",
+      "id": 1
+    },
+    {
+      "name": "Part Time Training",
+      "id": 2
+    },
+    {
+      "name": "Coding for Teens",
+      "id": 3
+    },
+    {
+      "name": "Event and Workshop",
+      "id": 4
+    },
+    {
+      "name": "Corporate",
+      "id": 5
+    }
+  ],
+  "location": [
+    {
+      "city": "BSD",
+      "address": "Jl. BSD Green Office Park, GOP 9 - G Floor, BSD City, Tangerang Banten 15345",
+      "coordinate": "6°18'07.3\"S 106°39'10.0\"E",
+      "id": 1
+    },
+    {
+      "city": "Jakarta",
+      "address": "Sinarmas MSIG Tower 40th Floor Sudirman - Jakarta Selatan",
+      "coordinate": "6°12'38.3\"S 106°49'20.2\"E",
+      "id": 2
+    }
+  ],
+  "productsdetails": [],
+  "orders": [
+    {
+      "username": "gamma",
+      "invoice": "INV/gamma/2018/11/18/184943",
+      "trxDate": "18/12/2018 @ 18:49:43",
+      "totalPrice": 80000,
+      "totalQty": 2,
+      "id": 1
+    },
+    {
+      "username": "gamma",
+      "invoice": "INV/gamma/2018/11/18/185043",
+      "trxDate": "18/12/2018 @ 18:50:43",
+      "totalPrice": 110000,
+      "totalQty": 4,
+      "id": 2
+    },
+    {
+      "username": "gamma",
+      "invoice": "INV/gamma/2018/11/18/185141",
+      "trxDate": "18/12/2018 @ 18:51:41",
+      "totalPrice": 210000,
+      "totalQty": 6,
+      "id": 3
+    },
+    {
+      "username": "gamma",
+      "invoice": "INV/gamma/2018/11/20/14418",
+      "trxDate": "20/12/2018 @ 14:41:8",
+      "totalPrice": 130000,
+      "totalQty": 3,
+      "id": 4
+    },
+    {
+      "username": "kezia",
+      "invoice": "INV/kezia/2018/11/20/152444",
+      "trxDate": "20/12/2018 @ 15:24:44",
+      "totalPrice": 305000,
+      "totalQty": 7,
+      "id": 5
+    },
+    {
+      "username": "marion",
+      "invoice": "INV/marion/2018/11/20/17442",
+      "trxDate": "20/12/2018 @ 17:4:42",
+      "totalPrice": 220000,
+      "totalQty": 8,
+      "id": 6
+    },
+    {
+      "username": "marion",
+      "invoice": "INV/marion/2018/11/20/17534",
+      "trxDate": "20/12/2018 @ 17:5:34",
+      "totalPrice": 145000,
+      "totalQty": 5,
+      "id": 7
+    },
+    {
+      "username": "kezia",
+      "invoice": "INV/kezia/2019/0/5/0312",
+      "trxDate": "5/1/2019 @ 0:3:12",
+      "totalPrice": 15000000,
+      "totalQty": 1,
+      "id": 8
+    }
+  ],
+  "orderdetails": [
+    {
+      "invoice": "INV/gamma/2018/11/18/184943",
+      "username": "gamma",
+      "itemDetails": [
+        {
+          "category": "Food",
+          "item": "Caramel Popcorn",
+          "price": 40000,
+          "qty": 2,
+          "username": "gamma",
+          "img": "https://cdn.cgv.id/uploads/concessions/101013.png",
+          "id": 1
+        }
+      ],
+      "id": 1
+    },
+    {
+      "invoice": "INV/gamma/2018/11/18/185043",
+      "username": "gamma",
+      "itemDetails": [
+        {
+          "category": "Food",
+          "item": "Caramel Popcorn",
+          "price": 40000,
+          "qty": 2,
+          "username": "gamma",
+          "img": "https://cdn.cgv.id/uploads/concessions/101013.png",
+          "id": 1
+        },
+        {
+          "category": "Beverage",
+          "item": "Nescafe",
+          "price": 15000,
+          "qty": 2,
+          "username": "gamma",
+          "img": "https://cdn.cgv.id/uploads/concessions/101050.png",
+          "id": 2
+        }
+      ],
+      "id": 2
+    },
+    {
+      "invoice": "INV/gamma/2018/11/18/185141",
+      "username": "gamma",
+      "itemDetails": [
+        {
+          "category": "Food",
+          "item": "Hotdog",
+          "price": 45000,
+          "qty": 3,
+          "username": "gamma",
+          "img": "https://cdn.cgv.id/uploads/concessions/101018.png",
+          "id": 1
+        },
+        {
+          "category": "Beverage",
+          "item": "Milo",
+          "price": 25000,
+          "qty": 3,
+          "username": "gamma",
+          "img": "https://cdn.cgv.id/uploads/concessions/101047.png",
+          "id": 2
+        }
+      ],
+      "id": 3
+    },
+    {
+      "invoice": "INV/gamma/2018/11/20/14418",
+      "username": "gamma",
+      "itemDetails": [
+        {
+          "category": "Food",
+          "item": "Caramel Popcorn",
+          "price": 40000,
+          "qty": 1,
+          "username": "gamma",
+          "img": "https://cdn.cgv.id/uploads/concessions/101013.png",
+          "id": 1
+        },
+        {
+          "category": "Food",
+          "item": "Hotdog",
+          "price": 45000,
+          "qty": 2,
+          "username": "gamma",
+          "img": "https://cdn.cgv.id/uploads/concessions/101018.png",
+          "id": 2
+        }
+      ],
+      "id": 4
+    },
+    {
+      "invoice": "INV/kezia/2018/11/20/152444",
+      "username": "kezia",
+      "itemDetails": [
+        {
+          "category": "Food",
+          "item": "Hotdog",
+          "price": 45000,
+          "qty": 5,
+          "username": "kezia",
+          "img": "https://cdn.cgv.id/uploads/concessions/101018.png",
+          "id": 1
+        },
+        {
+          "category": "Food",
+          "item": "Caramel Popcorn",
+          "price": 40000,
+          "qty": 2,
+          "username": "kezia",
+          "img": "https://cdn.cgv.id/uploads/concessions/101013.png",
+          "id": 2
+        }
+      ],
+      "id": 5
+    },
+    {
+      "invoice": "INV/marion/2018/11/20/17442",
+      "username": "marion",
+      "itemDetails": [
+        {
+          "category": "Beverage",
+          "item": "Mineral Water",
+          "price": 10000,
+          "qty": 3,
+          "username": "marion",
+          "img": "https://cdn.cgv.id/uploads/concessions/100032.png",
+          "id": 1
+        },
+        {
+          "category": "Food",
+          "item": "Caramel Popcorn",
+          "price": 40000,
+          "qty": 1,
+          "username": "marion",
+          "img": "https://cdn.cgv.id/uploads/concessions/101013.png",
+          "id": 2
+        },
+        {
+          "category": "Food",
+          "item": "Salty Popcorn",
+          "price": "35000",
+          "qty": 1,
+          "username": "marion",
+          "img": "https://cdn.cgv.id/uploads/concessions/101013.png",
+          "id": 3
+        },
+        {
+          "category": "Food",
+          "item": "Hotdog",
+          "price": 45000,
+          "qty": 2,
+          "username": "marion",
+          "img": "https://cdn.cgv.id/uploads/concessions/101018.png",
+          "id": 4
+        },
+        {
+          "category": "Beverage",
+          "item": "Milo",
+          "price": 25000,
+          "qty": 1,
+          "username": "marion",
+          "img": "https://cdn.cgv.id/uploads/concessions/101047.png",
+          "id": 5
+        }
+      ],
+      "id": 6
+    },
+    {
+      "invoice": "INV/marion/2018/11/20/17534",
+      "username": "marion",
+      "itemDetails": [
+        {
+          "category": "Food",
+          "item": "Caramel Popcorn",
+          "price": 40000,
+          "qty": 2,
+          "username": "marion",
+          "img": "https://cdn.cgv.id/uploads/concessions/101013.png",
+          "id": 1
+        },
+        {
+          "category": "Beverage",
+          "item": "Nescafe",
+          "price": 15000,
+          "qty": 2,
+          "username": "marion",
+          "img": "https://cdn.cgv.id/uploads/concessions/101050.png",
+          "id": 2
+        },
+        {
+          "category": "Food",
+          "item": "Salty Popcorn",
+          "price": "35000",
+          "qty": 1,
+          "username": "marion",
+          "img": "https://cdn.cgv.id/uploads/concessions/101013.png",
+          "id": 3
+        }
+      ],
+      "id": 7
+    },
+    {
+      "invoice": "INV/kezia/2019/0/5/0312",
+      "username": "kezia",
+      "itemDetails": [
+        {
+          "category": "Job Connector",
+          "item": "Web & Mobile Developer",
+          "price": "15000000",
+          "qty": 1,
+          "username": "kezia",
+          "img": "https://static.wixstatic.com/media/2e6af2_db2e7d5fead14942beafc013e812bbc7~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_db2e7d5fead14942beafc013e812bbc7~mv2.webp",
+          "id": 1
+        }
+      ],
+      "id": 8
+    }
+  ],
+  "activitylog": [
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Edit user: member",
+      "date": "11/1/2019 @ 5:54:43",
+      "id": 1
+    },
+    {
+      "desc": "Add wishlist: Web App Development",
+      "date": "11/1/2019 @ 6:49:8",
+      "id": 2
+    },
+    {
+      "desc": "Add wishlist: Web App Development",
+      "date": "11/1/2019 @ 6:49:55",
+      "id": 3
+    },
+    {
+      "username": "admin",
+      "desc": "Add wishlist: Web App Development",
+      "date": "11/1/2019 @ 6:51:23",
+      "id": 4
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Login",
+      "date": "12/1/2019 @ 11:25:23",
+      "id": 5
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Login",
+      "date": "13/1/2019 @ 16:55:44",
+      "id": 6
+    },
+    {
+      "username": "admin",
+      "desc": "Add wishlist: Web App Development",
+      "date": "13/1/2019 @ 22:8:41",
+      "id": 7
+    },
+    {
+      "username": "admin",
+      "desc": "Add wishlist: Web App Development",
+      "date": "13/1/2019 @ 22:10:40",
+      "id": 8
+    },
+    {
+      "username": "admin",
+      "desc": "Add wishlist: JC. Digital Marketing",
+      "date": "13/1/2019 @ 22:10:45",
+      "id": 9
+    },
+    {
+      "username": "angel",
+      "role": "MEMBER",
+      "desc": "Login",
+      "date": "16/1/2019 @ 10:28:46",
+      "id": 10
+    },
+    {
+      "username": "angel",
+      "role": "MEMBER",
+      "desc": "Logout",
+      "date": "16/1/2019 @ 10:29:19",
+      "id": 11
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Login",
+      "date": "16/1/2019 @ 10:29:25",
+      "id": 12
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Edit user: angel",
+      "date": "16/1/2019 @ 10:29:34",
+      "id": 13
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Edit user: kezia",
+      "date": "16/1/2019 @ 10:29:46",
+      "id": 14
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Login",
+      "date": "16/1/2019 @ 16:17:52",
+      "id": 15
+    },
+    {
+      "username": "angel",
+      "role": "PRODUCER",
+      "desc": "Login",
+      "date": "19/1/2019 @ 10:12:41",
+      "id": 16
+    },
+    {
+      "username": "angel",
+      "role": "PRODUCER",
+      "desc": "Logout",
+      "date": "19/1/2019 @ 10:13:43",
+      "id": 17
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Login",
+      "date": "19/1/2019 @ 10:13:47",
+      "id": 18
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Logout",
+      "date": "19/1/2019 @ 10:17:7",
+      "id": 19
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Logout",
+      "date": "19/1/2019 @ 11:7:52",
+      "id": 20
+    },
+    {
+      "username": "member",
+      "role": "MEMBER",
+      "desc": "Login",
+      "date": "19/1/2019 @ 11:7:57",
+      "id": 21
+    },
+    {
+      "username": "member",
+      "role": "MEMBER",
+      "desc": "Logout",
+      "date": "19/1/2019 @ 11:8:2",
+      "id": 22
+    },
+    {
+      "username": "kezia",
+      "role": "PRODUCER",
+      "desc": "Login",
+      "date": "19/1/2019 @ 11:8:6",
+      "id": 23
+    },
+    {
+      "username": "kezia",
+      "role": "PRODUCER",
+      "desc": "Logout",
+      "date": "19/1/2019 @ 11:8:22",
+      "id": 24
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Login",
+      "date": "19/1/2019 @ 11:8:28",
+      "id": 25
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Logout",
+      "date": "19/1/2019 @ 11:11:54",
+      "id": 26
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Login",
+      "date": "19/1/2019 @ 11:37:18",
+      "id": 27
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Login",
+      "date": "20/1/2019 @ 9:13:33",
+      "id": 28
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Logout",
+      "date": "20/1/2019 @ 22:33:56",
+      "id": 29
+    },
+    {
+      "username": "angel",
+      "role": "PRODUCER",
+      "desc": "Login",
+      "date": "20/1/2019 @ 22:41:33",
+      "id": 30
+    },
+    {
+      "username": "angel",
+      "role": "PRODUCER",
+      "desc": "Logout",
+      "date": "20/1/2019 @ 22:43:36",
+      "id": 31
+    },
+    {
+      "username": "member",
+      "role": "MEMBER",
+      "desc": "Login",
+      "date": "20/1/2019 @ 22:43:52",
+      "id": 32
+    },
+    {
+      "username": "member",
+      "role": "MEMBER",
+      "desc": "Logout",
+      "date": "20/1/2019 @ 22:45:35",
+      "id": 33
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Login",
+      "date": "20/1/2019 @ 22:45:41",
+      "id": 34
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Logout",
+      "date": "20/1/2019 @ 22:46:29",
+      "id": 35
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Login",
+      "date": "23/1/2019 @ 8:28:3",
+      "id": 36
+    },
+    {
+      "username": "admin",
+      "role": "ADMIN",
+      "desc": "Logout",
+      "date": "23/1/2019 @ 8:52:36",
+      "id": 37
+    },
+    {
+      "username": "kezia",
+      "role": "PRODUCER",
+      "desc": "Login",
+      "date": "23/1/2019 @ 8:52:43",
+      "id": 38
+    },
+    {
+      "username": "kezia",
+      "role": "PRODUCER",
+      "desc": "Logout",
+      "date": "23/1/2019 @ 9:39:58",
+      "id": 39
+    }
+  ],
+  "wishlist": [
+    {
+      "username": "admin",
+      "idProduct": 11,
+      "category": [
+        false,
+        "Part Time Training",
+        false,
+        false,
+        false
+      ],
+      "item": "Web App Development",
+      "price": "7500000",
+      "img": "https://static.wixstatic.com/media/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.webp",
+      "id": 8
+    },
+    {
+      "username": "admin",
+      "idProduct": 10,
+      "category": [
+        false,
+        "Part Time Training",
+        false,
+        false,
+        false
+      ],
+      "item": "Web App Development",
+      "price": "7500000",
+      "img": "https://static.wixstatic.com/media/2e6af2_1141bd4a8ddf45a3badd9a24cb3f0aa0~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_1141bd4a8ddf45a3badd9a24cb3f0aa0~mv2.webp",
+      "id": 9
+    },
+    {
+      "username": "member",
+      "idProduct": 11,
+      "category": [
+        false,
+        "Part Time Training",
+        false,
+        false,
+        false
+      ],
+      "item": "Web App Development",
+      "price": "7500000",
+      "img": "https://static.wixstatic.com/media/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_18116f6209454cae921dc6c28eb11119~mv2.webp",
+      "id": 10
+    },
+    {
+      "username": "member",
+      "idProduct": 10,
+      "category": [
+        false,
+        "Part Time Training",
+        false,
+        false,
+        false
+      ],
+      "item": "Web App Development",
+      "price": "7500000",
+      "img": "https://static.wixstatic.com/media/2e6af2_1141bd4a8ddf45a3badd9a24cb3f0aa0~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_1141bd4a8ddf45a3badd9a24cb3f0aa0~mv2.webp",
+      "id": 11
+    },
+    {
+      "username": "kezia",
+      "idProduct": 6,
+      "category": [
+        false,
+        "Part Time Training",
+        false,
+        false,
+        false
+      ],
+      "item": "Digital Startup Incubation",
+      "price": "20000000",
+      "img": "https://static.wixstatic.com/media/2e6af2_afcf8d108fd749ffadf70b9f44cc1aae~mv2.png/v1/fill/w_438,h_466,al_c,lg_1,q_80/2e6af2_afcf8d108fd749ffadf70b9f44cc1aae~mv2.webp",
+      "id": 12
+    }
+  ]
+}
