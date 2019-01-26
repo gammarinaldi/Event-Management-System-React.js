@@ -18,11 +18,8 @@ export const onUserLogin = ({ username, password }) => {
 
         dispatch({ type: AUTH_LOADING });
         
-        axios.get(API_URL_1 + '/auth/login', { 
-            params: {
-                username: username,
-                password: password
-            }
+        axios.post(API_URL_1 + '/auth/login', { 
+            username, password
          })
         .then((res) => {
             if(res.data.length > 0) {

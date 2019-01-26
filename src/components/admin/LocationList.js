@@ -30,7 +30,7 @@ class LocationList extends Component {
     }
 
     showLocation = () => {
-    axios.get(API_URL_1 + '/location')
+    axios.get(API_URL_1 + '/location/getlistlocation')
             .then((res) => {
                 console.log(res);
                 this.setState({ 
@@ -50,7 +50,7 @@ class LocationList extends Component {
         const coordinate = this.refs.addCoor.value;
 
         if(city) {
-            axios.post(API_URL_1 + '/location', {
+            axios.post(API_URL_1 + '/location/addlocation', {
                 city, address, coordinate
             }).then((res) => {
                 console.log(res);

@@ -60,7 +60,7 @@ class RegisterPage extends Component {
                 <div>
                     <div className="card bg-light">
                     <br/><br/>
-                    <article className="card-body mx-auto shadow p-3 mb-5 bg-white rounded" style={{ maxWidth: 400 }}>
+                    <article className="card-body col-3 mx-auto shadow p-3 mb-5 bg-white rounded">
                         <h5 className="card-title mt-3 text-center" 
                         style={{ fontSize: "16px" }}>Create an Account</h5><br/>
                         

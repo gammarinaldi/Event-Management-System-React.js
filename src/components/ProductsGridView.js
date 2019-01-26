@@ -27,7 +27,7 @@ class ProductsGridView extends Component {
     }
 
     showCategory = () => {
-        axios.get(API_URL_1 + '/category')
+        axios.get(API_URL_1 + '/category/getlistcategory')
         .then((res) => {
             this.setState({ 
                 listCategory: res.data,
@@ -48,7 +48,7 @@ class ProductsGridView extends Component {
     }
 
     showLocation = () => {
-        axios.get(API_URL_1 + '/location')
+        axios.get(API_URL_1 + '/location/getlistlocation')
         .then((res) => {
             this.setState({ 
                 listLocation: res.data 
@@ -68,7 +68,7 @@ class ProductsGridView extends Component {
     }
 
     showProducts = () => {
-        axios.get(API_URL_1 + '/products')
+        axios.get(API_URL_1 + '/products/getlistproducts')
         .then((res) => {
             this.setState({ 
                 listProducts: res.data, 
@@ -87,7 +87,7 @@ class ProductsGridView extends Component {
         var hargaMax = parseInt(this.refs.qHargaMax.value);
 
         if(location !== "" && category === "") {
-            axios.get(API_URL_1 + '/location', {
+            axios.get(API_URL_1 + '/location/getlistlocation', {
                 params: {
                     city: location
                 }
@@ -109,7 +109,7 @@ class ProductsGridView extends Component {
                 console.log(err);
             })
         } else if(category !== "" && location === "") {
-            axios.get(API_URL_1 + '/category', {
+            axios.get(API_URL_1 + '/category/getlistcategory', {
                 params: {
                     name: category
                 }
@@ -131,7 +131,7 @@ class ProductsGridView extends Component {
                 console.log(err);
             })
         } else if(location !== "" && category !== "") {
-            axios.get(API_URL_1 + '/location', {
+            axios.get(API_URL_1 + '/location/getlistlocation', {
                 params: {
                     city: location
                 }
@@ -140,7 +140,7 @@ class ProductsGridView extends Component {
                     idLocation: res.data[0].id 
                 });
 
-                axios.get(API_URL_1 + '/category', {
+                axios.get(API_URL_1 + '/category/getlistcategory', {
                     params: {
                         name: category
                     }

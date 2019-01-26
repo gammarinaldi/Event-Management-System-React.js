@@ -7,6 +7,7 @@ import { faCalendarCheck, faMapMarkerAlt, faBriefcase, faCalculator, faClock } f
 import { Link } from 'react-router-dom';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import axios from 'axios';
+import moment from 'moment';
 
 class ProductsItems extends Component {
 
@@ -37,7 +38,7 @@ class ProductsItems extends Component {
     }
 
     showCategory = () => {
-        axios.get(API_URL_1 + '/category')
+        axios.get(API_URL_1 + '/category/getlistcategory')
         .then((res) => {
             this.setState({ 
                 listCategory: res.data
@@ -57,7 +58,7 @@ class ProductsItems extends Component {
     }
 
     showCity = () => {
-        axios.get(API_URL_1 + '/location')
+        axios.get(API_URL_1 + '/location/getlistlocation')
         .then((res) => {
             this.setState({ 
                 locationDetails: res.data 
@@ -135,7 +136,9 @@ class ProductsItems extends Component {
     }
 
     render() {
-        const { id, img, item, price, idCategory, idLocation, startDate, endDate, startTime, endTime } = this.props.products;
+        var { id, img, item, price, idCategory, idLocation, startDate, endDate, startTime, endTime } = this.props.products;
+        startDate = moment(startDate).format('D MMMM YYYY');
+        endDate = moment(endDate).format('D MMMM YYYY');
 
             return (
                 //====================START >> SHOW ITEM PRODUK=========================//

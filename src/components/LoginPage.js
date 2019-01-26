@@ -63,7 +63,7 @@ class LoginPage extends Component {
             
               <div className="card bg-light">
               <br/><br/>
-              <article className="card-body mx-auto shadow p-3 mb-5 bg-white rounded">
+              <article className="card-body col-3 mx-auto shadow p-3 mb-5 bg-white rounded">
                 <br/>
                 <form style={{ paddingRight: "50px", paddingLeft: "50px" }}>
                 <h5 style={{ textAlign: 'center', fontSize: "16px" }}>Login</h5><br/>

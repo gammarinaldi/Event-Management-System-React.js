@@ -24,6 +24,7 @@ import {
     LineIcon,
     EmailIcon
   } from 'react-share';
+  import moment from 'moment';
 
 class ProductsDetails extends Component {
 
@@ -34,30 +35,35 @@ class ProductsDetails extends Component {
         this.showCategory();
 
         window.scrollTo(0, 0);
+
         var params = queryString.parse(this.props.location.search);
         var productsId = params.id;
-        axios.get(API_URL_1 + '/products/' + productsId)
-        .then((res) => {
-            this.props.select_products(res.data);
+
+        axios.post(API_URL_1 + '/products/getproduct', {
+            id: productsId
+        }).then((res) => {
+            this.props.select_products(res.data[0]);
             this.setState({
-                days: res.data.days
+                days: res.data[0].days
             });
 
-            axios.get(API_URL_1 + '/category/' + res.data.idCategory)
+            axios.post(API_URL_1 + '/category/getcategory', {
+                id: res.data[0].idCategory
+            })
             .then((res) => {
-                console.log(res);
                 this.setState({ 
-                    category: res.data.name
+                    category: res.data[0].name
                 });
             }).catch((err) => {
                 console.log(err);
             })
 
-            axios.get(API_URL_1 + '/location/' + res.data.idLocation)
+            axios.post(API_URL_1 + '/location/getlocation', {
+                id: res.data[0].idLocation
+            })
             .then((res) => {
-                console.log(res);
                 this.setState({ 
-                    location: res.data
+                    location: res.data[0]
                 });
             }).catch((err) => {
                 console.log(err);
@@ -71,11 +77,10 @@ class ProductsDetails extends Component {
     }
 
     showCategory = () => {
-        axios.get(API_URL_1 + '/category')
+        axios.get(API_URL_1 + '/category/getlistcategory')
         .then((res) => {
-            console.log(res);
             this.setState({ 
-                listCategory: res.data
+                listCategory: res.data[0]
             });
         }).catch((err) => {
             console.log(err);
@@ -199,20 +204,23 @@ class ProductsDetails extends Component {
     }
 
     listDays() {
-        var temp = [];
-        for(let i = 0; i < this.state.days.length; i++) {
-            temp.push(this.state.days[i]);
-            temp.push(', ');
-        }
+        // var temp = [];
+        // for(let i = 0; i < this.state.days.length; i++) {
+        //     temp.push(this.state.days[i]);
+        //     temp.push(', ');
+        // }
 
-        temp.splice(-1,1); //=====> Remove last item of array
+        // temp.splice(-1,1); //=====> Remove last item of array
         
-        return temp;
+        // return temp;
+        return this.state.days;
     }
 
     render() {
         
         var { id, item, price, img, startDate, endDate, startTime, endTime } = this.props.products;
+        startDate = moment(startDate).format('D MMMM YYYY');
+        endDate = moment(endDate).format('D MMMM YYYY');
         
         return(
                 <div className="card shadow p-3 mb-5 bg-white rounded col-lg-12">
