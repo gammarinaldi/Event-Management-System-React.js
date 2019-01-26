@@ -20,7 +20,9 @@ const INITIAL_STATE = {
                         errorLogin: '',
                         loading: false, 
                         cookie: false,
-                        path: '' 
+                        status: '',
+                        lastlogin: '',
+                        img: '' 
                     };
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,6 +34,9 @@ export default (state = INITIAL_STATE, action) => {
                     role: action.payload.role,
                     email: action.payload.email, 
                     phone: action.payload.phone, 
+                    status: action.payload.status,
+                    lastlogin: action.payload.lastlogin,
+                    img: action.payload.img,
                     cookie: true };
 
         case AUTH_REGISTER_SUCCESS:
@@ -40,6 +45,9 @@ export default (state = INITIAL_STATE, action) => {
                 role: action.payload.role,
                 email: action.payload.email, 
                 phone: action.payload.phone, 
+                status: action.payload.status,
+                lastlogin: action.payload.lastlogin,
+                img: action.payload.img,
                 cookie: true };
 
         case AUTH_SYSTEM_ERROR:
