@@ -14,10 +14,8 @@ class CheckOut extends Component {
     }
 
     getCartList = () => {
-        axios.get(API_URL_1 + '/supercart', {
-            params: {
-                username: this.props.username
-            }
+        axios.post(API_URL_1 + '/cart/getlistcart', {
+            username: this.props.username
         }).then((res) => {
             var price = 0;
             var qty = 0;
@@ -25,7 +23,12 @@ class CheckOut extends Component {
                 price += (element.qty * element.price);
                 qty += element.qty;
             });
-            this.setState({ cartList: res.data, selectedIdEdit: 0, totalPrice: price, totalQty: qty })
+            this.setState({ 
+                cartList: res.data[0], 
+                selectedIdEdit: 0, 
+                totalPrice: price, 
+                totalQty: qty 
+            })
         }).catch((err) => {
             console.log(err)
         })
@@ -52,26 +55,22 @@ class CheckOut extends Component {
                 var invoice = 
                 `INV/${this.props.username}/${currentdate.getFullYear()}/${currentdate.getMonth()}/${currentdate.getDate()}/${currentdate.getHours()}${currentdate.getMinutes()}${currentdate.getSeconds()}`;
 
-                axios.post(API_URL_1 + '/orders', {
+                axios.post(API_URL_1 + '/trx/addtrx', {
                     username: this.props.username,
                     invoice: invoice,
                     trxDate: datetime,
                     totalPrice: this.state.totalPrice,
                     totalQty: this.state.totalQty
                 }).then((res) => {
-                    console.log(res);
-                    
-                    axios.post(API_URL_1 + '/orderdetails', {
+                    axios.post(API_URL_1 + '/trx/trxdetails', {
                         invoice: invoice,
                         username: this.props.username,
                         itemDetails: this.state.cartList
                     }).then((res) => {
-                        console.log(res);
                         this.state.cartList.forEach((item) => {
-                            axios.delete(API_URL_1 + '/supercart/' + item.id)
+                            axios.delete(API_URL_1 + '/cart/deletecart/' + item.id)
                             .then((res) => {
                                 console.log(res);
-                                //this.getCartList();
                             }).catch((err) => {
                                 console.log(err);
                             })

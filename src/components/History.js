@@ -28,26 +28,26 @@ class History extends Component {
     }
 
     showOrders = () => {
-        axios.get(API_URL_1 + '/orders', {
-            params: {
-                username: this.props.username
-            }
+        axios.post(API_URL_1 + '/trx/gettrx', {
+            username: this.props.username
         }).then((res) => {
-            this.setState({ listOrders: res.data })
+            this.setState({ 
+                listOrders: res.data[0] 
+            })
         }).catch((err) => {
             console.log(err)
         })
     }
 
     showOrdersAdmin = () => {
-        axios.get(API_URL_1 + '/orders')
-                .then((res) => {
-                    this.setState({ 
-                        listOrders: res.data
-                    });
-                }).catch((err) => {
-                    console.log(err);
-                })
+        axios.get(API_URL_1 + '/trx/getlisttrx')
+        .then((res) => {
+            this.setState({ 
+                listOrders: res.data[0]
+            });
+        }).catch((err) => {
+            console.log(err);
+        })
     }
   
     renderListOrders = () => {

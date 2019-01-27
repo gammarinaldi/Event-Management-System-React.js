@@ -20,15 +20,11 @@ class Wishlist extends Component {
     }
 
     showWishlist = () => {
-        axios.get(API_URL_1 + '/wishlist', {
-            params: {
-                username: this.props.username
-            }
-        })
-        .then((res) => {
-            console.log(res);
+        axios.post(API_URL_1 + '/wishlist/getlistwishlist', {
+            username: this.props.username
+        }).then((res) => {
             this.setState({ 
-                listWishlist: res.data
+                listWishlist: res.data[0]
             });
         }).catch((err) => {
             console.log(err);
@@ -37,9 +33,8 @@ class Wishlist extends Component {
 
     onBtnDeleteClick = (id, item) => {
         if(window.confirm('Are you sure want to delete: ' + item + ' ?')) {
-            axios.delete(API_URL_1 + '/wishlist/' + id)
+            axios.delete(API_URL_1 + '/wishlist/deletewishlist/' + id)
                 .then((res) => {
-                    console.log(res);
                     this.showWishlist();
                 })
                 .catch((err) => {

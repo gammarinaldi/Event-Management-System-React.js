@@ -38,7 +38,7 @@ class ProductsListView extends Component {
     }
 
     showCategory = () => {
-        axios.get(API_URL_1 + '/category')
+        axios.get(API_URL_1 + '/category/getlistcategory')
         .then((res) => {
             console.log(res);
             this.setState({ 
@@ -70,7 +70,7 @@ class ProductsListView extends Component {
 
     showProducts = () => {
         if(this.props.myRole === "ADMIN") {
-            axios.get(API_URL_1 + '/products')
+            axios.get(API_URL_1 + '/products/getlistproducts')
             .then((res) => {
                 console.log(res);
                 this.setState({ 
@@ -82,17 +82,13 @@ class ProductsListView extends Component {
                 console.log(err);
             })
         } else if(this.props.myRole === "PRODUCER") {
-            axios.get(API_URL_1 + '/products', {
-                params: {
-                    creator: 'PRODUCER',
-                    createdBy: this.props.username
-                }
+            axios.post(API_URL_1 + '/products/getproduct', {
+                creator: 'PRODUCER', createdBy: this.props.username
             })
             .then((res) => {
-                console.log(res);
                 this.setState({ 
-                    listProducts: res.data, 
-                    searchListProducts: res.data, 
+                    listProducts: res.data[0], 
+                    searchListProducts: res.data[0], 
                     selectedIdEdit: 0 
                 });
             }).catch((err) => {
@@ -110,30 +106,25 @@ class ProductsListView extends Component {
         const startDate = this.refs.addStartDate.value;
         const endDate = this.refs.addEndDate.value;
 
-        axios.get(API_URL_1 + '/location', {
-            params: {
-                city: location
-            }
+        axios.post(API_URL_1 + '/location/getlocation', {
+            city: location
         }).then((res) => {
             this.setState({ 
                 idLocation: res.data[0].id 
             });
 
-            axios.get(API_URL_1 + '/category', {
-                params: {
-                    name: category
-                }
+            axios.post(API_URL_1 + '/category/getcategory', {
+                name: category
             }).then((res) => {
                 this.setState({ 
                     idCategory: res.data[0].id
                 });
 
-                axios.post(API_URL_1 + '/products', {
+                axios.post(API_URL_1 + '/products/addproduct', {
                     idCategory: this.state.idCategory, 
                     idLocation: this.state.idLocation,
                     item, price, img, startDate, endDate
                 }).then((res) => {
-                    console.log(res);
                     //=======> Activity Log
                     this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add product: '+item});
                     this.showProducts();
@@ -160,30 +151,25 @@ class ProductsListView extends Component {
         const startDate = this.refs.updateStartDate.value;
         const endDate = this.refs.updateEndDate.value;
 
-        axios.get(API_URL_1 + '/location', {
-            params: {
-                city: location
-            }
+        axios.post(API_URL_1 + '/location/getlocation', {
+            city: location
         }).then((res) => {
             this.setState({ 
                 idLocation: res.data[0].id 
             });
 
-            axios.get(API_URL_1 + '/category', {
-                params: {
-                    name: category
-                }
+            axios.post(API_URL_1 + '/category/getcategory', {
+                name: category
             }).then((res) => {
                 this.setState({ 
                     idCategory: res.data[0].id
                 });
 
-                axios.put(API_URL_1 + '/products/' + id, {
+                axios.put(API_URL_1 + '/products/editproduct/' + id, {
                     idCategory: this.state.idCategory, 
                     idLocation: this.state.idLocation,
                     item, price, img, startDate, endDate
                 }).then((res) => {
-                    console.log(res);
                     //=======> Activity Log
                     this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit product: '+item});
                     this.showProducts();
@@ -203,9 +189,8 @@ class ProductsListView extends Component {
 
     onBtnDeleteClick = (id, category, item) => {
         if(window.confirm('Are you sure want to delete: ' + category + ' ' + item + ' ?')) {
-            axios.delete(API_URL_1 + '/products/' + id)
+            axios.delete(API_URL_1 + '/products/deleteproduct/' + id)
             .then((res) => {
-                console.log(res);
                 //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Delete product: '+item});
                 this.showProducts();
@@ -224,10 +209,8 @@ class ProductsListView extends Component {
         var hargaMax = parseInt(this.refs.qHargaMax.value);
 
         if(location !== "" && category === "") {
-            axios.get(API_URL_1 + '/location', {
-                params: {
-                    city: location
-                }
+            axios.post(API_URL_1 + '/location/getlocation', {
+                city: location
             }).then((res) => {
                 this.setState({ 
                     idLocation: res.data[0].id 
@@ -246,10 +229,8 @@ class ProductsListView extends Component {
                 console.log(err);
             })
         } else if(category !== "" && location === "") {
-            axios.get(API_URL_1 + '/category', {
-                params: {
-                    name: category
-                }
+            axios.post(API_URL_1 + '/category/getcategory', {
+                name: category
             }).then((res) => {
                 this.setState({ 
                     idCategory: res.data[0].id
@@ -268,19 +249,15 @@ class ProductsListView extends Component {
                 console.log(err);
             })
         } else if(location !== "" && category !== "") {
-            axios.get(API_URL_1 + '/location', {
-                params: {
-                    city: location
-                }
+            axios.post(API_URL_1 + '/location/getlocation', {
+                city: location
             }).then((res) => {
                 this.setState({ 
                     idLocation: res.data[0].id 
                 });
 
-                axios.get(API_URL_1 + '/category', {
-                    params: {
-                        name: category
-                    }
+                axios.post(API_URL_1 + '/category/getcategory', {
+                    name: category
                 }).then((res) => {
                     this.setState({ 
                         idCategory: res.data[0].id
@@ -334,9 +311,8 @@ class ProductsListView extends Component {
     }
 
     showCity = () => {
-        axios.get(API_URL_1 + '/location')
+        axios.get(API_URL_1 + '/location/getlistlocation')
         .then((res) => {
-            console.log(res);
             this.setState({ 
                 locationDetails: res.data 
             });
@@ -356,9 +332,8 @@ class ProductsListView extends Component {
     }
 
     showLocation = () => {
-        axios.get(API_URL_1 + '/location')
+        axios.get(API_URL_1 + '/location/getlistlocation')
         .then((res) => {
-            console.log(res);
             this.setState({ 
                 listLocation: res.data 
             });

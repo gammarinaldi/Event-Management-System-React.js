@@ -10,7 +10,7 @@ class Cart extends Component {
     state = { listCart: [], selectedIdEdit: 0 }
     
     componentDidMount() {
-        // axios.get(API_URL_1 + '/supercart', {
+        // axios.get(API_URL_1 + '/cart', {
         //     params: {
         //         username: this.props.username
         //     }
@@ -40,15 +40,13 @@ class Cart extends Component {
     }
 
     showCart = () => {
-        axios.get(API_URL_1 + '/supercart', {
-            params: {
-                username: this.props.username
-            }
+        axios.post(API_URL_1 + '/cart/getlistcart', {
+            username: this.props.username
         })
         .then((res) => {
             console.log(res);
             this.setState({ 
-                listCart: res.data,
+                listCart: res.data[0],
                 selectedIdEdit: 0 
             });
         }).catch((err) => {
@@ -77,10 +75,9 @@ class Cart extends Component {
         const price = parseInt(this.refs.updatePrice.value);
         const qty = parseInt(this.refs.updateQty.value);
 
-        axios.put(API_URL_1 + '/supercart/' + id, {
+        axios.put(API_URL_1 + '/cart/editcart/' + id, {
             idProduct, username, category, item, img, price, qty
         }).then((res) => {
-            console.log(res);
             this.showCart();
         }).catch((err) => {
             console.log(err);
@@ -89,9 +86,8 @@ class Cart extends Component {
 
     onBtnDeleteClick = (id, item) => {
         if(window.confirm('Are you sure want to delete: ' + item + ' ?')) {
-            axios.delete(API_URL_1 + '/supercart/' + id)
+            axios.delete(API_URL_1 + '/cart/deletecart/' + id)
                 .then((res) => {
-                    console.log(res);
                     this.showCart();
                 })
                 .catch((err) => {

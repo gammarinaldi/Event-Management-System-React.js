@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
+import { convertToRupiah } from '../../actions'; 
 
 class Dashboard extends Component {
 
@@ -16,11 +17,10 @@ class Dashboard extends Component {
     }
 
     totalUsers = () => {
-        axios.get(API_URL_1 + '/users')
+        axios.get(API_URL_1 + '/users/getlistusers')
             .then((res) => {
-                console.log(res);
                 this.setState({ 
-                    listUsers: res.data
+                    listUsers: res.data[0]
                 });
             }).catch((err) => {
                 console.log(err);
@@ -28,31 +28,29 @@ class Dashboard extends Component {
     }
 
     totalProducts = () => {
-        axios.get(API_URL_1 + '/products')
+        axios.get(API_URL_1 + '/products/getlistproducts')
             .then((res) => {
                 console.log(res);
-                this.setState({ listProducts: res.data });
+                this.setState({ listProducts: res.data[0] });
             }).catch((err) => {
                 console.log(err);
             })
     }
 
     totalTrx = () => {
-        axios.get(API_URL_1 + '/orderdetails')
+        axios.get(API_URL_1 + '/trxdetails/getlisttrxdetails')
             .then((res) => {
-                console.log(res);
-                this.setState({ totalTrx: res.data });
+                this.setState({ totalTrx: res.data[0] });
             }).catch((err) => {
                 console.log(err);
             })
     }
 
     totalSales = () => {
-        axios.get(API_URL_1 + '/orders')
+        axios.get(API_URL_1 + '/trx/getlisttrx')
             .then((res) => {
-                console.log(res);
                 var price = 0;
-                res.data.forEach(element => {
+                res.data[0].forEach(element => {
                     price += element.totalPrice;
                 });
                 this.setState({ 
@@ -61,17 +59,6 @@ class Dashboard extends Component {
             }).catch((err) => {
                 console.log(err);
             })
-    }
-
-    convertToRupiah = (angka) => {
-        var rupiah = '';		
-        var angkarev = angka.toString().split('').reverse().join('');
-        for (var i = 0; i < angkarev.length; i++) {
-            if (i%3 === 0) {
-                rupiah += angkarev.substr(i,3)+'.';
-            }
-        }
-        return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
     }
 
     render() {
@@ -112,7 +99,7 @@ class Dashboard extends Component {
                                     <td align="center"><h1>{this.state.listUsers.length}</h1></td>
                                     <td align="center"><h1>{this.state.listProducts.length}</h1></td>
                                     <td align="center"><h1>{this.state.totalTrx.length}</h1></td>
-                                    <td align="center"><h1>{this.convertToRupiah(this.state.totalSales)}</h1></td>
+                                    <td align="center"><h1>{this.props.convertToRupiah(this.state.totalSales)}</h1></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -133,4 +120,4 @@ const mapStateToProps = (state) => {
   return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, { convertToRupiah })(Dashboard);

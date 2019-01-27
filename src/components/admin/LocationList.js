@@ -32,10 +32,9 @@ class LocationList extends Component {
     showLocation = () => {
     axios.get(API_URL_1 + '/location/getlistlocation')
             .then((res) => {
-                console.log(res);
                 this.setState({ 
-                    listLocation: res.data, 
-                    searchListLocation: res.data, 
+                    listLocation: res.data[0], 
+                    searchListLocation: res.data[0], 
                     selectedIdEdit: 0 
                 });
             }).catch((err) => {
@@ -53,7 +52,6 @@ class LocationList extends Component {
             axios.post(API_URL_1 + '/location/addlocation', {
                 city, address, coordinate
             }).then((res) => {
-                console.log(res);
                 //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add location: '+city});
                 this.showLocation();
@@ -71,10 +69,9 @@ class LocationList extends Component {
         const address = this.refs.updateAddress.value;
         const coordinate = this.refs.updateCoordinate.value;
 
-        axios.put(API_URL_1 + '/location/' + id, {
+        axios.put(API_URL_1 + '/location/editlocation/' + id, {
             city, address, coordinate
         }).then((res) => {
-            console.log(res);
             //=======> Activity Log
             this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit location: '+city});
             this.showLocation();
@@ -85,9 +82,8 @@ class LocationList extends Component {
 
     onBtnDeleteClick = (id, city) => {
         if(window.confirm('Are you sure want to delete: ' + city + ' ?')) {
-            axios.delete(API_URL_1 + '/location/' + id)
+            axios.delete(API_URL_1 + '/location/deletelocation/' + id)
                 .then((res) => {
-                    console.log(res);
                     //=======> Activity Log
                     this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Delete location: '+city});
                     this.showLocation();

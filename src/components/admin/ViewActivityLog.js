@@ -27,12 +27,11 @@ class ViewActivityLog extends Component {
     }
 
     showActivity = () => {
-        axios.get(API_URL_1 + '/activitylog')
+        axios.get(API_URL_1 + '/log/getlistlog')
                 .then((res) => {
-                    console.log(res);
                     this.setState({ 
-                        listActivity: res.data,
-                        searchListActivity: res.data
+                        listActivity: res.data[0],
+                        searchListActivity: res.data[0]
                     });
                 }).catch((err) => {
                     console.log(err);

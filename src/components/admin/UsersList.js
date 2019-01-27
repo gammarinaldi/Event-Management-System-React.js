@@ -31,12 +31,11 @@ class UsersList extends Component {
     }
 
     showUsers = () => {
-    axios.get(API_URL_1 + '/users')
+    axios.get(API_URL_1 + '/users/getlistusers')
             .then((res) => {
-                console.log(res);
                 this.setState({ 
-                    listUsers: res.data, 
-                    searchListUsers: res.data, 
+                    listUsers: res.data[0], 
+                    searchListUsers: res.data[0], 
                     selectedIdEdit: 0 
                 });
             }).catch((err) => {
@@ -55,10 +54,9 @@ class UsersList extends Component {
             const img = this.refs.addImg.value;
 
         if(username && role && fullname && email && phone && img) {
-            axios.post(API_URL_1 + '/users', {
+            axios.post(API_URL_1 + '/users/adduser', {
                 username, password, role, fullname, email, phone, img
             }).then((res) => {
-                console.log(res);
                 //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add user: '+username});
                 this.showUsers();
@@ -78,10 +76,9 @@ class UsersList extends Component {
         const phone = this.refs.updatePhone.value;
         const img = this.refs.updateImg.value;
 
-        axios.put(API_URL_1 + '/users/' + id, {
+        axios.put(API_URL_1 + '/users/edituser/' + id, {
             username, password, role, fullname, email, phone, img
         }).then((res) => {
-            console.log(res);
             //=======> Activity Log
             this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit user: '+username});
             this.showUsers();
@@ -92,9 +89,8 @@ class UsersList extends Component {
 
     onBtnDeleteClick = (id, username, role) => {
         if(window.confirm('Are you sure want to delete: ' + username + ' ' + role + ' ?')) {
-            axios.delete(API_URL_1 + '/users/' + id)
+            axios.delete(API_URL_1 + '/users/deleteuser/' + id)
                 .then((res) => {
-                    console.log(res);
                     //=======> Activity Log
                     this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Delete user: '+username});
                     this.showUsers();

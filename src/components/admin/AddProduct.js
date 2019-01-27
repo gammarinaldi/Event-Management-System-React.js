@@ -49,10 +49,11 @@ class ProductsEditDetails extends Component {
     componentDidMount() {
         var params = queryString.parse(this.props.location.search);
         var productsId = params.id;
-        axios.get(API_URL_1 + '/products/' + productsId)
-        .then((res) => {
+        axios.post(API_URL_1 + '/products/getproduct', {
+            id: productsId
+        }).then((res) => {
             this.setState({
-                listProduct: res.data
+                listProduct: res.data[0]
             });
         })
         .catch((err) => {
@@ -79,31 +80,27 @@ class ProductsEditDetails extends Component {
         const desc = this.state.tinyMCE;
         const days = this.state.days;
 
-        axios.get(API_URL_1 + '/location', {
-            params: {
-                city: location
-            }
+        axios.post(API_URL_1 + '/location/getlocation', {
+            city: location
         }).then((res) => {
             this.setState({ 
                 idLocation: res.data[0].id 
             });
 
-            axios.get(API_URL_1 + '/category', {
-                params: {
-                    name: category
-                }
+            axios.post(API_URL_1 + '/category/getcategory', {
+                name: category
             }).then((res) => {
                 this.setState({ 
                     idCategory: res.data[0].id
                 });
 
-                axios.post(API_URL_1 + '/products', {
+                axios.post(API_URL_1 + '/products/addproduct', {
                     idCategory: this.state.idCategory, 
                     idLocation: this.state.idLocation,
-                    creator: `${this.props.username} (${this.props.myRole})`,
+                    creator: this.props.myRole,
+                    createdBy: this.props.username,
                     item, price, img, startDate, endDate, startTime, endTime, desc, days
                 }).then((res) => {
-                    console.log(res);
                     document.getElementById('message').innerHTML = '<strong>Add product success!</strong>';
                     //=======> Activity Log
                     this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add product: '+item});
@@ -124,7 +121,7 @@ class ProductsEditDetails extends Component {
 
     onBtnDeleteClick = (id, item) => {
         if(window.confirm('Are you sure want to delete: ' + item + ' ?')) {
-            axios.delete(API_URL_1 + '/products/' + id)
+            axios.delete(API_URL_1 + '/products/deleteproduct/' + id)
             .then((res) => {
                 console.log(res);
                 window.location.replace('/admin/manageproducts');
@@ -136,11 +133,11 @@ class ProductsEditDetails extends Component {
     }
 
     showCity = () => {
-        axios.get(API_URL_1 + '/location')
+        axios.get(API_URL_1 + '/location/getlistlocation')
         .then((res) => {
             console.log(res);
             this.setState({ 
-                locationDetails: res.data 
+                locationDetails: res.data[0]
             });
             
         }).catch((err) => {
@@ -158,11 +155,10 @@ class ProductsEditDetails extends Component {
     }
 
     showLocation = () => {
-        axios.get(API_URL_1 + '/location')
+        axios.get(API_URL_1 + '/location/getlistlocation')
         .then((res) => {
-            console.log(res);
             this.setState({ 
-                listLocation: res.data 
+                listLocation: res.data[0]
             });
         }).catch((err) => {
             console.log(err);
@@ -179,12 +175,11 @@ class ProductsEditDetails extends Component {
     }
 
     showCategory = () => {
-        axios.get(API_URL_1 + '/category')
+        axios.get(API_URL_1 + '/category/getlistcategory')
         .then((res) => {
-            console.log(res);
             this.setState({ 
-                listCategory: res.data,
-                listAllCategory: res.data
+                listCategory: res.data[0],
+                listAllCategory: res.data[0]
             });
         }).catch((err) => {
             console.log(err);

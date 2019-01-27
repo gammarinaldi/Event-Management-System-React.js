@@ -104,7 +104,7 @@ class ProductsDetails extends Component {
         }).then((res) => {
             console.log(res);
             this.setState({
-                isWishlist: res.data
+                isWishlist: res.data[0]
             });
         }).catch((err) => {
             console.log(err);
@@ -140,10 +140,9 @@ class ProductsDetails extends Component {
     }
 
     onWishlistClick = (id, category, item, price, img) => {
-        axios.post(API_URL_1 + '/wishlist', {
+        axios.post(API_URL_1 + '/wishlist/addwishlist', {
             username: this.props.username, idProduct: id, category, item, price, img
         }).then((res) => {
-            console.log(res);
             this.getWishlist();
         }).catch((err) => {
             console.log(err);
@@ -151,14 +150,11 @@ class ProductsDetails extends Component {
     }
 
     onWishlistDelete = (idProduct) => {
-        axios.get(API_URL_1 + '/wishlist', {
-            params: {
-                idProduct: idProduct
-            }
+        axios.post(API_URL_1 + '/wishlist/getlistwishlist', {
+            idProduct
         }).then((res) => {
-            axios.delete(API_URL_1 + '/wishlist/' + res.data[0].id)
+            axios.delete(API_URL_1 + '/wishlist/deletewishlist/' + res.data[0].id)
             .then((res) => {
-                console.log(res);
                 this.getWishlist();
             }).catch((err) => {
                 console.log(err);
@@ -178,11 +174,9 @@ class ProductsDetails extends Component {
                 alert("Please input qty!");
             } else {
                 var username = this.props.username;
-                axios.post(API_URL_1 + '/supercart', {
-                    //idProduct, username, qty
+                axios.post(API_URL_1 + '/cart/addcart', {
                     idProduct, category, item, price, qty, img, username
                 }).then((res) => {
-                    console.log(res);
                     alert(`Success add to cart: ${qty} item(s)`);
                     window.location = "/cart";
                 }).catch((err) => {

@@ -25,13 +25,11 @@ class HistoryDetails extends Component {
     }
 
     showOrderDetails = () => {
-        axios.get(API_URL_1 + '/orderdetails/' + this.id(), {
-            params: {
-                username: this.props.username
-            }
+        axios.post(API_URL_1 + '/trxdetails/getlisttrxdetails', {
+            username: this.props.username
         }).then((res) => {
             this.setState({
-                listOrderDetails: res.data.itemDetails
+                listOrderDetails: res.data[0].itemDetails
             })
         }).catch((err) => {
             console.log(err)

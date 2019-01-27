@@ -94,17 +94,16 @@ class ProductsEditDetails extends Component {
     showProduct() {
         var params = queryString.parse(this.props.location.search);
         var productsId = params.id;
-        axios.get(API_URL_1 + '/products/' + productsId)
+        axios.post(API_URL_1 + '/products/getproduct/' + productsId)
         .then((res) => {
-            console.log(res);
 
             this.setState({
-                listProduct: res.data,
-                tinyMCE: res.data.desc,
-                days: res.data.days
+                listProduct: res.data[0],
+                tinyMCE: res.data[0].desc,
+                days: res.data[0].days
             });
 
-            for(let i = 0; i < res.data.days.length; i++) {
+            for(let i = 0; i < res.data[0].days.length; i++) {
                 switch(res.data.days[i]) {
                     case 'Sunday' : 
                         this.setState({ sunday: true });
@@ -152,30 +151,25 @@ class ProductsEditDetails extends Component {
         const desc = this.state.tinyMCE;
         const days = this.state.days;
 
-        axios.get(API_URL_1 + '/location', {
-            params: {
-                city: location
-            }
+        axios.post(API_URL_1 + '/location/getlocation', {
+            city: location
         }).then((res) => {
             this.setState({ 
                 idLocation: res.data[0].id 
             });
 
-            axios.get(API_URL_1 + '/category', {
-                params: {
-                    name: category
-                }
+            axios.get(API_URL_1 + '/category/getcategory', {
+                name: category
             }).then((res) => {
                 this.setState({ 
                     idCategory: res.data[0].id
                 });
 
-                axios.put(API_URL_1 + '/products/' + id, {
+                axios.put(API_URL_1 + '/products/editproduct/' + id, {
                     idCategory: this.state.idCategory, 
                     idLocation: this.state.idLocation,
                     item, price, img, startDate, endDate, startTime, endTime, desc, days
                 }).then((res) => {
-                    console.log(res);
                     document.getElementById('message').innerHTML = '<strong>Update success!</strong>';
                     //=======> Activity Log
                     this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit product: '+item});
@@ -196,9 +190,8 @@ class ProductsEditDetails extends Component {
 
     onBtnDeleteClick(id, item) {
         if(window.confirm('Are you sure want to delete: ' + item + ' ?')) {
-            axios.delete(API_URL_1 + '/products/' + id)
+            axios.delete(API_URL_1 + '/products/deleteproduct/' + id)
             .then((res) => {
-                console.log(res);
                 window.location.replace('/admin/manageproducts');
             })
             .catch((err) => {
@@ -207,19 +200,11 @@ class ProductsEditDetails extends Component {
         }
     }
 
-    convertToRupiah(angka) {
-        var rupiah = '';		
-        var angkarev = angka.toString().split('').reverse().join('');
-        for(var i = 0; i < angkarev.length; i++) if(i%3 === 0) rupiah += angkarev.substr(i,3)+'.';
-        return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
-    }
-
     showCity() {
-        axios.get(API_URL_1 + '/location')
+        axios.get(API_URL_1 + '/location/getlistlocation')
         .then((res) => {
-            console.log(res);
             this.setState({ 
-                locationDetails: res.data 
+                locationDetails: res.data[0] 
             });
             
         }).catch((err) => {
@@ -237,11 +222,10 @@ class ProductsEditDetails extends Component {
     }
 
     showLocation() {
-        axios.get(API_URL_1 + '/location')
+        axios.get(API_URL_1 + '/location/getlistlocation')
         .then((res) => {
-            console.log(res);
             this.setState({ 
-                listLocation: res.data 
+                listLocation: res.data[0] 
             });
         }).catch((err) => {
             console.log(err);
@@ -258,12 +242,11 @@ class ProductsEditDetails extends Component {
     }
 
     showCategory() {
-        axios.get(API_URL_1 + '/category')
+        axios.get(API_URL_1 + '/category/getlistcategory')
         .then((res) => {
-            console.log(res);
             this.setState({ 
-                listCategory: res.data,
-                listAllCategory: res.data
+                listCategory: res.data[0],
+                listAllCategory: res.data[0]
             });
         }).catch((err) => {
             console.log(err);

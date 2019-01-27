@@ -30,12 +30,12 @@ class CategoryList extends Component {
     }
 
     showCategory = () => {
-    axios.get(API_URL_1 + '/category')
+    axios.get(API_URL_1 + '/category/getlistcategory')
             .then((res) => {
                 console.log(res);
                 this.setState({ 
-                    listCategory: res.data, 
-                    searchListCategory: res.data, 
+                    listCategory: res.data[0], 
+                    searchListCategory: res.data[0], 
                     selectedIdEdit: 0 
                 });
             }).catch((err) => {
@@ -48,10 +48,9 @@ class CategoryList extends Component {
         const name = this.refs.addName.value;
 
         if(name) {
-            axios.post(API_URL_1 + '/category', {
+            axios.post(API_URL_1 + '/category/addcategory', {
                 name
             }).then((res) => {
-                console.log(res);
                 //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add category: '+name});
                 this.showCategory();
@@ -68,10 +67,9 @@ class CategoryList extends Component {
     onBtnSaveClick = (id) => {
         const name = this.refs.updateCity.value;
 
-        axios.put(API_URL_1 + '/category/' + id, {
+        axios.put(API_URL_1 + '/category/editcategory/' + id, {
             name
         }).then((res) => {
-            console.log(res);
             //=======> Activity Log
             this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit category: '+name});
             this.showCategory();
@@ -82,9 +80,8 @@ class CategoryList extends Component {
 
     onBtnDeleteClick = (id, name) => {
         if(window.confirm('Are you sure want to delete: ' + name + ' ?')) {
-            axios.delete(API_URL_1 + '/category/' + id)
+            axios.delete(API_URL_1 + '/category/deletecategory/' + id)
                 .then((res) => {
-                    console.log(res);
                     //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Delete category: '+name});
                     this.showCategory();

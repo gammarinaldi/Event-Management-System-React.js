@@ -59,13 +59,11 @@ class HeaderReact extends Component {
     }
 
     cartCount = () => {
-        axios.get(API_URL_1 + '/supercart', {
-            params: {
-                username: this.props.username
-            }
+        axios.post(API_URL_1 + '/cart/getlistcart', {
+            username: this.props.username
         }).then((res) => {
             this.setState({
-                cartCount: res.data.length
+                cartCount: res.data[0].length
             });
         }).catch((err) => {
             console.log(err);
@@ -73,13 +71,11 @@ class HeaderReact extends Component {
     }
 
     wishlistCount = () => {
-        axios.get(API_URL_1 + '/wishlist', {
-            params: {
-                username: this.props.username
-            }
+        axios.post(API_URL_1 + '/wishlist/getlistwishlist', {
+            username: this.props.username
         }).then((res) => {
             this.setState({
-                wishlistCount: res.data.length
+                wishlistCount: res.data[0].length
             });
         }).catch((err) => {
             console.log(err);
