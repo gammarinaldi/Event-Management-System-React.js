@@ -8,6 +8,7 @@ import { InputGroup, Row } from 'reactstrap';
 import Carousel from './Carousel';
 import Jumbotron from './Jumbotron';
 import { sortingJSON } from '../actions';
+import { CATEGORY_GETLIST, LOCATION_GETLIST, PRODUCTS_GETLIST, LOCATION_GET, CATEGORY_GET } from '../supports/api-url/apisuburl';
 
 class ProductsGridView extends Component {
     
@@ -27,7 +28,7 @@ class ProductsGridView extends Component {
     }
 
     showCategory = () => {
-        axios.get(API_URL_1 + '/category/getlistcategory')
+        axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
             this.setState({ 
                 listCategory: res.data,
@@ -48,7 +49,7 @@ class ProductsGridView extends Component {
     }
 
     showLocation = () => {
-        axios.get(API_URL_1 + '/location/getlistlocation')
+        axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
             this.setState({ 
                 listLocation: res.data 
@@ -68,7 +69,7 @@ class ProductsGridView extends Component {
     }
 
     showProducts = () => {
-        axios.get(API_URL_1 + '/products/getlistproducts')
+        axios.get(API_URL_1 + PRODUCTS_GETLIST)
         .then((res) => {
             this.setState({ 
                 listProducts: res.data, 
@@ -87,10 +88,8 @@ class ProductsGridView extends Component {
         var hargaMax = parseInt(this.refs.qHargaMax.value);
 
         if(location !== "" && category === "") {
-            axios.get(API_URL_1 + '/location/getlistlocation', {
-                params: {
-                    city: location
-                }
+            axios.post(API_URL_1 + LOCATION_GET, {
+                city: location
             }).then((res) => {
                 this.setState({ 
                     idLocation: res.data[0].id 
@@ -109,10 +108,8 @@ class ProductsGridView extends Component {
                 console.log(err);
             })
         } else if(category !== "" && location === "") {
-            axios.get(API_URL_1 + '/category/getlistcategory', {
-                params: {
-                    name: category
-                }
+            axios.post(API_URL_1 + CATEGORY_GET, {
+                name: category
             }).then((res) => {
                 this.setState({ 
                     idCategory: res.data[0].id
@@ -131,19 +128,15 @@ class ProductsGridView extends Component {
                 console.log(err);
             })
         } else if(location !== "" && category !== "") {
-            axios.get(API_URL_1 + '/location/getlistlocation', {
-                params: {
-                    city: location
-                }
+            axios.post(API_URL_1 + LOCATION_GET, {
+                city: location
             }).then((res) => {
                 this.setState({ 
                     idLocation: res.data[0].id 
                 });
 
-                axios.get(API_URL_1 + '/category/getlistcategory', {
-                    params: {
-                        name: category
-                    }
+                axios.get(API_URL_1 + CATEGORY_GET, {
+                    name: category
                 }).then((res) => {
                     this.setState({ 
                         idCategory: res.data[0].id

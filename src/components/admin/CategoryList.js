@@ -5,6 +5,12 @@ import { connect } from 'react-redux';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
 import { onActivityLog } from '../../actions';
+import { 
+    CATEGORY_GETLIST, 
+    CATEGORY_ADD, 
+    CATEGORY_EDIT, 
+    CATEGORY_DELETE 
+} from '../../supports/api-url/apisuburl';
 
 class CategoryList extends Component {
 
@@ -30,7 +36,7 @@ class CategoryList extends Component {
     }
 
     showCategory = () => {
-    axios.get(API_URL_1 + '/category/getlistcategory')
+    axios.get(API_URL_1 + CATEGORY_GETLIST)
             .then((res) => {
                 console.log(res);
                 this.setState({ 
@@ -48,7 +54,7 @@ class CategoryList extends Component {
         const name = this.refs.addName.value;
 
         if(name) {
-            axios.post(API_URL_1 + '/category/addcategory', {
+            axios.post(API_URL_1 + CATEGORY_ADD, {
                 name
             }).then((res) => {
                 //=======> Activity Log
@@ -67,7 +73,7 @@ class CategoryList extends Component {
     onBtnSaveClick = (id) => {
         const name = this.refs.updateCity.value;
 
-        axios.put(API_URL_1 + '/category/editcategory/' + id, {
+        axios.put(API_URL_1 + CATEGORY_EDIT + id, {
             name
         }).then((res) => {
             //=======> Activity Log
@@ -80,7 +86,7 @@ class CategoryList extends Component {
 
     onBtnDeleteClick = (id, name) => {
         if(window.confirm('Are you sure want to delete: ' + name + ' ?')) {
-            axios.delete(API_URL_1 + '/category/deletecategory/' + id)
+            axios.delete(API_URL_1 + CATEGORY_DELETE + id)
                 .then((res) => {
                     //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Delete category: '+name});

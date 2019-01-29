@@ -5,6 +5,7 @@ import { API_URL_1 } from '../../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import { sortingJSON } from '../../actions';
+import { LOG_GETLIST } from '../../supports/api-url/apisuburl';
 
 class ViewActivityLog extends Component {
 
@@ -27,7 +28,7 @@ class ViewActivityLog extends Component {
     }
 
     showActivity = () => {
-        axios.get(API_URL_1 + '/log/getlistlog')
+        axios.get(API_URL_1 + LOG_GETLIST)
                 .then((res) => {
                     this.setState({ 
                         listActivity: res.data[0],

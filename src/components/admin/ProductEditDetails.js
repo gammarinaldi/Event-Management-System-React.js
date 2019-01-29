@@ -6,6 +6,15 @@ import { API_URL_1 } from '../../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
 import { onActivityLog } from '../../actions';
+import { 
+    PRODUCTS_GET, 
+    LOCATION_GET, 
+    CATEGORY_GET, 
+    PRODUCTS_EDIT, 
+    PRODUCTS_DELETE, 
+    LOCATION_GETLIST, 
+    CATEGORY_GETLIST 
+} from '../../supports/api-url/apisuburl';
 
 class ProductsEditDetails extends Component {
 
@@ -93,18 +102,19 @@ class ProductsEditDetails extends Component {
 
     showProduct() {
         var params = queryString.parse(this.props.location.search);
-        var productsId = params.id;
-        axios.post(API_URL_1 + '/products/getproduct/' + productsId)
+        axios.post(API_URL_1 + PRODUCTS_GET, {
+            id: params.id
+        })
         .then((res) => {
-
+            var days = res.data[0].days.split(',');
             this.setState({
                 listProduct: res.data[0],
                 tinyMCE: res.data[0].desc,
-                days: res.data[0].days
+                days
             });
 
-            for(let i = 0; i < res.data[0].days.length; i++) {
-                switch(res.data.days[i]) {
+            for(let i = 0; i < days.length; i++) {
+                switch(days[i]) {
                     case 'Sunday' : 
                         this.setState({ sunday: true });
                         break;
@@ -130,7 +140,6 @@ class ProductsEditDetails extends Component {
                         break;
                 }
             }
-
         })
         .catch((err) => {
             console.log(err);
@@ -151,21 +160,21 @@ class ProductsEditDetails extends Component {
         const desc = this.state.tinyMCE;
         const days = this.state.days;
 
-        axios.post(API_URL_1 + '/location/getlocation', {
+        axios.post(API_URL_1 + LOCATION_GET, {
             city: location
         }).then((res) => {
             this.setState({ 
-                idLocation: res.data[0].id 
+                idLocation: res.data.id 
             });
 
-            axios.get(API_URL_1 + '/category/getcategory', {
+            axios.post(API_URL_1 + CATEGORY_GET, {
                 name: category
             }).then((res) => {
                 this.setState({ 
-                    idCategory: res.data[0].id
+                    idCategory: res.data.id
                 });
 
-                axios.put(API_URL_1 + '/products/editproduct/' + id, {
+                axios.put(API_URL_1 + PRODUCTS_EDIT + id, {
                     idCategory: this.state.idCategory, 
                     idLocation: this.state.idLocation,
                     item, price, img, startDate, endDate, startTime, endTime, desc, days
@@ -190,7 +199,7 @@ class ProductsEditDetails extends Component {
 
     onBtnDeleteClick(id, item) {
         if(window.confirm('Are you sure want to delete: ' + item + ' ?')) {
-            axios.delete(API_URL_1 + '/products/deleteproduct/' + id)
+            axios.delete(API_URL_1 + PRODUCTS_DELETE + id)
             .then((res) => {
                 window.location.replace('/admin/manageproducts');
             })
@@ -201,10 +210,10 @@ class ProductsEditDetails extends Component {
     }
 
     showCity() {
-        axios.get(API_URL_1 + '/location/getlistlocation')
+        axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
             this.setState({ 
-                locationDetails: res.data[0] 
+                locationDetails: res.data
             });
             
         }).catch((err) => {
@@ -222,10 +231,10 @@ class ProductsEditDetails extends Component {
     }
 
     showLocation() {
-        axios.get(API_URL_1 + '/location/getlistlocation')
+        axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
             this.setState({ 
-                listLocation: res.data[0] 
+                listLocation: res.data
             });
         }).catch((err) => {
             console.log(err);
@@ -242,11 +251,11 @@ class ProductsEditDetails extends Component {
     }
 
     showCategory() {
-        axios.get(API_URL_1 + '/category/getlistcategory')
+        axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
             this.setState({ 
-                listCategory: res.data[0],
-                listAllCategory: res.data[0]
+                listCategory: res.data,
+                listAllCategory: res.data
             });
         }).catch((err) => {
             console.log(err);

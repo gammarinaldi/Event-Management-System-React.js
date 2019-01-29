@@ -5,6 +5,7 @@ import { API_URL_1 } from '../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import queryString from 'query-string';
 import { convertToRupiah } from '../actions';
+import { TRXDETAILS_GET } from '../supports/api-url/apisuburl';
 
 class HistoryDetails extends Component {
 
@@ -25,7 +26,7 @@ class HistoryDetails extends Component {
     }
 
     showOrderDetails = () => {
-        axios.post(API_URL_1 + '/trxdetails/getlisttrxdetails', {
+        axios.post(API_URL_1 + TRXDETAILS_GET, {
             username: this.props.username
         }).then((res) => {
             this.setState({

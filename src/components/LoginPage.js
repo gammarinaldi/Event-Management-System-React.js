@@ -7,6 +7,7 @@ import Cookies from 'universal-cookie';
 import Spinner from './Spinner';
 import axios from 'axios';
 import { API_URL_1 } from '../supports/api-url/apiurl';
+import { AUTH_LOGIN } from '../supports/api-url/apisuburl';
 
 const cookies = new Cookies();
 
@@ -19,7 +20,7 @@ class LoginPage extends Component {
       var password = this.refs.password.value;
       this.props.onUserLogin({username, password})
 
-      axios.post(API_URL_1 + '/auth/login', { 
+      axios.post(API_URL_1 + AUTH_LOGIN, { 
         username, password
      })
       .then((res) => {

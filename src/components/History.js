@@ -5,6 +5,7 @@ import { API_URL_1 } from '../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import { convertToRupiah, sortingJSON } from '../actions';
+import { TRX_GET, TRX_GETLIST } from '../supports/api-url/apisuburl';
 
 class History extends Component {
 
@@ -28,7 +29,7 @@ class History extends Component {
     }
 
     showOrders = () => {
-        axios.post(API_URL_1 + '/trx/gettrx', {
+        axios.post(API_URL_1 + TRX_GET, {
             username: this.props.username
         }).then((res) => {
             this.setState({ 
@@ -40,7 +41,7 @@ class History extends Component {
     }
 
     showOrdersAdmin = () => {
-        axios.get(API_URL_1 + '/trx/getlisttrx')
+        axios.get(API_URL_1 + TRX_GETLIST)
         .then((res) => {
             this.setState({ 
                 listOrders: res.data[0]

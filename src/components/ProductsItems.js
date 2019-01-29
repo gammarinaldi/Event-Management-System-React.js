@@ -8,6 +8,12 @@ import { Link } from 'react-router-dom';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import axios from 'axios';
 import moment from 'moment';
+import { 
+    WISHLIST_GETLIST,
+    WISHLIST_DELETE, 
+    CATEGORY_GETLIST,
+    LOCATION_GETLIST
+} from '../supports/api-url/apisuburl';
 
 class ProductsItems extends Component {
 
@@ -24,10 +30,8 @@ class ProductsItems extends Component {
     }
 
     getWishlist = () => {
-        axios.get(API_URL_1 + '/wishlist', {
-            params: {
-                username: this.props.username
-            }
+        axios.post(API_URL_1 + WISHLIST_GETLIST, {
+            username: this.props.username
         }).then((res) => {
             this.setState({
                 isWishlist: res.data
@@ -38,7 +42,7 @@ class ProductsItems extends Component {
     }
 
     showCategory = () => {
-        axios.get(API_URL_1 + '/category/getlistcategory')
+        axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
             this.setState({ 
                 listCategory: res.data
@@ -58,7 +62,7 @@ class ProductsItems extends Component {
     }
 
     showCity = () => {
-        axios.get(API_URL_1 + '/location/getlistlocation')
+        axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
             this.setState({ 
                 locationDetails: res.data 
@@ -111,7 +115,7 @@ class ProductsItems extends Component {
     }
 
     onWishlistClick = (id, category, item, price, img) => {
-        axios.post(API_URL_1 + '/wishlist', {
+        axios.post(API_URL_1 + WISHLIST_GETLIST, {
             username: this.props.username, idProduct: id, category, item, price, img
         }).then((res) => {
             this.getWishlist();
@@ -121,12 +125,10 @@ class ProductsItems extends Component {
     }
 
     onWishlistDelete = (idProduct) => {
-        axios.get(API_URL_1 + '/wishlist', {
-            params: {
-                idProduct: idProduct
-            }
+        axios.post(API_URL_1 + WISHLIST_GETLIST, {
+            idProduct
         }).then((res) => {
-            axios.delete(API_URL_1 + '/wishlist/' + res.data[0].id)
+            axios.delete(API_URL_1 + WISHLIST_DELETE + res.data[0].id)
             .then((res) => {
                 this.getWishlist();
             }).catch((err) => {

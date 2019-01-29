@@ -7,14 +7,14 @@ import ManageProducts from './admin/ManageProducts';
 class HomePage extends Component {
 
     render() {
-    
-        if(this.props.myRole === "ADMIN") {
-          return <Dashboard />;
-        } else if(this.props.myRole === "PRODUCER") {
-          return <ManageProducts />;
-        } else {
-          return <ProductsGridView />;
-        }
+      alert(this.props.myRole)
+      if(this.props.myRole === "ADMIN") {
+        return <Dashboard />;
+      } else if(this.props.myRole === "PRODUCER") {
+        return <ManageProducts />;
+      } else {
+        return <ProductsGridView />;
+      }
 
     }
 }

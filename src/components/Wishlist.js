@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import { convertToRupiah, sortingJSON } from '../actions';
 import Pagination from 'react-js-pagination';
+import { WISHLIST_GETLIST, WISHLIST_DELETE } from '../supports/api-url/apisuburl';
 
 class Wishlist extends Component {
 
@@ -20,11 +21,11 @@ class Wishlist extends Component {
     }
 
     showWishlist = () => {
-        axios.post(API_URL_1 + '/wishlist/getlistwishlist', {
+        axios.post(API_URL_1 + WISHLIST_GETLIST, {
             username: this.props.username
         }).then((res) => {
             this.setState({ 
-                listWishlist: res.data[0]
+                listWishlist: res.data
             });
         }).catch((err) => {
             console.log(err);
@@ -33,7 +34,7 @@ class Wishlist extends Component {
 
     onBtnDeleteClick = (id, item) => {
         if(window.confirm('Are you sure want to delete: ' + item + ' ?')) {
-            axios.delete(API_URL_1 + '/wishlist/deletewishlist/' + id)
+            axios.delete(API_URL_1 + WISHLIST_DELETE + id)
                 .then((res) => {
                     this.showWishlist();
                 })

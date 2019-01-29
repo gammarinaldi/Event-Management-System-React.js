@@ -24,7 +24,16 @@ import {
     LineIcon,
     EmailIcon
   } from 'react-share';
-  import moment from 'moment';
+import moment from 'moment';
+import { 
+    PRODUCTS_GET, 
+    CATEGORY_GET, 
+    LOCATION_GET, 
+    CATEGORY_GETLIST, 
+    WISHLIST_ADD, 
+    WISHLIST_DELETE, 
+    WISHLIST_GETLIST 
+} from '../supports/api-url/apisuburl';
 
 class ProductsDetails extends Component {
 
@@ -39,7 +48,7 @@ class ProductsDetails extends Component {
         var params = queryString.parse(this.props.location.search);
         var productsId = params.id;
 
-        axios.post(API_URL_1 + '/products/getproduct', {
+        axios.post(API_URL_1 + PRODUCTS_GET, {
             id: productsId
         }).then((res) => {
             this.props.select_products(res.data[0]);
@@ -47,10 +56,11 @@ class ProductsDetails extends Component {
                 days: res.data[0].days
             });
 
-            axios.post(API_URL_1 + '/category/getcategory', {
+            axios.post(API_URL_1 + CATEGORY_GET, {
                 id: res.data[0].idCategory
             })
             .then((res) => {
+                console.log('Category: '+res.data[0].name);
                 this.setState({ 
                     category: res.data[0].name
                 });
@@ -58,7 +68,7 @@ class ProductsDetails extends Component {
                 console.log(err);
             })
 
-            axios.post(API_URL_1 + '/location/getlocation', {
+            axios.post(API_URL_1 + LOCATION_GET, {
                 id: res.data[0].idLocation
             })
             .then((res) => {
@@ -77,10 +87,10 @@ class ProductsDetails extends Component {
     }
 
     showCategory = () => {
-        axios.get(API_URL_1 + '/category/getlistcategory')
+        axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
             this.setState({ 
-                listCategory: res.data[0]
+                listCategory: res.data
             });
         }).catch((err) => {
             console.log(err);
@@ -97,14 +107,12 @@ class ProductsDetails extends Component {
     }
 
     getWishlist = () => {
-        axios.get(API_URL_1 + '/wishlist', {
-            params: {
-                username: this.props.username
-            }
+        axios.post(API_URL_1 + WISHLIST_GETLIST, {
+            username: this.props.username
         }).then((res) => {
-            console.log(res);
+            console.log('Wishlist: '+res.data);
             this.setState({
-                isWishlist: res.data[0]
+                isWishlist: res.data
             });
         }).catch((err) => {
             console.log(err);
@@ -127,10 +135,7 @@ class ProductsDetails extends Component {
                                     onClick={ () => 
                                     this.onWishlistClick(
                                         this.props.products.id, 
-                                        this.renderCategory(this.props.products.idCategory), 
-                                        this.props.products.item, 
-                                        this.props.products.price, 
-                                        this.props.products.img) }>
+                                        this.props.products.idCategory) }>
                                 <i className="fa fa-heart fa-sm"></i> Wishlist
                                 </button>;
             }
@@ -139,9 +144,9 @@ class ProductsDetails extends Component {
         return wishlistBtn;
     }
 
-    onWishlistClick = (id, category, item, price, img) => {
-        axios.post(API_URL_1 + '/wishlist/addwishlist', {
-            username: this.props.username, idProduct: id, category, item, price, img
+    onWishlistClick = (idProduct, idCategory) => {
+        axios.post(API_URL_1 + WISHLIST_ADD, {
+            username: this.props.username, idProduct, idCategory
         }).then((res) => {
             this.getWishlist();
         }).catch((err) => {
@@ -150,10 +155,10 @@ class ProductsDetails extends Component {
     }
 
     onWishlistDelete = (idProduct) => {
-        axios.post(API_URL_1 + '/wishlist/getlistwishlist', {
+        axios.post(API_URL_1 + WISHLIST_GETLIST, {
             idProduct
         }).then((res) => {
-            axios.delete(API_URL_1 + '/wishlist/deletewishlist/' + res.data[0].id)
+            axios.delete(API_URL_1 + WISHLIST_DELETE + res.data[0].id)
             .then((res) => {
                 this.getWishlist();
             }).catch((err) => {

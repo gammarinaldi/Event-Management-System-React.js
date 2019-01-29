@@ -6,6 +6,12 @@ import { connect } from 'react-redux';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
 import { onActivityLog, sortingJSON } from '../../actions';
+import { 
+    USERS_GETLIST, 
+    USERS_ADD, 
+    USERS_EDIT, 
+    USERS_DELETE 
+} from '../../supports/api-url/apisuburl';
 
 class UsersList extends Component {
 
@@ -31,7 +37,7 @@ class UsersList extends Component {
     }
 
     showUsers = () => {
-    axios.get(API_URL_1 + '/users/getlistusers')
+    axios.get(API_URL_1 + USERS_GETLIST)
             .then((res) => {
                 this.setState({ 
                     listUsers: res.data[0], 
@@ -54,7 +60,7 @@ class UsersList extends Component {
             const img = this.refs.addImg.value;
 
         if(username && role && fullname && email && phone && img) {
-            axios.post(API_URL_1 + '/users/adduser', {
+            axios.post(API_URL_1 + USERS_ADD, {
                 username, password, role, fullname, email, phone, img
             }).then((res) => {
                 //=======> Activity Log
@@ -76,7 +82,7 @@ class UsersList extends Component {
         const phone = this.refs.updatePhone.value;
         const img = this.refs.updateImg.value;
 
-        axios.put(API_URL_1 + '/users/edituser/' + id, {
+        axios.put(API_URL_1 + USERS_EDIT + id, {
             username, password, role, fullname, email, phone, img
         }).then((res) => {
             //=======> Activity Log
@@ -89,7 +95,7 @@ class UsersList extends Component {
 
     onBtnDeleteClick = (id, username, role) => {
         if(window.confirm('Are you sure want to delete: ' + username + ' ' + role + ' ?')) {
-            axios.delete(API_URL_1 + '/users/deleteuser/' + id)
+            axios.delete(API_URL_1 + USERS_DELETE + id)
                 .then((res) => {
                     //=======> Activity Log
                     this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Delete user: '+username});

@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import { convertToRupiah } from '../actions';
+import { CART_GETLIST, TRX_ADD, TRXDETAILS_ADD, CART_DELETE } from '../supports/api-url/apisuburl';
 
 class CheckOut extends Component {
 
@@ -14,7 +15,7 @@ class CheckOut extends Component {
     }
 
     getCartList = () => {
-        axios.post(API_URL_1 + '/cart/getlistcart', {
+        axios.post(API_URL_1 + CART_GETLIST, {
             username: this.props.username
         }).then((res) => {
             var price = 0;
@@ -55,20 +56,20 @@ class CheckOut extends Component {
                 var invoice = 
                 `INV/${this.props.username}/${currentdate.getFullYear()}/${currentdate.getMonth()}/${currentdate.getDate()}/${currentdate.getHours()}${currentdate.getMinutes()}${currentdate.getSeconds()}`;
 
-                axios.post(API_URL_1 + '/trx/addtrx', {
+                axios.post(API_URL_1 + TRX_ADD, {
                     username: this.props.username,
                     invoice: invoice,
                     trxDate: datetime,
                     totalPrice: this.state.totalPrice,
                     totalQty: this.state.totalQty
                 }).then((res) => {
-                    axios.post(API_URL_1 + '/trx/trxdetails', {
+                    axios.post(API_URL_1 + TRXDETAILS_ADD, {
                         invoice: invoice,
                         username: this.props.username,
                         itemDetails: this.state.cartList
                     }).then((res) => {
                         this.state.cartList.forEach((item) => {
-                            axios.delete(API_URL_1 + '/cart/deletecart/' + item.id)
+                            axios.delete(API_URL_1 + CART_DELETE + item.id)
                             .then((res) => {
                                 console.log(res);
                             }).catch((err) => {

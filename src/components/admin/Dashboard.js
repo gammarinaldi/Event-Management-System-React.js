@@ -4,6 +4,12 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import { convertToRupiah } from '../../actions'; 
+import { 
+    USERS_GETLIST, 
+    PRODUCTS_GETLIST, 
+    TRXDETAILS_GETLIST, 
+    TRX_GETLIST
+} from '../../supports/api-url/apisuburl';
 
 class Dashboard extends Component {
 
@@ -17,7 +23,7 @@ class Dashboard extends Component {
     }
 
     totalUsers = () => {
-        axios.get(API_URL_1 + '/users/getlistusers')
+        axios.get(API_URL_1 + USERS_GETLIST)
             .then((res) => {
                 this.setState({ 
                     listUsers: res.data[0]
@@ -28,7 +34,7 @@ class Dashboard extends Component {
     }
 
     totalProducts = () => {
-        axios.get(API_URL_1 + '/products/getlistproducts')
+        axios.get(API_URL_1 + PRODUCTS_GETLIST)
             .then((res) => {
                 console.log(res);
                 this.setState({ listProducts: res.data[0] });
@@ -38,7 +44,7 @@ class Dashboard extends Component {
     }
 
     totalTrx = () => {
-        axios.get(API_URL_1 + '/trxdetails/getlisttrxdetails')
+        axios.get(API_URL_1 + TRXDETAILS_GETLIST)
             .then((res) => {
                 this.setState({ totalTrx: res.data[0] });
             }).catch((err) => {
@@ -47,7 +53,7 @@ class Dashboard extends Component {
     }
 
     totalSales = () => {
-        axios.get(API_URL_1 + '/trx/getlisttrx')
+        axios.get(API_URL_1 + TRX_GETLIST)
             .then((res) => {
                 var price = 0;
                 res.data[0].forEach(element => {

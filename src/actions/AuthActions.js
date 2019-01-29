@@ -11,6 +11,7 @@ import {
     COOKIE_CHECKED
 } from './types';
 import { API_URL_1 } from '../supports/api-url/apiurl';
+import { AUTH_LOGIN, AUTH_KEEPLOGIN, AUTH_REGISTER } from '../supports/api-url/apisuburl';
 
 export const onUserLogin = ({ username, password }) => {
 
@@ -18,20 +19,26 @@ export const onUserLogin = ({ username, password }) => {
 
         dispatch({ type: AUTH_LOADING });
         
-        axios.post(API_URL_1 + '/auth/login', { 
+        axios.post(API_URL_1 + AUTH_LOGIN, { 
             username, password
          })
         .then((res) => {
-            if(res.data.length > 0) {
-                dispatch({ type: AUTH_LOGIN_SUCCESS, 
-                            payload: { 
-                                username: res.data[0].username,
-                                role: res.data[0].role, 
-                                email: res.data[0].email,
-                                phone: res.data[0].phone } });
+            if(res.data.status === 'error') {
+                dispatch({ type: AUTH_LOGIN_ERROR, payload: res.data.message });
             } else {
-                dispatch({ type: AUTH_LOGIN_ERROR, payload: 'Username or password invalid.' });
+                if(res.data.length > 0) {
+                    dispatch({ type: AUTH_LOGIN_SUCCESS, 
+                                payload: { 
+                                    username: res.data[0].username,
+                                    role: res.data[0].role, 
+                                    email: res.data[0].email,
+                                    phone: res.data[0].phone 
+                                } });
+                } else {
+                    dispatch({ type: AUTH_LOGIN_ERROR, payload: 'Username or password invalid.' });
+                }
             }
+            
         })
         .catch((err) => {
             console.log(err);
@@ -51,7 +58,7 @@ export const onUserRegister = ({ username, fullname, email, phone, password }) =
         if(username === '' || fullname === '' || email === '' || phone === '' || password === '') {
             dispatch({ type: AUTH_REGISTER_ERROR, payload: 'Semua form wajib diisi' });
         } else {
-            axios.post(API_URL_1 + '/auth/register', { 
+            axios.post(API_URL_1 + AUTH_REGISTER, { 
                 username, fullname, email, phone, password
             })
             .then((res) => {
@@ -78,10 +85,8 @@ export const keepLogin = (username) => {
 
     return (dispatch) => {
 
-        axios.get(API_URL_1 + '/users', {
-            params: {
-                username
-            }
+        axios.post(API_URL_1 + AUTH_KEEPLOGIN, {
+            username
         }).then((res) => {
             if(res.data.length > 0) {
                 dispatch({

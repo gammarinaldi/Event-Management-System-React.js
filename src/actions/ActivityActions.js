@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL_1 } from '../supports/api-url/apiurl';
+import { LOG_ADD } from '../supports/api-url/apisuburl';
 import { 
     ACTIVITY_LOG_SUCCESS,
     ACTIVITY_LOG_ERROR
@@ -8,15 +9,8 @@ import {
 export const onActivityLog = ({ username, role, desc }) => {
 
     return (dispatch) => {
-        var currentdate = new Date();
-        var datetime = currentdate.getDate() + "/" +
-            (currentdate.getMonth() + 1) + "/" +
-            currentdate.getFullYear() + " @ " +
-            currentdate.getHours() + ":" +
-            currentdate.getMinutes() + ":" +
-            currentdate.getSeconds();
-        axios.post(API_URL_1 + '/activitylog', {
-            username: username, role: role, desc: desc, date: datetime
+        axios.post(API_URL_1 + LOG_ADD, {
+            username, role, desc, date: new Date()
         }).then((res) => {
             console.log(res);
             if(res.data.length > 0) {

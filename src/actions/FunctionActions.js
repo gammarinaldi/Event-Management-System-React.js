@@ -18,7 +18,7 @@ export const convertToRupiah = (angka) => {
 };
 
 export const sortingJSON = (key, order='asc') => {
-    //=======> Function untuk sorting json / array of objects (Dynamic Sorting Function)
+    //=======> Function for sorting json / array of objects (Dynamic Sorting Function)
     //=======> Credit to: https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
     return (dispatch) => {
         return (a, b) => {

@@ -6,6 +6,18 @@ import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
 import { select_products, onActivityLog, convertToRupiah, sortingJSON } from '../actions';
+import { 
+    CATEGORY_GETLIST, 
+    PRODUCTS_GETLIST, 
+    PRODUCTS_GET, 
+    LOCATION_GET, 
+    CATEGORY_GET, 
+    PRODUCTS_ADD, 
+    PRODUCTS_EDIT, 
+    PRODUCTS_DELETE, 
+    LOCATION_GETLIST 
+} from '../supports/api-url/apisuburl';
+import moment from 'moment';
 
 class ProductsListView extends Component {
 
@@ -38,7 +50,7 @@ class ProductsListView extends Component {
     }
 
     showCategory = () => {
-        axios.get(API_URL_1 + '/category/getlistcategory')
+        axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
             console.log(res);
             this.setState({ 
@@ -70,7 +82,7 @@ class ProductsListView extends Component {
 
     showProducts = () => {
         if(this.props.myRole === "ADMIN") {
-            axios.get(API_URL_1 + '/products/getlistproducts')
+            axios.get(API_URL_1 + PRODUCTS_GETLIST)
             .then((res) => {
                 console.log(res);
                 this.setState({ 
@@ -82,7 +94,7 @@ class ProductsListView extends Component {
                 console.log(err);
             })
         } else if(this.props.myRole === "PRODUCER") {
-            axios.post(API_URL_1 + '/products/getproduct', {
+            axios.post(API_URL_1 + PRODUCTS_GET, {
                 creator: 'PRODUCER', createdBy: this.props.username
             })
             .then((res) => {
@@ -106,21 +118,21 @@ class ProductsListView extends Component {
         const startDate = this.refs.addStartDate.value;
         const endDate = this.refs.addEndDate.value;
 
-        axios.post(API_URL_1 + '/location/getlocation', {
+        axios.post(API_URL_1 + LOCATION_GET, {
             city: location
         }).then((res) => {
             this.setState({ 
                 idLocation: res.data[0].id 
             });
 
-            axios.post(API_URL_1 + '/category/getcategory', {
+            axios.post(API_URL_1 + CATEGORY_GET, {
                 name: category
             }).then((res) => {
                 this.setState({ 
                     idCategory: res.data[0].id
                 });
 
-                axios.post(API_URL_1 + '/products/addproduct', {
+                axios.post(API_URL_1 + PRODUCTS_ADD, {
                     idCategory: this.state.idCategory, 
                     idLocation: this.state.idLocation,
                     item, price, img, startDate, endDate
@@ -151,21 +163,21 @@ class ProductsListView extends Component {
         const startDate = this.refs.updateStartDate.value;
         const endDate = this.refs.updateEndDate.value;
 
-        axios.post(API_URL_1 + '/location/getlocation', {
+        axios.post(API_URL_1 + LOCATION_GET, {
             city: location
         }).then((res) => {
             this.setState({ 
                 idLocation: res.data[0].id 
             });
 
-            axios.post(API_URL_1 + '/category/getcategory', {
+            axios.post(API_URL_1 + CATEGORY_GET, {
                 name: category
             }).then((res) => {
                 this.setState({ 
                     idCategory: res.data[0].id
                 });
 
-                axios.put(API_URL_1 + '/products/editproduct/' + id, {
+                axios.put(API_URL_1 + PRODUCTS_EDIT + id, {
                     idCategory: this.state.idCategory, 
                     idLocation: this.state.idLocation,
                     item, price, img, startDate, endDate
@@ -189,7 +201,7 @@ class ProductsListView extends Component {
 
     onBtnDeleteClick = (id, category, item) => {
         if(window.confirm('Are you sure want to delete: ' + category + ' ' + item + ' ?')) {
-            axios.delete(API_URL_1 + '/products/deleteproduct/' + id)
+            axios.delete(API_URL_1 + PRODUCTS_DELETE + id)
             .then((res) => {
                 //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Delete product: '+item});
@@ -209,7 +221,7 @@ class ProductsListView extends Component {
         var hargaMax = parseInt(this.refs.qHargaMax.value);
 
         if(location !== "" && category === "") {
-            axios.post(API_URL_1 + '/location/getlocation', {
+            axios.post(API_URL_1 + LOCATION_GET, {
                 city: location
             }).then((res) => {
                 this.setState({ 
@@ -229,7 +241,7 @@ class ProductsListView extends Component {
                 console.log(err);
             })
         } else if(category !== "" && location === "") {
-            axios.post(API_URL_1 + '/category/getcategory', {
+            axios.post(API_URL_1 + CATEGORY_GET, {
                 name: category
             }).then((res) => {
                 this.setState({ 
@@ -249,14 +261,14 @@ class ProductsListView extends Component {
                 console.log(err);
             })
         } else if(location !== "" && category !== "") {
-            axios.post(API_URL_1 + '/location/getlocation', {
+            axios.post(API_URL_1 + LOCATION_GET, {
                 city: location
             }).then((res) => {
                 this.setState({ 
                     idLocation: res.data[0].id 
                 });
 
-                axios.post(API_URL_1 + '/category/getcategory', {
+                axios.post(API_URL_1 + CATEGORY_GET, {
                     name: category
                 }).then((res) => {
                     this.setState({ 
@@ -311,7 +323,7 @@ class ProductsListView extends Component {
     }
 
     showCity = () => {
-        axios.get(API_URL_1 + '/location/getlistlocation')
+        axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
             this.setState({ 
                 locationDetails: res.data 
@@ -332,7 +344,7 @@ class ProductsListView extends Component {
     }
 
     showLocation = () => {
-        axios.get(API_URL_1 + '/location/getlistlocation')
+        axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
             this.setState({ 
                 listLocation: res.data 
@@ -422,10 +434,10 @@ class ProductsListView extends Component {
                         ref="updatePrice" className="form-control" /></td>
                         <td><input type="text" defaultValue={item.img} size="4" style={{ fontSize: "12px" }}
                         ref="updateImg" className="form-control" /></td>
-                        <td><input type="date" defaultValue={item.startDate} size="4" style={{ fontSize: "12px" }}
+                        <td><input type="date" defaultValue={moment(item.startDate).format('D MMMM YYYY')} size="4" style={{ fontSize: "12px" }}
                             ref="updateStartDate" className="form-control" />
                             to
-                            <input type="date" defaultValue={item.endDate} size="4" style={{ fontSize: "12px" }}
+                            <input type="date" defaultValue={moment(item.endDate).format('D MMMM YYYY')} size="4" style={{ fontSize: "12px" }}
                             ref="updateEndDate" className="form-control" />
                         </td>
                         <td>{item.creator}</td>
@@ -458,7 +470,7 @@ class ProductsListView extends Component {
                         <td>{item.item}</td>
                         <td>{this.props.convertToRupiah(item.price)}</td>
                         <td><center><img src={item.img} alt={item.category} width="100px" height="100px" /></center></td>
-                        <td>{item.startDate} to {item.endDate}</td>
+                        <td>{moment(item.startDate).format('D MMMM YYYY')} to {moment(item.endDate).format('D MMMM YYYY')}</td>
                         <td>{item.createdBy}</td>
                         <td>{item.creator}</td>
                         <td>

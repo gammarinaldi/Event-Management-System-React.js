@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import { convertToRupiah } from '../actions';
+import { CART_GETLIST, CART_EDIT, CART_DELETE } from '../supports/api-url/apisuburl';
 
 class Cart extends Component {
 
@@ -40,13 +41,13 @@ class Cart extends Component {
     }
 
     showCart = () => {
-        axios.post(API_URL_1 + '/cart/getlistcart', {
+        axios.post(API_URL_1 + CART_GETLIST, {
             username: this.props.username
         })
         .then((res) => {
             console.log(res);
             this.setState({ 
-                listCart: res.data[0],
+                listCart: res.data,
                 selectedIdEdit: 0 
             });
         }).catch((err) => {
@@ -75,7 +76,7 @@ class Cart extends Component {
         const price = parseInt(this.refs.updatePrice.value);
         const qty = parseInt(this.refs.updateQty.value);
 
-        axios.put(API_URL_1 + '/cart/editcart/' + id, {
+        axios.put(API_URL_1 + CART_EDIT + id, {
             idProduct, username, category, item, img, price, qty
         }).then((res) => {
             this.showCart();
@@ -86,7 +87,7 @@ class Cart extends Component {
 
     onBtnDeleteClick = (id, item) => {
         if(window.confirm('Are you sure want to delete: ' + item + ' ?')) {
-            axios.delete(API_URL_1 + '/cart/deletecart/' + id)
+            axios.delete(API_URL_1 + CART_DELETE + id)
                 .then((res) => {
                     this.showCart();
                 })

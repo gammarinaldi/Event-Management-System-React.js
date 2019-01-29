@@ -15,6 +15,7 @@ import Cookies from 'universal-cookie';
 import logo from '../supports/img/logo.png';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import axios from 'axios';
+import { CART_GETLIST, WISHLIST_GETLIST } from '../supports/api-url/apisuburl';
 
 const cookies = new Cookies();
 
@@ -59,7 +60,7 @@ class HeaderReact extends Component {
     }
 
     cartCount = () => {
-        axios.post(API_URL_1 + '/cart/getlistcart', {
+        axios.post(API_URL_1 + CART_GETLIST, {
             username: this.props.username
         }).then((res) => {
             this.setState({
@@ -71,7 +72,7 @@ class HeaderReact extends Component {
     }
 
     wishlistCount = () => {
-        axios.post(API_URL_1 + '/wishlist/getlistwishlist', {
+        axios.post(API_URL_1 + WISHLIST_GETLIST, {
             username: this.props.username
         }).then((res) => {
             this.setState({

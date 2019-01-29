@@ -5,6 +5,12 @@ import { connect } from 'react-redux';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
 import { onActivityLog } from '../../actions';
+import { 
+    LOCATION_GETLIST, 
+    LOCATION_ADD, 
+    LOCATION_EDIT, 
+    LOCATION_DELETE 
+} from '../../supports/api-url/apisuburl';
 
 class LocationList extends Component {
 
@@ -30,7 +36,7 @@ class LocationList extends Component {
     }
 
     showLocation = () => {
-    axios.get(API_URL_1 + '/location/getlistlocation')
+    axios.get(API_URL_1 + LOCATION_GETLIST)
             .then((res) => {
                 this.setState({ 
                     listLocation: res.data[0], 
@@ -49,7 +55,7 @@ class LocationList extends Component {
         const coordinate = this.refs.addCoor.value;
 
         if(city) {
-            axios.post(API_URL_1 + '/location/addlocation', {
+            axios.post(API_URL_1 + LOCATION_ADD, {
                 city, address, coordinate
             }).then((res) => {
                 //=======> Activity Log
@@ -69,7 +75,7 @@ class LocationList extends Component {
         const address = this.refs.updateAddress.value;
         const coordinate = this.refs.updateCoordinate.value;
 
-        axios.put(API_URL_1 + '/location/editlocation/' + id, {
+        axios.put(API_URL_1 + LOCATION_EDIT + id, {
             city, address, coordinate
         }).then((res) => {
             //=======> Activity Log
@@ -82,7 +88,7 @@ class LocationList extends Component {
 
     onBtnDeleteClick = (id, city) => {
         if(window.confirm('Are you sure want to delete: ' + city + ' ?')) {
-            axios.delete(API_URL_1 + '/location/deletelocation/' + id)
+            axios.delete(API_URL_1 + LOCATION_DELETE + id)
                 .then((res) => {
                     //=======> Activity Log
                     this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Delete location: '+city});

@@ -3,6 +3,15 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import queryString from 'query-string';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
+import { 
+    PRODUCTS_ADD, 
+    PRODUCTS_GET,
+    PRODUCTS_DELETE,
+    LOCATION_GET,
+    LOCATION_GETLIST,
+    CATEGORY_GET,
+    CATEGORY_GETLIST
+} from '../../supports/api-url/apisuburl';
 import { Redirect } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
 import { onActivityLog } from '../../actions';
@@ -49,7 +58,7 @@ class ProductsEditDetails extends Component {
     componentDidMount() {
         var params = queryString.parse(this.props.location.search);
         var productsId = params.id;
-        axios.post(API_URL_1 + '/products/getproduct', {
+        axios.post(API_URL_1 + PRODUCTS_GET, {
             id: productsId
         }).then((res) => {
             this.setState({
@@ -80,21 +89,21 @@ class ProductsEditDetails extends Component {
         const desc = this.state.tinyMCE;
         const days = this.state.days;
 
-        axios.post(API_URL_1 + '/location/getlocation', {
+        axios.post(API_URL_1 + LOCATION_GET, {
             city: location
         }).then((res) => {
             this.setState({ 
                 idLocation: res.data[0].id 
             });
 
-            axios.post(API_URL_1 + '/category/getcategory', {
+            axios.post(API_URL_1 + CATEGORY_GET, {
                 name: category
             }).then((res) => {
                 this.setState({ 
                     idCategory: res.data[0].id
                 });
 
-                axios.post(API_URL_1 + '/products/addproduct', {
+                axios.post(API_URL_1 + PRODUCTS_ADD, {
                     idCategory: this.state.idCategory, 
                     idLocation: this.state.idLocation,
                     creator: this.props.myRole,
@@ -121,7 +130,7 @@ class ProductsEditDetails extends Component {
 
     onBtnDeleteClick = (id, item) => {
         if(window.confirm('Are you sure want to delete: ' + item + ' ?')) {
-            axios.delete(API_URL_1 + '/products/deleteproduct/' + id)
+            axios.delete(API_URL_1 + PRODUCTS_DELETE + id)
             .then((res) => {
                 console.log(res);
                 window.location.replace('/admin/manageproducts');
@@ -133,7 +142,7 @@ class ProductsEditDetails extends Component {
     }
 
     showCity = () => {
-        axios.get(API_URL_1 + '/location/getlistlocation')
+        axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
             console.log(res);
             this.setState({ 
@@ -155,7 +164,7 @@ class ProductsEditDetails extends Component {
     }
 
     showLocation = () => {
-        axios.get(API_URL_1 + '/location/getlistlocation')
+        axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
             this.setState({ 
                 listLocation: res.data[0]
@@ -175,7 +184,7 @@ class ProductsEditDetails extends Component {
     }
 
     showCategory = () => {
-        axios.get(API_URL_1 + '/category/getlistcategory')
+        axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
             this.setState({ 
                 listCategory: res.data[0],
