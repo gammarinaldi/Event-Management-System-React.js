@@ -25,7 +25,7 @@ class CheckOut extends Component {
                 qty += element.qty;
             });
             this.setState({ 
-                cartList: res.data[0], 
+                cartList: res.data, 
                 selectedIdEdit: 0, 
                 totalPrice: price, 
                 totalQty: qty 
@@ -35,7 +35,7 @@ class CheckOut extends Component {
         })
     }
 
-    onBtnPayment = () => {
+    onBtnConfirm = () => {
         const payment = parseInt(this.refs.payment.value);
 
         if(!payment) {
@@ -151,28 +151,6 @@ class CheckOut extends Component {
                                             </div>
                                         </td>
                                     </tr>
-
-                                    {/* <tr>
-                                        <td colSpan="8">
-                                            <div align="center">
-                                                <h5>
-                                                    Input Amount: <br/><br/>
-                                                <div align="center">
-                                                    <input type="number" ref="payment" style={{ fontSize: "16px" }}
-                                                    className="form-control form-control-lg" />
-                                                </div>
-                                                <br/>
-                                                <button className="btn btn-success" style={{ fontSize: "14px" }}
-                                                    onClick={ () => this.onBtnPayment() }>
-                                                <i className="fa fa-check fa-sm"></i>
-                                                &nbsp; PAY
-                                                </button>
-                                                </h5>
-                                                <br/>
-                                                <div id="change"></div>
-                                            </div>
-                                        </td>
-                                    </tr> */}
                                     <br/>
                                     <tr>
                                         <td colSpan="8">

@@ -33,7 +33,7 @@ export const USERS_ADD = "/users/adduser";
 export const USERS_EDIT = "/users/edituser/";
 export const USERS_DELETE = "/users/deleteuser/";
 export const WISHLIST_GETLIST = "/wishlist/getlistwishlist";
+export const WISHLIST_GET = "/wishlist/getwishlist";
 export const WISHLIST_ADD = "/wishlist/addwishlist";
 export const WISHLIST_EDIT = "/wishlist/editwishlist/";
 export const WISHLIST_DELETE = "/wishlist/deletewishlist/";
-

@@ -1,7 +1,23 @@
 import { 
     CONVERT_TO_RUPIAH,
-    SORTING_JSON
+    SORTING_JSON,
+    CONVERT_DATE
 } from './types';
+
+export const convertDate = (date) => {
+    return (dispatch) => {
+        var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+        
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            dispatch({type: CONVERT_DATE});
+            return [year, month, day].join('-');
+    }
+};
 
 export const convertToRupiah = (angka) => {
     return (dispatch) => {

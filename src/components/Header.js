@@ -64,7 +64,7 @@ class HeaderReact extends Component {
             username: this.props.username
         }).then((res) => {
             this.setState({
-                cartCount: res.data[0].length
+                cartCount: res.data.length
             });
         }).catch((err) => {
             console.log(err);
@@ -76,7 +76,7 @@ class HeaderReact extends Component {
             username: this.props.username
         }).then((res) => {
             this.setState({
-                wishlistCount: res.data[0].length
+                wishlistCount: res.data.length
             });
         }).catch((err) => {
             console.log(err);

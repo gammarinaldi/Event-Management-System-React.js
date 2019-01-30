@@ -11,3 +11,4 @@ export const ACTIVITY_LOG_SUCCESS = 'Activity log success';
 export const ACTIVITY_LOG_ERROR = 'Activity log error';
 export const CONVERT_TO_RUPIAH = 'Convert to rupiah';
 export const SORTING_JSON = 'Sorting JSON';
+export const CONVERT_DATE = 'Convert date';

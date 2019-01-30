@@ -40,8 +40,8 @@ class CategoryList extends Component {
             .then((res) => {
                 console.log(res);
                 this.setState({ 
-                    listCategory: res.data[0], 
-                    searchListCategory: res.data[0], 
+                    listCategory: res.data, 
+                    searchListCategory: res.data, 
                     selectedIdEdit: 0 
                 });
             }).catch((err) => {
@@ -169,7 +169,7 @@ class CategoryList extends Component {
                 <tr>
                     <td><center>{item.id}</center></td>
                     <td><input type="text" defaultValue={item.name} size="4" style={{ fontSize: "13px" }}
-                    ref="updateName" className="form-control" /></td>
+                    ref="updateCity" className="form-control" /></td>
                     <td>
                         <center>
                         <button className="btn btn-success"

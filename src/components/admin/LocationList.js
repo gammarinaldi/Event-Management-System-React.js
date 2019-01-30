@@ -39,8 +39,8 @@ class LocationList extends Component {
     axios.get(API_URL_1 + LOCATION_GETLIST)
             .then((res) => {
                 this.setState({ 
-                    listLocation: res.data[0], 
-                    searchListLocation: res.data[0], 
+                    listLocation: res.data, 
+                    searchListLocation: res.data, 
                     selectedIdEdit: 0 
                 });
             }).catch((err) => {

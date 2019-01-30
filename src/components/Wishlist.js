@@ -24,6 +24,7 @@ class Wishlist extends Component {
         axios.post(API_URL_1 + WISHLIST_GETLIST, {
             username: this.props.username
         }).then((res) => {
+            console.log(res.data)
             this.setState({ 
                 listWishlist: res.data
             });
@@ -71,7 +72,7 @@ class Wishlist extends Component {
             return (
                 <tr>
                     <td><center>{item.idProduct}</center></td>
-                    <td><a href={`/productsdetails?id=${item.idProduct}`}>{item.category}</a></td>
+                    <td><a href={`/productsdetails?id=${item.idProduct}`}>{item.categoryName}</a></td>
                     <td>{item.item}</td>
                     <td>{this.props.convertToRupiah(item.price)}</td>
                     <td><center><img src={item.img} alt={item.item} width="150px" height="150px" /></center></td>

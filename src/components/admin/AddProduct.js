@@ -62,7 +62,7 @@ class ProductsEditDetails extends Component {
             id: productsId
         }).then((res) => {
             this.setState({
-                listProduct: res.data[0]
+                listProduct: res.data
             });
         })
         .catch((err) => {
@@ -93,14 +93,14 @@ class ProductsEditDetails extends Component {
             city: location
         }).then((res) => {
             this.setState({ 
-                idLocation: res.data[0].id 
+                idLocation: res.data.id 
             });
 
             axios.post(API_URL_1 + CATEGORY_GET, {
                 name: category
             }).then((res) => {
                 this.setState({ 
-                    idCategory: res.data[0].id
+                    idCategory: res.data.id
                 });
 
                 axios.post(API_URL_1 + PRODUCTS_ADD, {
@@ -146,7 +146,7 @@ class ProductsEditDetails extends Component {
         .then((res) => {
             console.log(res);
             this.setState({ 
-                locationDetails: res.data[0]
+                locationDetails: res.data
             });
             
         }).catch((err) => {
@@ -167,7 +167,7 @@ class ProductsEditDetails extends Component {
         axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
             this.setState({ 
-                listLocation: res.data[0]
+                listLocation: res.data
             });
         }).catch((err) => {
             console.log(err);
@@ -187,8 +187,8 @@ class ProductsEditDetails extends Component {
         axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
             this.setState({ 
-                listCategory: res.data[0],
-                listAllCategory: res.data[0]
+                listCategory: res.data,
+                listAllCategory: res.data
             });
         }).catch((err) => {
             console.log(err);

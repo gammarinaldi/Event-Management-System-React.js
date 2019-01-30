@@ -11,7 +11,7 @@ import ProductsListView from './components/ProductsListView';
 import ProductsGridView from './components/ProductsGridView';
 import ProductsDetails from './components/ProductsDetails';
 import Cart from './components/Cart';
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"; //Return location for breadcrumbs
 import CheckOut from './components/CheckOut';
 import _History from './components/History';
 import Wishlist from './components/Wishlist';

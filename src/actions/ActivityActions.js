@@ -5,12 +5,13 @@ import {
     ACTIVITY_LOG_SUCCESS,
     ACTIVITY_LOG_ERROR
 } from './types';
+import moment from 'moment';
 
 export const onActivityLog = ({ username, role, desc }) => {
 
     return (dispatch) => {
         axios.post(API_URL_1 + LOG_ADD, {
-            username, role, desc, date: new Date()
+            username, role, desc, datetime: moment(new Date()).format('YYYY-MM-DD HH:MM:SS')
         }).then((res) => {
             console.log(res);
             if(res.data.length > 0) {

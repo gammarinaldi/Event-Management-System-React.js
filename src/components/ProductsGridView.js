@@ -8,7 +8,13 @@ import { InputGroup, Row } from 'reactstrap';
 import Carousel from './Carousel';
 import Jumbotron from './Jumbotron';
 import { sortingJSON } from '../actions';
-import { CATEGORY_GETLIST, LOCATION_GETLIST, PRODUCTS_GETLIST, LOCATION_GET, CATEGORY_GET } from '../supports/api-url/apisuburl';
+import { 
+    CATEGORY_GETLIST, 
+    LOCATION_GETLIST, 
+    PRODUCTS_GETLIST, 
+    LOCATION_GET, 
+    CATEGORY_GET 
+} from '../supports/api-url/apisuburl';
 
 class ProductsGridView extends Component {
     
@@ -112,7 +118,7 @@ class ProductsGridView extends Component {
                 name: category
             }).then((res) => {
                 this.setState({ 
-                    idCategory: res.data[0].id
+                    idCategory: res.data.id
                 });
     
                 var arrSearch = this.state.listProducts.filter((e) => {
@@ -132,14 +138,14 @@ class ProductsGridView extends Component {
                 city: location
             }).then((res) => {
                 this.setState({ 
-                    idLocation: res.data[0].id 
+                    idLocation: res.data.id 
                 });
 
                 axios.get(API_URL_1 + CATEGORY_GET, {
                     name: category
                 }).then((res) => {
                     this.setState({ 
-                        idCategory: res.data[0].id
+                        idCategory: res.data.id
                     });
         
                     var arrSearch = this.state.listProducts.filter((e) => {

@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import { sortingJSON } from '../../actions';
 import { LOG_GETLIST } from '../../supports/api-url/apisuburl';
+import moment from 'moment';
 
 class ViewActivityLog extends Component {
 
@@ -31,8 +32,8 @@ class ViewActivityLog extends Component {
         axios.get(API_URL_1 + LOG_GETLIST)
                 .then((res) => {
                     this.setState({ 
-                        listActivity: res.data[0],
-                        searchListActivity: res.data[0]
+                        listActivity: res.data,
+                        searchListActivity: res.data
                     });
                 }).catch((err) => {
                     console.log(err);
@@ -68,7 +69,7 @@ class ViewActivityLog extends Component {
                     <td>{item.username}</td>
                     <td>{item.role}</td>
                     <td>{item.desc}</td>
-                    <td>{item.date}</td>
+                    <td>{moment(item.datetime).format('DD MMM YYYY, H:mm:ss')}</td>
                 </tr>
             )
 

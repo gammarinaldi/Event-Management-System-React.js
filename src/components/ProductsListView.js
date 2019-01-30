@@ -434,10 +434,10 @@ class ProductsListView extends Component {
                         ref="updatePrice" className="form-control" /></td>
                         <td><input type="text" defaultValue={item.img} size="4" style={{ fontSize: "12px" }}
                         ref="updateImg" className="form-control" /></td>
-                        <td><input type="date" defaultValue={moment(item.startDate).format('D MMMM YYYY')} size="4" style={{ fontSize: "12px" }}
+                        <td><input type="date" defaultValue={moment(item.startDate).format('D MMM YYYY')} size="4" style={{ fontSize: "12px" }}
                             ref="updateStartDate" className="form-control" />
                             to
-                            <input type="date" defaultValue={moment(item.endDate).format('D MMMM YYYY')} size="4" style={{ fontSize: "12px" }}
+                            <input type="date" defaultValue={moment(item.endDate).format('D MMM YYYY')} size="4" style={{ fontSize: "12px" }}
                             ref="updateEndDate" className="form-control" />
                         </td>
                         <td>{item.creator}</td>
@@ -470,7 +470,7 @@ class ProductsListView extends Component {
                         <td>{item.item}</td>
                         <td>{this.props.convertToRupiah(item.price)}</td>
                         <td><center><img src={item.img} alt={item.category} width="100px" height="100px" /></center></td>
-                        <td>{moment(item.startDate).format('D MMMM YYYY')} to {moment(item.endDate).format('D MMMM YYYY')}</td>
+                        <td>{moment(item.startDate).format('D MMM YYYY')} to {moment(item.endDate).format('D MMM YYYY')}</td>
                         <td>{item.createdBy}</td>
                         <td>{item.creator}</td>
                         <td>

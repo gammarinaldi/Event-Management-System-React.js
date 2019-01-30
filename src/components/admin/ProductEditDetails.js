@@ -15,6 +15,7 @@ import {
     LOCATION_GETLIST, 
     CATEGORY_GETLIST 
 } from '../../supports/api-url/apisuburl';
+import moment from 'moment';
 
 class ProductsEditDetails extends Component {
 
@@ -153,8 +154,8 @@ class ProductsEditDetails extends Component {
         const item = this.refs.updateItem.value;
         const price = this.refs.updatePrice.value;
         const img = this.refs.updateImg.value;
-        const startDate = this.refs.updateStartDate.value;
-        const endDate = this.refs.updateEndDate.value;
+        const startDate = moment(this.refs.updateStartDate.value).format('YYYY-MM-DD');
+        const endDate = moment(this.refs.updateEndDate.value).format('YYYY-MM-DD');
         const startTime = this.refs.updateStartTime.value;
         const endTime = this.refs.updateEndTime.value;
         const desc = this.state.tinyMCE;
@@ -177,7 +178,7 @@ class ProductsEditDetails extends Component {
                 axios.put(API_URL_1 + PRODUCTS_EDIT + id, {
                     idCategory: this.state.idCategory, 
                     idLocation: this.state.idLocation,
-                    item, price, img, startDate, endDate, startTime, endTime, desc, days
+                    item, price, img, startDate, endDate, startTime, endTime, desc, days: days.toString()
                 }).then((res) => {
                     document.getElementById('message').innerHTML = '<strong>Update success!</strong>';
                     //=======> Activity Log
@@ -372,16 +373,20 @@ class ProductsEditDetails extends Component {
                                             <tr>
                                                 <td>&nbsp;Start Date</td>
                                                 <td>:</td>
-                                                <td>
-                                                    <input type="date" defaultValue={startDate} size="4" style={{ fontSize: "12px" }}
+                                                <td>{moment(startDate).format('YYYY-MM-DD')}&nbsp;
+                                                    <input type="date" 
+                                                        size="4" style={{ fontSize: "12px" }}
+                                                        defaultValue={moment(startDate).format('YYYY-MM-DD')}
                                                         ref="updateStartDate" className="form-control" />    
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;End Date</td>
                                                 <td>:</td>
-                                                <td>
-                                                    <input type="date" defaultValue={endDate} size="4" style={{ fontSize: "12px" }}
+                                                <td>{moment(endDate).format('YYYY-MM-DD')}&nbsp;
+                                                    <input type="date"
+                                                        size="4" style={{ fontSize: "12px" }} 
+                                                        defaultValue={moment(endDate).format('YYYY-MM-DD')}
                                                         ref="updateEndDate" className="form-control" />    
                                                 &nbsp;</td>
                                             </tr>
@@ -389,7 +394,8 @@ class ProductsEditDetails extends Component {
                                                 <td>&nbsp;Start Time</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="time" defaultValue={startTime} size="4" style={{ fontSize: "12px" }}
+                                                    <input type="time" defaultValue={startTime} 
+                                                        size="4" style={{ fontSize: "12px" }}
                                                         ref="updateStartTime" className="form-control" />    
                                                 &nbsp;</td>
                                             </tr>

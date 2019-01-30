@@ -26,7 +26,7 @@ class Dashboard extends Component {
         axios.get(API_URL_1 + USERS_GETLIST)
             .then((res) => {
                 this.setState({ 
-                    listUsers: res.data[0]
+                    listUsers: res.data
                 });
             }).catch((err) => {
                 console.log(err);
@@ -37,7 +37,7 @@ class Dashboard extends Component {
         axios.get(API_URL_1 + PRODUCTS_GETLIST)
             .then((res) => {
                 console.log(res);
-                this.setState({ listProducts: res.data[0] });
+                this.setState({ listProducts: res.data });
             }).catch((err) => {
                 console.log(err);
             })
@@ -46,7 +46,7 @@ class Dashboard extends Component {
     totalTrx = () => {
         axios.get(API_URL_1 + TRXDETAILS_GETLIST)
             .then((res) => {
-                this.setState({ totalTrx: res.data[0] });
+                this.setState({ totalTrx: res.data });
             }).catch((err) => {
                 console.log(err);
             })
@@ -56,7 +56,7 @@ class Dashboard extends Component {
         axios.get(API_URL_1 + TRX_GETLIST)
             .then((res) => {
                 var price = 0;
-                res.data[0].forEach(element => {
+                res.data.forEach(element => {
                     price += element.totalPrice;
                 });
                 this.setState({ 

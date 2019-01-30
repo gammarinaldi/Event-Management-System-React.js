@@ -12,7 +12,9 @@ import {
     WISHLIST_GETLIST,
     WISHLIST_DELETE, 
     CATEGORY_GETLIST,
-    LOCATION_GETLIST
+    LOCATION_GETLIST,
+    WISHLIST_GET,
+    WISHLIST_ADD
 } from '../supports/api-url/apisuburl';
 
 class ProductsItems extends Component {
@@ -102,10 +104,8 @@ class ProductsItems extends Component {
                                     onClick={ () => 
                                     this.onWishlistClick(
                                         this.props.products.id, 
-                                        this.renderCategory(this.props.products.idCategory), 
-                                        this.props.products.item, 
-                                        this.props.products.price, 
-                                        this.props.products.img) }>
+                                        this.props.products.idCategory
+                                        ) }>
                                 <i className="fa fa-heart fa-sm"></i> Wishlist
                                 </button>;
             }
@@ -114,9 +114,9 @@ class ProductsItems extends Component {
         return wishlistBtn;
     }
 
-    onWishlistClick = (id, category, item, price, img) => {
-        axios.post(API_URL_1 + WISHLIST_GETLIST, {
-            username: this.props.username, idProduct: id, category, item, price, img
+    onWishlistClick = (idProduct, idCategory) => {
+        axios.post(API_URL_1 + WISHLIST_ADD, {
+            username: this.props.username, idProduct, idCategory
         }).then((res) => {
             this.getWishlist();
         }).catch((err) => {
@@ -125,9 +125,10 @@ class ProductsItems extends Component {
     }
 
     onWishlistDelete = (idProduct) => {
-        axios.post(API_URL_1 + WISHLIST_GETLIST, {
+        axios.post(API_URL_1 + WISHLIST_GET, {
             idProduct
         }).then((res) => {
+            console.log(res.data[0].id)
             axios.delete(API_URL_1 + WISHLIST_DELETE + res.data[0].id)
             .then((res) => {
                 this.getWishlist();
@@ -139,8 +140,8 @@ class ProductsItems extends Component {
 
     render() {
         var { id, img, item, price, idCategory, idLocation, startDate, endDate, startTime, endTime } = this.props.products;
-        startDate = moment(startDate).format('D MMMM YYYY');
-        endDate = moment(endDate).format('D MMMM YYYY');
+        startDate = moment(startDate).format('DD MMM YYYY');
+        endDate = moment(endDate).format('DD MMM YYYY');
 
             return (
                 //====================START >> SHOW ITEM PRODUK=========================//

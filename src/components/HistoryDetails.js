@@ -30,7 +30,7 @@ class HistoryDetails extends Component {
             username: this.props.username
         }).then((res) => {
             this.setState({
-                listOrderDetails: res.data[0].itemDetails
+                listOrderDetails: res.data.itemDetails
             })
         }).catch((err) => {
             console.log(err)

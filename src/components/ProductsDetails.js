@@ -32,7 +32,8 @@ import {
     CATEGORY_GETLIST, 
     WISHLIST_ADD, 
     WISHLIST_DELETE, 
-    WISHLIST_GETLIST 
+    WISHLIST_GETLIST, 
+    WISHLIST_GET
 } from '../supports/api-url/apisuburl';
 
 class ProductsDetails extends Component {
@@ -135,7 +136,8 @@ class ProductsDetails extends Component {
                                     onClick={ () => 
                                     this.onWishlistClick(
                                         this.props.products.id, 
-                                        this.props.products.idCategory) }>
+                                        this.props.products.idCategory
+                                        ) }>
                                 <i className="fa fa-heart fa-sm"></i> Wishlist
                                 </button>;
             }
@@ -155,9 +157,10 @@ class ProductsDetails extends Component {
     }
 
     onWishlistDelete = (idProduct) => {
-        axios.post(API_URL_1 + WISHLIST_GETLIST, {
+        axios.post(API_URL_1 + WISHLIST_GET, {
             idProduct
         }).then((res) => {
+            console.log(res.data[0].id)
             axios.delete(API_URL_1 + WISHLIST_DELETE + res.data[0].id)
             .then((res) => {
                 this.getWishlist();
@@ -218,8 +221,8 @@ class ProductsDetails extends Component {
     render() {
         
         var { id, item, price, img, startDate, endDate, startTime, endTime } = this.props.products;
-        startDate = moment(startDate).format('D MMMM YYYY');
-        endDate = moment(endDate).format('D MMMM YYYY');
+        startDate = moment(startDate).format('DD MMMM YYYY');
+        endDate = moment(endDate).format('DD MMMM YYYY');
         
         return(
                 <div className="card shadow p-3 mb-5 bg-white rounded col-lg-12">

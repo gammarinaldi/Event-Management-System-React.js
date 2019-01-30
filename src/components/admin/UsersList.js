@@ -40,8 +40,8 @@ class UsersList extends Component {
     axios.get(API_URL_1 + USERS_GETLIST)
             .then((res) => {
                 this.setState({ 
-                    listUsers: res.data[0], 
-                    searchListUsers: res.data[0], 
+                    listUsers: res.data, 
+                    searchListUsers: res.data, 
                     selectedIdEdit: 0 
                 });
             }).catch((err) => {
@@ -57,11 +57,11 @@ class UsersList extends Component {
             const fullname = this.refs.addFullName.value;
             const email = this.refs.addEmail.value;
             const phone = this.refs.addPhone.value;
-            const img = this.refs.addImg.value;
+            //const img = this.refs.addImg.value;
 
-        if(username && role && fullname && email && phone && img) {
+        if(username && role && fullname && email && phone) {
             axios.post(API_URL_1 + USERS_ADD, {
-                username, password, role, fullname, email, phone, img
+                username, password, role, fullname, email, phone
             }).then((res) => {
                 //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add user: '+username});
@@ -196,8 +196,8 @@ class UsersList extends Component {
                             className="form-control" /></td>
                         <td><input type="number" placeholder="Phone" ref="addPhone" style={{ fontSize: "13px" }}
                             className="form-control"/></td>
-                        <td><input type="text" size="8" placeholder="Profile pic" ref="addImg" style={{ fontSize: "13px" }}
-                            className="form-control"/></td>
+                        {/* <td><input type="text" size="8" placeholder="Profile pic" ref="addImg" style={{ fontSize: "13px" }}
+                            className="form-control"/></td> */}
                         <td><center><button className="btn btn-success" style={{ fontSize: "12px" }}
                         onClick={() => this.onBtnAddClick()}>
                         <i className="fa fa-plus"></i> Add</button></center></td>
@@ -238,8 +238,8 @@ class UsersList extends Component {
                     ref="updateEmail" className="form-control" /></td>
                     <td><input type="number" defaultValue={item.phone} style={{ fontSize: "12px" }} 
                     ref="updatePhone" className="form-control" /></td>
-                    <td><input type="text" defaultValue={item.img} size="4" style={{ fontSize: "12px" }}
-                    ref="updateImg" className="form-control" /></td>
+                    {/* <td><input type="text" defaultValue={item.img} size="4" style={{ fontSize: "12px" }}
+                    ref="updateImg" className="form-control" /></td> */}
                     <td>
                         <center>
                         <button className="btn btn-success"
@@ -268,7 +268,7 @@ class UsersList extends Component {
                     <td>{item.fullname}</td>
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
-                    <td><center><img src={item.img} alt={item.fullname} width="100px" height="100px" /></center></td>
+                    {/* <td><center><img src={item.img} alt={item.fullname} width="100px" height="100px" /></center></td> */}
                     <td>
                         <center>
                         <button className="btn btn-info" 
@@ -336,8 +336,8 @@ class UsersList extends Component {
                                     <th><center>Fullname</center></th>
                                     <th><center>Email</center></th>
                                     <th><center>Phone</center></th>
-                                    <th><center>Image</center></th>
-                                    <th colSpan="2"><center>Action</center></th>
+                                    {/* <th><center>Image</center></th> */}
+                                    <th colSpan="1"><center>Action</center></th>
                                 </tr>
                             </thead>
                             <tbody>

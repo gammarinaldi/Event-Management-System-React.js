@@ -33,7 +33,7 @@ class History extends Component {
             username: this.props.username
         }).then((res) => {
             this.setState({ 
-                listOrders: res.data[0] 
+                listOrders: res.data
             })
         }).catch((err) => {
             console.log(err)
@@ -44,7 +44,7 @@ class History extends Component {
         axios.get(API_URL_1 + TRX_GETLIST)
         .then((res) => {
             this.setState({ 
-                listOrders: res.data[0]
+                listOrders: res.data
             });
         }).catch((err) => {
             console.log(err);
