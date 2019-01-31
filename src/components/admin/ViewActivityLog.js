@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
-import { sortingJSON } from '../../actions';
+import { sortingJSON, sideBarMenu } from '../../actions';
 import { LOG_GETLIST } from '../../supports/api-url/apisuburl';
-import moment from 'moment';
 
 class ViewActivityLog extends Component {
 
@@ -69,7 +68,7 @@ class ViewActivityLog extends Component {
                     <td>{item.username}</td>
                     <td>{item.role}</td>
                     <td>{item.desc}</td>
-                    <td>{moment(item.datetime).format('DD MMM YYYY, H:mm:ss')}</td>
+                    <td>{item.datetime}</td>
                 </tr>
             )
 
@@ -86,15 +85,7 @@ class ViewActivityLog extends Component {
                 <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            <div className="list-group">
-                                <a href="/" className="list-group-item">Dashboard</a>
-                                <a href="/admin/manageproducts" className="list-group-item">Manage Products</a>
-                                <a href="/admin/manageusers" className="list-group-item">Manage Users</a>
-                                <a href="/admin/managetrx" className="list-group-item">Manage Transactions</a>
-                                <a href="/admin/managecategory" className="list-group-item">Manage Category</a>
-                                <a href="/admin/managelocation" className="list-group-item">Manage Location</a>
-                                <a href="/admin/viewactivitylog" className="list-group-item active">View Activity Log</a>
-                            </div>
+                            {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'View Activity Log' })}
                         </div>
                         <div className="col-10 card bg-light" style={{ padding: "20px" }}>
                         <h2>View Activity Log</h2>
@@ -152,4 +143,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { sortingJSON })(ViewActivityLog);
+export default connect(mapStateToProps, { sortingJSON, sideBarMenu })(ViewActivityLog);

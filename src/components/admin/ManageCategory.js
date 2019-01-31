@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import CategoryList from './CategoryList';
+import { sideBarMenu } from '../../actions';
 
 class ManageCategory extends Component {
 
@@ -12,15 +13,7 @@ class ManageCategory extends Component {
                 <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            <div className="list-group">
-                                <a href="/" className="list-group-item">Dashboard</a>
-                                <a href="/admin/manageproducts" className="list-group-item">Manage Products</a>
-                                <a href="/admin/manageusers" className="list-group-item">Manage Users</a>
-                                <a href="/admin/managetrx" className="list-group-item">Manage Transactions</a>
-                                <a href="/admin/managecategory" className="list-group-item active">Manage Category</a>
-                                <a href="/admin/managelocation" className="list-group-item">Manage Location</a>
-                                <a href="/admin/viewactivitylog" className="list-group-item">View Activity Log</a>
-                            </div>
+                            {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Manage Category' })}
                         </div>
                         <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>
                         <h2>Manage Category</h2>
@@ -41,4 +34,4 @@ const mapStateToProps = (state) => {
   return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps)(ManageCategory);
+export default connect(mapStateToProps, { sideBarMenu })(ManageCategory);

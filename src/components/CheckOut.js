@@ -97,8 +97,8 @@ class CheckOut extends Component {
 
             return (
                 <tr>
-                    <td><center>{item.id}</center></td>
-                    <td>{item.category}</td>
+                    <td><center>{item.idProduct}</center></td>
+                    <td>{item.categoryName}</td>
                     <td>{item.item}</td>
                     <td>{this.props.convertToRupiah(item.price)}</td>
                     <td><center>{item.qty}</center></td>
@@ -128,7 +128,7 @@ class CheckOut extends Component {
                             <table className="table table-bordered">
                                 <thead className="thead-dark">
                                     <tr>
-                                        <th scope="col"><center>ID</center></th>
+                                        <th scope="col"><center>Product ID</center></th>
                                         <th scope="col"><center>Category</center></th>
                                         <th scope="col"><center>Item</center></th>
                                         <th scope="col"><center>Price</center></th>

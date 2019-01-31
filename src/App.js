@@ -25,6 +25,7 @@ import ProductEditDetails from './components/admin/ProductEditDetails';
 import Spinner from './components/Spinner';
 import AddProduct from './components/admin/AddProduct';
 import ViewActivityLog from './components/admin/ViewActivityLog';
+import Test from './components/Test';
 
 const cookies = new Cookies();
 
@@ -162,6 +163,7 @@ class App extends Component {
         <Route path="/admin/producteditdetails" component={ProductEditDetails}/>
         <Route path="/admin/addproduct" component={AddProduct}/>
         <Route path="/admin/viewactivitylog" component={ViewActivityLog}/>
+        <Route path="/test" component={Test}/>
 
       </div>
       )

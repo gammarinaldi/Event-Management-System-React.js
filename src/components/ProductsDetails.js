@@ -33,7 +33,8 @@ import {
     WISHLIST_ADD, 
     WISHLIST_DELETE, 
     WISHLIST_GETLIST, 
-    WISHLIST_GET
+    WISHLIST_GET,
+    CART_ADD
 } from '../supports/api-url/apisuburl';
 
 class ProductsDetails extends Component {
@@ -170,20 +171,18 @@ class ProductsDetails extends Component {
         })
     }
 
-    onBtnAddToCart = (idProduct, category, item, price, img) => {
+    onBtnAddToCart = (idProduct, idCategory) => {
 
         if(this.props.username === "") {
             alert("Please Login First!");
             window.location = "/login"
         } else {
-
             var qty = parseInt(document.getElementById('addQty').value);
             if(!qty || qty === 0 || qty < 0) {
                 alert("Please input qty!");
             } else {
-                var username = this.props.username;
-                axios.post(API_URL_1 + '/cart/addcart', {
-                    idProduct, category, item, price, qty, img, username
+                axios.post(API_URL_1 + CART_ADD, {
+                    idProduct, idCategory, username: this.props.username, qty
                 }).then((res) => {
                     alert(`Success add to cart: ${qty} item(s)`);
                     window.location = "/cart";
@@ -192,7 +191,6 @@ class ProductsDetails extends Component {
                     alert(`Failed add to cart`);
                 })
             }
-            
         }
 
     }
@@ -220,7 +218,7 @@ class ProductsDetails extends Component {
 
     render() {
         
-        var { id, item, price, img, startDate, endDate, startTime, endTime } = this.props.products;
+        var { id, idCategory, item, price, img, startDate, endDate, startTime, endTime } = this.props.products;
         startDate = moment(startDate).format('DD MMMM YYYY');
         endDate = moment(endDate).format('DD MMMM YYYY');
         
@@ -378,7 +376,7 @@ class ProductsDetails extends Component {
                                         <td>&nbsp;</td>
                                         <td>
                                             <button className="btn btn-success" style={{ fontSize: "14px" }}
-                                                onClick={ () => this.onBtnAddToCart(id, this.state.category, item, price, img) }>
+                                                onClick={ () => this.onBtnAddToCart(id, idCategory) }>
                                             <i className="fa fa-shopping-cart fa-sm"></i>
                                             &nbsp;&nbsp; Add to Cart
                                             </button>

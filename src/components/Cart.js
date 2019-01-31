@@ -11,32 +11,6 @@ class Cart extends Component {
     state = { listCart: [], selectedIdEdit: 0 }
     
     componentDidMount() {
-        // axios.get(API_URL_1 + '/cart', {
-        //     params: {
-        //         username: this.props.username
-        //     }
-        // }).then((res) => {
-        //     console.log(res);
-        //     for (let i = 0; i < res.data.length; i++) {
-        //         axios.get(API_URL_1 + '/products', {
-        //             params: {
-        //                 id: res.data[i].id
-        //             }
-        //         }).then((res) => {
-        //             console.log(res);
-        //             this.setState({
-        //                 //listCart: [...this.state.listCart, res.data]
-        //                 //listCart: this.state.listCart.concat([res.data])
-        //                 listCart: res.data
-        //               })
-        //         }).catch((err) => {
-        //             console.log(err);
-        //         })
-        //     }
-        // }).catch((err) => {
-        //     console.log(err);
-        // })
-        // console.log(this.state.listCart);
         this.showCart();
     }
 
@@ -68,17 +42,11 @@ class Cart extends Component {
     }
 
     onBtnSaveClick = (id) => {
-        const idProduct = parseInt(this.refs.updateIdProduct.value);
-        const username = this.refs.updateUsername.value;
-        const category = this.refs.updateCategory.value;
-        const item = this.refs.updateItem.value;
-        const img = this.refs.updateImg.value;
-        const price = parseInt(this.refs.updatePrice.value);
         const qty = parseInt(this.refs.updateQty.value);
-
         axios.put(API_URL_1 + CART_EDIT + id, {
-            idProduct, username, category, item, img, price, qty
+            qty
         }).then((res) => {
+            console.log(res);
             this.showCart();
         }).catch((err) => {
             console.log(err);
@@ -89,6 +57,7 @@ class Cart extends Component {
         if(window.confirm('Are you sure want to delete: ' + item + ' ?')) {
             axios.delete(API_URL_1 + CART_DELETE + id)
                 .then((res) => {
+                    console.log(res);
                     this.showCart();
                 })
                 .catch((err) => {
@@ -137,21 +106,16 @@ class Cart extends Component {
                 return (
                     <tr>
                         <td><center>{item.idProduct}</center></td>
-                        <input type="hidden" ref="updateIdProduct" defaultValue={item.idProduct} />
-                        <input type="hidden" ref="updateUsername" defaultValue={item.username} />
-                        <td>{item.category}<input type="hidden" ref="updateCategory" defaultValue={item.category} /></td>
-                        <td>{item.item}<input type="hidden" ref="updateItem" defaultValue={item.item} /></td>
-                        <td>{this.props.convertToRupiah(item.price)}
-                        <input type="hidden" ref="updatePrice" defaultValue={item.price} /></td>
-                        <td><center><img src={item.img} alt={item.item} width="150px" height="150px" /></center>
-                        <input type="hidden" ref="updateImg" defaultValue={item.img} /></td>
-                        <td><input type="number" defaultValue={item.qty}  size="4" 
-                        ref="updateQty" className="form-control" /></td>
+                        <td>{item.categoryName}</td>
+                        <td>{item.item}</td>
+                        <td>{this.props.convertToRupiah(item.price)}</td>
+                        <td><center><img src={item.img} alt={item.item} width="150px" height="150px" /></center></td>
+                        <td><input type="number" size="4" ref="updateQty" defaultValue={item.qty} className="form-control" /></td>
                         <td>{this.props.convertToRupiah(item.price*item.qty)}</td>
                         <td>
                             <center>
                             <button className="btn btn-success"
-                                onClick={() => this.onBtnSaveClick(item.id)}>
+                                onClick={() => this.onBtnSaveClick(item.idCart)}>
                                 <i className="fa fa-save fa-sm"></i>
                             </button>
                             &nbsp;
@@ -170,7 +134,7 @@ class Cart extends Component {
             return (
                 <tr>
                     <td><center>{item.idProduct}</center></td>
-                    <td><a href={`/productsdetails?id=${item.idProduct}`}>{item.category}</a></td>
+                    <td><a href={`/productsdetails?id=${item.idProduct}`}>{item.categoryName}</a></td>
                     <td>{item.item}</td>
                     <td>{this.props.convertToRupiah(item.price)}</td>
                     <td><center><img src={item.img} alt={item.item} width="150px" height="150px" /></center></td>
@@ -184,7 +148,7 @@ class Cart extends Component {
                         </button>
                         &nbsp;
                         <button className="btn btn-danger"
-                            onClick={ () => this.onBtnDeleteClick(item.id, item.item) }>
+                            onClick={ () => this.onBtnDeleteClick(item.idCart, item.item) }>
                             <i className="fa fa-trash fa-sm"></i>
                         </button>
                         </center>

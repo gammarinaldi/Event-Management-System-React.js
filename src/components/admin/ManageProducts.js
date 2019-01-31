@@ -2,25 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import ProductsListView from '../ProductsListView';
+import { sideBarMenu } from '../../actions';
 
 class ManageProducts extends Component {
-
-    sideBarMenu () {
-        if(this.props.myRole === "ADMIN") {
-            return <div className="list-group">
-                        <a href="/" className="list-group-item">Dashboard</a>
-                        <a href="/admin/manageproducts" className="list-group-item active">Manage Products</a>
-                        <a href="/admin/manageusers" className="list-group-item">Manage Users</a>
-                        <a href="/admin/managetrx" className="list-group-item">Manage Transactions</a>
-                        <a href="/admin/managecategory" className="list-group-item">Manage Category</a>
-                        <a href="/admin/managelocation" className="list-group-item">Manage Location</a>
-                    </div>;
-        } else if(this.props.myRole === "PRODUCER") {
-            return <div className="list-group">
-                        <a href="/admin/manageproducts" className="list-group-item active">Manage Products</a>
-                    </div>;
-        }
-    }
 
     render() {
     
@@ -30,7 +14,7 @@ class ManageProducts extends Component {
                 <div className="card bg-light" style={{ padding: "20px" }}>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            {this.sideBarMenu()}
+                            {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Manage Products' })}
                         </div>
                         <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>
                         <h2>Manage Products &nbsp;&nbsp;&nbsp;
@@ -55,4 +39,4 @@ const mapStateToProps = (state) => {
   return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps)(ManageProducts);
+export default connect(mapStateToProps, { sideBarMenu })(ManageProducts);

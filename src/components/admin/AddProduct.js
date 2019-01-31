@@ -7,14 +7,12 @@ import {
     PRODUCTS_ADD, 
     PRODUCTS_GET,
     PRODUCTS_DELETE,
-    LOCATION_GET,
     LOCATION_GETLIST,
-    CATEGORY_GET,
     CATEGORY_GETLIST
 } from '../../supports/api-url/apisuburl';
 import { Redirect } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
-import { onActivityLog } from '../../actions';
+import { onActivityLog, sideBarMenu } from '../../actions';
 
 class ProductsEditDetails extends Component {
 
@@ -89,39 +87,17 @@ class ProductsEditDetails extends Component {
         const desc = this.state.tinyMCE;
         const days = this.state.days;
 
-        axios.post(API_URL_1 + LOCATION_GET, {
-            city: location
+        axios.post(API_URL_1 + PRODUCTS_ADD, {
+            idCategory: category, 
+            idLocation: location,
+            creator: this.props.myRole,
+            createdBy: this.props.username,
+            item, price, img, startDate, endDate, startTime, endTime, desc, days: days.toString()
         }).then((res) => {
-            this.setState({ 
-                idLocation: res.data.id 
-            });
-
-            axios.post(API_URL_1 + CATEGORY_GET, {
-                name: category
-            }).then((res) => {
-                this.setState({ 
-                    idCategory: res.data.id
-                });
-
-                axios.post(API_URL_1 + PRODUCTS_ADD, {
-                    idCategory: this.state.idCategory, 
-                    idLocation: this.state.idLocation,
-                    creator: this.props.myRole,
-                    createdBy: this.props.username,
-                    item, price, img, startDate, endDate, startTime, endTime, desc, days
-                }).then((res) => {
-                    document.getElementById('message').innerHTML = '<strong>Add product success!</strong>';
-                    //=======> Activity Log
-                    this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add product: '+item});
-                    this.refs.formAdd.reset();
-                }).catch((err) => {
-                    console.log(err);
-                })
-
-            }).catch((err) => {
-                console.log(err);
-            })
-
+            document.getElementById('message').innerHTML = '<strong>Add product success!</strong>';
+            //=======> Activity Log
+            this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add product: '+item});
+            this.refs.formAdd.reset();
         }).catch((err) => {
             console.log(err);
         })
@@ -177,7 +153,7 @@ class ProductsEditDetails extends Component {
     renderListLocation = () => {
         var listJSXLocation = this.state.listLocation.map((item) => {
             return (
-                <option>{item.city}</option>
+                <option value={item.id}>{item.city}</option>
             )
         })
         return listJSXLocation;
@@ -207,28 +183,10 @@ class ProductsEditDetails extends Component {
     renderAllCategory = () => {
         var listJSXAllCategory = this.state.listAllCategory.map((item) => {
             return (
-                <option>{item.name}</option>
+                <option value={item.id}>{item.name}</option>
             )
         })
         return listJSXAllCategory;
-    }
-
-    sideBarMenu () {
-        if(this.props.myRole === "ADMIN") {
-            return <div className="list-group">
-                        <a href="/" className="list-group-item">Dashboard</a>
-                        <a href="/admin/manageproducts" className="list-group-item active">Manage Products</a>
-                        <a href="/admin/manageusers" className="list-group-item">Manage Users</a>
-                        <a href="/admin/managetrx" className="list-group-item">Manage Transactions</a>
-                        <a href="/admin/managecategory" className="list-group-item">Manage Category</a>
-                        <a href="/admin/managelocation" className="list-group-item">Manage Location</a>
-                        <a href="/admin/viewactivitylog" className="list-group-item">View Activity Log</a>
-                    </div>;
-        } else if(this.props.myRole === "PRODUCER") {
-            return <div className="list-group">
-                        <a href="/admin/manageproducts" className="list-group-item active">Manage Products</a>
-                    </div>;
-        }
     }
 
     render() {
@@ -239,7 +197,7 @@ class ProductsEditDetails extends Component {
                 <style>{"tr{border-top: hidden;}"}</style>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                                {this.sideBarMenu()}
+                                {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Add Product' })}
                             </div>
                             <div className="card bg-light col-6" style={{ padding: "20px" }}>
                             <h4>Add Product</h4>
@@ -402,4 +360,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { onActivityLog })(ProductsEditDetails);
+export default connect(mapStateToProps, { onActivityLog, sideBarMenu })(ProductsEditDetails);

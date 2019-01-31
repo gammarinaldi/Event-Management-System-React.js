@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
-import { onActivityLog } from '../../actions';
+import { onActivityLog, sideBarMenu } from '../../actions';
 import { 
     PRODUCTS_GET, 
     LOCATION_GET, 
@@ -281,27 +281,8 @@ class ProductsEditDetails extends Component {
         return listJSXAllCategory;
     }
 
-    sideBarMenu () {
-        if(this.props.myRole === "ADMIN") {
-            return <div className="list-group">
-                        <a href="/" className="list-group-item">Dashboard</a>
-                        <a href="/admin/manageproducts" className="list-group-item active">Manage Products</a>
-                        <a href="/admin/manageusers" className="list-group-item">Manage Users</a>
-                        <a href="/admin/managetrx" className="list-group-item">Manage Transactions</a>
-                        <a href="/admin/managecategory" className="list-group-item">Manage Category</a>
-                        <a href="/admin/managelocation" className="list-group-item">Manage Location</a>
-                        <a href="/admin/viewactivitylog" className="list-group-item">View Activity Log</a>
-                    </div>;
-        } else if(this.props.myRole === "PRODUCER") {
-            return <div className="list-group">
-                        <a href="/admin/manageproducts" className="list-group-item active">Manage Products</a>
-                    </div>;
-        }
-    }
-
     render() {
-        
-        const { id, idCategory, idLocation, item, price, img, startDate, endDate, startTime, endTime } = this.state.listProduct;
+        var { id, idCategory, idLocation, item, price, img, startDate, endDate, startTime, endTime } = this.state.listProduct;
 
         //====================START >> EDIT ITEM PRODUK=========================//
         if(this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") {
@@ -310,7 +291,7 @@ class ProductsEditDetails extends Component {
                 <style>{"tr{border-top: hidden;}"}</style>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            {this.sideBarMenu()}
+                            {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Edit Product' })}
                             </div>
                             <div className="card bg-light col-lg-6" style={{ padding: "20px" }}>
                             <h4>Edit Product Details</h4>
@@ -373,20 +354,20 @@ class ProductsEditDetails extends Component {
                                             <tr>
                                                 <td>&nbsp;Start Date</td>
                                                 <td>:</td>
-                                                <td>{moment(startDate).format('YYYY-MM-DD')}&nbsp;
+                                                <td>
                                                     <input type="date" 
                                                         size="4" style={{ fontSize: "12px" }}
-                                                        defaultValue={moment(startDate).format('YYYY-MM-DD')}
+                                                        defaultValue={startDate}
                                                         ref="updateStartDate" className="form-control" />    
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;End Date</td>
                                                 <td>:</td>
-                                                <td>{moment(endDate).format('YYYY-MM-DD')}&nbsp;
+                                                <td>
                                                     <input type="date"
                                                         size="4" style={{ fontSize: "12px" }} 
-                                                        defaultValue={moment(endDate).format('YYYY-MM-DD')}
+                                                        defaultValue={endDate}
                                                         ref="updateEndDate" className="form-control" />    
                                                 &nbsp;</td>
                                             </tr>
@@ -439,10 +420,6 @@ class ProductsEditDetails extends Component {
                                                 <td>&nbsp;Description</td>
                                                 <td>:</td>
                                                 <td>
-                                                    {/* <textarea className="form-control" value={this.state.value} style={{ fontSize: "12px" }}
-                                                        onChange={this.handleChange.bind(this)}
-                                                        ref="updateDesc" rows="4" cols="40">
-                                                    </textarea>&nbsp; */}
                                                     <Editor
                                                     apiKey='rh7l8avejcgd40a81hu5b2e4u9g441bva85ut25b72kkop0a'
                                                     initialValue={this.state.tinyMCE}
@@ -500,4 +477,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { onActivityLog })(ProductsEditDetails);
+export default connect(mapStateToProps, { onActivityLog, sideBarMenu })(ProductsEditDetails);

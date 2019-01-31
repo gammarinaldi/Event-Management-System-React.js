@@ -1,8 +1,52 @@
+import React from 'react';
 import { 
     CONVERT_TO_RUPIAH,
     SORTING_JSON,
-    CONVERT_DATE
+    CONVERT_DATE,
+    SIDE_BAR_MENU
 } from './types';
+
+export const sideBarMenu = ({ myRole, active }) => {
+    return (dispatch) => {
+
+        var dashboard, manageproducts, manageusers, managetrx, managecategory, managelocation , viewactivitylog;
+
+        if (active === 'Dashboard') dashboard = "list-group-item active"; 
+        else dashboard = "list-group-item";
+        if (active === 'Manage Products' || active === 'Add Product' || active === 'Edit Product') 
+        manageproducts = "list-group-item active"; 
+        else manageproducts = "list-group-item";
+        if (active === 'Manage Users') manageusers = "list-group-item active"; 
+        else manageusers = "list-group-item";
+        if (active === 'Manage Transactions') managetrx = "list-group-item active"; 
+        else managetrx = "list-group-item";
+        if (active === 'Manage Category') managecategory = "list-group-item active"; 
+        else managecategory = "list-group-item";
+        if (active === 'Manage Location') managelocation = "list-group-item active"; 
+        else managelocation = "list-group-item";
+        if (active === 'View Activity Log') viewactivitylog = "list-group-item active"; 
+        else viewactivitylog = "list-group-item";
+
+        if(myRole === "ADMIN") {
+            dispatch({type: SIDE_BAR_MENU});
+            return <div className="list-group">
+                        <a href="/" className={dashboard}>Dashboard</a>
+                        <a href="/admin/manageproducts" className={manageproducts}>Manage Products</a>
+                        <a href="/admin/manageusers" className={manageusers}>Manage Users</a>
+                        <a href="/admin/managetrx" className={managetrx}>Manage Transactions</a>
+                        <a href="/admin/managecategory" className={managecategory}>Manage Category</a>
+                        <a href="/admin/managelocation" className={managelocation}>Manage Location</a>
+                        <a href="/admin/viewactivitylog" className={viewactivitylog}>View Activity Log</a>
+                    </div>;
+        } else if(myRole === "PRODUCER") {
+            dispatch({type: SIDE_BAR_MENU});
+            return <div className="list-group">
+                        <a href="/admin/manageproducts" className="list-group-item active">Manage Products</a>
+                    </div>;
+        }
+    }
+    
+};
 
 export const convertDate = (date) => {
     return (dispatch) => {

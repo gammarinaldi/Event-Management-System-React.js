@@ -80,10 +80,9 @@ class UsersList extends Component {
         const role = this.refs.updateRole.value;
         const email = this.refs.updateEmail.value;
         const phone = this.refs.updatePhone.value;
-        const img = this.refs.updateImg.value;
 
         axios.put(API_URL_1 + USERS_EDIT + id, {
-            username, password, role, fullname, email, phone, img
+            username, password, role, fullname, email, phone
         }).then((res) => {
             //=======> Activity Log
             this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit user: '+username});

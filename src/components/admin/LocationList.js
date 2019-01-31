@@ -52,11 +52,10 @@ class LocationList extends Component {
 
         const city = this.refs.addCity.value;
         const address = this.refs.addAddress.value;
-        const coordinate = this.refs.addCoor.value;
 
         if(city) {
             axios.post(API_URL_1 + LOCATION_ADD, {
-                city, address, coordinate
+                city, address
             }).then((res) => {
                 //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add location: '+city});
@@ -73,10 +72,9 @@ class LocationList extends Component {
     onBtnSaveClick = (id) => {
         const city = this.refs.updateCity.value;
         const address = this.refs.updateAddress.value;
-        const coordinate = this.refs.updateCoordinate.value;
 
         axios.put(API_URL_1 + LOCATION_EDIT + id, {
-            city, address, coordinate
+            city, address
         }).then((res) => {
             //=======> Activity Log
             this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit location: '+city});
@@ -151,11 +149,6 @@ class LocationList extends Component {
                                 ref="addAddress" style={{ fontSize: "13px" }} 
                                 className="form-control" />
                         </td>
-                        <td>
-                            <input type="text" size="8" placeholder="Add coordinate" 
-                                ref="addCoor" style={{ fontSize: "13px" }} 
-                                className="form-control" />
-                        </td>
                         <td><center><button className="btn btn-success" style={{ fontSize: "12px" }}
                         onClick={() => this.onBtnAddClick()}>
                         <i className="fa fa-plus"></i> Add</button></center></td>
@@ -181,8 +174,6 @@ class LocationList extends Component {
                     ref="updateCity" className="form-control" /></td>
                     <td><input type="text" defaultValue={item.address} size="4" style={{ fontSize: "13px" }}
                     ref="updateAddress" className="form-control" /></td>
-                    <td><input type="text" defaultValue={item.coordinate} size="4" style={{ fontSize: "13px" }}
-                    ref="updateCoordinate" className="form-control" /></td>
                     <td>
                         <center>
                         <button className="btn btn-success"
@@ -207,7 +198,6 @@ class LocationList extends Component {
                     <td><center>{item.id}</center></td>
                     <td>{item.city}</td>
                     <td>{item.address}</td>
-                    <td>{item.coordinate}</td>
                     <td>
                         <center>
                         <button className="btn btn-info" 
@@ -256,7 +246,6 @@ class LocationList extends Component {
                                     <th><center>ID</center></th>
                                     <th><center>City</center></th>
                                     <th><center>Address</center></th>
-                                    <th><center>Coordinate</center></th>
                                     <th colSpan="2"><center>Action</center></th>
                                 </tr>
                             </thead>

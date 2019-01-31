@@ -11,8 +11,7 @@ import {
     PRODUCTS_GETLIST, 
     PRODUCTS_GET, 
     LOCATION_GET, 
-    CATEGORY_GET, 
-    PRODUCTS_ADD, 
+    CATEGORY_GET,
     PRODUCTS_EDIT, 
     PRODUCTS_DELETE, 
     LOCATION_GETLIST 
@@ -109,50 +108,6 @@ class ProductsListView extends Component {
         }
     }
 
-    onBtnAddClick = () => {
-        const category = this.refs.addCategory.value;
-        const location = this.refs.addLocation.value;
-        const item = this.refs.addItem.value;
-        const price = this.refs.addPrice.value;
-        const img = this.refs.addImg.value;
-        const startDate = this.refs.addStartDate.value;
-        const endDate = this.refs.addEndDate.value;
-
-        axios.post(API_URL_1 + LOCATION_GET, {
-            city: location
-        }).then((res) => {
-            this.setState({ 
-                idLocation: res.data[0].id 
-            });
-
-            axios.post(API_URL_1 + CATEGORY_GET, {
-                name: category
-            }).then((res) => {
-                this.setState({ 
-                    idCategory: res.data[0].id
-                });
-
-                axios.post(API_URL_1 + PRODUCTS_ADD, {
-                    idCategory: this.state.idCategory, 
-                    idLocation: this.state.idLocation,
-                    item, price, img, startDate, endDate
-                }).then((res) => {
-                    //=======> Activity Log
-                    this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add product: '+item});
-                    this.showProducts();
-                }).catch((err) => {
-                    console.log(err);
-                })
-
-            }).catch((err) => {
-                console.log(err);
-            })
-
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
-
     onBtnSaveClick = (id) => {
 
         const category = this.refs.updateCategory.value;
@@ -199,8 +154,8 @@ class ProductsListView extends Component {
         
     }
 
-    onBtnDeleteClick = (id, category, item) => {
-        if(window.confirm('Are you sure want to delete: ' + category + ' ' + item + ' ?')) {
+    onBtnDeleteClick = (id, item) => {
+        if(window.confirm(`Are you sure want to delete: ${item} ?`)) {
             axios.delete(API_URL_1 + PRODUCTS_DELETE + id)
             .then((res) => {
                 //=======> Activity Log
@@ -363,43 +318,6 @@ class ProductsListView extends Component {
         return listJSXLocation;
     }
 
-    adminAddAction = () => {
-        if(this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") {
-            return(
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <select ref="addCategory" className="custom-select" style={{ fontSize: "12px" }}>
-                                    {this.renderAllCategory()}
-                            </select>
-                        </td>
-                        <td>
-                            <select ref="addLocation" className="custom-select" style={{ fontSize: "12px" }}>
-                                    {this.renderListLocation()}
-                            </select>
-                        </td>
-                        <td><input type="text" size="8" placeholder="Input item" ref="addItem" style={{ fontSize: "12px" }} 
-                            className="form-control" /></td>
-                        <td><input type="number" placeholder="Input price" ref="addPrice" style={{ fontSize: "12px" }}
-                            className="form-control"/></td>
-                        <td><input type="text" size="8" placeholder="Input image link" ref="addImg" style={{ fontSize: "12px" }}
-                            className="form-control"/></td>
-                        <td><input type="date" size="8" ref="addStartDate" style={{ fontSize: "12px" }} 
-                            className="form-control" />
-                            to
-                            <input type="date" size="8" ref="addEndDate" style={{ fontSize: "12px" }} 
-                            className="form-control" />
-                        </td>
-                        <td colSpan="3"><center><button className="btn btn-success" style={{ fontSize: "12px" }} 
-                        onClick={() => this.onBtnAddClick()}>
-                            <i className="fa fa-plus"></i> Quick Add Product</button></center></td>
-                    </tr>
-                </tfoot>
-            )
-        }
-    }
-
     onItemClick = () => {
         this.props.select_products(this.props.products);
     }
@@ -434,10 +352,10 @@ class ProductsListView extends Component {
                         ref="updatePrice" className="form-control" /></td>
                         <td><input type="text" defaultValue={item.img} size="4" style={{ fontSize: "12px" }}
                         ref="updateImg" className="form-control" /></td>
-                        <td><input type="date" defaultValue={moment(item.startDate).format('D MMM YYYY')} size="4" style={{ fontSize: "12px" }}
+                        <td><input type="date" defaultValue={item.startDate} size="4" style={{ fontSize: "12px" }}
                             ref="updateStartDate" className="form-control" />
                             to
-                            <input type="date" defaultValue={moment(item.endDate).format('D MMM YYYY')} size="4" style={{ fontSize: "12px" }}
+                            <input type="date" defaultValue={item.endDate} size="4" style={{ fontSize: "12px" }}
                             ref="updateEndDate" className="form-control" />
                         </td>
                         <td>{item.creator}</td>
@@ -484,7 +402,7 @@ class ProductsListView extends Component {
                                     </td>
                                     <td>
                                     <button className="btn btn-danger"
-                                        onClick={ () => this.onBtnDeleteClick(item.id, item.category, item.item) }>
+                                        onClick={ () => this.onBtnDeleteClick(item.id, item.item) }>
                                         <i className="fa fa-trash fa-sm"></i>
                                     </button>
                                     </td>
@@ -568,7 +486,6 @@ class ProductsListView extends Component {
                             <tbody>
                                     {this.renderListProducts()}
                             </tbody>
-                                    {this.adminAddAction()}
                         </table>
                         <Pagination
                             activePage={this.state.activePage}
