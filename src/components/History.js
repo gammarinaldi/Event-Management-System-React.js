@@ -62,12 +62,16 @@ class History extends Component {
             return (
                 <tr key={x}>   
                     <td><center>{item.id}</center></td>
-                    <td><center><a href={'/historydetails?id=' + item.id + '&invoice=' + item.invoice}>{item.invoice}</a></center></td>
+                    <td><center><a href={'/historydetails?idTrx=' + item.id + '&invoice=' + item.invoice}>{item.invoice}</a></center></td>
                     <td><center>{item.username}</center></td>
-                    <td>{item.trxDate}</td>
+                    <td>{item.bankName}</td>
+                    <td>{item.accNumber}</td>
+                    <td><a href={`${API_URL_1}${item.receipt}`} target="_blank" rel="noopener noreferrer">
+                    <img src={`${API_URL_1}${item.receipt}`} alt={item.invoice} width={100} /></a></td>
+                    <td>{item.trxDateTime}</td>
                     <td><center>{item.totalQty}</center></td>
                     <td>{this.props.convertToRupiah(item.totalPrice)}</td>
-                    <td></td>
+                    <td><center>{item.status}</center></td>
                 </tr>
             )
 
@@ -82,7 +86,7 @@ class History extends Component {
             
             return(
                 <div className="card bg-light" style={{ fontSize: "13px", paddingLeft: "20px" }}>
-                    <div className="col-lg-8 align-self-center">
+                    <div className="col-lg-12 align-self-center">
                         <div className="col-lg-12 text-center" style={{ paddingTop: "20px" }}>
                             <h2 className="section-heading">Transaction History</h2>
                         </div>
@@ -94,7 +98,10 @@ class History extends Component {
                                         <th scope="col"><center>Trx Id</center></th>
                                         <th scope="col"><center>Invoice</center></th>
                                         <th scope="col"><center>Username</center></th>
-                                        <th scope="col"><center>Trx Time</center></th>
+                                        <th scope="col"><center>Bank Name</center></th>
+                                        <th scope="col"><center>Account Number</center></th>
+                                        <th scope="col"><center>Receipt</center></th>
+                                        <th scope="col"><center>Trx Date Time</center></th>
                                         <th scope="col"><center>Total Qty</center></th>
                                         <th scope="col"><center>Total Price</center></th>
                                         <th scope="col" colSpan="2"><center>Status</center></th>

@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import queryString from 'query-string';
 import { convertToRupiah } from '../actions';
 import { TRXDETAILS_GET } from '../supports/api-url/apisuburl';
+import moment from 'moment';
 
 class HistoryDetails extends Component {
 
@@ -17,7 +18,7 @@ class HistoryDetails extends Component {
 
     id = () => {
         var params = queryString.parse(this.props.location.search);
-        return params.id;
+        return params.idTrx;
     }
 
     invoice = () => {
@@ -27,10 +28,10 @@ class HistoryDetails extends Component {
 
     showOrderDetails = () => {
         axios.post(API_URL_1 + TRXDETAILS_GET, {
-            username: this.props.username
+            idTrx: this.id()
         }).then((res) => {
             this.setState({
-                listOrderDetails: res.data.itemDetails
+                listOrderDetails: res.data
             })
         }).catch((err) => {
             console.log(err)
@@ -42,12 +43,13 @@ class HistoryDetails extends Component {
 
             return (
                 <tr>   
-                    <td><center>{item.id}</center></td>
+                    <td><center>{item.idProduct}</center></td>
                     <td><center>{item.category}</center></td>
                     <td><center>{item.item}</center></td>
-                    <td><center><img src={item.img} alt={item.category} width={150} height={150} /></center></td>
-                    <td><center>{item.qty}</center></td>
+                    <td><center>{moment(item.startDate).format('DD MMM Y')} 
+                    &nbsp;to {moment(item.startDate).format('DD MMM Y')}</center></td>
                     <td><center>{this.props.convertToRupiah(item.price)}</center></td>
+                    <td><center>{item.qty}</center></td>
                 </tr>
             )
         })
@@ -88,12 +90,12 @@ class HistoryDetails extends Component {
                                     <table className="table table-bordered table-hover">
                                         <thead className="thead-dark">
                                             <tr>
-                                            <th scope="col"><center>Id</center></th>
+                                                <th scope="col"><center>PID</center></th>
                                                 <th scope="col"><center>Category</center></th>
                                                 <th scope="col"><center>Item</center></th>
-                                                <th scope="col"><center>Image</center></th>
+                                                <th scope="col"><center>Schedule</center></th>
+                                                <th scope="col"><center>Price</center></th>
                                                 <th scope="col"><center>Qty</center></th>
-                                                <th scope="col"><center>Harga</center></th>
                                             </tr>
                                         </thead>
                                         <tbody>

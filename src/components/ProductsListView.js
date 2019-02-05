@@ -122,14 +122,14 @@ class ProductsListView extends Component {
             city: location
         }).then((res) => {
             this.setState({ 
-                idLocation: res.data[0].id 
+                idLocation: res.data.id 
             });
 
             axios.post(API_URL_1 + CATEGORY_GET, {
                 name: category
             }).then((res) => {
                 this.setState({ 
-                    idCategory: res.data[0].id
+                    idCategory: res.data.id
                 });
 
                 axios.put(API_URL_1 + PRODUCTS_EDIT + id, {

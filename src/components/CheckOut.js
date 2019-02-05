@@ -5,10 +5,17 @@ import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import { convertToRupiah } from '../actions';
 import { CART_GETLIST, TRX_ADD, TRXDETAILS_ADD, CART_DELETE } from '../supports/api-url/apisuburl';
+import moment from 'moment';
 
 class CheckOut extends Component {
 
-    state = { cartList: [], selectedIdEdit: 0, totalPrice: 0, totalQty: 0 }
+    state = { 
+        cartList: [], 
+        addReceipt: 'Choose receipt',
+        selectedIdEdit: 0, 
+        totalPrice: 0, 
+        totalQty: 0 
+    }
 
     componentDidMount() {
         this.getCartList();
@@ -36,58 +43,70 @@ class CheckOut extends Component {
     }
 
     onBtnConfirm = () => {
-        const payment = parseInt(this.refs.payment.value);
 
-        if(!payment) {
-            alert('Please input amount of payment');
-        } else {
-            const change = payment - this.state.totalPrice;
-            if(change < 0 ) {
-                return alert('Insuffucient payment');
-            } else {
-                var currentdate = new Date();
-                var datetime = currentdate.getDate() + "/" +
-                    (currentdate.getMonth() + 1) + "/" +
-                    currentdate.getFullYear() + " @ " +
-                    currentdate.getHours() + ":" +
-                    currentdate.getMinutes() + ":" +
-                    currentdate.getSeconds();
+        if(document.getElementById("addReceipt").files[0] !== undefined) {
+            var formData = new FormData();
+            var headers = {
+                headers: 
+                {'Content-Type': 'multipart/form-data'}
+            }
 
-                var invoice = 
-                `INV/${this.props.username}/${currentdate.getFullYear()}/${currentdate.getMonth()}/${currentdate.getDate()}/${currentdate.getHours()}${currentdate.getMinutes()}${currentdate.getSeconds()}`;
+            var currentdate = new Date();
 
-                axios.post(API_URL_1 + TRX_ADD, {
-                    username: this.props.username,
-                    invoice: invoice,
-                    trxDate: datetime,
-                    totalPrice: this.state.totalPrice,
-                    totalQty: this.state.totalQty
-                }).then((res) => {
+            var invoice = 
+            `INV/${this.props.username}/${currentdate.getFullYear()}/${currentdate.getMonth()}/${currentdate.getDate()}/${currentdate.getHours()}${currentdate.getMinutes()}${currentdate.getSeconds()}`;
+
+            var data = {
+                username: this.props.username,
+                bankName: this.refs.bankName.value,
+                accNumber: this.refs.accNo.value,
+                invoice,
+                totalPrice: this.state.totalPrice,
+                totalQty: this.state.totalQty,
+                trxDateTime: moment(new Date()).format('YYYY-MM-DD HH:MM:SS'),
+                status: 'Unconfirmed'
+            }
+
+            if(document.getElementById('addReceipt')){
+                formData.append('receipt', document.getElementById('addReceipt').files[0]);
+            }
+
+            formData.append('data', JSON.stringify(data)); //Convert object javascript menjadi JSON
+
+            axios.post(API_URL_1 + TRX_ADD, formData, headers)
+            .then((res) => {
+                console.log(res.data[0].id);
+                console.log(this.state.cartList);
+
+                for(let i = 0; i < this.state.cartList.length; i++) {
                     axios.post(API_URL_1 + TRXDETAILS_ADD, {
-                        invoice: invoice,
-                        username: this.props.username,
-                        itemDetails: this.state.cartList
+                        idTrx: res.data[0].id,
+                        idProduct: this.state.cartList[i].idProduct
                     }).then((res) => {
-                        this.state.cartList.forEach((item) => {
-                            axios.delete(API_URL_1 + CART_DELETE + item.id)
-                            .then((res) => {
-                                console.log(res);
-                            }).catch((err) => {
-                                console.log(err);
-                            })
+                        console.log(res);
+                        axios.delete(API_URL_1 + CART_DELETE + this.state.cartList[i].idCart)
+                        .then((res) => {
+                            console.log(res);
+                        }).catch((err) => {
+                            console.log(err);
                         })
-                        document.getElementById("change").innerHTML = 
-                        '<div className="alert alert-primary"><h3>Your change: ' + this.props.convertToRupiah(change) + ' , Thank you!</h3></div>';
                     }).catch((err) => {
                         console.log(err);
                     })
-                        
-                }).catch((err) => {
-                    console.log(err);
-                })
+                }
 
-            }
-
+                document.getElementById("change").innerHTML = 
+                '<div className="alert alert-primary"><h3>Payment confirmation success, your order will be proceed, Thank you!</h3></div>';
+                
+            })
+            .catch((err) =>{
+                console.log(err);
+            })
+        }
+        else if (!this.refs.bankName.value 
+                    && !this.refs.accNo.value 
+                    && document.getElementById("addReceipt").files[0] === undefined) {
+            alert('Please input all required data!');
         }
     }
   
@@ -143,11 +162,11 @@ class CheckOut extends Component {
                                     <tr>
                                         <td colSpan="8">
                                             <div align="center">
-                                                <h5>
+                                                <h3>
                                                     TOTAL PRICE : {this.props.convertToRupiah(this.state.totalPrice)}
                                                     &nbsp;
                                                     ( {this.state.totalQty} item(s) )
-                                                </h5>
+                                                </h3>
                                             </div>
                                         </td>
                                     </tr>
@@ -156,7 +175,11 @@ class CheckOut extends Component {
                                         <td colSpan="8">
                                             <div class="alert alert-warning" role="alert">
                                             <center>
-                                                <h4>Please pay to:<br/><br/>
+                                                <h4>Please pay<br/>
+                                                    <h3>
+                                                        <strong>{this.props.convertToRupiah(this.state.totalPrice)}</strong>
+                                                    </h3>
+                                                    to:<br/>
                                                     BCA a/n PT. PURWADHIKA KIRANA NUSANTARA<br/>
                                                     KCU Alam Sutera<br/>
                                                     Acc No. 604-168-8880
@@ -169,15 +192,28 @@ class CheckOut extends Component {
                                         <td colSpan="8">
                                             <div align="center">
                                                 <h3>Payment Confirmation</h3>
-                                                Please upload proof of payment
+                                                Please input your bank name, account number, and proof of payment
                                                 <hr/>
                                                 <br/>
-                                                
                                                 <div className="row">
                                                     <div className="col-lg-3">&nbsp;</div>
                                                     <div className="col-lg-6 align-self-center">
-                                                        <input type="file" id="input" ref="payment" 
-                                                        style={{ fontSize: "12px" }} className="form-control-file"/>
+                                                        Your Bank Name: <input ref="bankName" className="form-control form-control-lg" 
+                                                        style={{ fontSize: "14px" }} 
+                                                        placeholder="Your Bank Name" type="text" /><br/>
+                                                        Your Account No: <input ref="accNo" className="form-control form-control-lg" 
+                                                        style={{ fontSize: "14px" }} 
+                                                        placeholder="Your Account Number" type="text" /><br/>
+                                                    </div>
+                                                    <div className="col-lg-3">&nbsp;</div>
+                                                </div>
+                                                <br/>
+                                                <div className="row">
+                                                    <div className="col-lg-3">&nbsp;</div>
+                                                    <div className="col-lg-6 align-self-center">
+                                                        Upload proof of payment: <br/><br/>
+                                                        <input type="file" id="addReceipt" name="addReceipt" 
+                                                        label={this.state.addReceipt} onChange={this.addReceiptChange} />
                                                     </div>
                                                     <div className="col-lg-3">&nbsp;</div>
                                                 </div>

@@ -327,7 +327,7 @@ class ProductsEditDetails extends Component {
                                             <td>
                                                 <br/>
                                                 <button type="submit" className="btn btn-success" style={{ fontSize: "12px" }}>
-                                                    <i className="fa fa-thumbs-up fa-sm"></i> Submit
+                                                    <i className="fa fa-check-up fa-sm"></i> Submit
                                                 </button>
                                             </td>
                                         </tr>

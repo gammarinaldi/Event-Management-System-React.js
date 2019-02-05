@@ -90,7 +90,7 @@ class CategoryList extends Component {
                 .then((res) => {
                     //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Delete category: '+name});
-                    this.showCategory();
+                this.showCategory();
                 })
                 .catch((err) => {
                     console.log(err);
