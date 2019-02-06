@@ -6,14 +6,13 @@ import { API_URL_1 } from '../../supports/api-url/apiurl';
 import { convertToRupiah, sideBarMenu } from '../../actions'; 
 import { 
     USERS_GETLIST, 
-    PRODUCTS_GETLIST, 
-    TRXDETAILS_GETLIST, 
+    PRODUCTS_GETLIST,
     TRX_GETLIST
 } from '../../supports/api-url/apisuburl';
 
 class Dashboard extends Component {
 
-    state = { listUsers: [], listProducts: [], totalSales: 0, totalTrx: [] }
+    state = { listUsers: 0, listProducts: 0, totalSales: 0, totalTrx: 0 }
 
     componentDidMount() {
         this.totalUsers();
@@ -26,7 +25,7 @@ class Dashboard extends Component {
         axios.get(API_URL_1 + USERS_GETLIST)
             .then((res) => {
                 this.setState({ 
-                    listUsers: res.data
+                    listUsers: res.data.length
                 });
             }).catch((err) => {
                 console.log(err);
@@ -37,16 +36,20 @@ class Dashboard extends Component {
         axios.get(API_URL_1 + PRODUCTS_GETLIST)
             .then((res) => {
                 console.log(res);
-                this.setState({ listProducts: res.data });
+                this.setState({ 
+                    listProducts: res.data.length 
+                });
             }).catch((err) => {
                 console.log(err);
             })
     }
 
     totalTrx = () => {
-        axios.get(API_URL_1 + TRXDETAILS_GETLIST)
+        axios.get(API_URL_1 + TRX_GETLIST)
             .then((res) => {
-                this.setState({ totalTrx: res.data });
+                this.setState({ 
+                    totalTrx: res.data.length 
+                });
             }).catch((err) => {
                 console.log(err);
             })
@@ -92,9 +95,9 @@ class Dashboard extends Component {
                                 </thead>
                                 <tbody>     
                                 <tr className="table-warning">
-                                    <td align="center"><h1>{this.state.listUsers.length}</h1></td>
-                                    <td align="center"><h1>{this.state.listProducts.length}</h1></td>
-                                    <td align="center"><h1>{this.state.totalTrx.length}</h1></td>
+                                    <td align="center"><h1>{this.state.listUsers}</h1></td>
+                                    <td align="center"><h1>{this.state.listProducts}</h1></td>
+                                    <td align="center"><h1>{this.state.totalTrx}</h1></td>
                                     <td align="center"><h1>{this.props.convertToRupiah(this.state.totalSales)}</h1></td>
                                 </tr>
                                 </tbody>

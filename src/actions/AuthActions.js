@@ -59,7 +59,7 @@ export const onUserRegister = ({ username, fullname, email, phone, password }) =
             dispatch({ type: AUTH_REGISTER_ERROR, payload: 'Semua form wajib diisi' });
         } else {
             axios.post(API_URL_1 + AUTH_REGISTER, { 
-                username, fullname, email, phone, password
+                username, password, fullname, email, phone
             })
             .then((res) => {
                 if(res.data.status === 'error') {

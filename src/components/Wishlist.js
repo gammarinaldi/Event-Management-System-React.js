@@ -33,9 +33,9 @@ class Wishlist extends Component {
         })
     }
 
-    onBtnDeleteClick = (id, item) => {
-        if(window.confirm('Are you sure want to delete: ' + item + ' ?')) {
-            axios.delete(API_URL_1 + WISHLIST_DELETE + id)
+    onBtnDeleteClick = (idWishlist, item) => {
+        if(window.confirm('Are you sure want to delete: (' + idWishlist + ') ' + item + ' ?')) {
+            axios.delete(API_URL_1 + WISHLIST_DELETE + idWishlist)
                 .then((res) => {
                     this.showWishlist();
                 })
@@ -79,7 +79,7 @@ class Wishlist extends Component {
                     <td>
                         <center>
                         <button className="btn btn-danger"
-                            onClick={ () => this.onBtnDeleteClick(item.id, item.item) }>
+                            onClick={ () => this.onBtnDeleteClick(item.idWishlist, item.item) }>
                             <i className="fa fa-trash fa-sm"></i>
                         </button>
                         </center>

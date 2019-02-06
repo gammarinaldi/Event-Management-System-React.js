@@ -1,6 +1,6 @@
 export const AUTH_LOGIN = "/auth/login";
 export const AUTH_KEEPLOGIN = "/auth/keeplogin";
-export const AUTH_REGISTER = "/users/register";
+export const AUTH_REGISTER = "/auth/register";
 export const CART_GETLIST = "/cart/getlistcart";
 export const CART_ADD = "/cart/addcart";
 export const CART_EDIT = "/cart/editcart/";

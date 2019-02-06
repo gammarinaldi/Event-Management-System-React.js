@@ -221,7 +221,7 @@ class ProductsGridView extends Component {
                     <br/>
                     <div className="card bg-light" style={{ fontSize: "13px", padding: "30px" }}>
                         <div className="row justify-content-center">
-                        <h1>One platform for IT workshop, training, & course.</h1></div>
+                        <h1>One-Stop-Shopping for IT workshop, training, & course.</h1></div>
                     </div>
                     <br/>
                     <div className="card bg-light" style={{ fontSize: "13px", padding: "30px" }}>

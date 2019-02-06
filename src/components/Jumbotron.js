@@ -14,8 +14,8 @@ export default () => (
                         </a>
                     </div>
                     <div className="media-body">
-                        <h4 className="media-heading">Feature 1</h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+                        <h4 className="media-heading">React.js</h4>
+                        This app front-end built with React.js
                     </div>
                 </div>
             </div>
@@ -29,8 +29,8 @@ export default () => (
                         </a>
                     </div>
                     <div className="media-body">
-                        <h4 className="media-heading">Feature 2</h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+                        <h4 className="media-heading">Node.js</h4>
+                        This app back-end built with Node.js
                     </div>
                 </div>
             </div>
@@ -44,8 +44,8 @@ export default () => (
                         </a>
                     </div>
                     <div className="media-body">
-                        <h4 className="media-heading">Feature 3</h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+                        <h4 className="media-heading">MySQL</h4>
+                        This app database built with MySQL
                     </div>
                 </div>
             </div>
