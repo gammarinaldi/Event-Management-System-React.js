@@ -73,7 +73,7 @@ class ProductsListView extends Component {
     renderAllCategory = () => {
         var listJSXAllCategory = this.state.listAllCategory.map((item) => {
             return (
-                <option>{item.name}</option>
+                <option value={item.id}>{item.name}</option>
             )
         })
         return listJSXAllCategory;
@@ -114,7 +114,6 @@ class ProductsListView extends Component {
         const location = this.refs.updateLocation.value;
         const item = this.refs.updateItem.value;
         const price = this.refs.updatePrice.value;
-        const img = this.refs.updateImg.value;
         const startDate = this.refs.updateStartDate.value;
         const endDate = this.refs.updateEndDate.value;
 
@@ -135,7 +134,8 @@ class ProductsListView extends Component {
                 axios.put(API_URL_1 + PRODUCTS_EDIT + id, {
                     idCategory: this.state.idCategory, 
                     idLocation: this.state.idLocation,
-                    item, price, img, startDate, endDate
+                    img: this.state.listProducts.img,
+                    item, price, startDate, endDate
                 }).then((res) => {
                     //=======> Activity Log
                     this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit product: '+item});
@@ -177,7 +177,7 @@ class ProductsListView extends Component {
 
         if(location !== "" && category === "") {
             axios.post(API_URL_1 + LOCATION_GET, {
-                city: location
+                id: location
             }).then((res) => {
                 this.setState({ 
                     idLocation: res.data[0].id 
@@ -197,7 +197,7 @@ class ProductsListView extends Component {
             })
         } else if(category !== "" && location === "") {
             axios.post(API_URL_1 + CATEGORY_GET, {
-                name: category
+                id: category
             }).then((res) => {
                 this.setState({ 
                     idCategory: res.data[0].id
@@ -217,14 +217,14 @@ class ProductsListView extends Component {
             })
         } else if(location !== "" && category !== "") {
             axios.post(API_URL_1 + LOCATION_GET, {
-                city: location
+                id: location
             }).then((res) => {
                 this.setState({ 
                     idLocation: res.data[0].id 
                 });
 
                 axios.post(API_URL_1 + CATEGORY_GET, {
-                    name: category
+                    id: category
                 }).then((res) => {
                     this.setState({ 
                         idCategory: res.data[0].id
@@ -312,7 +312,7 @@ class ProductsListView extends Component {
     renderListLocation = () => {
         var listJSXLocation = this.state.listLocation.map((item) => {
             return (
-                <option>{item.city}</option>
+                <option value={item.id}>{item.city}</option>
             )
         })
         return listJSXLocation;
@@ -334,6 +334,8 @@ class ProductsListView extends Component {
                 return (
                     <tr key={index}>
                         <td>{item.id}</td>
+                        <td><input type="text" defaultValue={item.item} size="4" style={{ fontSize: "12px" }}
+                        ref="updateItem" className="form-control" /></td>
                         <td>
                             <select ref="updateCategory" className="custom-select" style={{ fontSize: "12px" }}>
                                 <option>{this.renderCategory(item.idCategory)}</option>
@@ -346,12 +348,12 @@ class ProductsListView extends Component {
                                 {this.renderListLocation()}
                             </select>
                         </td>
-                        <td><input type="text" defaultValue={item.item} size="4" style={{ fontSize: "12px" }}
-                        ref="updateItem" className="form-control" /></td>
                         <td><input type="number" defaultValue={item.price} style={{ fontSize: "12px" }} 
                         ref="updatePrice" className="form-control" /></td>
-                        <td><input type="text" defaultValue={item.img} size="4" style={{ fontSize: "12px" }}
-                        ref="updateImg" className="form-control" /></td>
+                        <td>
+                            <a href={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
+                            <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} /></a>    
+                        </td>
                         <td><input type="date" defaultValue={item.startDate} size="4" style={{ fontSize: "12px" }}
                             ref="updateStartDate" className="form-control" />
                             to
@@ -382,25 +384,28 @@ class ProductsListView extends Component {
                 return (
                     <tr>
                         <td><center>{item.id}</center></td>
-                        <td><a href={`/admin/producteditdetails?id=${item.id}`}>
-                            {this.renderCategory(item.idCategory)}</a></td>
+                        <td><strong><a href={`/admin/producteditdetails?id=${item.id}`} alt={item.item} 
+                            title="Click to edit this item">{item.item}</a></strong></td>
+                        <td>{this.renderCategory(item.idCategory)}</td>
                         <td>{this.renderCity(item.idLocation)}</td>
-                        <td>{item.item}</td>
                         <td>{this.props.convertToRupiah(item.price)}</td>
-                        <td><center><img src={item.img} alt={item.category} width="100px" height="100px" /></center></td>
-                        <td>{moment(item.startDate).format('D MMM YYYY')} to {moment(item.endDate).format('D MMM YYYY')}</td>
+                        <td>
+                            <a href={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
+                            <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} /></a>
+                        </td>
+                        <td>Start: {moment(item.startDate).format('D MMM YYYY')}<br/>End: {moment(item.endDate).format('D MMM YYYY')}</td>
                         <td>{item.createdBy}</td>
                         <td>{item.creator}</td>
                         <td>
                             <table className="table table-borderless table-sm">
                                 <tr>
-                                    <td>
+                                    {/* <td align="center">
                                     <button className="btn btn-info" 
                                         onClick={ () => this.setState({ selectedIdEdit: item.id }) }>
                                         <i className="fa fa-edit fa-sm"></i>
                                     </button>
-                                    </td>
-                                    <td>
+                                    </td> */}
+                                    <td align="center">
                                     <button className="btn btn-danger"
                                         onClick={ () => this.onBtnDeleteClick(item.id, item.item) }>
                                         <i className="fa fa-trash fa-sm"></i>
@@ -442,7 +447,7 @@ class ProductsListView extends Component {
                         </Col>
                         <Col lg="2">
                             <input type="text" className="form-control" 
-                            placeholder="Search" style={{ fontSize: "12px" }}
+                            placeholder="Search by item" style={{ fontSize: "12px" }}
                             ref="qItem" onKeyUp={() => {this.onKeyUpSearch()}} />
                         </Col>
                         <Col lg="3">
@@ -473,9 +478,9 @@ class ProductsListView extends Component {
                             <thead className="thead-dark">
                                 <tr>
                                     <th><center>ID</center></th>
+                                    <th><center>Item</center></th>
                                     <th><center>Category</center></th>
                                     <th><center>Location</center></th>
-                                    <th><center>Item</center></th>
                                     <th><center>Price</center></th>
                                     <th><center>Image</center></th>
                                     <th><center>Schedule</center></th>

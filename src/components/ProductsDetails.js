@@ -225,8 +225,10 @@ class ProductsDetails extends Component {
         return(
                 <div className="card shadow p-3 mb-5 bg-white rounded col-lg-12">
                     <center>
-                        <img className="img-responsive" alt={item} width="250px" height="250px"
-                            src={img} style={{ marginRight: "20px" }}/>
+                        <br/>
+                        <a href={`${API_URL_1}${img}`} target="_blank" rel="noopener noreferrer">
+                        <img src={`${API_URL_1}${img}`} alt={item} width={180} /></a>
+                        <br/><br/>
                         <h2>{item}</h2>
                         <h4 className="section-subheading" style={{ color: "LIMEGREEN" }}>
                             <FontAwesomeIcon icon={faBriefcase} size="md" />&nbsp;

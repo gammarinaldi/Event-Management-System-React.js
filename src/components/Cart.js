@@ -106,10 +106,11 @@ class Cart extends Component {
                 return (
                     <tr>
                         <td><center>{item.idProduct}</center></td>
-                        <td>{item.categoryName}</td>
                         <td>{item.item}</td>
+                        <td>{item.categoryName}</td>
                         <td>{this.props.convertToRupiah(item.price)}</td>
-                        <td><center><img src={item.img} alt={item.item} width="150px" height="150px" /></center></td>
+                        <td><center><a href={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
+                            <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} /></a></center></td>
                         <td><input type="number" size="4" ref="updateQty" defaultValue={item.qty} className="form-control" /></td>
                         <td>{this.props.convertToRupiah(item.price*item.qty)}</td>
                         <td>
@@ -134,10 +135,11 @@ class Cart extends Component {
             return (
                 <tr>
                     <td><center>{item.idProduct}</center></td>
-                    <td><a href={`/productsdetails?id=${item.idProduct}`}>{item.categoryName}</a></td>
-                    <td>{item.item}</td>
+                    <td><a href={`/productsdetails?id=${item.idProduct}`}>{item.item}</a></td>
+                    <td>{item.categoryName}</td>
                     <td>{this.props.convertToRupiah(item.price)}</td>
-                    <td><center><img src={item.img} alt={item.item} width="150px" height="150px" /></center></td>
+                    <td><center><a href={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
+                        <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} /></a></center></td>
                     <td><center>{item.qty}</center></td>
                     <td>{this.props.convertToRupiah(item.price*item.qty)}</td>
                     <td>
@@ -180,8 +182,8 @@ class Cart extends Component {
                                 <thead className="thead-dark">
                                     <tr>
                                         <th scope="col"><center>Product ID</center></th>
-                                        <th scope="col"><center>Category</center></th>
                                         <th scope="col"><center>Item</center></th>
+                                        <th scope="col"><center>Category</center></th>
                                         <th scope="col"><center>Price</center></th>
                                         <th scope="col"><center>Image</center></th>
                                         <th scope="col"><center>Qty</center></th>

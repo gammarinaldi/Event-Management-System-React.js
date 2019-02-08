@@ -27,8 +27,6 @@ class ProductsEditDetails extends Component {
             locationDetails: [],
             listCategory: [],
             listAllCategory: [],
-            idLocation: 0,
-            idCategory: 0,
             tinyMCE: '',
             days: [],
             sunday: false,
@@ -37,7 +35,8 @@ class ProductsEditDetails extends Component {
             wednesday: false,
             thursday: false,
             friday: false,
-            saturday: false
+            saturday: false,
+            updateImgChange: ''
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -111,6 +110,7 @@ class ProductsEditDetails extends Component {
             this.setState({
                 listProduct: res.data[0],
                 tinyMCE: res.data[0].desc,
+                updateImgChange: res.data[0].img,
                 days
             });
 
@@ -148,18 +148,42 @@ class ProductsEditDetails extends Component {
     }
 
     onBtnSaveClick(id) {
+        console.log(document.getElementById('updateImg').files[0])
+
+        var formData = new FormData();
+        var headers = {
+            headers: 
+            {'Content-Type': 'multipart/form-data'}
+        }
 
         const category = this.refs.updateCategory.value;
         const location = this.refs.updateLocation.value;
         const item = this.refs.updateItem.value;
         const price = this.refs.updatePrice.value;
-        const img = this.refs.updateImg.value;
         const startDate = moment(this.refs.updateStartDate.value).format('YYYY-MM-DD');
         const endDate = moment(this.refs.updateEndDate.value).format('YYYY-MM-DD');
         const startTime = this.refs.updateStartTime.value;
         const endTime = this.refs.updateEndTime.value;
         const desc = this.state.tinyMCE;
         const days = this.state.days;
+
+        if(document.getElementById("updateImg").files[0] !== undefined){
+            formData.append('img', document.getElementById('updateImg').files[0]);
+            var data = {
+                idCategory: category, 
+                idLocation: location,
+                item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
+            }
+        } else {
+            data = {
+                idCategory: category, 
+                idLocation: location,
+                img: this.state.listProduct.img,
+                item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
+            }
+        }
+
+        formData.append('data', JSON.stringify(data)); //Convert object javascript menjadi JSON
 
         axios.post(API_URL_1 + LOCATION_GET, {
             city: location
@@ -175,11 +199,8 @@ class ProductsEditDetails extends Component {
                     idCategory: res.data.id
                 });
 
-                axios.put(API_URL_1 + PRODUCTS_EDIT + id, {
-                    idCategory: this.state.idCategory, 
-                    idLocation: this.state.idLocation,
-                    item, price, img, startDate, endDate, startTime, endTime, desc, days: days.toString()
-                }).then((res) => {
+                axios.put(API_URL_1 + PRODUCTS_EDIT + id, formData, headers)
+                .then((res) => {
                     document.getElementById('message').innerHTML = '<strong>Update success!</strong>';
                     //=======> Activity Log
                     this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit product: '+item});
@@ -207,6 +228,15 @@ class ProductsEditDetails extends Component {
             .catch((err) => {
                 console.log(err);
             })
+        }
+    }
+
+    onUpdateImgChange = () => {
+        if(document.getElementById("updateImg").files[0] !== undefined) {
+            this.setState({updateImgChange : document.getElementById("updateImg").files[0].name})
+        }
+        else {
+            this.setState({updateImgChange: this.state.listProduct.img})
         }
     }
 
@@ -245,7 +275,7 @@ class ProductsEditDetails extends Component {
     renderListLocation() {
         var listJSXLocation = this.state.listLocation.map((item) => {
             return (
-                <option>{item.city}</option>
+                <option value={item.id}>{item.city}</option>
             )
         })
         return listJSXLocation;
@@ -275,7 +305,7 @@ class ProductsEditDetails extends Component {
     renderAllCategory() {
         var listJSXAllCategory = this.state.listAllCategory.map((item) => {
             return (
-                <option>{item.name}</option>
+                <option value={item.id}>{item.name}</option>
             )
         })
         return listJSXAllCategory;
@@ -311,7 +341,7 @@ class ProductsEditDetails extends Component {
                                                 <td>:</td>
                                                 <td>
                                                     <select ref="updateCategory" className="custom-select" style={{ fontSize: "12px" }}>
-                                                        <option>{this.renderCategory(idCategory)}</option>
+                                                        <option value={idCategory}>{this.renderCategory(idCategory)}</option>
                                                         {this.renderAllCategory()}
                                                     </select>
                                                 &nbsp;</td>
@@ -321,7 +351,7 @@ class ProductsEditDetails extends Component {
                                                 <td>:</td>
                                                 <td>
                                                     <select ref="updateLocation" className="custom-select" style={{ fontSize: "12px" }}>
-                                                        <option>{this.renderCity(idLocation)}</option>
+                                                        <option value={idLocation}>{this.renderCity(idLocation)}</option>
                                                         {this.renderListLocation()}
                                                     </select>    
                                                 &nbsp;</td>
@@ -346,9 +376,11 @@ class ProductsEditDetails extends Component {
                                                 <td>&nbsp;Image</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <img src={img} alt={item} width="100px" height="100px"/>
-                                                    <input type="text" defaultValue={img} size="4" style={{ fontSize: "12px" }}
-                                                        ref="updateImg" className="form-control" />    
+                                                    <a href={`${API_URL_1}${img}`} target="_blank" rel="noopener noreferrer">
+                                                    <img src={`${API_URL_1}${img}`} alt={item} width={100} /></a>
+                                                    <br/><br/>  
+                                                    <input type="file" id="updateImg" name="updateImg" 
+                                                    label={this.state.updateImgChange} onChange={this.onUpdateImgChange} /> 
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>
@@ -421,15 +453,23 @@ class ProductsEditDetails extends Component {
                                                 <td>:</td>
                                                 <td>
                                                     <Editor
-                                                    apiKey='rh7l8avejcgd40a81hu5b2e4u9g441bva85ut25b72kkop0a'
-                                                    initialValue={this.state.tinyMCE}
-                                                    init={{
-                                                    height: 300,
-                                                    plugins: 'link image code',
-                                                    toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
-                                                    }}
-                                                    onChange={this.handleEditorChange}
-                                                />
+                                                        apiKey='rh7l8avejcgd40a81hu5b2e4u9g441bva85ut25b72kkop0a'
+                                                        initialValue={this.state.tinyMCE}
+                                                        init={{
+                                                            height: 300,
+                                                            plugins: [
+                                                                'advlist autolink lists link image charmap print preview anchor textcolor',
+                                                                'searchreplace visualblocks code fullscreen',
+                                                                'insertdatetime media table paste code help wordcount'
+                                                            ],
+                                                            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                                                            content_css: [
+                                                                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                                                                '//www.tiny.cloud/css/codepen.min.css'
+                                                            ]
+                                                        }}
+                                                        onChange={this.handleEditorChange}
+                                                    />
                                                 </td>
                                             </tr>
                                             <tr>

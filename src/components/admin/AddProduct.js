@@ -75,32 +75,50 @@ class ProductsEditDetails extends Component {
     onBtnAddClick = (e) => {
         e.preventDefault();
 
-        const category = this.refs.addCategory.value;
-        const location = this.refs.addLocation.value;
-        const item = this.refs.addItem.value;
-        const price = this.refs.addPrice.value;
-        const img = this.refs.addImg.value;
-        const startDate = this.refs.addStartDate.value;
-        const endDate = this.refs.addEndDate.value;
-        const startTime = this.refs.addStartTime.value;
-        const endTime = this.refs.addEndTime.value;
-        const desc = this.state.tinyMCE;
-        const days = this.state.days;
+        if(document.getElementById("addImg").files[0] !== undefined) {
+            var formData = new FormData();
+            var headers = {
+                headers: 
+                {'Content-Type': 'multipart/form-data'}
+            }
 
-        axios.post(API_URL_1 + PRODUCTS_ADD, {
-            idCategory: category, 
-            idLocation: location,
-            creator: this.props.myRole,
-            createdBy: this.props.username,
-            item, price, img, startDate, endDate, startTime, endTime, desc, days: days.toString()
-        }).then((res) => {
-            document.getElementById('message').innerHTML = '<strong>Add product success!</strong>';
-            //=======> Activity Log
-            this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add product: '+item});
-            this.refs.formAdd.reset();
-        }).catch((err) => {
-            console.log(err);
-        })
+            const category = this.refs.addCategory.value;
+            const location = this.refs.addLocation.value;
+            const item = this.refs.addItem.value;
+            const price = this.refs.addPrice.value;
+            const startDate = this.refs.addStartDate.value;
+            const endDate = this.refs.addEndDate.value;
+            const startTime = this.refs.addStartTime.value;
+            const endTime = this.refs.addEndTime.value;
+            const desc = this.state.tinyMCE;
+            const days = this.state.days;
+
+            var data = {
+                idCategory: category, 
+                idLocation: location,
+                creator: this.props.myRole,
+                createdBy: this.props.username,
+                item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
+            }
+
+            if(document.getElementById('addImg')){
+                formData.append('img', document.getElementById('addImg').files[0]);
+            }
+
+            formData.append('data', JSON.stringify(data)); //Convert object javascript menjadi JSON
+
+            axios.post(API_URL_1 + PRODUCTS_ADD, formData, headers)
+            .then((res) => {
+                console.log(res);
+                document.getElementById('message').innerHTML = '<strong>Add product success!</strong>';
+                //=======> Activity Log
+                this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add product: '+item});
+                this.refs.formAdd.reset();
+            })
+            .catch((err) =>{
+                console.log(err);
+            })
+        }
         
     }
 
@@ -245,8 +263,8 @@ class ProductsEditDetails extends Component {
                                             <td>&nbsp;Image</td>
                                             <td>:</td>
                                             <td>
-                                                <input type="text" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addImg" className="form-control" />    
+                                                <input type="file" id="addImg" name="addImg" 
+                                                    label={this.state.addImg} onChange={this.addImgChange} />
                                             &nbsp;</td>
                                         </tr>
                                         <tr>
@@ -310,15 +328,23 @@ class ProductsEditDetails extends Component {
                                                     ref="addDesc" rows="4" cols="40">
                                                 </textarea>&nbsp; */}
                                                 <Editor
-                                                apiKey='rh7l8avejcgd40a81hu5b2e4u9g441bva85ut25b72kkop0a'
-                                                initialValue={this.state.tinyMCE}
-                                                init={{
-                                                    height: 300,
-                                                    plugins: 'link image code',
-                                                    toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
-                                                }}
-                                                onChange={this.handleEditorChange}
-                                            />
+                                                    apiKey='rh7l8avejcgd40a81hu5b2e4u9g441bva85ut25b72kkop0a'
+                                                    initialValue={this.state.tinyMCE}
+                                                    init={{
+                                                        height: 300,
+                                                        plugins: [
+                                                            'advlist autolink lists link image charmap print preview anchor textcolor',
+                                                            'searchreplace visualblocks code fullscreen',
+                                                            'insertdatetime media table paste code help wordcount'
+                                                        ],
+                                                        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                                                        content_css: [
+                                                            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                                                            '//www.tiny.cloud/css/codepen.min.css'
+                                                        ]
+                                                    }}
+                                                    onChange={this.handleEditorChange}
+                                                />
                                             </td>
                                         </tr>
                                         <tr>

@@ -44,10 +44,10 @@ class HistoryDetails extends Component {
             return (
                 <tr>   
                     <td><center>{item.idProduct}</center></td>
-                    <td><center>{item.category}</center></td>
                     <td><center>{item.item}</center></td>
-                    <td><center>{moment(item.startDate).format('DD MMM Y')} 
-                    &nbsp;to {moment(item.startDate).format('DD MMM Y')}</center></td>
+                    <td><center>{item.category}</center></td>
+                    <td><center>Start: {moment(item.startDate).format('DD/MMM/Y')}<br/>
+                    End: {moment(item.startDate).format('DD/MMM/Y')}</center></td>
                     <td><center>{this.props.convertToRupiah(item.price)}</center></td>
                     <td><center>{item.qty}</center></td>
                 </tr>
@@ -91,8 +91,8 @@ class HistoryDetails extends Component {
                                         <thead className="thead-dark">
                                             <tr>
                                                 <th scope="col"><center>PID</center></th>
-                                                <th scope="col"><center>Category</center></th>
                                                 <th scope="col"><center>Item</center></th>
+                                                <th scope="col"><center>Category</center></th>
                                                 <th scope="col"><center>Schedule</center></th>
                                                 <th scope="col"><center>Price</center></th>
                                                 <th scope="col"><center>Qty</center></th>
@@ -122,12 +122,12 @@ class HistoryDetails extends Component {
                             <table className="table table-bordered table-hover">
                                 <thead className="thead-dark">
                                     <tr>
-                                    <th scope="col"><center>Id</center></th>
-                                        <th scope="col"><center>Category</center></th>
+                                        <th scope="col"><center>PID</center></th>
                                         <th scope="col"><center>Item</center></th>
-                                        <th scope="col"><center>Image</center></th>
+                                        <th scope="col"><center>Category</center></th>
+                                        <th scope="col"><center>Schedule</center></th>
+                                        <th scope="col"><center>Price</center></th>
                                         <th scope="col"><center>Qty</center></th>
-                                        <th scope="col"><center>Harga</center></th>
                                     </tr>
                                 </thead>
                                 <tbody>

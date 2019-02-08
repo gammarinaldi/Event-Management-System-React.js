@@ -48,7 +48,7 @@ class ProductsGridView extends Component {
     renderAllCategory = () => {
         var listJSXAllCategory = this.state.listAllCategory.map((item) => {
             return (
-                <option>{item.name}</option>
+                <option value={item.id}>{item.name}</option>
             )
         })
         return listJSXAllCategory;
@@ -68,7 +68,7 @@ class ProductsGridView extends Component {
     renderListLocation = () => {
         var listJSXLocation = this.state.listLocation.map((item) => {
             return (
-                <option>{item.city}</option>
+                <option value={item.id}>{item.city}</option>
             )
         })
         return listJSXLocation;
@@ -86,7 +86,9 @@ class ProductsGridView extends Component {
         })
     }
 
-    onBtnSearchClick = () => {
+    onBtnSearchClick = (e) => {
+        e.preventDefault();
+
         var category = this.refs.qCategory.value;
         var location = this.refs.qLocation.value;
         var item = this.refs.qItem.value;
@@ -95,7 +97,7 @@ class ProductsGridView extends Component {
 
         if(location !== "" && category === "") {
             axios.post(API_URL_1 + LOCATION_GET, {
-                city: location
+                id: location
             }).then((res) => {
                 this.setState({ 
                     idLocation: res.data[0].id 
@@ -115,10 +117,10 @@ class ProductsGridView extends Component {
             })
         } else if(category !== "" && location === "") {
             axios.post(API_URL_1 + CATEGORY_GET, {
-                name: category
+                id: category
             }).then((res) => {
                 this.setState({ 
-                    idCategory: res.data.id
+                    idCategory: res.data[0].id
                 });
     
                 var arrSearch = this.state.listProducts.filter((e) => {
@@ -135,17 +137,17 @@ class ProductsGridView extends Component {
             })
         } else if(location !== "" && category !== "") {
             axios.post(API_URL_1 + LOCATION_GET, {
-                city: location
+                id: location
             }).then((res) => {
                 this.setState({ 
-                    idLocation: res.data.id 
+                    idLocation: res.data[0].id 
                 });
 
-                axios.get(API_URL_1 + CATEGORY_GET, {
-                    name: category
+                axios.post(API_URL_1 + CATEGORY_GET, {
+                    id: category
                 }).then((res) => {
                     this.setState({ 
-                        idCategory: res.data.id
+                        idCategory: res.data[0].id
                     });
         
                     var arrSearch = this.state.listProducts.filter((e) => {
@@ -221,7 +223,7 @@ class ProductsGridView extends Component {
                     <br/>
                     <div className="card bg-light" style={{ fontSize: "13px", padding: "30px" }}>
                         <div className="row justify-content-center">
-                        <h1>One-Stop-Shopping for IT workshop, training, & course.</h1></div>
+                        <h1>One-Stop-Shopping for IT event, workshop, & bootcamp.</h1></div>
                     </div>
                     <br/>
                     <div className="card bg-light" style={{ fontSize: "13px", padding: "30px" }}>
@@ -258,7 +260,7 @@ class ProductsGridView extends Component {
                                         </Row>
                                         <Row style={{ marginBottom: "20px" }}>
                                             <input type="text" className="form-control" ref="qItem" 
-                                            placeholder="Products" style={{ fontSize: "12px" }}/>
+                                            placeholder="Search by product name" style={{ fontSize: "12px" }}/>
                                         </Row>
                                         <Row style={{ marginBottom: "20px" }}>
                                             <InputGroup>
@@ -279,11 +281,19 @@ class ProductsGridView extends Component {
                                             </InputGroup>
                                         </Row>
                                         <Row style={{ marginBottom: "20px" }}>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <div className="col align-self-center">
                                             <button type="button" className="btn btn-default btn-sm btn-success"
                                             onClick={this.onBtnSearchClick}
                                             style={{ fontSize: "12px" }}>
                                             <span className="glyphicon glyphicon-search"></span> Search 
                                             </button>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button type="reset" className="btn btn-default btn-sm btn-info"
+                                            style={{ fontSize: "12px" }}>
+                                            <span className="glyphicon glyphicon-repeat"></span> Reset 
+                                            </button>
+                                            </div>
                                         </Row>
                                     </form>
 

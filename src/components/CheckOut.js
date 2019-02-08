@@ -44,7 +44,13 @@ class CheckOut extends Component {
 
     onBtnConfirm = () => {
 
-        if(document.getElementById("addReceipt").files[0] !== undefined) {
+        if (!this.refs.bankName.value && !this.refs.accNo.value) {
+            alert('Please input all required data!');
+        } 
+        else if (document.getElementById("addReceipt").files[0] === undefined) {
+            alert('Please input all required data!');
+        }
+        else {
             var formData = new FormData();
             var headers = {
                 headers: 
@@ -103,11 +109,6 @@ class CheckOut extends Component {
                 console.log(err);
             })
         }
-        else if (!this.refs.bankName.value 
-                    && !this.refs.accNo.value 
-                    && document.getElementById("addReceipt").files[0] === undefined) {
-            alert('Please input all required data!');
-        }
     }
   
     renderListCart = () => {
@@ -117,8 +118,8 @@ class CheckOut extends Component {
             return (
                 <tr>
                     <td><center>{item.idProduct}</center></td>
-                    <td>{item.categoryName}</td>
                     <td>{item.item}</td>
+                    <td>{item.categoryName}</td>
                     <td>{this.props.convertToRupiah(item.price)}</td>
                     <td><center>{item.qty}</center></td>
                     <td>{this.props.convertToRupiah(item.price*item.qty)}</td>
@@ -148,8 +149,8 @@ class CheckOut extends Component {
                                 <thead className="thead-dark">
                                     <tr>
                                         <th scope="col"><center>Product ID</center></th>
-                                        <th scope="col"><center>Category</center></th>
                                         <th scope="col"><center>Item</center></th>
+                                        <th scope="col"><center>Category</center></th>
                                         <th scope="col"><center>Price</center></th>
                                         <th scope="col"><center>Qty</center></th>
                                         <th scope="col"><center>Sub-Total</center></th>

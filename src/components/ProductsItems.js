@@ -148,15 +148,18 @@ class ProductsItems extends Component {
                 <div>
                     <Col lg="4" style={{ marginBottom: "25px" }}>
                         <Card>
+                        <br/><br/>
                         <center>
-                            <Link to="#" onClick={this.onItemClick}><b style={{ fontSize: 'medium' }}>
-                            <img src={img} width="180px" height="180px" alt={item} className="img-responsive" /></b></Link>
+                            <Link to="#" onClick={this.onItemClick}>
+                            <a href={`${API_URL_1}${img}`} target="_blank" rel="noopener noreferrer">
+                            <img src={`${API_URL_1}${img}`} alt={item} width={180} /></a>
+                            </Link>
                         </center>
                         <br/>
                         <CardTitle id="cardTitle" style={{ padding: '0 0 0 20px', margin: '0 0 10px 0' }}>
                             <Link to="#" onClick={this.onItemClick}><b style={{ fontSize: 'medium' }}>{item}</b></Link>
                         </CardTitle>
-                        <CardText id="cardCategory" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
+                        <CardText id="cardCategory" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: 'LIMEGREEN' }}>
                             <FontAwesomeIcon icon={faBriefcase} size="md" />&nbsp;<strong>{this.renderCategory(idCategory)}</strong>
                         </CardText>
                         <CardText id="cardDate" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
