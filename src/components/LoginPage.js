@@ -61,13 +61,14 @@ class LoginPage extends Component {
         }
 
         return (
-            
-              <div className="card bg-light">
-              <br/><br/>
-              <div className="card-body mx-auto shadow p-3 mb-5 bg-white rounded">
+          <div className="card bg-light" style={{ paddingLeft: "40px", paddingRight: "40px", paddingTop: "20px" }}>
+
+            <div className="row justify-content-center">
+          
+              <div className="col-lg-3 card-body mx-auto shadow p-3 mb-5 bg-white rounded">
                 <br/>
-                <form style={{ paddingRight: "50px", paddingLeft: "50px" }}>
-                <h5 style={{ textAlign: 'center', fontSize: "16px" }}>Login</h5><br/>
+                <form style={{ paddingRight: "50px",paddingLeft: "50px" }}>
+                <h5 style={{ textAlign: 'center',fontSize: "20px",paddingTop: "20px" }}>Sign In</h5><br/>
                 <div className="alert alert-warning" style={{ fontSize: "12px" }}>
                   <center><h4>Demo Account</h4>
                   <br/><b>Admin</b> <br/>Username: admin<br/>Password: admin
@@ -93,7 +94,10 @@ class LoginPage extends Component {
                         <Link to="/register">Create one</Link> </p>
               <br/>
               </div>
+
             </div>
+
+          </div>
         )
 
       }

@@ -7,18 +7,20 @@ import { convertToRupiah, sideBarMenu } from '../../actions';
 import { 
     USERS_GETLIST, 
     PRODUCTS_GETLIST,
-    TRX_GETLIST
+    TRX_GETLIST,
+    BEST_SELLER
 } from '../../supports/api-url/apisuburl';
 
 class Dashboard extends Component {
 
-    state = { listUsers: 0, listProducts: 0, totalSales: 0, totalTrx: 0 }
+    state = { listUsers: 0, listProducts: 0, totalSales: 0, totalTrx: 0, bestSeller: '' }
 
     componentDidMount() {
         this.totalUsers();
         this.totalProducts();
         this.totalSales();
         this.totalTrx();
+        this.bestSeller();
     }
 
     totalUsers = () => {
@@ -70,6 +72,18 @@ class Dashboard extends Component {
             })
     }
 
+    bestSeller = () => {
+        axios.get(API_URL_1 + BEST_SELLER)
+            .then((res) => {
+                console.log(res)
+                this.setState({ 
+                    bestSeller: res.data[0].item
+                });
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
+
     render() {
     
         if(this.props.myRole === "ADMIN" && this.props.username !== "") {
@@ -85,22 +99,36 @@ class Dashboard extends Component {
                         <div className="row shadow p-3 mb-5 bg-white rounded">
                         <div className="table-responsive col-lg-12">
                             <table className="table">
-                                <thead>
-                                <tr>
-                                    <th>Total Users:</th>
-                                    <th>Total Products:</th>
-                                    <th>Total Transactions:</th>
-                                    <th>Total Sales:</th>
+                                <tr className="table-info">
+                                    <td align="left"><h3>Total Sales</h3></td>
+                                    <td align="center"><h3>:</h3></td>
+                                    <td><h3>{this.props.convertToRupiah(this.state.totalSales)}</h3></td>
+                                    <td>&nbsp;</td>
                                 </tr>
-                                </thead>
-                                <tbody>     
-                                <tr className="table-warning">
-                                    <td align="center"><h1>{this.state.listUsers}</h1></td>
-                                    <td align="center"><h1>{this.state.listProducts}</h1></td>
-                                    <td align="center"><h1>{this.state.totalTrx}</h1></td>
-                                    <td align="center"><h1>{this.props.convertToRupiah(this.state.totalSales)}</h1></td>
+                                <tr className="table-info">
+                                    <td align="left"><h3>Total Products</h3></td>
+                                    <td align="center"><h3>:</h3></td>
+                                    <td><h3>{this.state.listProducts}</h3></td>
+                                    <td>&nbsp;</td>
                                 </tr>
-                                </tbody>
+                                <tr className="table-info">
+                                    <td align="left"><h3>Total Transactions</h3></td>
+                                    <td align="center"><h3>:</h3></td>
+                                    <td><h3>{this.state.totalTrx}</h3></td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr className="table-info">
+                                    <td align="left"><h3>Total Users</h3></td>
+                                    <td align="center"><h3>:</h3></td>
+                                    <td><h3>{this.state.listUsers}</h3></td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr className="table-info">
+                                    <td align="left"><h3>Best Seller</h3></td>
+                                    <td align="center"><h3>:</h3></td>
+                                    <td><h3>{this.state.bestSeller}</h3></td>
+                                    <td>&nbsp;</td>
+                                </tr>
                             </table>
                             </div>
                             </div>

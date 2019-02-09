@@ -37,3 +37,4 @@ export const WISHLIST_GET = "/wishlist/getwishlist";
 export const WISHLIST_ADD = "/wishlist/addwishlist";
 export const WISHLIST_EDIT = "/wishlist/editwishlist/";
 export const WISHLIST_DELETE = "/wishlist/deletewishlist/";
+export const BEST_SELLER = "/trxdetails/bestseller"

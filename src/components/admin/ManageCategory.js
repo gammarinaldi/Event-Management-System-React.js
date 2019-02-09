@@ -8,7 +8,7 @@ class ManageCategory extends Component {
 
     render() {
     
-        if(this.props.myRole === "ADMIN" && this.props.username !== "") {
+        if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
           return (
                 <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
                     <div className="row">

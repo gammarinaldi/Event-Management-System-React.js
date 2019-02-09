@@ -41,7 +41,9 @@ export const sideBarMenu = ({ myRole, active }) => {
         } else if(myRole === "PRODUCER") {
             dispatch({type: SIDE_BAR_MENU});
             return <div className="list-group">
-                        <a href="/admin/manageproducts" className="list-group-item active">Manage Products</a>
+                        <a href="/admin/manageproducts" className={manageproducts}>Manage Products</a>
+                        <a href="/admin/managecategory" className={managecategory}>Manage Category</a>
+                        <a href="/admin/managelocation" className={managelocation}>Manage Location</a>
                     </div>;
         }
     }

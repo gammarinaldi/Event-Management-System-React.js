@@ -8,7 +8,6 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import ReduxThunk from 'redux-thunk';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import 'mdbreact/dist/css/mdb.css';
 import './supports/font-awesome/css/font-awesome.min.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 

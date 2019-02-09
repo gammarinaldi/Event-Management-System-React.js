@@ -47,14 +47,14 @@ class HeaderReact extends Component {
         if(window.confirm('Are you sure want to Logout?')) {
             if(this.props.onUserLogout()) {
                 //=======> Activity Log
-                this.props.onActivityLog({username: this.props.username, role: this.props.role, desc: 'Logout'});
+                this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Logout'});
             }
             cookies.remove('usernameCookie', 'emailCookie', 'roleCookie');
         }
     }
 
     isProducer() {
-        if(this.props.role === "PRODUCER") {
+        if(this.props.myRole === "PRODUCER") {
             return <NavItem><NavLink href="/"><div style={{ color: 'LIGHTSEAGREEN' }}>Manage Products</div></NavLink></NavItem>;
         }
     }
@@ -124,7 +124,7 @@ class HeaderReact extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar style={{ fontSize: "14px", fontWeight: "bold" }}>
                             <NavItem>
-                            <NavLink href="/">Hello, {this.props.username}</NavLink>
+                            <NavLink href="/">Hello, {this.props.username} ({this.props.myRole})</NavLink>
                             </NavItem>
                             &nbsp;
                             <NavItem>
@@ -176,7 +176,7 @@ class HeaderReact extends Component {
 const mapStateToProps = (state) => {
     return {
         username: state.auth.username,
-        role: state.auth.role
+        myRole: state.auth.role
     }
 }
 

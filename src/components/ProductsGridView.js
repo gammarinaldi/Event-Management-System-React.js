@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import ProductsItems from './ProductsItems';
-import { InputGroup, Row } from 'reactstrap';
 import Carousel from './Carousel';
 import Jumbotron from './Jumbotron';
 import { sortingJSON } from '../actions';
@@ -15,6 +14,7 @@ import {
     LOCATION_GET, 
     CATEGORY_GET 
 } from '../supports/api-url/apisuburl';
+import { InputGroup, Row, Col } from 'reactstrap';
 
 class ProductsGridView extends Component {
     
@@ -86,8 +86,8 @@ class ProductsGridView extends Component {
         })
     }
 
-    onBtnSearchClick = (e) => {
-        e.preventDefault();
+    onKeyUpSearch = () => {
+        //e.preventDefault();
 
         var category = this.refs.qCategory.value;
         var location = this.refs.qLocation.value;
@@ -233,56 +233,68 @@ class ProductsGridView extends Component {
 
                     <div className="card bg-light" style={{ fontSize: "13px" }}>
 
-                            <div className="row justify-content-center" style={{ marginTop: "30px" }}>
-                                    {changeToListView}
-                            </div>
+                        <div className="row justify-content-center" style={{ marginTop: "30px" }}>
+                                {changeToListView}
+                        </div>
 
-                            <br/><br/>
+                        <div className="row justify-content-center" 
+                            style={{ paddingTop: "20px", paddingLeft: "100px", paddingRight: "100px" }}>
 
-                            <div className="row justify-content-center">
-                                <div className="card h-100 bg-light" style={{ padding: "20px", marginBottom: "20px" }}>
-                                    <div className="card-body col-md-lg-2">
-                                    
-                                    <form ref="searchForm">
-                                        <Row style={{ marginBottom: "20px" }}>
+                            <div className="col-lg-2">
+                                <form ref="searchForm">
+                                    <Row style={{ marginBottom: "20px" }}>
+                                        <Col lg="12">
                                             <select ref="qCategory" className="custom-select" 
+                                            onChange={() => {this.onKeyUpSearch()}}
                                             style={{ fontSize: "12px" }}>
                                                 <option value="">All Category</option>
                                                 {this.renderAllCategory()}
                                             </select>
-                                        </Row>
-                                        <Row style={{ marginBottom: "20px" }}>
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ marginBottom: "20px" }}>
+                                        <Col lg="12">
                                             <select ref="qLocation" className="custom-select" 
+                                            onChange={() => {this.onKeyUpSearch()}}
                                             style={{ fontSize: "12px" }}>
                                                 <option value="">All Location</option>
                                                 {this.renderListLocation()}
                                             </select>
-                                        </Row>
-                                        <Row style={{ marginBottom: "20px" }}>
-                                            <input type="text" className="form-control" ref="qItem" 
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ marginBottom: "20px" }}>
+                                        <Col lg="12">
+                                            <input type="text" className="form-control" ref="qItem"
+                                            onChange={() => {this.onKeyUpSearch()}} 
                                             placeholder="Search by product name" style={{ fontSize: "12px" }}/>
-                                        </Row>
-                                        <Row style={{ marginBottom: "20px" }}>
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ marginBottom: "20px" }}>
+                                        <Col lg="12">
                                             <InputGroup>
                                             <div className="input-group-prepend">
                                                 <div className="input-group-text">Min Rp</div>
                                             </div>
                                             <input type="number" className="form-control" 
+                                            onChange={() => {this.onKeyUpSearch()}}
                                             ref="qHargaMin" defaultValue="0" style={{ fontSize: "12px" }}/>
                                             </InputGroup>
-                                        </Row>
-                                        <Row style={{ marginBottom: "20px" }}>
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ marginBottom: "20px" }}>
+                                        <Col lg="12">
                                             <InputGroup>
                                             <div className="input-group-prepend">
                                                 <div className="input-group-text">Max Rp</div>
                                             </div>
                                             <input type="number" className="form-control" 
+                                            onChange={() => {this.onKeyUpSearch()}}
                                             ref="qHargaMax" defaultValue="99999999" style={{ fontSize: "12px" }}/>
                                             </InputGroup>
-                                        </Row>
-                                        <Row style={{ marginBottom: "20px" }}>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <div className="col align-self-center">
+                                        </Col>
+                                    </Row>
+                                    {/* <Row style={{ marginBottom: "20px" }}>
+                                        <Col lg="12">
                                             <button type="button" className="btn btn-default btn-sm btn-success"
                                             onClick={this.onBtnSearchClick}
                                             style={{ fontSize: "12px" }}>
@@ -293,19 +305,18 @@ class ProductsGridView extends Component {
                                             style={{ fontSize: "12px" }}>
                                             <span className="glyphicon glyphicon-repeat"></span> Reset 
                                             </button>
-                                            </div>
-                                        </Row>
-                                    </form>
+                                        </Col>
+                                    </Row> */}
+                                </form>
+                            </div>
 
-                                    </div>
-
-                                </div>
-
-                                <div className="col-lg-8">
+                            <div className="col-lg-10">
+                                <div className="row">
                                         {this.renderListProducts()}
                                 </div>
-                            
                             </div>
+                            
+                        </div>
                     </div>
                 </div>
             

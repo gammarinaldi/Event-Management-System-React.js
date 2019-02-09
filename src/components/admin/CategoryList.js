@@ -134,7 +134,7 @@ class CategoryList extends Component {
     }
 
     adminAddAction = () => {
-        if(this.props.myRole === 'ADMIN') {
+        if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
             return(
                 <tfoot>
                     <tr>
@@ -188,7 +188,7 @@ class CategoryList extends Component {
         }
         //====================END >> EDIT ITEM PRODUK=========================//
 
-        if(this.props.myRole === "ADMIN") {
+        if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
             return (
                 <tr>
                     <td><center>{item.id}</center></td>
@@ -221,7 +221,7 @@ class CategoryList extends Component {
         
     render() {
         
-        if(this.props.username !== "" && this.props.myRole === "ADMIN") {
+        if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
             
             return(
                 <div style={{ fontSize: "13px" }} className="card shadow p-3 mb-5 bg-white rounded">
@@ -238,7 +238,7 @@ class CategoryList extends Component {
                         <table className="table table-bordered table-hover">
                             <thead className="thead-dark">
                                 <tr>
-                                    <th><center>ID</center></th>
+                                    <th><center>CID</center></th>
                                     <th><center>Name</center></th>
                                     <th colSpan="2"><center>Action</center></th>
                                 </tr>

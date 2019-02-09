@@ -69,7 +69,7 @@ class CheckOut extends Component {
                 invoice,
                 totalPrice: this.state.totalPrice,
                 totalQty: this.state.totalQty,
-                trxDateTime: moment(new Date()).format('YYYY-MM-DD HH:MM:SS'),
+                trxDateTime: moment(new Date()).format('DD/MMM/YYYY HH:MM:SS'),
                 status: 'Unconfirmed'
             }
 
@@ -87,7 +87,8 @@ class CheckOut extends Component {
                 for(let i = 0; i < this.state.cartList.length; i++) {
                     axios.post(API_URL_1 + TRXDETAILS_ADD, {
                         idTrx: res.data[0].id,
-                        idProduct: this.state.cartList[i].idProduct
+                        idProduct: this.state.cartList[i].idProduct,
+                        qty: this.state.cartList[i].qty
                     }).then((res) => {
                         console.log(res);
                         axios.delete(API_URL_1 + CART_DELETE + this.state.cartList[i].idCart)

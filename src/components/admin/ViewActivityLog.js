@@ -105,7 +105,7 @@ class ViewActivityLog extends Component {
                                 <table className="table table-bordered table-hover">
                                     <thead className="thead-dark">
                                         <tr>
-                                            <th><center>ID</center></th>
+                                            <th><center>LID</center></th>
                                             <th><center>Username</center></th>
                                             <th><center>Role</center></th>
                                             <th><center>Activity</center></th>

@@ -40,7 +40,7 @@ class RegisterPage extends Component {
                 load = <center><Spinner /></center>;
             } else {
                 load =  <center>
-                            <Button color="primary" style={{ fontSize: "13px" }} 
+                            <Button color="primary" style={{ fontSize: "14px" }} 
                                 onClick={this.onBtnRegisterClick}><b>Sign Up</b></Button>
                             <br/>
                             <div id="error" style={{ fontSize: "13px" }}></div>
@@ -58,51 +58,55 @@ class RegisterPage extends Component {
             return (
             
                 <div>
-                    <div className="card bg-light">
-                    <br/><br/>
-                    <article className="card-body col-3 mx-auto shadow p-3 mb-5 bg-white rounded">
-                        <h5 className="card-title mt-3 text-center" 
-                        style={{ fontSize: "16px" }}>Create an Account</h5><br/>
-                        
-                        <form style={{ paddingBottom: "50px", paddingRight: "50px", paddingLeft: "50px" }}>
-                            <div className="form-group">
-                                <input type="text" ref="username" className="form-control form-control-lg" 
-                                placeholder="Username" style={{ fontSize: "14px", marginBottom: "15px" }}/>
-                            </div>
-                            <div className="form-group">
-                                <input type="text" ref="fullname" className="form-control form-control-lg" 
-                                placeholder="Fullname" style={{ fontSize: "14px", marginBottom: "15px" }}/>
-                            </div>
-                            <div className="form-group">
-                                <input type="email" ref="email" className="form-control form-control-lg" 
-                                placeholder="Email address" style={{ fontSize: "14px", marginBottom: "15px"  }} />
-                            </div>
-                            <div className="form-group">
-                                <input type="text" ref="phone" className="form-control form-control-lg" 
-                                placeholder="Phone number" style={{ fontSize: "14px", marginBottom: "15px"  }} />
-                            </div>
-                            <div className="form-group">
-                                <input ref="password" className="form-control form-control-lg" 
-                                placeholder="Create password" type="password" style={{ fontSize: "14px", marginBottom: "15px"  }} />
-                            </div>
-                            <div className="form-group">
-                                <input ref="confirmPassword" className="form-control form-control-lg" 
-                                placeholder="Confirm password" type="password" style={{ fontSize: "14px", marginBottom: "15px"  }} />
-                            </div>
-                            <br/>                         
-                            <div className="form-group">
-                                {alertReg}
-                                {load}
-                            </div>      
-                        </form>
+                    <div className="card bg-light" style={{ paddingLeft: "40px", paddingRight: "40px", paddingTop: "20px" }}>
+                    
+                        <div className="row justify-content-center">
 
-                        <p className="text-center" style={{ fontSize: "14px" }}>Have an account? &nbsp;
-                        <Link to="/login">Sign in</Link> </p>
+                        <div className="col-lg-3 card-body mx-auto shadow p-3 mb-5 bg-white rounded"
+                            style={{ marginLeft: "20px", marginRight: "20px" }}>
+                            <h5 className="card-title mt-3 text-center" 
+                            style={{ fontSize: "20px", paddingTop: "20px" }}>Create an Account</h5><br/>
+                            
+                            <form style={{ paddingBottom: "50px", paddingRight: "50px", paddingLeft: "50px" }}>
+                                <div className="form-group">
+                                    <input type="text" ref="username" className="form-control form-control-lg" 
+                                    placeholder="Username" style={{ fontSize: "14px", marginBottom: "15px" }}/>
+                                </div>
+                                <div className="form-group">
+                                    <input type="text" ref="fullname" className="form-control form-control-lg" 
+                                    placeholder="Fullname" style={{ fontSize: "14px", marginBottom: "15px" }}/>
+                                </div>
+                                <div className="form-group">
+                                    <input type="email" ref="email" className="form-control form-control-lg" 
+                                    placeholder="Email address" style={{ fontSize: "14px", marginBottom: "15px"  }} />
+                                </div>
+                                <div className="form-group">
+                                    <input type="text" ref="phone" className="form-control form-control-lg" 
+                                    placeholder="Phone number" style={{ fontSize: "14px", marginBottom: "15px"  }} />
+                                </div>
+                                <div className="form-group">
+                                    <input ref="password" className="form-control form-control-lg" 
+                                    placeholder="Create password" type="password" style={{ fontSize: "14px", marginBottom: "15px"  }} />
+                                </div>
+                                <div className="form-group">
+                                    <input ref="confirmPassword" className="form-control form-control-lg" 
+                                    placeholder="Confirm password" type="password" style={{ fontSize: "14px", marginBottom: "15px"  }} />
+                                </div>
+                                <br/>                         
+                                <div className="form-group">
+                                    {alertReg}
+                                    {load}
+                                </div>      
+                            </form>
 
-                    </article>
+                            <p className="text-center" style={{ fontSize: "14px" }}>Have an account? &nbsp;
+                            <Link to="/login">Sign in</Link> </p>
+
+                        </div>
+                    </div>
+
                     </div>
                 </div>
-    
             )
 
         } 

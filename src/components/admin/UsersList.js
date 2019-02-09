@@ -68,7 +68,7 @@ class UsersList extends Component {
             }).catch((err) => {
                 console.log(err);
             })
-        } else alert('Please fill all input box.')
+        } else alert('Please input all fields.')
 
     }
 
@@ -215,7 +215,7 @@ class UsersList extends Component {
         if(item.id === this.state.selectedIdEdit) {
             return (
                 <tr key={index}>
-                    <td>{item.id}</td>
+                    <td><center>{item.id}</center></td>
                     <td><input type="text" defaultValue={item.username} size="4" style={{ fontSize: "12px" }}
                     ref="updateUserName" className="form-control" /></td>
                     <td><input type="password" size="4" defaultValue={item.password} ref="updatePassword" 
@@ -315,7 +315,7 @@ class UsersList extends Component {
                         <table className="table table-bordered table-hover">
                             <thead className="thead-dark">
                                 <tr>
-                                    <th><center>ID</center></th>
+                                    <th><center>UID</center></th>
                                     <th><center>Username</center></th>
                                     <th><center>Password</center></th>
                                     <th><center>Fullname</center></th>

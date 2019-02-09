@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import { convertToRupiah, sortingJSON } from '../actions';
 import { TRX_GET, TRX_GETLIST } from '../supports/api-url/apisuburl';
-import moment from 'moment';
 
 class History extends Component {
 
@@ -71,7 +70,7 @@ class History extends Component {
                         <a href={`${API_URL_1}${item.receipt}`} target="_blank" rel="noopener noreferrer">
                         <img src={`${API_URL_1}${item.receipt}`} alt={item.invoice} width={100} /></a>
                     </td>
-                    <td>{moment(item.trxDateTime).format('DD/MMM/YYYY H:mm:ss')}</td>
+                    <td>{item.trxDateTime}</td>
                     <td><center>{item.totalQty}</center></td>
                     <td>{this.props.convertToRupiah(item.totalPrice)}</td>
                     <td><center>{item.status}</center></td>
@@ -98,7 +97,7 @@ class History extends Component {
                             <table className="table table-bordered table-hover">
                                 <thead className="thead-dark">
                                     <tr>
-                                        <th scope="col"><center>Trx Id</center></th>
+                                        <th scope="col"><center>TID</center></th>
                                         <th scope="col"><center>Invoice</center></th>
                                         <th scope="col"><center>Username</center></th>
                                         <th scope="col"><center>Bank Name</center></th>

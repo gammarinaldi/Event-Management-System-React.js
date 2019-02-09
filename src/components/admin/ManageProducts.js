@@ -7,7 +7,6 @@ import { sideBarMenu } from '../../actions';
 class ManageProducts extends Component {
 
     render() {
-    
         if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
           return (
               <div style={{ fontSize: "13px" }}>

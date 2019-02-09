@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { select_products, convertToRupiah, onActivityLog } from '../actions';
-import { Card, Button, CardTitle, CardText, Col } from 'reactstrap';
+import { Card, Button, CardTitle, CardText } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarCheck, faMapMarkerAlt, faBriefcase, faCalculator, faClock } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,7 @@ import {
     WISHLIST_GET,
     WISHLIST_ADD
 } from '../supports/api-url/apisuburl';
+import '../../src/App.css';
 
 class ProductsItems extends Component {
 
@@ -145,51 +146,48 @@ class ProductsItems extends Component {
 
             return (
                 //====================START >> SHOW ITEM PRODUK=========================//
-                <div>
-                    <Col lg="4" style={{ marginBottom: "25px" }}>
-                        <Card>
-                        <br/><br/>
-                        <center>
-                            <Link to="#" onClick={this.onItemClick}>
-                            <a href={`${API_URL_1}${img}`} target="_blank" rel="noopener noreferrer">
-                            <img src={`${API_URL_1}${img}`} alt={item} width={180} /></a>
-                            </Link>
-                        </center>
-                        <br/>
-                        <CardTitle id="cardTitle" style={{ padding: '0 0 0 20px', margin: '0 0 10px 0' }}>
-                            <Link to="#" onClick={this.onItemClick}><b style={{ fontSize: 'medium' }}>{item}</b></Link>
-                        </CardTitle>
-                        <CardText id="cardCategory" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: 'LIMEGREEN' }}>
-                            <FontAwesomeIcon icon={faBriefcase} size="md" />&nbsp;<strong>{this.renderCategory(idCategory)}</strong>
-                        </CardText>
-                        <CardText id="cardDate" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
-                            <FontAwesomeIcon icon={faCalendarCheck} size="md" />&nbsp;{startDate} to {endDate}
-                        </CardText>
-                        <CardText id="cardTime" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
-                            <FontAwesomeIcon icon={faClock} size="md" />&nbsp;{startTime} to {endTime}
-                        </CardText>
-                        <CardText id="eventVenue" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
-                            <FontAwesomeIcon icon={faMapMarkerAlt} size="md" />&nbsp;
-                            {this.renderCity(idLocation)}
-                        </CardText>
-                        <CardText id="id" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
-                            ID Product: {id}
-                        </CardText>
-                        <CardText id="cardPrice" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#ea7f1c' }}>
-                        <FontAwesomeIcon icon={faCalculator} size="md" />&nbsp;{this.props.convertToRupiah(price)}
-                        </CardText>
-                        <br/>
-                        <CardText id="eventBookShare" style={{ padding: '0 20px 0 20px', margin: '0 0 10px 0', color: '#898989' }}>
-                            <div align="center">
-                            {this.renderWishlist(id)}
-                            </div>
-                        </CardText>
-                        <Button style={{ margin: '0 10px 10px 10px', fontSize: "14px" }}
-                            onClick={this.onItemClick} 
-                            color="success"><strong>View Details</strong>
-                        </Button>
-                        </Card>
-                    </Col>
+                <div className="col-lg-4">
+                    <Card style={{ marginBottom: "20px", paddingTop: "20px" }}>
+                    <center>
+                        <Link to="#" onClick={this.onItemClick}>
+                        <a href={`${API_URL_1}${img}`} target="_blank" rel="noopener noreferrer">
+                        <img src={`${API_URL_1}${img}`} alt={item} width={180} /></a>
+                        </Link>
+                    </center>
+                    <br/>
+                    <CardTitle id="cardTitle" style={{ padding: '0 0 0 20px', margin: '0 0 10px 0' }}>
+                        <Link to="#" onClick={this.onItemClick}><b style={{ fontSize: 'medium' }}>{item}</b></Link>
+                    </CardTitle>
+                    <CardText id="cardCategory" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: 'LIMEGREEN' }}>
+                        <FontAwesomeIcon icon={faBriefcase} size="md" />&nbsp;<strong>{this.renderCategory(idCategory)}</strong>
+                    </CardText>
+                    <CardText id="eventVenue" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
+                        <FontAwesomeIcon icon={faMapMarkerAlt} size="md" />&nbsp;
+                        <strong>{this.renderCity(idLocation)}</strong>
+                    </CardText>
+                    <CardText id="cardDate" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
+                        <FontAwesomeIcon icon={faCalendarCheck} size="md" />&nbsp;{startDate} to {endDate}
+                    </CardText>
+                    <CardText id="cardTime" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
+                        <FontAwesomeIcon icon={faClock} size="md" />&nbsp;{startTime} to {endTime}
+                    </CardText>
+                    <CardText id="id" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
+                        ID Product: {id}
+                    </CardText>
+                    <CardText id="cardPrice" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#ea7f1c' }}>
+                    <FontAwesomeIcon icon={faCalculator} size="md" />&nbsp;{this.props.convertToRupiah(price)}
+                    </CardText>
+                    <br/>
+                    <CardText id="eventBookShare" style={{ padding: '0 20px 0 20px', margin: '0 0 10px 0', color: '#898989' }}>
+                        <div align="center">
+                        {this.renderWishlist(id)}
+                        </div>
+                    </CardText>
+                    <Button style={{ margin: '0 10px 10px 10px', fontSize: "14px" }}
+                        onClick={this.onItemClick} 
+                        color="success"><strong>View Details</strong>
+                    </Button>
+                    </Card>
                 </div>
                 //====================END >> SHOW ITEM PRODUK=========================//
             )

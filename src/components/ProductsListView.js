@@ -98,8 +98,8 @@ class ProductsListView extends Component {
             })
             .then((res) => {
                 this.setState({ 
-                    listProducts: res.data[0], 
-                    searchListProducts: res.data[0], 
+                    listProducts: res.data, 
+                    searchListProducts: res.data, 
                     selectedIdEdit: 0 
                 });
             }).catch((err) => {
@@ -390,21 +390,23 @@ class ProductsListView extends Component {
                         <td>{this.renderCity(item.idLocation)}</td>
                         <td>{this.props.convertToRupiah(item.price)}</td>
                         <td>
+                            <center>
                             <a href={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
                             <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} /></a>
+                            </center>
                         </td>
                         <td>Start: {moment(item.startDate).format('D MMM YYYY')}<br/>End: {moment(item.endDate).format('D MMM YYYY')}</td>
                         <td>{item.createdBy}</td>
                         <td>{item.creator}</td>
                         <td>
-                            <table className="table table-borderless table-sm">
+                            {/* <table className="table table-borderless table-sm">
                                 <tr>
-                                    {/* <td align="center">
+                                    <td align="center">
                                     <button className="btn btn-info" 
                                         onClick={ () => this.setState({ selectedIdEdit: item.id }) }>
                                         <i className="fa fa-edit fa-sm"></i>
                                     </button>
-                                    </td> */}
+                                    </td>
                                     <td align="center">
                                     <button className="btn btn-danger"
                                         onClick={ () => this.onBtnDeleteClick(item.id, item.item) }>
@@ -412,7 +414,13 @@ class ProductsListView extends Component {
                                     </button>
                                     </td>
                                 </tr>
-                            </table>
+                            </table> */}
+                            <center>
+                                <button className="btn btn-danger"
+                                    onClick={ () => this.onBtnDeleteClick(item.id, item.item) }>
+                                    <i className="fa fa-trash fa-sm"></i>
+                                </button>
+                            </center>
                         </td>
                     </tr>
                 )
@@ -477,7 +485,7 @@ class ProductsListView extends Component {
                         <table className="table table-bordered table-hover">
                             <thead className="thead-dark">
                                 <tr>
-                                    <th><center>ID</center></th>
+                                    <th><center>PID</center></th>
                                     <th><center>Item</center></th>
                                     <th><center>Category</center></th>
                                     <th><center>Location</center></th>

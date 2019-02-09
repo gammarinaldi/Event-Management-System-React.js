@@ -134,7 +134,7 @@ class LocationList extends Component {
     }
 
     adminAddAction = () => {
-        if(this.props.myRole === 'ADMIN') {
+        if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
             return(
                 <tfoot>
                     <tr>
@@ -192,7 +192,7 @@ class LocationList extends Component {
         }
         //====================END >> EDIT ITEM PRODUK=========================//
 
-        if(this.props.myRole === "ADMIN") {
+        if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
             return (
                 <tr>
                     <td><center>{item.id}</center></td>
@@ -226,7 +226,7 @@ class LocationList extends Component {
         
     render() {
         
-        if(this.props.username !== "" && this.props.myRole === "ADMIN") {
+        if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
             
             return(
                 <div style={{ fontSize: "13px" }} className="card shadow p-3 mb-5 bg-white rounded">
@@ -243,7 +243,7 @@ class LocationList extends Component {
                         <table className="table table-bordered table-hover">
                             <thead className="thead-dark">
                                 <tr>
-                                    <th><center>ID</center></th>
+                                    <th><center>LID</center></th>
                                     <th><center>City</center></th>
                                     <th><center>Address</center></th>
                                     <th colSpan="2"><center>Action</center></th>

@@ -56,7 +56,7 @@ export const onUserRegister = ({ username, fullname, email, phone, password }) =
         dispatch({ type: AUTH_LOADING });
 
         if(username === '' || fullname === '' || email === '' || phone === '' || password === '') {
-            dispatch({ type: AUTH_REGISTER_ERROR, payload: 'Semua form wajib diisi' });
+            dispatch({ type: AUTH_REGISTER_ERROR, payload: 'Please input all fields.' });
         } else {
             axios.post(API_URL_1 + AUTH_REGISTER, { 
                 username, password, fullname, email, phone

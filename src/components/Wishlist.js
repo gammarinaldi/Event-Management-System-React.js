@@ -110,7 +110,7 @@ class Wishlist extends Component {
                             <table className="table table-bordered table-hover">
                                 <thead className="thead-dark">
                                     <tr>
-                                        <th scope="col"><center>Product ID</center></th>
+                                        <th scope="col"><center>PID</center></th>
                                         <th scope="col"><center>Item</center></th>
                                         <th scope="col"><center>Category</center></th>
                                         <th scope="col"><center>Price</center></th>
