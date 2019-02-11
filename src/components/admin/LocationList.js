@@ -142,12 +142,12 @@ class LocationList extends Component {
                         <td>
                             <input type="text" size="8" placeholder="Add city" 
                                 ref="addCity" style={{ fontSize: "13px" }} 
-                                className="form-control" />
+                                className="form-control form-control-lg" />
                         </td>
                         <td>
                             <input type="text" size="8" placeholder="Add address" 
                                 ref="addAddress" style={{ fontSize: "13px" }} 
-                                className="form-control" />
+                                className="form-control form-control-lg" />
                         </td>
                         <td><center><button className="btn btn-success" style={{ fontSize: "12px" }}
                         onClick={() => this.onBtnAddClick()}>
@@ -171,9 +171,9 @@ class LocationList extends Component {
                 <tr>
                     <td><center>{item.id}</center></td>
                     <td><input type="text" defaultValue={item.city} size="4" style={{ fontSize: "13px" }}
-                    ref="updateCity" className="form-control" /></td>
+                    ref="updateCity" className="form-control form-control-lg" /></td>
                     <td><input type="text" defaultValue={item.address} size="4" style={{ fontSize: "13px" }}
-                    ref="updateAddress" className="form-control" /></td>
+                    ref="updateAddress" className="form-control form-control-lg" /></td>
                     <td>
                         <center>
                         <button className="btn btn-success"
@@ -229,17 +229,16 @@ class LocationList extends Component {
         if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
             
             return(
-                <div style={{ fontSize: "13px" }} className="card shadow p-3 mb-5 bg-white rounded">
+                <div style={{ fontSize: "13px", marginLeft: "20px", marginTop: "10px" }} 
+                    className="col-lg-8 card shadow p-3 mb-5 bg-white rounded">
                     <br/>
-                    <div className="col-lg-4">
                     <form id="searchForm">
-                    <input type="text" className="form-control" style={{ fontSize: "12px" }} 
+                    <input type="text" className="form-control form-control-lg" style={{ fontSize: "12px", width: "370px" }} 
                             placeholder="Search by city"
                             ref="qCity" onKeyUp={() => {this.onKeyUpSearch()}} />
                     </form>
-                    </div>
                     <br/>
-                    <div className="table-responsive col-lg-10">
+                    <div className="table-responsive">
                         <table className="table table-bordered table-hover">
                             <thead className="thead-dark">
                                 <tr>

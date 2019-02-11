@@ -8,19 +8,35 @@ import {
     USERS_GETLIST, 
     PRODUCTS_GETLIST,
     TRX_GETLIST,
-    BEST_SELLER
+    TOTAL_TRX,
+    BEST_SELLER,
+    WORST_SELLER,
+    TOTAL_CONFIRMED,
+    LEFT_IN_CART
 } from '../../supports/api-url/apisuburl';
 
 class Dashboard extends Component {
 
-    state = { listUsers: 0, listProducts: 0, totalSales: 0, totalTrx: 0, bestSeller: '' }
+    state = { 
+        listUsers: 0, 
+        listProducts: 0, 
+        totalSales: 0, 
+        itemsSold: 0, 
+        bestSeller: '', 
+        worstSeller: '', 
+        totalConfirmed: 0,
+        leftInCart: 0
+     }
 
     componentDidMount() {
         this.totalUsers();
         this.totalProducts();
         this.totalSales();
-        this.totalTrx();
+        this.itemsSold();
         this.bestSeller();
+        this.worstSeller();
+        this.totalConfirmed();
+        this.leftInCart();
     }
 
     totalUsers = () => {
@@ -46,11 +62,35 @@ class Dashboard extends Component {
             })
     }
 
-    totalTrx = () => {
-        axios.get(API_URL_1 + TRX_GETLIST)
+    itemsSold = () => {
+        axios.get(API_URL_1 + TOTAL_TRX)
             .then((res) => {
                 this.setState({ 
-                    totalTrx: res.data.length 
+                    itemsSold: res.data[0].qty 
+                });
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
+
+    totalConfirmed = () => {
+        axios.get(API_URL_1 + TOTAL_CONFIRMED)
+            .then((res) => {
+                console.log(res)
+                this.setState({ 
+                    totalConfirmed: res.data[0].confirmed 
+                });
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
+
+    leftInCart = () => {
+        axios.get(API_URL_1 + LEFT_IN_CART)
+            .then((res) => {
+                console.log(res)
+                this.setState({ 
+                    leftInCart: res.data[0].qty 
                 });
             }).catch((err) => {
                 console.log(err);
@@ -84,6 +124,28 @@ class Dashboard extends Component {
             })
     }
 
+    worstSeller = () => {
+        axios.get(API_URL_1 + WORST_SELLER)
+            .then((res) => {
+                console.log(res)
+                this.setState({ 
+                    worstSeller: res.data[0].item
+                });
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
+
+    salesConversion = () => {
+        var sc = 100 - ((this.state.leftInCart / this.state.itemsSold) * 100);
+        var result = '';
+        if(sc >= 0 && sc <= 50) result = `${sc}% (Low Performance)`;
+        else if(sc >= 60 && sc <= 79) result = `${sc}% (Medium Performance)`;
+        else if(sc >= 80) result = `${sc}% (Good Performance)`;
+       
+        return result;
+    }
+
     render() {
     
         if(this.props.myRole === "ADMIN" && this.props.username !== "") {
@@ -93,40 +155,58 @@ class Dashboard extends Component {
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
                             {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Dashboard' })}
                         </div>
-                        <div className="card bg-light" style={{ padding: "20px" }}>
+                        <div className="col-lg-8 card bg-light" style={{ paddingTop: "20px", paddingRight: "40px", paddingLeft: "40px" }}>
                         <h2>Admin Dashboard</h2>
                         <hr/>
                         <div className="row shadow p-3 mb-5 bg-white rounded">
                         <div className="table-responsive col-lg-12">
                             <table className="table">
-                                <tr className="table-info">
+                                <tr>
                                     <td align="left"><h3>Total Sales</h3></td>
                                     <td align="center"><h3>:</h3></td>
                                     <td><h3>{this.props.convertToRupiah(this.state.totalSales)}</h3></td>
                                     <td>&nbsp;</td>
                                 </tr>
-                                <tr className="table-info">
+                                <tr>
                                     <td align="left"><h3>Total Products</h3></td>
                                     <td align="center"><h3>:</h3></td>
                                     <td><h3>{this.state.listProducts}</h3></td>
                                     <td>&nbsp;</td>
                                 </tr>
-                                <tr className="table-info">
-                                    <td align="left"><h3>Total Transactions</h3></td>
-                                    <td align="center"><h3>:</h3></td>
-                                    <td><h3>{this.state.totalTrx}</h3></td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr className="table-info">
+                                <tr>
                                     <td align="left"><h3>Total Users</h3></td>
                                     <td align="center"><h3>:</h3></td>
                                     <td><h3>{this.state.listUsers}</h3></td>
                                     <td>&nbsp;</td>
                                 </tr>
-                                <tr className="table-info">
+                                <tr>
+                                    <td align="left"><h3>Total Items Sold</h3></td>
+                                    <td align="center"><h3>:</h3></td>
+                                    <td><h3>{this.state.itemsSold}</h3></td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><h3>Items Left in Cart</h3></td>
+                                    <td align="center"><h3>:</h3></td>
+                                    <td><h3>{this.state.leftInCart}</h3></td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><h3>Sales Conversion</h3></td>
+                                    <td align="center"><h3>:</h3></td>
+                                    <td><h3>{this.salesConversion()}</h3></td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
                                     <td align="left"><h3>Best Seller</h3></td>
                                     <td align="center"><h3>:</h3></td>
                                     <td><h3>{this.state.bestSeller}</h3></td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><h3>Worst Seller</h3></td>
+                                    <td align="center"><h3>:</h3></td>
+                                    <td><h3>{this.state.worstSeller}</h3></td>
                                     <td>&nbsp;</td>
                                 </tr>
                             </table>

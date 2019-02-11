@@ -29,6 +29,7 @@ export const onUserLogin = ({ username, password }) => {
                 if(res.data.length > 0) {
                     dispatch({ type: AUTH_LOGIN_SUCCESS, 
                                 payload: { 
+                                    idUser: res.data[0].id,
                                     username: res.data[0].username,
                                     role: res.data[0].role, 
                                     email: res.data[0].email,
@@ -92,6 +93,7 @@ export const keepLogin = (username) => {
                 dispatch({
                     type: AUTH_LOGIN_SUCCESS,
                     payload: {  
+                        idUser: res.data[0].id,
                         username: res.data[0].username,
                         role: res.data[0].role,
                         email: res.data[0].email,

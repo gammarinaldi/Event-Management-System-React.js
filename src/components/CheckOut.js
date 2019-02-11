@@ -149,7 +149,7 @@ class CheckOut extends Component {
                             <table className="table table-bordered">
                                 <thead className="thead-dark">
                                     <tr>
-                                        <th scope="col"><center>Product ID</center></th>
+                                        <th scope="col"><center>PID</center></th>
                                         <th scope="col"><center>Item</center></th>
                                         <th scope="col"><center>Category</center></th>
                                         <th scope="col"><center>Price</center></th>
@@ -164,11 +164,11 @@ class CheckOut extends Component {
                                     <tr>
                                         <td colSpan="8">
                                             <div align="center">
-                                                <h3>
-                                                    TOTAL PRICE : {this.props.convertToRupiah(this.state.totalPrice)}
+                                                <h2>
+                                                    GRAND TOTAL : {this.props.convertToRupiah(this.state.totalPrice)}
                                                     &nbsp;
                                                     ( {this.state.totalQty} item(s) )
-                                                </h3>
+                                                </h2>
                                             </div>
                                         </td>
                                     </tr>
@@ -178,9 +178,9 @@ class CheckOut extends Component {
                                             <div class="alert alert-warning" role="alert">
                                             <center>
                                                 <h4>Please pay<br/>
-                                                    <h3>
+                                                    <h2>
                                                         <strong>{this.props.convertToRupiah(this.state.totalPrice)}</strong>
-                                                    </h3>
+                                                    </h2>
                                                     to:<br/>
                                                     BCA a/n PT. PURWADHIKA KIRANA NUSANTARA<br/>
                                                     KCU Alam Sutera<br/>

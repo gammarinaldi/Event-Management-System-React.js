@@ -218,7 +218,7 @@ class ProductsEditDetails extends Component {
                                 {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Add Product' })}
                             </div>
                             <div className="card bg-light col-6" style={{ padding: "20px" }}>
-                            <h4>Add Product</h4>
+                            <h2>Add Product</h2>
                             <hr/>
                             <div className="table-responsive card shadow p-3 mb-5 bg-white rounded">
 

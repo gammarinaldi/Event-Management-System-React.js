@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import queryString from 'query-string';
-import { convertToRupiah } from '../actions';
+import { convertToRupiah, sideBarMenu } from '../actions';
 import { TRXDETAILS_GET } from '../supports/api-url/apisuburl';
 import moment from 'moment';
 import Modal from "react-responsive-modal";
@@ -61,12 +61,13 @@ class HistoryDetails extends Component {
                 return (
                     <tr>   
                         <td><center>{item.idProduct}</center></td>
-                        <td><center>{item.item}</center></td>
-                        <td><center>{item.category}</center></td>
+                        <td><left>{item.item}</left></td>
+                        <td><left>{item.category}</left></td>
+                        <td><left>{item.address}</left></td>
                         <td><center>Start: {moment(item.startDate).format('DD/MMM/Y')}<br/>
                         End: {moment(item.endDate).format('DD/MMM/Y')}</center></td>
-                        <td><center>{item.startTime} - {item.endTime}</center></td>
-                        <td><center>{this.props.convertToRupiah(item.price)}</center></td>
+                        <td><center>Start: {item.startTime}<br/>End: {item.endTime}</center></td>
+                        <td><right>{this.props.convertToRupiah(item.price)}</right></td>
                         <td><center>{item.qty}</center></td>
                         <td>
                             <center>
@@ -81,12 +82,13 @@ class HistoryDetails extends Component {
                 return (
                     <tr>   
                         <td><center>{item.idProduct}</center></td>
-                        <td><center>{item.item}</center></td>
-                        <td><center>{item.category}</center></td>
+                        <td><left>{item.item}</left></td>
+                        <td><left>{item.category}</left></td>
+                        <td><left>{item.address}</left></td>
                         <td><center>Start: {moment(item.startDate).format('DD/MMM/Y')}<br/>
                         End: {moment(item.endDate).format('DD/MMM/Y')}</center></td>
-                        <td><center>{item.startTime} - {item.endTime}</center></td>
-                        <td><center>{this.props.convertToRupiah(item.price)}</center></td>
+                        <td><center>Start: {item.startTime}<br/>End: {item.endTime}</center></td>
+                        <td><right>{this.props.convertToRupiah(item.price)}</right></td>
                         <td><center>{item.qty}</center></td>
                         <td>
                             <center>
@@ -121,46 +123,41 @@ class HistoryDetails extends Component {
                     <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
                         <div className="row">
                             <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                                <div className="list-group">
-                                    <a href="/" className="list-group-item">Dashboard</a>
-                                    <a href="/admin/manageproducts" className="list-group-item">Manage Products</a>
-                                    <a href="/admin/manageusers" className="list-group-item">Manage Users</a>
-                                    <a href="/admin/managetrx" className="list-group-item active">Manage Transactions</a>
-                                    <a href="/admin/managecategory" className="list-group-item">Manage Category</a>
-                                    <a href="/admin/managelocation" className="list-group-item">Manage Location</a>
-                                    <a href="/admin/viewactivitylog" className="list-group-item">View Activity Log</a>
-                                </div>
+                                {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Transaction Details' })}
                             </div>
-                            <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>
-                            <h4>Manage Transaction</h4>
+                            <div className="col-lg-10 bg-light" style={{ padding: "20px" }}>
+                            <h2>Manage Transactions</h2>
                             <hr/>
                             
                             <div className="card bg-light" style={{ fontSize: "13px", paddingLeft: "20px" }}>
-                                <div className="col-lg-10 text-center" style={{ paddingTop: "20px" }}>
-                                    <h2 className="section-heading">Transaction Details</h2>
-                                    <h3 className="section-subheading text-muted">{this.invoice()}</h3>
+                                <div className="col-lg-12 align-self-center">
+                                    <div className="col-lg-12 text-center" style={{ paddingTop: "20px" }}>
+                                        <h3 className="section-heading">Transaction Details</h3>
+                                        <h4 className="section-subheading text-muted">{this.invoice()}</h4>
+                                    </div>
+                                    <br/>
+                                    <div className="table-responsive col-lg-12 shadow p-3 mb-5 bg-white rounded">
+                                        <table className="table table-bordered table-hover">
+                                            <thead className="thead-dark">
+                                                <tr>
+                                                    <th scope="col"><center>PID</center></th>
+                                                    <th scope="col"><center>Item</center></th>
+                                                    <th scope="col"><center>Category</center></th>
+                                                    <th scope="col"><center>Location</center></th>
+                                                    <th scope="col"><center>Date</center></th>
+                                                    <th scope="col"><center>Time</center></th>
+                                                    <th scope="col"><center>Price</center></th>
+                                                    <th scope="col"><center>Qty</center></th>
+                                                    <th scope="col"><center>Barcode</center></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {this.renderListOrderDetails()}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
                                 </div>
-                                <br/>
-                                <div class="table-responsive col-lg-10 shadow p-3 mb-5 bg-white rounded">
-                                    <table className="table table-bordered table-hover">
-                                        <thead className="thead-dark">
-                                            <tr>
-                                                <th scope="col"><center>PID</center></th>
-                                                <th scope="col"><center>Item</center></th>
-                                                <th scope="col"><center>Category</center></th>
-                                                <th scope="col"><center>Date</center></th>
-                                                <th scope="col"><center>Time</center></th>
-                                                <th scope="col"><center>Price</center></th>
-                                                <th scope="col"><center>Qty</center></th>
-                                                <th scope="col"><center>Barcode</center></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        {this.renderListOrderDetails()}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
 
                             </div>
                         </div>
@@ -169,7 +166,7 @@ class HistoryDetails extends Component {
             } else {
                 return(
                     <div className="card bg-light" style={{ fontSize: "13px", paddingLeft: "20px" }}>
-                    <div className="col-lg-6 align-self-center">
+                    <div className="col-lg-12 align-self-center">
                         <div className="col-lg-12 text-center" style={{ paddingTop: "20px" }}>
                             <h2 className="section-heading text-uppercase">Transaction Details</h2>
                             <h3 className="section-subheading text-muted">{this.invoice()}</h3>
@@ -182,7 +179,9 @@ class HistoryDetails extends Component {
                                         <th scope="col"><center>PID</center></th>
                                         <th scope="col"><center>Item</center></th>
                                         <th scope="col"><center>Category</center></th>
-                                        <th scope="col"><center>Schedule</center></th>
+                                        <th scope="col"><center>Location</center></th>
+                                        <th scope="col"><center>Date</center></th>
+                                        <th scope="col"><center>Time</center></th>
                                         <th scope="col"><center>Price</center></th>
                                         <th scope="col"><center>Qty</center></th>
                                         <th scope="col"><center>Barcode</center></th>
@@ -212,4 +211,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { convertToRupiah })(HistoryDetails);
+export default connect(mapStateToProps, { convertToRupiah, sideBarMenu })(HistoryDetails);

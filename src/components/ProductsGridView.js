@@ -244,7 +244,7 @@ class ProductsGridView extends Component {
                                 <form ref="searchForm">
                                     <Row style={{ marginBottom: "20px" }}>
                                         <Col lg="12">
-                                            <select ref="qCategory" className="form-control" 
+                                            <select ref="qCategory" className="form-control form-control-lg" 
                                             onChange={() => {this.onKeyUpSearch()}}
                                             style={{ fontSize: "12px" }}>
                                                 <option value="">All Category</option>
@@ -254,7 +254,7 @@ class ProductsGridView extends Component {
                                     </Row>
                                     <Row style={{ marginBottom: "20px" }}>
                                         <Col lg="12">
-                                            <select ref="qLocation" className="form-control" 
+                                            <select ref="qLocation" className="form-control form-control-lg" 
                                             onChange={() => {this.onKeyUpSearch()}}
                                             style={{ fontSize: "12px" }}>
                                                 <option value="">All Location</option>
@@ -264,7 +264,7 @@ class ProductsGridView extends Component {
                                     </Row>
                                     <Row style={{ marginBottom: "20px" }}>
                                         <Col lg="12">
-                                            <input type="text" className="form-control" ref="qItem"
+                                            <input type="text" className="form-control form-control-lg" ref="qItem"
                                             onChange={() => {this.onKeyUpSearch()}} 
                                             placeholder="Search by product name" style={{ fontSize: "12px" }}/>
                                         </Col>
@@ -275,7 +275,7 @@ class ProductsGridView extends Component {
                                             <div className="input-group-prepend">
                                                 <div className="input-group-text">Min Rp</div>
                                             </div>
-                                            <input type="number" className="form-control" 
+                                            <input type="number" className="form-control form-control-lg" 
                                             onChange={() => {this.onKeyUpSearch()}}
                                             ref="qHargaMin" defaultValue="0" style={{ fontSize: "12px" }}/>
                                             </InputGroup>
@@ -287,7 +287,7 @@ class ProductsGridView extends Component {
                                             <div className="input-group-prepend">
                                                 <div className="input-group-text">Max Rp</div>
                                             </div>
-                                            <input type="number" className="form-control" 
+                                            <input type="number" className="form-control form-control-lg" 
                                             onChange={() => {this.onKeyUpSearch()}}
                                             ref="qHargaMax" defaultValue="99999999" style={{ fontSize: "12px" }}/>
                                             </InputGroup>

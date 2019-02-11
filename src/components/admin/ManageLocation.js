@@ -10,18 +10,29 @@ class ManageLocation extends Component {
     
         if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
           return (
-                <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
-                    <div className="row">
-                        <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Manage Location' })}
-                        </div>
-                        <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>
-                        <h2>Manage Location</h2>
-                        <hr/>
-                        <LocationList />
-                        </div>
-                    </div>
+            <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
+
+            <div className="row">
+
+                <div className="col-lg-2" style={{ marginBottom: "20px" }}>
+                    {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Manage Location' })}
                 </div>
+                
+                <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <h2>Manage Location</h2>
+                      <hr/>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <LocationList />
+                  </div>
+                </div>
+
+            </div>
+
+        </div>
           )
         } else {
           return <Redirect to='/login' />

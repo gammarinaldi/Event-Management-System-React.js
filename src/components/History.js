@@ -63,6 +63,8 @@ class History extends Component {
                     invoice: this.state.listOrders.invoice
                 }).then((res) => {
                     console.log(res);
+                    //=======> Activity Log
+                    this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Confirm Trx'});
                 }).catch((err) => {
                     console.log(err);
                 })
@@ -198,7 +200,13 @@ class History extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { username: state.auth.username, myRole: state.auth.role, email: state.auth.email, fullname: state.auth.fullname }
+    return { 
+        idUser: state.auth.idUser,
+        username: state.auth.username, 
+        myRole: state.auth.role, 
+        email: state.auth.email, 
+        fullname: state.auth.fullname 
+    }
 }
 
 export default connect(mapStateToProps, { convertToRupiah, sortingJSON })(History);

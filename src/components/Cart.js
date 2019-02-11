@@ -197,7 +197,7 @@ class Cart extends Component {
                                 <tfoot>
                                     <tr>
                                         <td colSpan="8">
-                                            <div align="right"><h5>TOTAL : {this.props.convertToRupiah(this.totalPrice())}</h5></div>
+                                            <div align="right"><h2>GRAND TOTAL : {this.props.convertToRupiah(this.totalPrice())}</h2></div>
                                         </td>
                                     </tr>
 

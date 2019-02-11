@@ -26,6 +26,8 @@ export const sideBarMenu = ({ myRole, active }) => {
         else managelocation = "list-group-item";
         if (active === 'View Activity Log') viewactivitylog = "list-group-item active"; 
         else viewactivitylog = "list-group-item";
+        if (active === 'Transaction Details') managetrx = "list-group-item active"; 
+        else viewactivitylog = "list-group-item";
 
         if(myRole === "ADMIN") {
             dispatch({type: SIDE_BAR_MENU});

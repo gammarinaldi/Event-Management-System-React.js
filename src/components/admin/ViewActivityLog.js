@@ -95,8 +95,8 @@ class ViewActivityLog extends Component {
                             <br/>
                             <div className="col-6">
                             <form id="searchForm">
-                            <input type="text" className="form-control" style={{ fontSize: "12px" }} 
-                                    placeholder="Search by name"
+                            <input type="text" className="form-control form-control-lg" style={{ fontSize: "12px" }} 
+                                    placeholder="Search"
                                     ref="qName" onKeyUp={() => {this.onKeyUpSearch()}} />
                             </form>
                             </div>
