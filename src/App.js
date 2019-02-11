@@ -140,7 +140,8 @@ class App extends Component {
       return (
         <div className="container-fluid">
 
-        <Header NavBrand={`Template Project React JS ${this.roleStat()}`} />
+        {/* <Header NavBrand={`emsy ${this.roleStat()}`} /> */}
+        <Header NavBrand={`emsy`} />
 
         {breadCrumb}
         
