@@ -7,14 +7,29 @@ import queryString from 'query-string';
 import { convertToRupiah } from '../actions';
 import { TRXDETAILS_GET } from '../supports/api-url/apisuburl';
 import moment from 'moment';
+import Modal from "react-responsive-modal";
+import Barcode from 'react-barcode';
+
+const styles = {
+    fontFamily: "sans-serif",
+    textAlign: "center"
+  };
 
 class HistoryDetails extends Component {
 
-    state = { listOrderDetails: [] }
+    state = { listOrderDetails: [], open: false }
 
     componentDidMount() {
         this.showOrderDetails();
     }
+
+    onOpenModal = () => {
+        this.setState({ open: true });
+    };
+
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
 
     id = () => {
         var params = queryString.parse(this.props.location.search);
@@ -39,26 +54,66 @@ class HistoryDetails extends Component {
     }
   
     renderListOrderDetails = () => {
+        const { open } = this.state;
         var listJSXOrderDetails = this.state.listOrderDetails.map((item) => {
 
-            return (
-                <tr>   
-                    <td><center>{item.idProduct}</center></td>
-                    <td><center>{item.item}</center></td>
-                    <td><center>{item.category}</center></td>
-                    <td><center>Start: {moment(item.startDate).format('DD/MMM/Y')}<br/>
-                    End: {moment(item.startDate).format('DD/MMM/Y')}</center></td>
-                    <td><center>{this.props.convertToRupiah(item.price)}</center></td>
-                    <td><center>{item.qty}</center></td>
-                </tr>
-            )
+            if(item.barcode === 0) {
+                return (
+                    <tr>   
+                        <td><center>{item.idProduct}</center></td>
+                        <td><center>{item.item}</center></td>
+                        <td><center>{item.category}</center></td>
+                        <td><center>Start: {moment(item.startDate).format('DD/MMM/Y')}<br/>
+                        End: {moment(item.endDate).format('DD/MMM/Y')}</center></td>
+                        <td><center>{item.startTime} - {item.endTime}</center></td>
+                        <td><center>{this.props.convertToRupiah(item.price)}</center></td>
+                        <td><center>{item.qty}</center></td>
+                        <td>
+                            <center>
+                                <div style={styles}>
+                                    Your purchase not confirmed yet.
+                                </div>
+                            </center>
+                        </td>
+                    </tr>
+                )
+            } else {
+                return (
+                    <tr>   
+                        <td><center>{item.idProduct}</center></td>
+                        <td><center>{item.item}</center></td>
+                        <td><center>{item.category}</center></td>
+                        <td><center>Start: {moment(item.startDate).format('DD/MMM/Y')}<br/>
+                        End: {moment(item.endDate).format('DD/MMM/Y')}</center></td>
+                        <td><center>{item.startTime} - {item.endTime}</center></td>
+                        <td><center>{this.props.convertToRupiah(item.price)}</center></td>
+                        <td><center>{item.qty}</center></td>
+                        <td>
+                            <center>
+                                <div style={styles}>
+                                <button onClick={this.onOpenModal}>Show Barcode</button>
+                                <Modal open={open} onClose={this.onCloseModal} center>
+                                <br/><br/><br/>
+                                <h2>Show this barcode when you check in</h2>
+                                <br/>
+                                <p align="center" style={{ fontSize: "16px" }}>
+                                    <Barcode value={item.barcode} />
+                                </p>
+                                </Modal>
+                                </div>
+                            </center>
+                        </td>
+                    </tr>
+                )
+            }
+
         })
         
         return listJSXOrderDetails;
     }
         
     render() {
-        
+
         if(this.props.username !== "") {
 
             if(this.props.myRole === "ADMIN") {
@@ -93,9 +148,11 @@ class HistoryDetails extends Component {
                                                 <th scope="col"><center>PID</center></th>
                                                 <th scope="col"><center>Item</center></th>
                                                 <th scope="col"><center>Category</center></th>
-                                                <th scope="col"><center>Schedule</center></th>
+                                                <th scope="col"><center>Date</center></th>
+                                                <th scope="col"><center>Time</center></th>
                                                 <th scope="col"><center>Price</center></th>
                                                 <th scope="col"><center>Qty</center></th>
+                                                <th scope="col"><center>Barcode</center></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -128,6 +185,7 @@ class HistoryDetails extends Component {
                                         <th scope="col"><center>Schedule</center></th>
                                         <th scope="col"><center>Price</center></th>
                                         <th scope="col"><center>Qty</center></th>
+                                        <th scope="col"><center>Barcode</center></th>
                                     </tr>
                                 </thead>
                                 <tbody>

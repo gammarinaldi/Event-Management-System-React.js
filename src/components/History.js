@@ -5,7 +5,7 @@ import { API_URL_1 } from '../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import { convertToRupiah, sortingJSON } from '../actions';
-import { TRX_GET, TRX_GETLIST } from '../supports/api-url/apisuburl';
+import { TRX_GET, TRX_GETLIST, TRX_STATUS_UPDATE, TRXDETAILS_BARCODE } from '../supports/api-url/apisuburl';
 
 class History extends Component {
 
@@ -50,6 +50,34 @@ class History extends Component {
             console.log(err);
         })
     }
+
+    onConfirm = (id) => {
+        if(window.confirm('Are you sure want to confirm this invoice?')) {
+            axios.put(API_URL_1 + TRX_STATUS_UPDATE + id, {
+                status: 'Confirmed'
+            }).then((res) => {
+                //Generate check in barcode
+                axios.put(API_URL_1 + TRXDETAILS_BARCODE + res.data[0].id, {
+                    email: this.props.email,
+                    fullname: this.props.fullname,
+                    invoice: this.state.listOrders.invoice
+                }).then((res) => {
+                    console.log(res);
+                }).catch((err) => {
+                    console.log(err);
+                })
+
+                if(this.props.myRole === "ADMIN") {
+                    this.showOrdersAdmin();
+                } else {
+                    this.showOrders();
+                }
+
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+    }
   
     renderListOrders = () => {
         var indexOfLastTodo = this.state.activePage * this.state.itemPerPage;
@@ -59,24 +87,60 @@ class History extends Component {
 
         var listJSXOrders = renderedProjects.map((item, x) => {
 
-            return (
-                <tr key={x}>   
-                    <td><center>{item.id}</center></td>
-                    <td><center><a href={'/historydetails?idTrx=' + item.id + '&invoice=' + item.invoice}>{item.invoice}</a></center></td>
-                    <td><center>{item.username}</center></td>
-                    <td>{item.bankName}</td>
-                    <td>{item.accNumber}</td>
-                    <td>
-                        <a href={`${API_URL_1}${item.receipt}`} target="_blank" rel="noopener noreferrer">
-                        <img src={`${API_URL_1}${item.receipt}`} alt={item.invoice} width={100} /></a>
-                    </td>
-                    <td>{item.trxDateTime}</td>
-                    <td><center>{item.totalQty}</center></td>
-                    <td>{this.props.convertToRupiah(item.totalPrice)}</td>
-                    <td><center>{item.status}</center></td>
-                </tr>
-            )
-
+            if(item.status === 'Confirmed') {
+                return (
+                    <tr key={x}>   
+                        <td><center>{item.id}</center></td>
+                        <td><center><a href={'/historydetails?idTrx=' + item.id + '&invoice=' + item.invoice}>{item.invoice}</a></center></td>
+                        <td><center>{item.username}</center></td>
+                        <td>{item.bankName}</td>
+                        <td>{item.accNumber}</td>
+                        <td>
+                            <a href={`${API_URL_1}${item.receipt}`} target="_blank" rel="noopener noreferrer">
+                            <img src={`${API_URL_1}${item.receipt}`} alt={item.invoice} width={100} /></a>
+                        </td>
+                        <td>{item.trxDateTime}</td>
+                        <td><center>{item.totalQty}</center></td>
+                        <td>{this.props.convertToRupiah(item.totalPrice)}</td>
+                        <td>
+                            <center>
+                            <strong style={{ color: 'LIMEGREEN' }}>{item.status}</strong>
+                            </center>
+                        </td>
+                    </tr>
+                )
+            } else {
+                return (
+                    <tr key={x}>   
+                        <td><center>{item.id}</center></td>
+                        <td><center><a href={'/historydetails?idTrx=' + item.id + '&invoice=' + item.invoice}>{item.invoice}</a></center></td>
+                        <td><center>{item.username}</center></td>
+                        <td>{item.bankName}</td>
+                        <td>{item.accNumber}</td>
+                        <td>
+                            <a href={`${API_URL_1}${item.receipt}`} target="_blank" rel="noopener noreferrer">
+                            <img src={`${API_URL_1}${item.receipt}`} alt={item.invoice} width={100} /></a>
+                        </td>
+                        <td>{item.trxDateTime}</td>
+                        <td><center>{item.totalQty}</center></td>
+                        <td>{this.props.convertToRupiah(item.totalPrice)}</td>
+                        <td>
+                            <center>
+                                <select ref="updateStatus" className="form-control form-control-lg" 
+                                style={{ fontSize: "12px" }} >
+                                    <option value={item.id}>{item.status}</option>
+                                    <option value={item.id}>Confirm</option>
+                                </select>
+                                <br/>
+                                <button type="submit" class="btn btn-primary" 
+                                    style={{ fontSize: "12px" }}
+                                    onClick={() => this.onConfirm(item.id)}>Update</button>
+                            </center>
+                        </td>
+                    </tr>
+                )
+            }
+            
         })
         
         return listJSXOrders;
@@ -134,7 +198,7 @@ class History extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { username: state.auth.username, myRole: state.auth.role }
+    return { username: state.auth.username, myRole: state.auth.role, email: state.auth.email, fullname: state.auth.fullname }
 }
 
 export default connect(mapStateToProps, { convertToRupiah, sortingJSON })(History);

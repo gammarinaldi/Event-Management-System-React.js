@@ -244,7 +244,7 @@ class ProductsGridView extends Component {
                                 <form ref="searchForm">
                                     <Row style={{ marginBottom: "20px" }}>
                                         <Col lg="12">
-                                            <select ref="qCategory" className="custom-select" 
+                                            <select ref="qCategory" className="form-control" 
                                             onChange={() => {this.onKeyUpSearch()}}
                                             style={{ fontSize: "12px" }}>
                                                 <option value="">All Category</option>
@@ -254,7 +254,7 @@ class ProductsGridView extends Component {
                                     </Row>
                                     <Row style={{ marginBottom: "20px" }}>
                                         <Col lg="12">
-                                            <select ref="qLocation" className="custom-select" 
+                                            <select ref="qLocation" className="form-control" 
                                             onChange={() => {this.onKeyUpSearch()}}
                                             style={{ fontSize: "12px" }}>
                                                 <option value="">All Location</option>
