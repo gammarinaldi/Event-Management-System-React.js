@@ -36,7 +36,7 @@ class History extends Component {
                 listOrders: res.data
             })
         }).catch((err) => {
-            console.log(err)
+            console.log(err);
         })
     }
 
@@ -51,16 +51,16 @@ class History extends Component {
         })
     }
 
-    onConfirm = (id) => {
+    onConfirm = (id, invoice) => {
         if(window.confirm('Are you sure want to confirm this invoice?')) {
             axios.put(API_URL_1 + TRX_STATUS_UPDATE + id, {
                 status: 'Confirmed'
             }).then((res) => {
                 //Generate check in barcode
                 axios.put(API_URL_1 + TRXDETAILS_BARCODE + res.data[0].id, {
+                    invoice,
                     email: this.props.email,
-                    fullname: this.props.fullname,
-                    invoice: this.state.listOrders.invoice
+                    fullname: this.props.fullname
                 }).then((res) => {
                     console.log(res);
                     //=======> Activity Log
@@ -136,7 +136,7 @@ class History extends Component {
                                 <br/>
                                 <button type="submit" class="btn btn-primary" 
                                     style={{ fontSize: "12px" }}
-                                    onClick={() => this.onConfirm(item.id)}>Update</button>
+                                    onClick={() => this.onConfirm(item.id, item.invoice)}>Update</button>
                             </center>
                         </td>
                     </tr>
@@ -201,7 +201,7 @@ class History extends Component {
 
 const mapStateToProps = (state) => {
     return { 
-        idUser: state.auth.idUser,
+        idUser: state.auth.id,
         username: state.auth.username, 
         myRole: state.auth.role, 
         email: state.auth.email, 

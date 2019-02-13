@@ -25,7 +25,8 @@ import ProductEditDetails from './components/admin/ProductEditDetails';
 import Spinner from './components/Spinner';
 import AddProduct from './components/admin/AddProduct';
 import ViewActivityLog from './components/admin/ViewActivityLog';
-import Test from './components/Test';
+import WaitVerification from './components/WaitVerification';
+import Verified from './components/Verified';
 
 const cookies = new Cookies();
 
@@ -40,9 +41,9 @@ class App extends Component {
   componentDidMount() {
     const newCookie = cookies.get('usernameCookie');
     if(newCookie) {
-        this.props.keepLogin(newCookie);
+      this.props.keepLogin(newCookie);
     } else {
-        this.props.cookieChecked();
+      this.props.cookieChecked();
     }
   }
 
@@ -122,7 +123,10 @@ class App extends Component {
       else currentPage = location.pathname;
       
       var breadCrumb;
-      if(location.pathname !== '/login' && location.pathname !== '/register' ) {
+      if(location.pathname !== '/login' 
+          && location.pathname !== '/register' 
+          && location.pathname !== '/waitverification'
+          && location.pathname !== '/verified' ) {
         breadCrumb = 
         <div style={{ fontSize: "13px" }}>
             <nav aria-label="breadcrumb">
@@ -141,7 +145,7 @@ class App extends Component {
         <div className="container-fluid">
 
         {/* <Header NavBrand={`emsy ${this.roleStat()}`} /> */}
-        <Header NavBrand={`emsy`} />
+        <Header NavBrand={`EMS`} />
 
         {breadCrumb}
         
@@ -164,7 +168,8 @@ class App extends Component {
         <Route path="/admin/producteditdetails" component={ProductEditDetails}/>
         <Route path="/admin/addproduct" component={AddProduct}/>
         <Route path="/admin/viewactivitylog" component={ViewActivityLog}/>
-        <Route path="/test" component={Test}/>
+        <Route path="/waitverification" component={WaitVerification}/>
+        <Route path="/verified" component={Verified}/>
 
       </div>
       )

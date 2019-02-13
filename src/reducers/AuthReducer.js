@@ -11,7 +11,9 @@ import {
 
 //=================GLOBAL STATE IS HERE====================//
 const INITIAL_STATE = { 
+                        id: '',
                         username: '', 
+                        fullname: '',
                         role: '',
                         email: '', 
                         phone: '',
@@ -20,9 +22,7 @@ const INITIAL_STATE = {
                         errorLogin: '',
                         loading: false, 
                         cookie: false,
-                        status: '',
-                        lastlogin: '',
-                        img: '' 
+                        status: ''
                     };
 
 export default (state = INITIAL_STATE, action) => {
@@ -30,25 +30,28 @@ export default (state = INITIAL_STATE, action) => {
 
         case AUTH_LOGIN_SUCCESS:
             return { ...INITIAL_STATE, 
+                    id: action.payload.id,
                     username: action.payload.username, 
+                    fullname: action.payload.fullname,
                     role: action.payload.role,
                     email: action.payload.email, 
                     phone: action.payload.phone, 
                     status: action.payload.status,
-                    lastlogin: action.payload.lastlogin,
-                    img: action.payload.img,
                     cookie: true };
 
+        // case AUTH_REGISTER_SUCCESS:
+        //     return { ...INITIAL_STATE, 
+        //             id: action.payload.id,
+        //             username: action.payload.username, 
+        //             fullname: action.payload.fullname,
+        //             role: action.payload.role,
+        //             email: action.payload.email, 
+        //             phone: action.payload.phone, 
+        //             status: action.payload.status,
+        //             cookie: true };
+
         case AUTH_REGISTER_SUCCESS:
-            return { ...INITIAL_STATE, 
-                username: action.payload.username, 
-                role: action.payload.role,
-                email: action.payload.email, 
-                phone: action.payload.phone, 
-                status: action.payload.status,
-                lastlogin: action.payload.lastlogin,
-                img: action.payload.img,
-                cookie: true };
+            return { ...INITIAL_STATE, status: action.payload, cookie: true };
 
         case AUTH_SYSTEM_ERROR:
             return { ...INITIAL_STATE, errorSystem: action.payload, cookie: true };

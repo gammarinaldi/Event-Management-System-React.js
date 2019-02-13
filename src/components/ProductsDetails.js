@@ -372,7 +372,7 @@ class ProductsDetails extends Component {
                                 <table>
                                     <tr>
                                         <td>
-                                            <input type="number" placeholder="Input Qty" ref="addQty" id="addQty" 
+                                            <input type="number" placeholder="Input Qty" ref="addQty" id="addQty" value="1"
                                                 style={{ fontSize: "13px" }} className="form-control form-control-lg" />
                                         </td>
                                         <td>&nbsp;</td>

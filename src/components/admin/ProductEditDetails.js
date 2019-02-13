@@ -332,7 +332,7 @@ class ProductsEditDetails extends Component {
                                     <table className="table table-borderless">
                                         <tbody>
                                             <tr>
-                                                <td>&nbsp;ID</td>
+                                                <td>&nbsp;PID</td>
                                                 <td>:</td>
                                                 <td>{id}</td>
                                             </tr>
@@ -340,7 +340,7 @@ class ProductsEditDetails extends Component {
                                                 <td>&nbsp;Category</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <select ref="updateCategory" className="custom-select" style={{ fontSize: "12px" }}>
+                                                    <select ref="updateCategory" className="form-control form-control-lg" style={{ fontSize: "12px" }}>
                                                         <option value={idCategory}>{this.renderCategory(idCategory)}</option>
                                                         {this.renderAllCategory()}
                                                     </select>
@@ -350,7 +350,7 @@ class ProductsEditDetails extends Component {
                                                 <td>&nbsp;Location</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <select ref="updateLocation" className="custom-select" style={{ fontSize: "12px" }}>
+                                                    <select ref="updateLocation" className="form-control form-control-lg" style={{ fontSize: "12px" }}>
                                                         <option value={idLocation}>{this.renderCity(idLocation)}</option>
                                                         {this.renderListLocation()}
                                                     </select>    
@@ -361,7 +361,7 @@ class ProductsEditDetails extends Component {
                                                 <td>:</td>
                                                 <td>
                                                     <input type="text" defaultValue={item} size="4" style={{ fontSize: "12px" }}
-                                                        ref="updateItem" className="form-control" />    
+                                                        ref="updateItem" className="form-control form-control-lg" />    
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>
@@ -369,7 +369,7 @@ class ProductsEditDetails extends Component {
                                                 <td>:</td>
                                                 <td>
                                                     <input type="number" defaultValue={price} style={{ fontSize: "12px" }} 
-                                                        ref="updatePrice" className="form-control" />    
+                                                        ref="updatePrice" className="form-control form-control-lg" />    
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>
@@ -390,7 +390,7 @@ class ProductsEditDetails extends Component {
                                                     <input type="date" 
                                                         size="4" style={{ fontSize: "12px" }}
                                                         defaultValue={startDate}
-                                                        ref="updateStartDate" className="form-control" />    
+                                                        ref="updateStartDate" className="form-control form-control-lg" />    
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>
@@ -400,7 +400,7 @@ class ProductsEditDetails extends Component {
                                                     <input type="date"
                                                         size="4" style={{ fontSize: "12px" }} 
                                                         defaultValue={endDate}
-                                                        ref="updateEndDate" className="form-control" />    
+                                                        ref="updateEndDate" className="form-control form-control-lg" />    
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>
@@ -409,7 +409,7 @@ class ProductsEditDetails extends Component {
                                                 <td>
                                                     <input type="time" defaultValue={startTime} 
                                                         size="4" style={{ fontSize: "12px" }}
-                                                        ref="updateStartTime" className="form-control" />    
+                                                        ref="updateStartTime" className="form-control form-control-lg" />    
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>
@@ -417,7 +417,7 @@ class ProductsEditDetails extends Component {
                                                 <td>:</td>
                                                 <td>
                                                     <input type="time" defaultValue={endTime} size="4" style={{ fontSize: "12px" }}
-                                                        ref="updateEndTime" className="form-control" />    
+                                                        ref="updateEndTime" className="form-control form-control-lg" />    
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>

@@ -178,17 +178,17 @@ class UsersList extends Component {
                         onClick={() => this.onBtnAddClick()}>
                             <i className="fa fa-plus"></i> Add</button></center></td>
                         <td><input type="text" size="8" placeholder="Username" ref="addUserName" style={{ fontSize: "13px" }} 
-                            className="form-control" /></td>
+                            className="form-control form-control-lg" /></td>
                         <td><input type="password" size="8" placeholder="Password" ref="addPassword" style={{ fontSize: "13px" }} 
-                            className="form-control" /></td>
+                            className="form-control form-control-lg" /></td>
                         <td><input type="text" size="8" placeholder="Fullname" ref="addFullName" style={{ fontSize: "13px" }} 
-                            className="form-control" /></td>
+                            className="form-control form-control-lg" /></td>
                         <td><input type="email" size="8" placeholder="Email" ref="addEmail" style={{ fontSize: "13px" }} 
-                            className="form-control" /></td>
+                            className="form-control form-control-lg" /></td>
                         <td><input type="number" placeholder="Phone" ref="addPhone" style={{ fontSize: "13px" }}
-                            className="form-control"/></td>
+                            className="form-control form-control-lg"/></td>
                         <td>
-                            <select ref="addRole" className="custom-select" style={{ fontSize: "12px" }}>
+                            <select ref="addRole" className="form-control form-control-lg" style={{ fontSize: "12px" }}>
                                     <option>ADMIN</option>
                                     <option>PRODUCER</option>
                                     <option>MEMBER</option>
@@ -217,17 +217,17 @@ class UsersList extends Component {
                 <tr key={index}>
                     <td><center>{item.id}</center></td>
                     <td><input type="text" defaultValue={item.username} size="4" style={{ fontSize: "12px" }}
-                    ref="updateUserName" className="form-control" /></td>
+                    ref="updateUserName" className="form-control form-control-lg" /></td>
                     <td><input type="password" size="4" defaultValue={item.password} ref="updatePassword" 
-                    style={{ fontSize: "12px" }} className="form-control" /></td>
+                    style={{ fontSize: "12px" }} className="form-control form-control-lg" /></td>
                     <td><input type="text" defaultValue={item.fullname} size="4" style={{ fontSize: "12px" }}
-                    ref="updateFullName" className="form-control" /></td>
+                    ref="updateFullName" className="form-control form-control-lg" /></td>
                     <td><input type="email" defaultValue={item.email} size="4" style={{ fontSize: "12px" }}
-                    ref="updateEmail" className="form-control" /></td>
+                    ref="updateEmail" className="form-control form-control-lg" /></td>
                     <td><input type="number" defaultValue={item.phone} style={{ fontSize: "12px" }} 
-                    ref="updatePhone" className="form-control" /></td>
+                    ref="updatePhone" className="form-control form-control-lg" /></td>
                     <td>
-                        <select ref="updateRole" className="custom-select" style={{ fontSize: "12px" }}>
+                        <select ref="updateRole" className="form-control form-control-lg" style={{ fontSize: "12px" }}>
                                 <option>{item.role}</option>
                                 <option>ADMIN</option>
                                 <option>PRODUCER</option>
@@ -295,7 +295,7 @@ class UsersList extends Component {
                     <form id="searchForm">
                     <Row>
                         <Col lg="2">
-                            <select ref="qRole" className="custom-select" style={{ fontSize: "12px" }} 
+                            <select ref="qRole" className="form-control form-control-lg" style={{ fontSize: "12px" }} 
                             onChange={() => {this.onKeyUpSearch()}}>
                                 <option value="">All Roles</option>
                                 <option>ADMIN</option>
@@ -304,7 +304,7 @@ class UsersList extends Component {
                             </select>
                         </Col>
                         <Col lg="6">
-                            <input type="text" className="form-control" style={{ fontSize: "12px" }} 
+                            <input type="text" className="form-control form-control-lg" style={{ fontSize: "12px" }} 
                             placeholder="Search"
                             ref="qQuery" onKeyUp={() => {this.onKeyUpSearch()}} />
                         </Col>

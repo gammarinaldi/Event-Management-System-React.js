@@ -29,12 +29,15 @@ export const onUserLogin = ({ username, password }) => {
                 if(res.data.length > 0) {
                     dispatch({ type: AUTH_LOGIN_SUCCESS, 
                                 payload: { 
-                                    idUser: res.data[0].id,
+                                    id: res.data[0].id,
                                     username: res.data[0].username,
+                                    fullname: res.data[0].fullname,
                                     role: res.data[0].role, 
                                     email: res.data[0].email,
-                                    phone: res.data[0].phone 
-                                } });
+                                    phone: res.data[0].phone,
+                                    status: res.data[0].status 
+                                } 
+                            });
                 } else {
                     dispatch({ type: AUTH_LOGIN_ERROR, payload: 'Username or password invalid.' });
                 }
@@ -93,11 +96,13 @@ export const keepLogin = (username) => {
                 dispatch({
                     type: AUTH_LOGIN_SUCCESS,
                     payload: {  
-                        idUser: res.data[0].id,
+                        id: res.data[0].id,
                         username: res.data[0].username,
+                        fullname: res.data[0].fullname,
                         role: res.data[0].role,
                         email: res.data[0].email,
-                        phone: res.data[0].phone
+                        phone: res.data[0].phone,
+                        status: res.data[0].status
                      }
                 })
             }
@@ -106,6 +111,13 @@ export const keepLogin = (username) => {
     }
 
 };
+
+export const onUserVerified = (userData) => {
+    return {
+        type: AUTH_LOGIN_SUCCESS,
+        payload: userData
+    }
+}
 
 export const onUserLogout = () => {
     return { type: LOGOUT }

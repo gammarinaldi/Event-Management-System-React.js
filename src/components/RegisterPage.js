@@ -3,10 +3,10 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { onUserRegister, onActivityLog } from '../actions';
 import { Button } from 'reactstrap';
-import Cookies from 'universal-cookie';
+//import Cookies from 'universal-cookie';
 import Spinner from './Spinner';
 
-const cookies = new Cookies();
+//const cookies = new Cookies();
 
 class RegisterPage extends Component {
 
@@ -25,15 +25,17 @@ class RegisterPage extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if(newProps.username !== '') {
-            cookies.set('usernameCookie', newProps.username, { path: '/' });
-            //=======> Activity Log
-            this.props.onActivityLog({username: newProps.username, role: "MEMBER", desc: 'Register'});
-        }
+        // if(newProps.username !== '') {
+        //     cookies.set('usernameCookie', newProps.username, { path: '/' });
+        //     //=======> Activity Log
+        //     this.props.onActivityLog({username: newProps.username, role: 'MEMBER', desc: 'Register'});
+        // }
+        //=======> Activity Log
+        this.props.onActivityLog({username: newProps.username, role: 'MEMBER', desc: 'Register'});
     }
 
     render () {
-        if(this.props.username === "") {
+        if(this.props.status === "") {
             
             var load;
             if(this.props.loading) {
@@ -111,17 +113,18 @@ class RegisterPage extends Component {
 
         } 
         
-        return <Redirect to="/" />
+        return <Redirect to="/waitverification" />
 
     }
     
 }
 
 const mapStateToProps = (state) => {
-    return { username: state.auth.username,
-             loading: state.auth.loading, 
-             errorRegister: state.auth.errorRegister 
-            };
+    return { 
+        status: state.auth.status,
+        loading: state.auth.loading, 
+        errorRegister: state.auth.errorRegister 
+    };
 }
     
 export default connect(mapStateToProps, { onUserRegister, onActivityLog })(RegisterPage);

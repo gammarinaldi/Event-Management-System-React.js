@@ -41,14 +41,30 @@ class ViewActivityLog extends Component {
 
     onKeyUpSearch = () => {
 
-        var username = this.refs.qName.value;
+        var query = this.refs.qName.value;
         var arrSearch;
 
         arrSearch = this.state.listActivity.filter((e) => {
 
-            return e.username.toLowerCase().includes(username.toLowerCase()) 
+            return e.username.toLowerCase().includes(query.toLowerCase()) 
             
         })
+
+        if(arrSearch.length === 0) {
+            arrSearch = this.state.listActivity.filter((e) => {
+
+                return e.role.toLowerCase().includes(query.toLowerCase())
+                
+            })
+        }
+
+        if(arrSearch.length === 0) {
+            arrSearch = this.state.listActivity.filter((e) => {
+
+                return e.desc.toLowerCase().includes(query.toLowerCase())
+                
+            })
+        }
 
         this.setState({ searchListActivity: arrSearch })
 
@@ -83,25 +99,33 @@ class ViewActivityLog extends Component {
             
             return(
                 <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
+
                     <div className="row">
+
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
                             {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'View Activity Log' })}
                         </div>
+
                         <div className="col-10 card bg-light" style={{ padding: "20px" }}>
-                        <h2>View Activity Log</h2>
-                        <hr/>
-                        
-                        <div style={{ fontSize: "13px" }} className="card shadow p-3 mb-5 bg-white rounded">
+                            
+                        <div className="row">
+                            <div className="col-lg-12">
+                            <h2>Activity Log</h2>
+                            <hr/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            
+                        <div style={{ fontSize: "13px", marginLeft: "20px", marginTop: "10px" }} 
+                            className="col-lg-8 card shadow p-3 mb-5 bg-white rounded">
                             <br/>
-                            <div className="col-6">
                             <form id="searchForm">
-                            <input type="text" className="form-control form-control-lg" style={{ fontSize: "12px" }} 
+                            <input type="text" className="form-control form-control-lg" style={{ fontSize: "12px", width: "370px" }} 
                                     placeholder="Search"
                                     ref="qName" onKeyUp={() => {this.onKeyUpSearch()}} />
                             </form>
-                            </div>
                             <br/>
-                            <div className="table-responsive col-10">
+                            <div className="table-responsive">
                                 <table className="table table-bordered table-hover">
                                     <thead className="thead-dark">
                                         <tr>
@@ -127,7 +151,11 @@ class ViewActivityLog extends Component {
                         </div>
 
                         </div>
+
+                        </div>
+
                     </div>
+
                 </div>
             )
         } else {

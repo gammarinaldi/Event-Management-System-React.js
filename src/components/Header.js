@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { onUserLogout, onActivityLog } from '../actions';
 import Cookies from 'universal-cookie';
-import logo from '../supports/img/logo.png';
+//import logo from '../supports/img/logo.png';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import axios from 'axios';
 import { CART_GETLIST, WISHLIST_GETLIST } from '../supports/api-url/apisuburl';
@@ -116,9 +116,9 @@ class HeaderReact extends Component {
                 
                 <div style={{ margin: '0 0 90px 0' }}>
                     <Navbar color="light" light expand="md" fixed="top" className="shadow">
-                    <NavbarBrand href="/" style={{ fontSize: "16px" }}>
-                    {/* <b>{this.props.NavBrand}</b> */}
-                    <img src={logo} alt="Purwadhika store logo" height={50} width={250} />
+                    <NavbarBrand href="/" style={{ fontSize: "35px", marginBottom: "10px" }}>
+                    <b>{this.props.NavBrand}</b>&nbsp;<span style={{ fontSize: "16px" }}>Event Management System</span>
+                    {/* <img src={logo} alt="Purwadhika store logo" height={50} width={250} /> */}
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
