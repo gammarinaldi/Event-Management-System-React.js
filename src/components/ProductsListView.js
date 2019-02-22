@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { InputGroup, Row, Col } from 'reactstrap';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
@@ -384,8 +384,10 @@ class ProductsListView extends Component {
                 return (
                     <tr>
                         <td><center>{item.id}</center></td>
-                        <td><strong><a href={`/admin/producteditdetails?id=${item.id}`} alt={item.item} 
-                            title="Click to edit this item">{item.item}</a></strong></td>
+                        <td><strong>
+                            <Link to={`/admin/producteditdetails?id=${item.id}`} alt={item.item} 
+                                title="Click to edit this item">{item.item}</Link>
+                            </strong></td>
                         <td>{this.renderCategory(item.idCategory)}</td>
                         <td>{this.renderCity(item.idLocation)}</td>
                         <td>{this.props.convertToRupiah(item.price)}</td>
@@ -399,22 +401,6 @@ class ProductsListView extends Component {
                         <td>{item.createdBy}</td>
                         <td>{item.creator}</td>
                         <td>
-                            {/* <table className="table table-borderless table-sm">
-                                <tr>
-                                    <td align="center">
-                                    <button className="btn btn-info" 
-                                        onClick={ () => this.setState({ selectedIdEdit: item.id }) }>
-                                        <i className="fa fa-edit fa-sm"></i>
-                                    </button>
-                                    </td>
-                                    <td align="center">
-                                    <button className="btn btn-danger"
-                                        onClick={ () => this.onBtnDeleteClick(item.id, item.item) }>
-                                        <i className="fa fa-trash fa-sm"></i>
-                                    </button>
-                                    </td>
-                                </tr>
-                            </table> */}
                             <center>
                                 <button className="btn btn-danger"
                                     onClick={ () => this.onBtnDeleteClick(item.id, item.item) }>

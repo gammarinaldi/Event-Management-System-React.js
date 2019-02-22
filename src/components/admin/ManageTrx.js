@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import History from '../History';
-import { sideBarMenu } from '../../actions';
+import SideBar from './SideBar';
 
 class ManageTrx extends Component {
 
@@ -13,7 +13,7 @@ class ManageTrx extends Component {
                 <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Manage Transactions' })}
+                        <SideBar myRole={this.props.myRole} />
                         </div>
                         <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>
                         <h2>Manage Transactions</h2>
@@ -35,4 +35,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
   }
 
-export default connect(mapStateToProps, { sideBarMenu })(ManageTrx);
+export default connect(mapStateToProps)(ManageTrx);

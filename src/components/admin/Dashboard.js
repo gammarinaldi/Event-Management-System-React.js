@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
-import { convertToRupiah, sideBarMenu } from '../../actions'; 
+import { convertToRupiah } from '../../actions'; 
+import SideBar from './SideBar';
 import { 
     USERS_GETLIST, 
     PRODUCTS_GETLIST,
@@ -153,7 +154,8 @@ class Dashboard extends Component {
                 <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Dashboard' })}
+                            {/* {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Dashboard' })} */}
+                            <SideBar myRole={this.props.myRole} />
                         </div>
                         <div className="col-lg-8 card bg-light" style={{ paddingTop: "20px", paddingRight: "40px", paddingLeft: "40px" }}>
                         <h2>Admin Dashboard</h2>
@@ -227,4 +229,4 @@ const mapStateToProps = (state) => {
   return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { convertToRupiah, sideBarMenu })(Dashboard);
+export default connect(mapStateToProps, { convertToRupiah })(Dashboard);

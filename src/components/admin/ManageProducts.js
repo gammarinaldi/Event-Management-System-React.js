@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import ProductsListView from '../ProductsListView';
-import { sideBarMenu } from '../../actions';
+import SideBar from './SideBar';
 
 class ManageProducts extends Component {
 
@@ -13,12 +13,13 @@ class ManageProducts extends Component {
                 <div className="card bg-light" style={{ padding: "20px" }}>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Manage Products' })}
+                        <SideBar myRole={this.props.myRole} />
                         </div>
                         <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>
                         <h2>Manage Products &nbsp;&nbsp;&nbsp;
-                            <a href="/admin/addproduct" class="btn btn-success" 
-                            style={{ fontSize: "12px" }}><i className="fa fa-plus"></i> Add product</a>
+                            <Link to="/admin/addproduct" className="btn btn-success" style={{ fontSize: "12px" }}>
+                            <i className="fa fa-plus"></i> Add product
+                            </Link>
                         </h2>
                         <hr/>
                         <ProductsListView />
@@ -38,4 +39,4 @@ const mapStateToProps = (state) => {
   return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { sideBarMenu })(ManageProducts);
+export default connect(mapStateToProps)(ManageProducts);

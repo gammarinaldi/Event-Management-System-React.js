@@ -9,6 +9,7 @@ import { TRXDETAILS_GET } from '../supports/api-url/apisuburl';
 import moment from 'moment';
 import Modal from "react-responsive-modal";
 import Barcode from 'react-barcode';
+import SideBar from './admin/SideBar';
 
 const styles = {
     fontFamily: "sans-serif",
@@ -57,7 +58,7 @@ class HistoryDetails extends Component {
         const { open } = this.state;
         var listJSXOrderDetails = this.state.listOrderDetails.map((item) => {
 
-            if(item.barcode === 0) {
+            if(item.barcode === '0') {
                 return (
                     <tr>   
                         <td><center>{item.idProduct}</center></td>
@@ -123,7 +124,7 @@ class HistoryDetails extends Component {
                     <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
                         <div className="row">
                             <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                                {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Transaction Details' })}
+                            <SideBar myRole={this.props.myRole} />
                             </div>
                             <div className="col-lg-10 bg-light" style={{ padding: "20px" }}>
                             <h2>Manage Transactions</h2>

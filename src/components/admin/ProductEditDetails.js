@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
-import { onActivityLog, sideBarMenu } from '../../actions';
+import { onActivityLog } from '../../actions';
 import { 
     PRODUCTS_GET, 
     LOCATION_GET, 
@@ -16,6 +16,7 @@ import {
     CATEGORY_GETLIST 
 } from '../../supports/api-url/apisuburl';
 import moment from 'moment';
+import SideBar from './SideBar';
 
 class ProductsEditDetails extends Component {
 
@@ -321,7 +322,7 @@ class ProductsEditDetails extends Component {
                 <style>{"tr{border-top: hidden;}"}</style>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Edit Product' })}
+                        <SideBar myRole={this.props.myRole} />
                             </div>
                             <div className="card bg-light col-lg-6" style={{ padding: "20px" }}>
                             <h4>Edit Product Details</h4>
@@ -517,4 +518,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { onActivityLog, sideBarMenu })(ProductsEditDetails);
+export default connect(mapStateToProps, { onActivityLog })(ProductsEditDetails);

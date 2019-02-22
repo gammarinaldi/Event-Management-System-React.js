@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
-import { sortingJSON, sideBarMenu } from '../../actions';
+import { sortingJSON } from '../../actions';
 import { LOG_GETLIST } from '../../supports/api-url/apisuburl';
+import SideBar from './SideBar';
 
 class ViewActivityLog extends Component {
 
@@ -103,7 +104,7 @@ class ViewActivityLog extends Component {
                     <div className="row">
 
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'View Activity Log' })}
+                        <SideBar myRole={this.props.myRole} />
                         </div>
 
                         <div className="col-10 card bg-light" style={{ padding: "20px" }}>
@@ -171,4 +172,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { sortingJSON, sideBarMenu })(ViewActivityLog);
+export default connect(mapStateToProps, { sortingJSON })(ViewActivityLog);

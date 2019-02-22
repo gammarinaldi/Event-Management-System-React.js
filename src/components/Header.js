@@ -10,12 +10,13 @@ import {
     } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { onUserLogout, onActivityLog } from '../actions';
+import { onUserLogout, onActivityLog, refreshSelectProduct } from '../actions';
 import Cookies from 'universal-cookie';
 //import logo from '../supports/img/logo.png';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import axios from 'axios';
 import { CART_GETLIST, WISHLIST_GETLIST } from '../supports/api-url/apisuburl';
+import Style from 'style-it';
 
 const cookies = new Cookies();
 
@@ -53,9 +54,11 @@ class HeaderReact extends Component {
         }
     }
 
-    isProducer() {
-        if(this.props.myRole === "PRODUCER") {
-            return <NavItem><NavLink href="/"><div style={{ color: 'LIGHTSEAGREEN' }}>Manage Products</div></NavLink></NavItem>;
+    isAdmin() {
+        if(this.props.myRole === "PRODUCER" || this.props.myRole === "ADMIN") {
+            return  <NavItem>
+                        <Link to="/" className="topMenu"><i className="fa fa-cog fa-lg"></i> Admin Dashboard</Link>
+                    </NavItem>;
         }
     }
 
@@ -88,26 +91,39 @@ class HeaderReact extends Component {
 
             return (
                 <div style={{ margin: '0 0 90px 0' }}>
+                    <Style>
+                        {`
+                            .topMenu {
+                                color: grey;
+                                text-decoration: none;
+                            }
+                            .topMenu:hover {
+                                color: dimgray;
+                            }
+                        `}
                     <Navbar color="light" light expand="md" fixed="top" className="shadow">
-                    <NavbarBrand href="/" style={{ fontSize: "35px", marginBottom: "10px" }}>
-                    <b>{this.props.NavBrand}</b>&nbsp;<span style={{ fontSize: "16px" }}>Event Management System</span>
-                    {/* <img src={logo} alt="Purwadhika store logo" height={50} width={250} /> */}
+                    <NavbarBrand style={{ fontSize: "35px", marginBottom: "10px" }}>
+                    <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
+                        <b>{this.props.NavBrand}</b>&nbsp;<span style={{ fontSize: "16px" }}>Event Management System</span>
+                    </Link>
+                    {/* <img src={logo} alt="logo" height={50} width={250} /> */}
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar style={{ fontSize: "14px", fontWeight: "bold" }}>
 
                         <NavItem>
-                        <Link to="/login"><NavLink><i className="fa fa-sign-in"></i> Sign In</NavLink></Link>
+                        <Link to="/login" className="topMenu" ><NavLink><i className="fa fa-sign-in"></i> Sign In</NavLink></Link>
                         </NavItem>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <NavItem>
-                        <Link to="/register"><NavLink><i className="fa fa-user-plus"></i> Sign Up</NavLink></Link>
+                        <Link to="/register" className="topMenu" ><NavLink><i className="fa fa-user-plus"></i> Sign Up</NavLink></Link>
                         </NavItem>
 
                         </Nav>
                     </Collapse>
                     </Navbar>
+                    </Style>
                 </div>
             )
 
@@ -115,57 +131,59 @@ class HeaderReact extends Component {
             return (
                 
                 <div style={{ margin: '0 0 90px 0' }}>
+                    <Style>
+                        {`
+                            .topMenu {
+                                color: grey;
+                                text-decoration: none;
+                            }
+                            .topMenu:hover {
+                                color: dimgray;
+                            }
+                        `}
                     <Navbar color="light" light expand="md" fixed="top" className="shadow">
-                    <NavbarBrand href="/" style={{ fontSize: "35px", marginBottom: "10px" }}>
-                    <b>{this.props.NavBrand}</b>&nbsp;<span style={{ fontSize: "16px" }}>Event Management System</span>
+                    <NavbarBrand style={{ fontSize: "35px", marginBottom: "10px" }}>
+                    <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
+                        <b>{this.props.NavBrand}</b>&nbsp;<span style={{ fontSize: "16px" }}>Event Management System</span>
+                    </Link>
                     {/* <img src={logo} alt="Purwadhika store logo" height={50} width={250} /> */}
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar style={{ fontSize: "14px", fontWeight: "bold" }}>
                             <NavItem>
-                            <NavLink href="/">Hello, {this.props.username} ({this.props.myRole})</NavLink>
+                            <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
+                                Hello, {this.props.username} ({this.props.myRole})
+                            </Link>
                             </NavItem>
-                            &nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <NavItem>
-                            {/* <NavLink href="/productsgridview">Home</NavLink> */}
-                            <NavLink href="/productsgridview">
-                            <i className="fa fa-home fa-lg"></i>&nbsp;Home
-                            </NavLink>
+                            <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
+                                <i className="fa fa-home fa-lg"></i>&nbsp;Home
+                            </Link>
                             </NavItem>
-                            {this.isProducer()}
-                            &nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            {this.isAdmin()}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <NavItem>
-                            {/* <NavLink href="/wishlist">Wishlist</NavLink> */}
-                            <NavLink href="/wishlist"><i className="fa fa-heart fa-lg"></i>&nbsp;Wishlist
-                            </NavLink>
+                            <Link to="/wishlist" className="topMenu"><i className="fa fa-heart fa-lg"></i>&nbsp;Wishlist</Link>
                             </NavItem>
-                            &nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <NavItem>
-                            {/* <NavLink href="/cart">Cart ({this.state.cartCount})</NavLink> */}
-                            <NavLink href="/cart">
-                            <i className="fa fa-shopping-cart fa-lg"></i>
-                            &nbsp;Cart&nbsp;<span className="badge badge-primary">{this.state.cartCount}</span>
-                            </NavLink>
+                            <Link to="/cart" className="topMenu"><i className="fa fa-shopping-cart fa-lg"></i>&nbsp;Cart&nbsp;<span className="badge badge-primary">{this.state.cartCount}</span></Link>
                             </NavItem>
-                            &nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <NavItem>
-                            {/* <NavLink href="/history">Transactions</NavLink> */}
-                            <NavLink href="/history">
-                            <i className="fa fa-history fa-lg"></i>&nbsp;History
-                            </NavLink>
+                            <Link to="/history" className="topMenu"><i className="fa fa-history fa-lg"></i>&nbsp;History</Link>
                             </NavItem>
-                            &nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <NavItem>
-                            {/* <NavLink href="#" onClick={this.onLogoutSelect}>Logout</NavLink> */}
-                            <NavLink href="#" onClick={this.onLogoutSelect}>
-                            <i className="fa fa-sign-out fa-lg"></i>
-                            &nbsp;Logout
-                            </NavLink>
+                            <Link to="#" className="topMenu" onClick={this.onLogoutSelect}><i className="fa fa-sign-out fa-lg"></i>&nbsp;Logout</Link>
                             </NavItem>
                         </Nav>
                     </Collapse>
                     </Navbar>
+                    </Style>
                 </div>
             )
         }
@@ -180,4 +198,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { onUserLogout, onActivityLog })(HeaderReact);
+export default connect(mapStateToProps, { onUserLogout, onActivityLog, refreshSelectProduct })(HeaderReact);

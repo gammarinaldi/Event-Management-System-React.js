@@ -40,6 +40,13 @@ class LoginPage extends Component {
       }
     }
 
+    renderOnKeyPress = (event) => {
+      if (event.key === 'Enter'){
+          // alert('Enter has been pressed')
+          this.onBtnSubmit()
+      }
+    }
+
     render() {
 
       if(this.props.username === "") {
@@ -83,7 +90,7 @@ class LoginPage extends Component {
                 </div>
                 <div className="form-group">
                   <input ref="password" className="form-control form-control-lg" style={{ fontSize: "14px" }} 
-                  placeholder="Password" type="password" />
+                  placeholder="Password" type="password" onKeyPress={this.renderOnKeyPress}/>
                 </div>
                 <br/>
                 {alertLog}

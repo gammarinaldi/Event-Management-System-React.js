@@ -33,7 +33,7 @@ export const sideBarMenu = ({ myRole, active }) => {
             dispatch({type: SIDE_BAR_MENU});
             return <div className="list-group">
                         <a href="/" className={dashboard}>Dashboard</a>
-                        <a href="/admin/manageproducts" className={manageproducts}>Manage Products</a>
+                        <a href="/admin/manageproducts?p=1" className={manageproducts}>Manage Products</a>
                         <a href="/admin/manageusers" className={manageusers}>Manage Users</a>
                         <a href="/admin/managetrx" className={managetrx}>Manage Transactions</a>
                         <a href="/admin/managecategory" className={managecategory}>Manage Category</a>

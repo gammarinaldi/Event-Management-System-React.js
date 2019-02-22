@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import { convertToRupiah, sortingJSON } from '../actions';
@@ -45,19 +45,14 @@ class Wishlist extends Component {
         }
     }
 
-    onBtnCS = () => {
-        return window.location = '/productsgridview';
-    }
-
     btnCustom = () => {
         var btnCustom;
         btnCustom = <h5>
-                        <button className="btn btn-success" style={{ fontSize: "13px" }}
-                            onClick={ () => this.onBtnCS() }>
+                        <Link to="/productsgridview" className="btn btn-info" style={{ fontSize: "13px" }}>
                         <i className="fa fa-shopping-cart fa-sm"></i>
                         &nbsp; Continue Shopping
-                        </button>
-                        </h5>;
+                        </Link>
+                    </h5>;
         return btnCustom;
     }
   
@@ -72,17 +67,19 @@ class Wishlist extends Component {
             return (
                 <tr>
                     <td><center>{item.idProduct}</center></td>
-                    <td><a href={`/productsdetails?id=${item.idProduct}`}>{item.item}</a></td>
+                    <td><Link to={`/productsdetails?id=${item.idProduct}`}>{item.item}</Link></td>
                     <td>{item.categoryName}</td>
                     <td>{this.props.convertToRupiah(item.price)}</td>
-                    <td><center><a href={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
-                            <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} /></a></center></td>
+                    <td><center>
+                        <Link to={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
+                        <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} />
+                        </Link>
+                    </center></td>
                     <td>
                         <center>
-                        <button className="btn btn-danger"
-                            onClick={ () => this.onBtnDeleteClick(item.idWishlist, item.item) }>
-                            <i className="fa fa-trash fa-sm"></i>
-                        </button>
+                        <Link to="#" className="btn btn-danger" onClick={ () => this.onBtnDeleteClick(item.idWishlist, item.item) }>
+                        <i className="fa fa-trash fa-sm"></i>
+                        </Link>
                         </center>
                     </td>
                 </tr>

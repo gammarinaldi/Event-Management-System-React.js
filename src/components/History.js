@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
-import { convertToRupiah, sortingJSON } from '../actions';
+import { convertToRupiah, sortingJSON, onActivityLog } from '../actions';
 import { TRX_GET, TRX_GETLIST, TRX_STATUS_UPDATE, TRXDETAILS_BARCODE } from '../supports/api-url/apisuburl';
 
 class History extends Component {
@@ -62,9 +62,8 @@ class History extends Component {
                     email: this.props.email,
                     fullname: this.props.fullname
                 }).then((res) => {
-                    console.log(res);
                     //=======> Activity Log
-                    this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Confirm Trx'});
+                    this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Purchase Confirmation'});
                 }).catch((err) => {
                     console.log(err);
                 })
@@ -93,7 +92,9 @@ class History extends Component {
                 return (
                     <tr key={x}>   
                         <td><center>{item.id}</center></td>
-                        <td><center><a href={'/historydetails?idTrx=' + item.id + '&invoice=' + item.invoice}>{item.invoice}</a></center></td>
+                        <td><center>
+                            <Link to={'/historydetails?idTrx=' + item.id + '&invoice=' + item.invoice}>{item.invoice}</Link>
+                            </center></td>
                         <td><center>{item.username}</center></td>
                         <td>{item.bankName}</td>
                         <td>{item.accNumber}</td>
@@ -111,11 +112,11 @@ class History extends Component {
                         </td>
                     </tr>
                 )
-            } else {
+            } else if(this.props.myRole === 'ADMIN' && item.status === 'Unconfirmed') {
                 return (
                     <tr key={x}>   
                         <td><center>{item.id}</center></td>
-                        <td><center><a href={'/historydetails?idTrx=' + item.id + '&invoice=' + item.invoice}>{item.invoice}</a></center></td>
+                        <td><center><Link to={'/historydetails?idTrx=' + item.id + '&invoice=' + item.invoice}>{item.invoice}</Link></center></td>
                         <td><center>{item.username}</center></td>
                         <td>{item.bankName}</td>
                         <td>{item.accNumber}</td>
@@ -141,7 +142,29 @@ class History extends Component {
                         </td>
                     </tr>
                 )
-            }
+            } else if(item.status === 'Unconfirmed') {
+                return (
+                    <tr key={x}>   
+                        <td><center>{item.id}</center></td>
+                        <td><center><Link to={'/historydetails?idTrx=' + item.id + '&invoice=' + item.invoice}>{item.invoice}</Link></center></td>
+                        <td><center>{item.username}</center></td>
+                        <td>{item.bankName}</td>
+                        <td>{item.accNumber}</td>
+                        <td>
+                            <a href={`${API_URL_1}${item.receipt}`} target="_blank" rel="noopener noreferrer">
+                            <img src={`${API_URL_1}${item.receipt}`} alt={item.invoice} width={100} /></a>
+                        </td>
+                        <td>{item.trxDateTime}</td>
+                        <td><center>{item.totalQty}</center></td>
+                        <td>{this.props.convertToRupiah(item.totalPrice)}</td>
+                        <td>
+                            <center>
+                            <strong>{item.status}</strong>
+                            </center>
+                        </td>
+                    </tr>
+                )
+            } else return false;
             
         })
         
@@ -209,4 +232,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { convertToRupiah, sortingJSON })(History);
+export default connect(mapStateToProps, { convertToRupiah, sortingJSON, onActivityLog })(History);

@@ -23,7 +23,7 @@ import {
     LinkedinIcon,
     LineIcon,
     EmailIcon
-  } from 'react-share';
+} from 'react-share';
 import moment from 'moment';
 import { 
     PRODUCTS_GET, 
@@ -223,12 +223,15 @@ class ProductsDetails extends Component {
         endDate = moment(endDate).format('DD MMMM YYYY');
         
         return(
-                <div className="card shadow p-3 mb-5 bg-white rounded col-lg-12">
-                    <center>
-                        <br/>
+            <div className="col-lg-12 card shadow p-3 mb-5 bg-white rounded">
+                <br/><br/>
+                <div className="row">
+                    <div className="col-lg-2"></div>
+                    <div className="col-lg-4 text-center" style={{ marginBottom: '20px' }}>
                         <a href={`${API_URL_1}${img}`} target="_blank" rel="noopener noreferrer">
                         <img src={`${API_URL_1}${img}`} alt={item} width={180} /></a>
-                        <br/><br/>
+                    </div>
+                    <div className="col-lg-3">
                         <h2>{item}</h2>
                         <h4 className="section-subheading" style={{ color: "LIMEGREEN" }}>
                             <FontAwesomeIcon icon={faBriefcase} size="md" />&nbsp;
@@ -255,141 +258,144 @@ class ProductsDetails extends Component {
                         <br/>
                         <h5 className="section-subheading text-muted">Start Time: {startTime}</h5>
                         <h5 className="section-subheading text-muted">End Time: {endTime}</h5>
-                        <br/>
-
-                        <div className="row">
-                            <div className="col-lg-6 mx-auto" align="justify" style={{ fontSize: "14px" }}>
-                                <hr/>
-                                {this.MyComponent()}
-                                <hr/>
-                                <table align="center">
-                                    <tr>
-                                        <td>
-                                        <FacebookShareButton
-                                            url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                            quote={item}
-                                            className=""
-                                            style={{ marginTop: "10px" }}>
-                                            <FacebookIcon
-                                                size={32}
-                                                round />
-                                        </FacebookShareButton>
-                                        </td>&nbsp;
-                                        <td>
-                                        <WhatsappShareButton
-                                            url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                            quote={item}
-                                            className=""
-                                            style={{ marginTop: "10px" }}>
-                                            <WhatsappIcon
-                                                size={32}
-                                                round />
-                                        </WhatsappShareButton>
-                                        </td>&nbsp;
-                                        <td>
-                                        <LinkedinShareButton
-                                            url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                            quote={item}
-                                            className=""
-                                            style={{ marginTop: "10px" }}>
-                                            <LinkedinIcon
-                                                size={32}
-                                                round />
-                                        </LinkedinShareButton>
-                                        </td>&nbsp;
-                                        <td>
-                                        <LineShareButton
-                                            url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                            quote={item}
-                                            className=""
-                                            style={{ marginTop: "10px" }}>
-                                            <LineIcon
-                                                size={32}
-                                                round />
-                                        </LineShareButton>
-                                        </td>&nbsp;
-                                        <td>
-                                        <GooglePlusShareButton
-                                            url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                            quote={item}
-                                            className=""
-                                            style={{ marginTop: "10px" }}>
-                                            <GooglePlusIcon
-                                                size={32}
-                                                round />
-                                        </GooglePlusShareButton>
-                                        </td>&nbsp;
-                                        <td>
-                                        <EmailShareButton
-                                            url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                            quote={item}
-                                            className=""
-                                            style={{ marginTop: "10px" }}>
-                                            <EmailIcon
-                                                size={32}
-                                                round />
-                                        </EmailShareButton>
-                                        </td>&nbsp;
-                                        <td>
-                                        <TwitterShareButton
-                                            url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                            quote={item}
-                                            className=""
-                                            style={{ marginTop: "10px" }}>
-                                            <TwitterIcon
-                                                size={32}
-                                                round />
-                                        </TwitterShareButton>
-                                        </td>&nbsp;
-                                        <td>
-                                        <TelegramShareButton
-                                            url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                            quote={item}
-                                            className=""
-                                            style={{ marginTop: "10px" }}>
-                                            <TelegramIcon
-                                                size={32}
-                                                round />
-                                        </TelegramShareButton>
-                                        </td>&nbsp;
-                                    </tr>
-                                </table>
-                                
-                            </div>
-                        </div>
-                        <br/>
-                        {this.renderWishlist(id)}
-                        <br/>
-                        <br/>
-                        
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <h4 style={{ color: '#ea7f1c', fontSize: "16px" }}>
-                                    <FontAwesomeIcon icon={faCalculator} size="md" />&nbsp;
-                                    {this.props.convertToRupiah(price)}
-                                </h4>
-                                <br/>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <input type="number" placeholder="Input Qty" ref="addQty" id="addQty" value="1"
-                                                style={{ fontSize: "13px" }} className="form-control form-control-lg" />
-                                        </td>
-                                        <td>&nbsp;</td>
-                                        <td>
-                                            <button className="btn btn-success" style={{ fontSize: "14px" }}
-                                                onClick={ () => this.onBtnAddToCart(id, idCategory) }>
-                                            <i className="fa fa-shopping-cart fa-sm"></i>
-                                            &nbsp;&nbsp; Add to Cart
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <br/><br/>
-                            </div>
-                        </div>
-                    </center>
+                    </div>
+                    <div className="col-lg-3"></div>
                 </div>
+                <div className="row">
+                    <div className="col-lg-6 mx-auto" align="justify" style={{ fontSize: "14px" }}>
+                        <hr/>
+                        {this.MyComponent()}
+                        <hr/>
+                        <table align="center">
+                            <tr>
+                                <td>
+                                <FacebookShareButton
+                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
+                                    quote={item}
+                                    className=""
+                                    style={{ marginTop: "10px" }}>
+                                    <FacebookIcon
+                                        size={32}
+                                        round />
+                                </FacebookShareButton>
+                                </td>&nbsp;
+                                <td>
+                                <WhatsappShareButton
+                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
+                                    quote={item}
+                                    className=""
+                                    style={{ marginTop: "10px" }}>
+                                    <WhatsappIcon
+                                        size={32}
+                                        round />
+                                </WhatsappShareButton>
+                                </td>&nbsp;
+                                <td>
+                                <LinkedinShareButton
+                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
+                                    quote={item}
+                                    className=""
+                                    style={{ marginTop: "10px" }}>
+                                    <LinkedinIcon
+                                        size={32}
+                                        round />
+                                </LinkedinShareButton>
+                                </td>&nbsp;
+                                <td>
+                                <LineShareButton
+                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
+                                    quote={item}
+                                    className=""
+                                    style={{ marginTop: "10px" }}>
+                                    <LineIcon
+                                        size={32}
+                                        round />
+                                </LineShareButton>
+                                </td>&nbsp;
+                                <td>
+                                <GooglePlusShareButton
+                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
+                                    quote={item}
+                                    className=""
+                                    style={{ marginTop: "10px" }}>
+                                    <GooglePlusIcon
+                                        size={32}
+                                        round />
+                                </GooglePlusShareButton>
+                                </td>&nbsp;
+                                <td>
+                                <EmailShareButton
+                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
+                                    quote={item}
+                                    className=""
+                                    style={{ marginTop: "10px" }}>
+                                    <EmailIcon
+                                        size={32}
+                                        round />
+                                </EmailShareButton>
+                                </td>&nbsp;
+                                <td>
+                                <TwitterShareButton
+                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
+                                    quote={item}
+                                    className=""
+                                    style={{ marginTop: "10px" }}>
+                                    <TwitterIcon
+                                        size={32}
+                                        round />
+                                </TwitterShareButton>
+                                </td>&nbsp;
+                                <td>
+                                <TelegramShareButton
+                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
+                                    quote={item}
+                                    className=""
+                                    style={{ marginTop: "10px" }}>
+                                    <TelegramIcon
+                                        size={32}
+                                        round />
+                                </TelegramShareButton>
+                                </td>&nbsp;
+                            </tr>
+                        </table>
+                        
+                    </div>
+                </div>
+                <br/>
+                <center>{this.renderWishlist(id)}</center>
+                <br/>
+                <br/>
+                
+                <center>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <h4 style={{ color: '#ea7f1c', fontSize: "16px" }}>
+                            <FontAwesomeIcon icon={faCalculator} size="md" />&nbsp;
+                            {this.props.convertToRupiah(price)}
+                        </h4>
+                        <br/>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="number" placeholder="Input Qty" ref="addQty" id="addQty" value="1"
+                                        style={{ fontSize: "13px" }} className="form-control form-control-lg" />
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <button className="btn btn-success" style={{ fontSize: "14px" }}
+                                        onClick={ () => this.onBtnAddToCart(id, idCategory) }>
+                                    <i className="fa fa-shopping-cart fa-sm"></i>
+                                    &nbsp;&nbsp; Add to Cart
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/><br/>
+                    </div>
+                </div>
+                </center>
+
+            </div>
         )
     }
 }

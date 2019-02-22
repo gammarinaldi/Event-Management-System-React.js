@@ -39,17 +39,6 @@ export default (state = INITIAL_STATE, action) => {
                     status: action.payload.status,
                     cookie: true };
 
-        // case AUTH_REGISTER_SUCCESS:
-        //     return { ...INITIAL_STATE, 
-        //             id: action.payload.id,
-        //             username: action.payload.username, 
-        //             fullname: action.payload.fullname,
-        //             role: action.payload.role,
-        //             email: action.payload.email, 
-        //             phone: action.payload.phone, 
-        //             status: action.payload.status,
-        //             cookie: true };
-
         case AUTH_REGISTER_SUCCESS:
             return { ...INITIAL_STATE, status: action.payload, cookie: true };
 

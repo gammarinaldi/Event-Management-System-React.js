@@ -6,7 +6,7 @@ import { API_URL_1 } from '../supports/api-url/apiurl';
 import ProductsItems from './ProductsItems';
 import Carousel from './Carousel';
 import Jumbotron from './Jumbotron';
-import { sortingJSON } from '../actions';
+import { sortingJSON, getAllProducts, refreshSelectProduct } from '../actions';
 import { 
     CATEGORY_GETLIST, 
     LOCATION_GETLIST, 
@@ -31,6 +31,8 @@ class ProductsGridView extends Component {
         this.showProducts();
         this.showCategory();
         this.showLocation();
+        this.props.getAllProducts();    
+        this.props.refreshSelectProduct();
     }
 
     showCategory = () => {
@@ -87,8 +89,6 @@ class ProductsGridView extends Component {
     }
 
     onKeyUpSearch = () => {
-        //e.preventDefault();
-
         var category = this.refs.qCategory.value;
         var location = this.refs.qLocation.value;
         var item = this.refs.qItem.value;
@@ -180,9 +180,9 @@ class ProductsGridView extends Component {
 
     renderListProducts = () => {
         var sortedListProducts = this.state.searchListProducts.sort(this.props.sortingJSON('id', 'desc'));
-        var listJSXProducts = sortedListProducts.map((e) => {
+        var listJSXProducts = sortedListProducts.map((item) => {
             return (
-                <ProductsItems products={e}  />
+                <ProductsItems products={item} />
             )
         })
         return listJSXProducts;
@@ -216,7 +216,9 @@ class ProductsGridView extends Component {
                     <div className="card bg-light" style={{ fontSize: "13px", padding: "30px" }}>
                         <div className="row justify-content-center">
                             <div className="col-lg-6">
-                                <Carousel />
+                                <Carousel 
+                                    listProducts={this.props.listProducts}
+                                />
                             </div>
                         </div>
                     </div>
@@ -325,7 +327,12 @@ class ProductsGridView extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { username: state.auth.username, myRole: state.auth.role, products: state.selectedProducts }
+    return { 
+        username: state.auth.username, 
+        myRole: state.auth.role, 
+        products: state.selectedProducts,
+        listProducts: state.listProducts 
+    }
 }
 
-export default connect(mapStateToProps, { sortingJSON })(ProductsGridView);
+export default connect(mapStateToProps, { sortingJSON, getAllProducts, refreshSelectProduct })(ProductsGridView);

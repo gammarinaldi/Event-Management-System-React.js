@@ -12,7 +12,8 @@ import {
 } from '../../supports/api-url/apisuburl';
 import { Redirect } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
-import { onActivityLog, sideBarMenu } from '../../actions';
+import { onActivityLog } from '../../actions';
+import SideBar from './SideBar';
 
 class ProductsEditDetails extends Component {
 
@@ -75,51 +76,53 @@ class ProductsEditDetails extends Component {
     onBtnAddClick = (e) => {
         e.preventDefault();
 
-        if(document.getElementById("addImg").files[0] !== undefined) {
-            var formData = new FormData();
-            var headers = {
-                headers: 
-                {'Content-Type': 'multipart/form-data'}
-            }
-
-            const category = this.refs.addCategory.value;
-            const location = this.refs.addLocation.value;
-            const item = this.refs.addItem.value;
-            const price = this.refs.addPrice.value;
-            const startDate = this.refs.addStartDate.value;
-            const endDate = this.refs.addEndDate.value;
-            const startTime = this.refs.addStartTime.value;
-            const endTime = this.refs.addEndTime.value;
-            const desc = this.state.tinyMCE;
-            const days = this.state.days;
-
-            var data = {
-                idCategory: category, 
-                idLocation: location,
-                creator: this.props.myRole,
-                createdBy: this.props.username,
-                item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
-            }
-
-            if(document.getElementById('addImg')){
-                formData.append('img', document.getElementById('addImg').files[0]);
-            }
-
-            formData.append('data', JSON.stringify(data)); //Convert object javascript menjadi JSON
-
-            axios.post(API_URL_1 + PRODUCTS_ADD, formData, headers)
-            .then((res) => {
-                console.log(res);
-                document.getElementById('message').innerHTML = '<strong>Add product success!</strong>';
-                //=======> Activity Log
-                this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add product: '+item});
-                this.refs.formAdd.reset();
-            })
-            .catch((err) =>{
-                console.log(err);
-            })
+        if(!this.state.days || this.state.tinyMCE === '') alert('All fields required.');
+        else {
+            if(document.getElementById("addImg").files[0] !== undefined) {
+                var formData = new FormData();
+                var headers = {
+                    headers: 
+                    {'Content-Type': 'multipart/form-data'}
+                }
+    
+                const category = this.refs.addCategory.value;
+                const location = this.refs.addLocation.value;
+                const item = this.refs.addItem.value;
+                const price = this.refs.addPrice.value;
+                const startDate = this.refs.addStartDate.value;
+                const endDate = this.refs.addEndDate.value;
+                const startTime = this.refs.addStartTime.value;
+                const endTime = this.refs.addEndTime.value;
+                const desc = this.state.tinyMCE;
+                const days = this.state.days;
+    
+                var data = {
+                    idCategory: category, 
+                    idLocation: location,
+                    creator: this.props.myRole,
+                    createdBy: this.props.username,
+                    item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
+                }
+    
+                if(document.getElementById('addImg')){
+                    formData.append('img', document.getElementById('addImg').files[0]);
+                }
+    
+                formData.append('data', JSON.stringify(data)); //Convert object javascript menjadi JSON
+    
+                axios.post(API_URL_1 + PRODUCTS_ADD, formData, headers)
+                .then((res) => {
+                    console.log(res);
+                    document.getElementById('message').innerHTML = '<strong>Add product success!</strong>';
+                    //=======> Activity Log
+                    this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add product: '+item});
+                    this.refs.formAdd.reset();
+                })
+                .catch((err) =>{
+                    console.log(err);
+                })
+            } else alert('All fields required.');
         }
-        
     }
 
     onBtnDeleteClick = (id, item) => {
@@ -215,7 +218,7 @@ class ProductsEditDetails extends Component {
                 <style>{"tr{border-top: hidden;}"}</style>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                                {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Add Product' })}
+                        <SideBar myRole={this.props.myRole} />
                             </div>
                             <div className="card bg-light col-6" style={{ padding: "20px" }}>
                             <h2>Add Product</h2>
@@ -229,7 +232,7 @@ class ProductsEditDetails extends Component {
                                             <td>&nbsp;Category</td>
                                             <td>:</td>
                                             <td>
-                                                <select ref="addCategory" className="custom-select" style={{ fontSize: "12px" }}>
+                                                <select ref="addCategory" className="form-control form-control-lg" style={{ fontSize: "12px" }} required>
                                                     {this.renderAllCategory()}
                                                 </select>
                                             &nbsp;</td>
@@ -238,7 +241,7 @@ class ProductsEditDetails extends Component {
                                             <td>&nbsp;Location</td>
                                             <td>:</td>
                                             <td>
-                                                <select ref="addLocation" className="custom-select" style={{ fontSize: "12px" }}>
+                                                <select ref="addLocation" className="form-control form-control-lg" style={{ fontSize: "12px" }} required>
                                                     {this.renderListLocation()}
                                                 </select>    
                                             &nbsp;</td>
@@ -248,7 +251,7 @@ class ProductsEditDetails extends Component {
                                             <td>:</td>
                                             <td>
                                                 <input type="text" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addItem" className="form-control" />    
+                                                    ref="addItem" className="form-control form-control-lg" required/>    
                                             &nbsp;</td>
                                         </tr>
                                         <tr>
@@ -256,7 +259,7 @@ class ProductsEditDetails extends Component {
                                             <td>:</td>
                                             <td>
                                                 <input type="number" style={{ fontSize: "12px" }} 
-                                                    ref="addPrice" className="form-control" placeholder="Rp." />    
+                                                    ref="addPrice" className="form-control form-control-lg" placeholder="Rp." required/>    
                                             &nbsp;</td>
                                         </tr>
                                         <tr>
@@ -264,7 +267,7 @@ class ProductsEditDetails extends Component {
                                             <td>:</td>
                                             <td>
                                                 <input type="file" id="addImg" name="addImg" 
-                                                    label={this.state.addImg} onChange={this.addImgChange} />
+                                                    label={this.state.addImg} onChange={this.addImgChange} required/>
                                             &nbsp;</td>
                                         </tr>
                                         <tr>
@@ -272,7 +275,7 @@ class ProductsEditDetails extends Component {
                                             <td>:</td>
                                             <td>
                                                 <input type="date" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addStartDate" className="form-control" />    
+                                                    ref="addStartDate" className="form-control form-control-lg" required/>    
                                             &nbsp;</td>
                                         </tr>
                                         <tr>
@@ -280,7 +283,7 @@ class ProductsEditDetails extends Component {
                                             <td>:</td>
                                             <td>
                                                 <input type="date" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addEndDate" className="form-control" />    
+                                                    ref="addEndDate" className="form-control form-control-lg" required/>    
                                             &nbsp;</td>
                                         </tr>
                                         <tr>
@@ -288,7 +291,7 @@ class ProductsEditDetails extends Component {
                                             <td>:</td>
                                             <td>
                                                 <input type="time" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addStartTime" className="form-control" />    
+                                                    ref="addStartTime" className="form-control form-control-lg" required/>    
                                             &nbsp;</td>
                                         </tr>
                                         <tr>
@@ -296,7 +299,7 @@ class ProductsEditDetails extends Component {
                                             <td>:</td>
                                             <td>
                                                 <input type="time" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addEndTime" className="form-control" />    
+                                                    ref="addEndTime" className="form-control form-control-lg" required/>    
                                             &nbsp;</td>
                                         </tr>
                                         <tr>
@@ -353,7 +356,7 @@ class ProductsEditDetails extends Component {
                                             <td>
                                                 <br/>
                                                 <button type="submit" className="btn btn-success" style={{ fontSize: "12px" }}>
-                                                    <i className="fa fa-check-up fa-sm"></i> Submit
+                                                    <i className="fa fa-check fa-sm"></i> Submit
                                                 </button>
                                             </td>
                                         </tr>
@@ -386,4 +389,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { onActivityLog, sideBarMenu })(ProductsEditDetails);
+export default connect(mapStateToProps, { onActivityLog })(ProductsEditDetails);

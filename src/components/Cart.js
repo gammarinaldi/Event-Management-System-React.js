@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import { convertToRupiah } from '../actions';
@@ -66,32 +66,26 @@ class Cart extends Component {
         }
     }
 
-    onBtnCS = () => {
-        return window.location = '/productsgridview';
-    }
-
     btnCustom = () => {
         var btnCustom;
         if(!this.state.listCart.length) {
             btnCustom = <h5>
-                        <button className="btn btn-success" style={{ fontSize: "13px" }}
-                            onClick={ () => this.onBtnCS() }>
+                        <Link to="/productsgridview" className="btn btn-info" style={{ fontSize: "13px" }}>
                         <i className="fa fa-shopping-cart fa-sm"></i>
                         &nbsp; Continue Shopping
-                        </button>
+                        </Link>
                         </h5>;
         } else {
             btnCustom = <h5>
-                        <button className="btn btn-info" style={{ fontSize: "13px" }}
-                            onClick={ () => this.onBtnCS() }>
+                        <Link to="/productsgridview" className="btn btn-info" style={{ fontSize: "13px" }}>
                         <i className="fa fa-shopping-cart fa-sm"></i>
                         &nbsp; Continue Shopping
-                        </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button className="btn btn-success" style={{ fontSize: "13px" }}
-                            onClick={ () => this.onBtnCheckout() }>
-                        <i className="fa fa-check fa-sm"></i>
-                        &nbsp; CHECKOUT
-                        </button>
+                        </Link>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <Link to="#" className="btn btn-success" style={{ fontSize: "13px" }} onClick={ () => this.onBtnCheckout() }>
+                        <i className="fa fa-shopping-cart fa-sm"></i>
+                        &nbsp; Checkout
+                        </Link>
                         </h5>;
         }
         return btnCustom;
@@ -109,8 +103,11 @@ class Cart extends Component {
                         <td>{item.item}</td>
                         <td>{item.categoryName}</td>
                         <td>{this.props.convertToRupiah(item.price)}</td>
-                        <td><center><a href={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
-                            <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} /></a></center></td>
+                        <td><center>
+                            <Link to={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
+                            <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} />
+                            </Link>
+                            </center></td>
                         <td><input type="number" size="4" ref="updateQty" defaultValue={item.qty} className="form-control" /></td>
                         <td>{this.props.convertToRupiah(item.price*item.qty)}</td>
                         <td>
@@ -135,7 +132,7 @@ class Cart extends Component {
             return (
                 <tr>
                     <td><center>{item.idProduct}</center></td>
-                    <td><a href={`/productsdetails?id=${item.idProduct}`}>{item.item}</a></td>
+                    <td><Link to={`/productsdetails?id=${item.idProduct}`}>{item.item}</Link></td>
                     <td>{item.categoryName}</td>
                     <td>{this.props.convertToRupiah(item.price)}</td>
                     <td><center><a href={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
