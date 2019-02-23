@@ -218,7 +218,7 @@ class ProductsEditDetails extends Component {
                 <style>{"tr{border-top: hidden;}"}</style>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                        <SideBar myRole={this.props.myRole} />
+                        <SideBar active='Add Product' />
                             </div>
                             <div className="card bg-light col-6" style={{ padding: "20px" }}>
                             <h2>Add Product</h2>

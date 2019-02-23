@@ -18,8 +18,7 @@ class UsersList extends Component {
     state = {   
                 listUsers: [], 
                 selectedIdEdit: 0, 
-                searchListUsers: [], 
-                filterForm: '', 
+                searchListUsers: [],
                 value: '',
                 uploading: false,
                 images: [],
@@ -147,26 +146,6 @@ class UsersList extends Component {
 
         this.setState({ searchListUsers: arrSearch })
 
-    }
-
-    filterUsers = () => {
-        var filterList;
-
-        filterList = this.state.listUsers.filter((item) => {
-            return (
-                item.username.toLowerCase().includes(this.state.filterForm.toLowerCase())
-            )
-        })
-
-        if(filterList.length === 0) {
-            filterList = this.state.listUsers.filter((item) => {
-                return (
-                    item.fullname.toLowerCase().includes(this.state.filterForm.toLowerCase())
-                )
-            })
-        }
-
-        return filterList;
     }
 
     adminAddAction = () => {

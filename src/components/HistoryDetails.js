@@ -7,7 +7,7 @@ import queryString from 'query-string';
 import { convertToRupiah, sideBarMenu } from '../actions';
 import { TRXDETAILS_GET } from '../supports/api-url/apisuburl';
 import moment from 'moment';
-import Modal from "react-responsive-modal";
+import Modal from 'react-responsive-modal';
 import Barcode from 'react-barcode';
 import SideBar from './admin/SideBar';
 
@@ -124,7 +124,7 @@ class HistoryDetails extends Component {
                     <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
                         <div className="row">
                             <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                            <SideBar myRole={this.props.myRole} />
+                            <SideBar active='Transaction Details' />
                             </div>
                             <div className="col-lg-10 bg-light" style={{ padding: "20px" }}>
                             <h2>Manage Transactions</h2>

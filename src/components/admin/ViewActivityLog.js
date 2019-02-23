@@ -14,7 +14,7 @@ class ViewActivityLog extends Component {
         listActivity: [],
         searchListActivity: [],
         activePage: 1,
-        itemPerPage: 5
+        itemPerPage: 10
      }
 
     handlePageChange(pageNumber) {
@@ -30,45 +30,38 @@ class ViewActivityLog extends Component {
 
     showActivity = () => {
         axios.get(API_URL_1 + LOG_GETLIST)
-                .then((res) => {
-                    this.setState({ 
-                        listActivity: res.data,
-                        searchListActivity: res.data
-                    });
-                }).catch((err) => {
-                    console.log(err);
-                })
+        .then((res) => {
+            this.setState({ 
+                listActivity: res.data,
+                searchListActivity: res.data
+            });
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
     onKeyUpSearch = () => {
-
-        var query = this.refs.qName.value;
+        var query = this.refs.query.value;
         var arrSearch;
+        console.log(this.state.listActivity)
 
         arrSearch = this.state.listActivity.filter((e) => {
-
-            return e.username.toLowerCase().includes(query.toLowerCase()) 
-            
+            return e.username.toLowerCase().includes(query.toLowerCase())
         })
 
         if(arrSearch.length === 0) {
             arrSearch = this.state.listActivity.filter((e) => {
-
                 return e.role.toLowerCase().includes(query.toLowerCase())
-                
             })
         }
 
         if(arrSearch.length === 0) {
             arrSearch = this.state.listActivity.filter((e) => {
-
-                return e.desc.toLowerCase().includes(query.toLowerCase())
-                
+                return e.desc.toLowerCase().includes(query.toLowerCase())  
             })
         }
-
+        
         this.setState({ searchListActivity: arrSearch })
-
     }
   
     renderListActivity = () => {
@@ -104,7 +97,7 @@ class ViewActivityLog extends Component {
                     <div className="row">
 
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                        <SideBar myRole={this.props.myRole} />
+                        <SideBar active='View Activity Log' />
                         </div>
 
                         <div className="col-10 card bg-light" style={{ padding: "20px" }}>
@@ -123,7 +116,7 @@ class ViewActivityLog extends Component {
                             <form id="searchForm">
                             <input type="text" className="form-control form-control-lg" style={{ fontSize: "12px", width: "370px" }} 
                                     placeholder="Search"
-                                    ref="qName" onKeyUp={() => {this.onKeyUpSearch()}} />
+                                    ref="query" onKeyUp={() => {this.onKeyUpSearch()}} />
                             </form>
                             <br/>
                             <div className="table-responsive">

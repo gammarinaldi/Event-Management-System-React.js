@@ -18,8 +18,6 @@ class Verified extends Component {
             username,
             password
         }).then((res) => {
-            //const { token } = res.data;
-            //localStorage.setItem("token", token || "");
             this.props.onUserVerified(res.data);
             this.setState({
                 loading: false, 
@@ -33,15 +31,18 @@ class Verified extends Component {
     renderContent = () =>{
         if(this.state.verified && !this.state.loading){
             return(
-                <div className="alert alert-success">
-                    <p>Your account now verified!</p>
+                <div class="d-flex justify-content-center">
+                    <div class="p-5 alert alert-success">
+                        <h3 align="center">Congratulations! Your account now verified!
+                        </h3>
+                    </div>
                 </div>
             )
         }
         
         return (
             <div className="alert alert-warning">
-                <h2>Loading...</h2>
+                <h2>Sorry, error occured.</h2>
             </div>
         );
     }

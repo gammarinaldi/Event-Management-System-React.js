@@ -3,12 +3,12 @@ import axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
-import { convertToRupiah } from '../actions';
+import { convertToRupiah, cartCount } from '../actions';
 import { CART_GETLIST, CART_EDIT, CART_DELETE } from '../supports/api-url/apisuburl';
 
 class Cart extends Component {
 
-    state = { listCart: [], selectedIdEdit: 0 }
+    state = { listCart: [], selectedIdEdit: 0, open: false }
     
     componentDidMount() {
         this.showCart();
@@ -37,16 +37,13 @@ class Cart extends Component {
         return total;
     }
 
-    onBtnCheckout = () => {
-        window.location = '/checkout';  
-    }
-
     onBtnSaveClick = (id) => {
         const qty = parseInt(this.refs.updateQty.value);
         axios.put(API_URL_1 + CART_EDIT + id, {
             qty
         }).then((res) => {
             console.log(res);
+            this.props.cartCount(this.props.username);
             this.showCart();
         }).catch((err) => {
             console.log(err);
@@ -58,6 +55,7 @@ class Cart extends Component {
             axios.delete(API_URL_1 + CART_DELETE + id)
                 .then((res) => {
                     console.log(res);
+                    this.props.cartCount(this.props.username);
                     this.showCart();
                 })
                 .catch((err) => {
@@ -82,7 +80,7 @@ class Cart extends Component {
                         &nbsp; Continue Shopping
                         </Link>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <Link to="#" className="btn btn-success" style={{ fontSize: "13px" }} onClick={ () => this.onBtnCheckout() }>
+                        <Link to="/checkout" className="btn btn-success" style={{ fontSize: "13px" }}>
                         <i className="fa fa-shopping-cart fa-sm"></i>
                         &nbsp; Checkout
                         </Link>
@@ -96,7 +94,8 @@ class Cart extends Component {
         var listJSXCart = this.state.listCart.map((item) => {
 
             //====================START >> EDIT ITEM PRODUK=========================//
-            if(item.id === this.state.selectedIdEdit) {
+            if(item.idCart === this.state.selectedIdEdit) {
+                console.log(item.id)
                 return (
                     <tr>
                         <td><center>{item.idProduct}</center></td>
@@ -108,7 +107,7 @@ class Cart extends Component {
                             <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} />
                             </Link>
                             </center></td>
-                        <td><input type="number" size="4" ref="updateQty" defaultValue={item.qty} className="form-control" /></td>
+                        <td><input type="number" size="4" ref="updateQty" defaultValue={item.qty} className="form-control" style={{ fontSize: "13px" }}/></td>
                         <td>{this.props.convertToRupiah(item.price*item.qty)}</td>
                         <td>
                             <center>
@@ -142,7 +141,7 @@ class Cart extends Component {
                     <td>
                         <center>
                         <button className="btn btn-info" 
-                            onClick={ () => this.setState({ selectedIdEdit: item.id }) }>
+                            onClick={ () => this.setState({ selectedIdEdit: item.idCart }) }>
                             <i className="fa fa-edit fa-sm"></i>
                         </button>
                         &nbsp;
@@ -225,4 +224,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { convertToRupiah })(Cart);
+export default connect(mapStateToProps, { convertToRupiah, cartCount })(Cart);

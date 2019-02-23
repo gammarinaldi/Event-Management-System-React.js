@@ -197,18 +197,6 @@ class ProductsGridView extends Component {
             if(this.props.products.id !== 0) {
                 return <Redirect to={`/productsdetails?id=${this.props.products.id}`} />
             }
-
-            var changeToListView;
-            if(this.props.myRole === "ADMIN") {
-                changeToListView = <div className="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" style={{ fontSize: "13px" }} 
-                                    onClick={() => {this.onClickListView()}}
-                                    className="btn btn-info">Manage Products</button>
-                                    </div>
-                                    ;
-            } else {
-                changeToListView = '';
-            }
             
             return (
                 <div>
@@ -234,10 +222,6 @@ class ProductsGridView extends Component {
                     <br/>
 
                     <div className="card bg-light" style={{ fontSize: "13px" }}>
-
-                        <div className="row justify-content-center" style={{ marginTop: "30px" }}>
-                                {changeToListView}
-                        </div>
 
                         <div className="row justify-content-center" 
                             style={{ paddingTop: "20px", paddingLeft: "100px", paddingRight: "100px" }}>
@@ -295,20 +279,6 @@ class ProductsGridView extends Component {
                                             </InputGroup>
                                         </Col>
                                     </Row>
-                                    {/* <Row style={{ marginBottom: "20px" }}>
-                                        <Col lg="12">
-                                            <button type="button" className="btn btn-default btn-sm btn-success"
-                                            onClick={this.onBtnSearchClick}
-                                            style={{ fontSize: "12px" }}>
-                                            <span className="glyphicon glyphicon-search"></span> Search 
-                                            </button>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button type="reset" className="btn btn-default btn-sm btn-info"
-                                            style={{ fontSize: "12px" }}>
-                                            <span className="glyphicon glyphicon-repeat"></span> Reset 
-                                            </button>
-                                        </Col>
-                                    </Row> */}
                                 </form>
                             </div>
 

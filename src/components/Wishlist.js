@@ -9,7 +9,7 @@ import { WISHLIST_GETLIST, WISHLIST_DELETE } from '../supports/api-url/apisuburl
 
 class Wishlist extends Component {
 
-    state = { listWishlist: [], activePage: 1, itemPerPage: 5, }
+    state = { listWishlist: [], activePage: 1, itemPerPage: 5, open: false }
     
     componentDidMount() {
         this.showWishlist();
@@ -61,19 +61,18 @@ class Wishlist extends Component {
         var indexOfFirstTodo = indexOfLastTodo - this.state.itemPerPage;
         var sortedListWishlist = this.state.listWishlist.sort(this.props.sortingJSON('id', 'desc'));
         var renderedProjects = sortedListWishlist.slice(indexOfFirstTodo, indexOfLastTodo);
-        
+
         var listJSXWishlist = renderedProjects.map((item) => {
             //====================SHOW >> SHOW ITEM PRODUK=========================//
             return (
-                <tr>
+                <tr key={item.idProduct}>
                     <td><center>{item.idProduct}</center></td>
                     <td><Link to={`/productsdetails?id=${item.idProduct}`}>{item.item}</Link></td>
                     <td>{item.categoryName}</td>
                     <td>{this.props.convertToRupiah(item.price)}</td>
                     <td><center>
-                        <Link to={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
-                        <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} />
-                        </Link>
+                        <a href={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
+                        <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} /></a>
                     </center></td>
                     <td>
                         <center>
@@ -99,7 +98,7 @@ class Wishlist extends Component {
                     <div className="col-lg-8 align-self-center">
                         <div className="col-lg-12 text-center" style={{ paddingTop: "20px" }}>
                             <h2 className="section-heading text-uppercase">Wishlist</h2>
-                            <h3 className="section-subheading text-muted">Your favorite events</h3>
+                            <h3 className="section-subheading text-muted">Your favorite products</h3>
                             <br/>
                         </div>
                         <br/>

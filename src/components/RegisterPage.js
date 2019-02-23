@@ -3,10 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { onUserRegister, onActivityLog } from '../actions';
 import { Button } from 'reactstrap';
-//import Cookies from 'universal-cookie';
 import Spinner from './Spinner';
-
-//const cookies = new Cookies();
 
 class RegisterPage extends Component {
 
@@ -21,17 +18,39 @@ class RegisterPage extends Component {
             document.getElementById("error").innerHTML = "Password do not match.";
         } else {
             this.props.onUserRegister({username, fullname, email, phone, password});
+            this.props.onActivityLog({username, role: 'MEMBER', desc: 'Register'});
         }
     }
 
-    componentWillReceiveProps(newProps) {
-        // if(newProps.username !== '') {
-        //     cookies.set('usernameCookie', newProps.username, { path: '/' });
-        //     //=======> Activity Log
-        //     this.props.onActivityLog({username: newProps.username, role: 'MEMBER', desc: 'Register'});
-        // }
-        //=======> Activity Log
-        this.props.onActivityLog({username: newProps.username, role: 'MEMBER', desc: 'Register'});
+    autoFill = () => {
+        var arrName = [
+            'arrum',
+            'citra',
+            'raisa',
+            'elma',
+            'zelda'
+        ];
+        var arrFullName = [
+            'Arrum Husna Pandayin',
+            'Citra Nabila Melani',
+            'Raisa Anggraini',
+            'Elma Ulya Nurdiyanti',
+            'Zelda Melani'
+        ];
+        var arrPhone = [
+            '02197624765',
+            '08226313614',
+            '02103901874',
+            '03818440884',
+            '02359913100'
+        ];
+        var num = Math.floor(Math.random() * 5);
+        document.getElementById('username').value = arrName[num];
+        document.getElementById('fullname').value = arrFullName[num];
+        document.getElementById('email').value = 'gammarinaldi@gmail.com';
+        document.getElementById('phone').value = arrPhone[num];
+        document.getElementById('password').value = '123456';
+        document.getElementById('confirmPassword').value = '123456';
     }
 
     render () {
@@ -66,32 +85,40 @@ class RegisterPage extends Component {
 
                         <div className="col-lg-3 card-body mx-auto shadow p-3 mb-5 bg-white rounded"
                             style={{ marginLeft: "20px", marginRight: "20px" }}>
-                            <h5 className="card-title mt-3 text-center" 
-                            style={{ fontSize: "20px", paddingTop: "20px" }}>Create an Account</h5><br/>
+                            <br/>
+                            <center>
+                                <Button color="info" style={{ fontSize: "12px" }} 
+                                    onClick={() => this.autoFill()}><b>Generate Autofill</b></Button>
+                                <br/>
+                                <div id="error" style={{ fontSize: "13px" }}></div>
+                            </center>
+                            <h5 className="card-title mt-3 text-center" style={{ fontSize: "20px", paddingTop: "20px" }}>
+                            Create an Account
+                            </h5><br/>
                             
                             <form style={{ paddingBottom: "50px", paddingRight: "50px", paddingLeft: "50px" }}>
                                 <div className="form-group">
-                                    <input type="text" ref="username" className="form-control form-control-lg" 
+                                    <input type="text" id="username" ref="username" className="form-control form-control-lg" 
                                     placeholder="Username" style={{ fontSize: "14px", marginBottom: "15px" }}/>
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" ref="fullname" className="form-control form-control-lg" 
+                                    <input type="text" id="fullname" ref="fullname" className="form-control form-control-lg" 
                                     placeholder="Fullname" style={{ fontSize: "14px", marginBottom: "15px" }}/>
                                 </div>
                                 <div className="form-group">
-                                    <input type="email" ref="email" className="form-control form-control-lg" 
+                                    <input type="email" id="email" ref="email" className="form-control form-control-lg" 
                                     placeholder="Email address" style={{ fontSize: "14px", marginBottom: "15px"  }} />
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" ref="phone" className="form-control form-control-lg" 
+                                    <input type="text" id="phone" ref="phone" className="form-control form-control-lg" 
                                     placeholder="Phone number" style={{ fontSize: "14px", marginBottom: "15px"  }} />
                                 </div>
                                 <div className="form-group">
-                                    <input ref="password" className="form-control form-control-lg" 
+                                    <input ref="password" id="password" className="form-control form-control-lg" 
                                     placeholder="Create password" type="password" style={{ fontSize: "14px", marginBottom: "15px"  }} />
                                 </div>
                                 <div className="form-group">
-                                    <input ref="confirmPassword" className="form-control form-control-lg" 
+                                    <input ref="confirmPassword" id="confirmPassword" className="form-control form-control-lg" 
                                     placeholder="Confirm password" type="password" style={{ fontSize: "14px", marginBottom: "15px"  }} />
                                 </div>
                                 <br/>                         

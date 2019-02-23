@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types'; //Return location for breadcrumbs
+import { refreshSelectProduct } from '../actions';
 
 class BreadCrumb extends Component {
 
@@ -8,7 +10,7 @@ class BreadCrumb extends Component {
         match: PropTypes.object.isRequired,
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired
-      };
+    }
 
     render() {
         const { location } = this.props;
@@ -19,7 +21,8 @@ class BreadCrumb extends Component {
         else if(location.pathname === '/productslistview') currentPage = 'Products List View';
         else if(location.pathname === '/productsgridview') currentPage = 'Products Grid View';
         else if(location.pathname === '/productsdetails') {
-            previousPage = <li className="breadcrumb-item"><Link to="/productsgridview">Products</Link></li>;
+            previousPage = <li className="breadcrumb-item"><Link to="/productsgridview"
+                            onClick={() => this.props.refreshSelectProduct()}>Products</Link></li>;
             currentPage = 'Product Details';
         }
         else if(location.pathname === '/cart') currentPage = 'Cart';
@@ -99,4 +102,4 @@ class BreadCrumb extends Component {
     }
 }
 
-export default withRouter(BreadCrumb);
+export default withRouter(connect(null, { refreshSelectProduct})(BreadCrumb));

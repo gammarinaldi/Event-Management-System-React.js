@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import ProductsListView from '../ProductsListView';
+import ProductsListView from './ProductsListView';
 import SideBar from './SideBar';
 
 class ManageProducts extends Component {
@@ -13,7 +13,7 @@ class ManageProducts extends Component {
                 <div className="card bg-light" style={{ padding: "20px" }}>
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                        <SideBar myRole={this.props.myRole} />
+                        <SideBar active='Manage Products' />
                         </div>
                         <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>
                         <h2>Manage Products &nbsp;&nbsp;&nbsp;

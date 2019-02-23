@@ -102,8 +102,8 @@ class Dashboard extends Component {
         axios.get(API_URL_1 + TRX_GETLIST)
             .then((res) => {
                 var price = 0;
-                res.data.forEach(element => {
-                    price += element.totalPrice;
+                res.data.forEach(item => {
+                    price += item.totalPrice;
                 });
                 this.setState({ 
                     totalSales: price
@@ -155,7 +155,7 @@ class Dashboard extends Component {
                     <div className="row">
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
                             {/* {this.props.sideBarMenu({ myRole: this.props.myRole, active: 'Dashboard' })} */}
-                            <SideBar myRole={this.props.myRole} />
+                            <SideBar active='Dashboard' />
                         </div>
                         <div className="col-lg-8 card bg-light" style={{ paddingTop: "20px", paddingRight: "40px", paddingLeft: "40px" }}>
                         <h2>Admin Dashboard</h2>

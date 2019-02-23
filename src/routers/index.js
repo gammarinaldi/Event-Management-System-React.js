@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import HomePage from '../components/HomePage';
 import LoginPage from '../components/LoginPage';
 import RegisterPage from '../components/RegisterPage';
-import ProductsListView from '../components/ProductsListView';
+import ProductsListView from '../components/admin/ProductsListView';
 import ProductsGridView from '../components/ProductsGridView';
 import ProductsDetails from '../components/ProductsDetails';
 import Cart from '../components/Cart';
@@ -30,7 +30,7 @@ class Routing extends Component {
                 <Route exact path="/" component={HomePage}/>
                 <Route path="/login" component={LoginPage}/>
                 <Route path="/register" component={RegisterPage}/>
-                <Route path="/productslistview" component={ProductsListView}/>
+                <Route path="/admin/productslistview" component={ProductsListView}/>
                 <Route path="/productsgridview" component={ProductsGridView}/>
                 <Route path="/productsdetails" component={ProductsDetails}/>
                 <Route path="/cart" component={Cart}/>

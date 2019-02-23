@@ -14,7 +14,7 @@ class CheckOut extends Component {
         addReceipt: 'Choose receipt',
         selectedIdEdit: 0, 
         totalPrice: 0, 
-        totalQty: 0 
+        totalQty: 0
     }
 
     componentDidMount() {
@@ -81,7 +81,7 @@ class CheckOut extends Component {
 
             axios.post(API_URL_1 + TRX_ADD, formData, headers)
             .then((res) => {
-                console.log(res.data[0].id);
+                console.log(res.status);
                 console.log(this.state.cartList);
 
                 for(let i = 0; i < this.state.cartList.length; i++) {
@@ -104,10 +104,10 @@ class CheckOut extends Component {
 
                 document.getElementById("change").innerHTML = 
                 '<div className="alert alert-primary"><h3>Payment confirmation success, your order will be proceed, Thank you!</h3></div>';
-                
             })
             .catch((err) =>{
                 console.log(err);
+                document.getElementById("change").innerHTML = '<strong>Upload failed, file format is not supported.</strong>';
             })
         }
     }
@@ -179,12 +179,12 @@ class CheckOut extends Component {
                                             <center>
                                                 <h4>Please pay<br/>
                                                     <h2>
-                                                        <strong>{this.props.convertToRupiah(this.state.totalPrice)}</strong>
+                                                        <strong>{this.props.convertToRupiah(this.state.totalPrice+Math.floor(Math.random() * 999))}</strong>
                                                     </h2>
                                                     to:<br/>
-                                                    BCA a/n PT. PURWADHIKA KIRANA NUSANTARA<br/>
-                                                    KCU Alam Sutera<br/>
-                                                    Acc No. 604-168-8880
+                                                    BCA a/n PT. SATU NUSANTARA<br/>
+                                                    KCU The Breeze<br/>
+                                                    Acc No. 123-456-78910
                                                 </h4></center>
                                             </div>
                                         </td>
@@ -213,7 +213,9 @@ class CheckOut extends Component {
                                                 <div className="row">
                                                     <div className="col-lg-3">&nbsp;</div>
                                                     <div className="col-lg-6 align-self-center">
-                                                        Upload proof of payment: <br/><br/>
+                                                        Upload proof of payment:<br/>
+                                                        (jpg, jpeg, png)
+                                                        <br/><br/>
                                                         <input type="file" id="addReceipt" name="addReceipt" 
                                                         label={this.state.addReceipt} onChange={this.addReceiptChange} />
                                                     </div>

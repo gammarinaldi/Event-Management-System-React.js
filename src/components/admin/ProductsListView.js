@@ -3,9 +3,9 @@ import axios from 'axios';
 import { InputGroup, Row, Col } from 'reactstrap';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { API_URL_1 } from '../supports/api-url/apiurl';
+import { API_URL_1 } from '../../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
-import { select_products, onActivityLog, convertToRupiah, sortingJSON } from '../actions';
+import { select_products, onActivityLog, convertToRupiah, sortingJSON } from '../../actions';
 import { 
     CATEGORY_GETLIST, 
     PRODUCTS_GETLIST, 
@@ -15,7 +15,7 @@ import {
     PRODUCTS_EDIT, 
     PRODUCTS_DELETE, 
     LOCATION_GETLIST 
-} from '../supports/api-url/apisuburl';
+} from '../../supports/api-url/apisuburl';
 import moment from 'moment';
 
 class ProductsListView extends Component {
@@ -426,21 +426,21 @@ class ProductsListView extends Component {
                     <form id="searchForm">
                     <Row>
                         <Col lg="2">
-                            <select ref="qCategory" className="custom-select" style={{ fontSize: "12px" }}
+                            <select ref="qCategory" className="form-control form-control-lg" style={{ fontSize: "12px" }}
                             onChange={() => {this.onKeyUpSearch()}}>
                                 <option value="">All Category</option>
                                 {this.renderAllCategory()}
                             </select>
                         </Col>
                         <Col lg="2">
-                            <select ref="qLocation" className="custom-select" style={{ fontSize: "12px" }}
+                            <select ref="qLocation" className="form-control form-control-lg" style={{ fontSize: "12px" }}
                             onChange={() => {this.onKeyUpSearch()}}>
                                 <option value="">All Location</option>
                                 {this.renderListLocation()}
                             </select>
                         </Col>
                         <Col lg="2">
-                            <input type="text" className="form-control" 
+                            <input type="text" className="form-control form-control-lg" 
                             placeholder="Search by item" style={{ fontSize: "12px" }}
                             ref="qItem" onKeyUp={() => {this.onKeyUpSearch()}} />
                         </Col>
@@ -449,7 +449,7 @@ class ProductsListView extends Component {
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Rp</div>
                             </div>
-                            <input type="number" className="form-control" 
+                            <input type="number" className="form-control form-control-lg" 
                             ref="qHargaMin" defaultValue="0" style={{ fontSize: "12px" }}
                             onKeyUp={() => {this.onKeyUpSearch()}} />
                         </InputGroup>
@@ -459,7 +459,7 @@ class ProductsListView extends Component {
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Rp</div>
                             </div>
-                            <input type="number" className="form-control" 
+                            <input type="number" className="form-control form-control-lg" 
                             ref="qHargaMax" defaultValue="99999999" style={{ fontSize: "12px" }} 
                             onKeyUp={() => {this.onKeyUpSearch()}} />
                         </InputGroup>

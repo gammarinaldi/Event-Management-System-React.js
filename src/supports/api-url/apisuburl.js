@@ -8,6 +8,7 @@ export const CART_ADD = "/cart/addcart";
 export const CART_EDIT = "/cart/editcart/";
 export const CART_DELETE = "/cart/deletecart/";
 export const LEFT_IN_CART = "/cart/leftincart";
+export const TOTAL_QTY_CART = "/cart/cartcount";
 
 export const CATEGORY_GETLIST = "/category/getlistcategory";
 export const CATEGORY_ADD = "/category/addcategory";

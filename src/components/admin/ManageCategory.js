@@ -15,7 +15,7 @@ class ManageCategory extends Component {
                 <div className="row">
 
                     <div className="col-lg-2" style={{ marginBottom: "20px" }}>
-                    <SideBar myRole={this.props.myRole} />
+                    <SideBar active='Manage Category' />
                     </div>
                     
                     <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>

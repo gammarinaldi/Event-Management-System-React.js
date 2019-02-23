@@ -13,16 +13,13 @@ import { connect } from 'react-redux';
 import { onUserLogout, onActivityLog, refreshSelectProduct } from '../actions';
 import Cookies from 'universal-cookie';
 //import logo from '../supports/img/logo.png';
-import { API_URL_1 } from '../supports/api-url/apiurl';
-import axios from 'axios';
-import { CART_GETLIST, WISHLIST_GETLIST } from '../supports/api-url/apisuburl';
 import Style from 'style-it';
 
 const cookies = new Cookies();
 
 class HeaderReact extends Component {
 
-    state = { listCart: [], cartCount: 0, wishlistCount: 0 }
+    state = { listCart: [] }
 
     constructor(props) {
         super(props);
@@ -31,11 +28,6 @@ class HeaderReact extends Component {
         this.state = {
             isOpen: false
         };
-    }
-
-    componentDidMount() {
-        this.cartCount();
-        this.wishlistCount();
     }
 
     toggle() {
@@ -56,34 +48,14 @@ class HeaderReact extends Component {
 
     isAdmin() {
         if(this.props.myRole === "PRODUCER" || this.props.myRole === "ADMIN") {
-            return  <NavItem>
+            return  (
+                <div>
+                    <NavItem>
                         <Link to="/" className="topMenu"><i className="fa fa-cog fa-lg"></i> Admin Dashboard</Link>
-                    </NavItem>;
+                    </NavItem>
+                </div>
+            )
         }
-    }
-
-    cartCount = () => {
-        axios.post(API_URL_1 + CART_GETLIST, {
-            username: this.props.username
-        }).then((res) => {
-            this.setState({
-                cartCount: res.data.length
-            });
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
-
-    wishlistCount = () => {
-        axios.post(API_URL_1 + WISHLIST_GETLIST, {
-            username: this.props.username
-        }).then((res) => {
-            this.setState({
-                wishlistCount: res.data.length
-            });
-        }).catch((err) => {
-            console.log(err);
-        })
     }
 
     render() {
@@ -128,64 +100,126 @@ class HeaderReact extends Component {
             )
 
         } else {
-            return (
+            if(this.props.myRole === 'ADMIN' || this.props.myRole === 'PRODUCER') {
+                return (
                 
-                <div style={{ margin: '0 0 90px 0' }}>
-                    <Style>
-                        {`
-                            .topMenu {
-                                color: grey;
-                                text-decoration: none;
-                            }
-                            .topMenu:hover {
-                                color: dimgray;
-                            }
-                        `}
-                    <Navbar color="light" light expand="md" fixed="top" className="shadow">
-                    <NavbarBrand style={{ fontSize: "35px", marginBottom: "10px" }}>
-                    <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
-                        <b>{this.props.NavBrand}</b>&nbsp;<span style={{ fontSize: "16px" }}>Event Management System</span>
-                    </Link>
-                    {/* <img src={logo} alt="Purwadhika store logo" height={50} width={250} /> */}
-                    </NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar style={{ fontSize: "14px", fontWeight: "bold" }}>
-                            <NavItem>
-                            <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
-                                Hello, {this.props.username} ({this.props.myRole})
-                            </Link>
-                            </NavItem>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <NavItem>
-                            <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
-                                <i className="fa fa-home fa-lg"></i>&nbsp;Home
-                            </Link>
-                            </NavItem>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            {this.isAdmin()}
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <NavItem>
-                            <Link to="/wishlist" className="topMenu"><i className="fa fa-heart fa-lg"></i>&nbsp;Wishlist</Link>
-                            </NavItem>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <NavItem>
-                            <Link to="/cart" className="topMenu"><i className="fa fa-shopping-cart fa-lg"></i>&nbsp;Cart&nbsp;<span className="badge badge-primary">{this.state.cartCount}</span></Link>
-                            </NavItem>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <NavItem>
-                            <Link to="/history" className="topMenu"><i className="fa fa-history fa-lg"></i>&nbsp;History</Link>
-                            </NavItem>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <NavItem>
-                            <Link to="#" className="topMenu" onClick={this.onLogoutSelect}><i className="fa fa-sign-out fa-lg"></i>&nbsp;Logout</Link>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
-                    </Navbar>
-                    </Style>
-                </div>
-            )
+                    <div style={{ margin: '0 0 90px 0' }}>
+                        <Style>
+                            {`
+                                .topMenu {
+                                    color: grey;
+                                    text-decoration: none;
+                                }
+                                .topMenu:hover {
+                                    color: dimgray;
+                                }
+                            `}
+                        <Navbar color="light" light expand="md" fixed="top" className="shadow">
+                        <NavbarBrand style={{ fontSize: "35px", marginBottom: "10px" }}>
+                        <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
+                            <b>{this.props.NavBrand}</b>&nbsp;<span style={{ fontSize: "16px" }}>Event Management System</span>
+                        </Link>
+                        {/* <img src={logo} alt="Purwadhika store logo" height={50} width={250} /> */}
+                        </NavbarBrand>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar style={{ fontSize: "14px", fontWeight: "bold" }}>
+                                <NavItem>
+                                <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
+                                    Hello, {this.props.username}
+                                </Link>
+                                </NavItem>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <NavItem>
+                                <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
+                                    <i className="fa fa-home fa-lg"></i>&nbsp;Home
+                                </Link>
+                                </NavItem>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                {this.isAdmin()}
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <NavItem>
+                                <Link to="/wishlist" className="topMenu"><i className="fa fa-heart fa-lg"></i>&nbsp;Wishlist</Link>
+                                </NavItem>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <NavItem>
+                                <Link to="/cart" className="topMenu"><i className="fa fa-shopping-cart fa-lg"></i>
+                                &nbsp;Cart&nbsp;<span className="badge badge-primary">{this.props.totalQtyCart}</span></Link>
+                                </NavItem>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <NavItem>
+                                <Link to="/history" className="topMenu"><i className="fa fa-history fa-lg"></i>&nbsp;History</Link>
+                                </NavItem>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <NavItem>
+                                <Link to="#" className="topMenu" onClick={this.onLogoutSelect}><i className="fa fa-sign-out fa-lg"></i>&nbsp;Logout</Link>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                        </Navbar>
+                        </Style>
+                    </div>
+                )
+            } else {
+                return (
+                
+                    <div style={{ margin: '0 0 90px 0' }}>
+                        <Style>
+                            {`
+                                .topMenu {
+                                    color: grey;
+                                    text-decoration: none;
+                                }
+                                .topMenu:hover {
+                                    color: dimgray;
+                                }
+                            `}
+                        <Navbar color="light" light expand="md" fixed="top" className="shadow">
+                        <NavbarBrand style={{ fontSize: "35px", marginBottom: "10px" }}>
+                        <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
+                            <b>{this.props.NavBrand}</b>&nbsp;<span style={{ fontSize: "16px" }}>Event Management System</span>
+                        </Link>
+                        {/* <img src={logo} alt="Purwadhika store logo" height={50} width={250} /> */}
+                        </NavbarBrand>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar style={{ fontSize: "14px", fontWeight: "bold" }}>
+                                <NavItem>
+                                <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
+                                    Hello, {this.props.username}
+                                </Link>
+                                </NavItem>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <NavItem>
+                                <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
+                                    <i className="fa fa-home fa-lg"></i>&nbsp;Home
+                                </Link>
+                                </NavItem>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <NavItem>
+                                <Link to="/wishlist" className="topMenu"><i className="fa fa-heart fa-lg"></i>&nbsp;Wishlist</Link>
+                                </NavItem>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <NavItem>
+                                <Link to="/cart" className="topMenu"><i className="fa fa-shopping-cart fa-lg"></i>
+                                &nbsp;Cart&nbsp;<span className="badge badge-primary">{this.props.totalQtyCart}</span></Link>
+                                </NavItem>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <NavItem>
+                                <Link to="/history" className="topMenu"><i className="fa fa-history fa-lg"></i>&nbsp;History</Link>
+                                </NavItem>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <NavItem>
+                                <Link to="#" className="topMenu" onClick={this.onLogoutSelect}><i className="fa fa-sign-out fa-lg"></i>&nbsp;Logout</Link>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                        </Navbar>
+                        </Style>
+                    </div>
+                )
+            }
+            
         }
         
     }

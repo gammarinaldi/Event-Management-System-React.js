@@ -115,7 +115,15 @@ export const keepLogin = (username) => {
 export const onUserVerified = (userData) => {
     return {
         type: AUTH_LOGIN_SUCCESS,
-        payload: userData
+        payload: {  
+            id: userData[0].id,
+            username: userData[0].username,
+            fullname: userData[0].fullname,
+            role: userData[0].role,
+            email: userData[0].email,
+            phone: userData[0].phone,
+            status: userData[0].status
+         }
     }
 }
 

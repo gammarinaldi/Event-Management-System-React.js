@@ -1,29 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { select_products, convertToRupiah } from '../actions';
+import { Link, Redirect } from 'react-router-dom';
+import { select_products, convertToRupiah, cartCount } from '../actions';
 import queryString from 'query-string';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarCheck, faMapMarkerAlt, faBriefcase, faCalculator } from '@fortawesome/free-solid-svg-icons';
-import {
-    FacebookShareButton,
-    GooglePlusShareButton,
-    LinkedinShareButton,
-    TwitterShareButton,
-    TelegramShareButton,
-    WhatsappShareButton,
-    LineShareButton,
-    EmailShareButton,
-    FacebookIcon,
-    TwitterIcon,
-    TelegramIcon,
-    WhatsappIcon,
-    GooglePlusIcon,
-    LinkedinIcon,
-    LineIcon,
-    EmailIcon
-} from 'react-share';
 import moment from 'moment';
 import { 
     PRODUCTS_GET, 
@@ -36,17 +19,39 @@ import {
     WISHLIST_GET,
     CART_ADD
 } from '../supports/api-url/apisuburl';
+import ShareButton from './ShareButton';
+import Modal from 'react-responsive-modal';
 
 class ProductsDetails extends Component {
 
-    state = { totalQty: 0, category: '', location: [], days: [] ,isWishlist: [], listCategory: [] }
+    state = { 
+        totalQty: 0, 
+        category: '', 
+        location: [], 
+        days: [],
+        isWishlist: [], 
+        listCategory: [], 
+        goToCart: 0,
+        open: false 
+    }
+
+    onOpenModal = () => {
+        this.setState({ open: true });
+    };
+
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
 
     componentDidMount() {
         this.getWishlist();
         this.showCategory();
+        this.showProduct();
 
         window.scrollTo(0, 0);
+    }
 
+    showProduct = () => {
         var params = queryString.parse(this.props.location.search);
         var productsId = params.id;
 
@@ -85,7 +90,6 @@ class ProductsDetails extends Component {
         .catch((err) => {
             console.log(err);
         })
-        
     }
 
     showCategory = () => {
@@ -172,10 +176,9 @@ class ProductsDetails extends Component {
     }
 
     onBtnAddToCart = (idProduct, idCategory) => {
-
         if(this.props.username === "") {
             alert("Please Login First!");
-            window.location = "/login"
+            window.location = '/login';
         } else {
             var qty = parseInt(document.getElementById('addQty').value);
             if(!qty || qty === 0 || qty < 0) {
@@ -184,15 +187,18 @@ class ProductsDetails extends Component {
                 axios.post(API_URL_1 + CART_ADD, {
                     idProduct, idCategory, username: this.props.username, qty
                 }).then((res) => {
+                    this.props.cartCount(this.props.username);
                     alert(`Success add to cart: ${qty} item(s)`);
-                    window.location = "/cart";
                 }).catch((err) => {
                     console.log(err);
                     alert(`Failed add to cart`);
                 })
             }
+            setTimeout(() => { 
+                this.setState({ goToCart: 1 });
+                this.showProduct();
+            }, 100);
         }
-
     }
 
     createMarkup() {
@@ -217,7 +223,8 @@ class ProductsDetails extends Component {
     }
 
     render() {
-        
+        if(this.state.goToCart === 1) return <Redirect to='/cart' />
+        const { open } = this.state;
         var { id, idCategory, item, price, img, startDate, endDate, startTime, endTime } = this.props.products;
         startDate = moment(startDate).format('DD MMMM YYYY');
         endDate = moment(endDate).format('DD MMMM YYYY');
@@ -227,9 +234,16 @@ class ProductsDetails extends Component {
                 <br/><br/>
                 <div className="row">
                     <div className="col-lg-2"></div>
-                    <div className="col-lg-4 text-center" style={{ marginBottom: '20px' }}>
-                        <a href={`${API_URL_1}${img}`} target="_blank" rel="noopener noreferrer">
-                        <img src={`${API_URL_1}${img}`} alt={item} width={180} /></a>
+                    <div className="col-lg-4 text-right" style={{ marginBottom: '20px' }}>
+                        <Link to='#'><img src={`${API_URL_1}${img}`} alt={item} width={340} onClick={this.onOpenModal}/></Link>
+                        <Modal open={open} onClose={this.onCloseModal} center>
+                            <br/><br/>
+                            <h2 align="center">{item}</h2>
+                            <br/>
+                            <p align="center" style={{ fontSize: "16px" }}>
+                            <img src={`${API_URL_1}${img}`} alt={item} title={item} width='100%' />
+                            </p>
+                        </Modal>
                     </div>
                     <div className="col-lg-3">
                         <h2>{item}</h2>
@@ -266,99 +280,7 @@ class ProductsDetails extends Component {
                         <hr/>
                         {this.MyComponent()}
                         <hr/>
-                        <table align="center">
-                            <tr>
-                                <td>
-                                <FacebookShareButton
-                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                    quote={item}
-                                    className=""
-                                    style={{ marginTop: "10px" }}>
-                                    <FacebookIcon
-                                        size={32}
-                                        round />
-                                </FacebookShareButton>
-                                </td>&nbsp;
-                                <td>
-                                <WhatsappShareButton
-                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                    quote={item}
-                                    className=""
-                                    style={{ marginTop: "10px" }}>
-                                    <WhatsappIcon
-                                        size={32}
-                                        round />
-                                </WhatsappShareButton>
-                                </td>&nbsp;
-                                <td>
-                                <LinkedinShareButton
-                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                    quote={item}
-                                    className=""
-                                    style={{ marginTop: "10px" }}>
-                                    <LinkedinIcon
-                                        size={32}
-                                        round />
-                                </LinkedinShareButton>
-                                </td>&nbsp;
-                                <td>
-                                <LineShareButton
-                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                    quote={item}
-                                    className=""
-                                    style={{ marginTop: "10px" }}>
-                                    <LineIcon
-                                        size={32}
-                                        round />
-                                </LineShareButton>
-                                </td>&nbsp;
-                                <td>
-                                <GooglePlusShareButton
-                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                    quote={item}
-                                    className=""
-                                    style={{ marginTop: "10px" }}>
-                                    <GooglePlusIcon
-                                        size={32}
-                                        round />
-                                </GooglePlusShareButton>
-                                </td>&nbsp;
-                                <td>
-                                <EmailShareButton
-                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                    quote={item}
-                                    className=""
-                                    style={{ marginTop: "10px" }}>
-                                    <EmailIcon
-                                        size={32}
-                                        round />
-                                </EmailShareButton>
-                                </td>&nbsp;
-                                <td>
-                                <TwitterShareButton
-                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                    quote={item}
-                                    className=""
-                                    style={{ marginTop: "10px" }}>
-                                    <TwitterIcon
-                                        size={32}
-                                        round />
-                                </TwitterShareButton>
-                                </td>&nbsp;
-                                <td>
-                                <TelegramShareButton
-                                    url={`${API_URL_1}/producteditdetails?id=${id}`}
-                                    quote={item}
-                                    className=""
-                                    style={{ marginTop: "10px" }}>
-                                    <TelegramIcon
-                                        size={32}
-                                        round />
-                                </TelegramShareButton>
-                                </td>&nbsp;
-                            </tr>
-                        </table>
-                        
+                        <ShareButton id={id} item={item} />
                     </div>
                 </div>
                 <br/>
@@ -377,7 +299,7 @@ class ProductsDetails extends Component {
                         <table>
                             <tr>
                                 <td>
-                                    <input type="number" placeholder="Input Qty" ref="addQty" id="addQty" value="1"
+                                    <input type="number" placeholder="Input Qty" ref="addQty" id="addQty" defaultValue="1"
                                         style={{ fontSize: "13px" }} className="form-control form-control-lg" />
                                 </td>
                                 <td>&nbsp;</td>
@@ -404,4 +326,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, products: state.selectedProducts }
 }
 
-export default connect(mapStateToProps, { select_products, convertToRupiah })(ProductsDetails);
+export default connect(mapStateToProps, { select_products, convertToRupiah, cartCount })(ProductsDetails);
