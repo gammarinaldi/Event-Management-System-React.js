@@ -35,7 +35,7 @@ class RegisterPage extends Component {
             'Citra Nabila Melani',
             'Raisa Anggraini',
             'Elma Ulya Nurdiyanti',
-            'Zelda Melani'
+            'Zelda Zaelani'
         ];
         var arrPhone = [
             '02197624765',

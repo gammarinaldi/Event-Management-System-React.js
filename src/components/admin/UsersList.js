@@ -7,8 +7,7 @@ import { API_URL_1 } from '../../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
 import { onActivityLog, sortingJSON } from '../../actions';
 import { 
-    USERS_GETLIST, 
-    USERS_ADD, 
+    USERS_GETLIST,
     USERS_EDIT, 
     USERS_DELETE 
 } from '../../supports/api-url/apisuburl';
@@ -46,29 +45,6 @@ class UsersList extends Component {
             }).catch((err) => {
                 console.log(err);
             })
-    }
-
-    onBtnAddClick = () => {
-
-        const username = this.refs.addUserName.value;
-        const password = this.refs.addPassword.value;
-        const fullname = this.refs.addFullName.value;
-        const email = this.refs.addEmail.value;
-        const phone = this.refs.addPhone.value;
-        const role = this.refs.addRole.value;
-
-        if(username && password && role && fullname && email && phone) {
-            axios.post(API_URL_1 + USERS_ADD, {
-                username, password, fullname, email, phone, role
-            }).then((res) => {
-                //=======> Activity Log
-                this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add user: '+username});
-                this.showUsers();
-            }).catch((err) => {
-                console.log(err);
-            })
-        } else alert('Please input all fields.')
-
     }
 
     onBtnSaveClick = (id) => {
@@ -145,37 +121,6 @@ class UsersList extends Component {
 
         this.setState({ searchListUsers: arrSearch })
 
-    }
-
-    adminAddAction = () => {
-        if(this.props.myRole === 'ADMIN') {
-            return(
-                <tfoot>
-                    <tr>
-                        <td><center><button className="btn btn-success" style={{ fontSize: "12px" }}
-                        onClick={() => this.onBtnAddClick()}>
-                            <i className="fa fa-plus"></i> Add</button></center></td>
-                        <td><input type="text" size="8" placeholder="Username" ref="addUserName" style={{ fontSize: "13px" }} 
-                            className="form-control form-control-lg" /></td>
-                        <td><input type="password" size="8" placeholder="Password" ref="addPassword" style={{ fontSize: "13px" }} 
-                            className="form-control form-control-lg" /></td>
-                        <td><input type="text" size="8" placeholder="Fullname" ref="addFullName" style={{ fontSize: "13px" }} 
-                            className="form-control form-control-lg" /></td>
-                        <td><input type="email" size="8" placeholder="Email" ref="addEmail" style={{ fontSize: "13px" }} 
-                            className="form-control form-control-lg" /></td>
-                        <td><input type="number" placeholder="Phone" ref="addPhone" style={{ fontSize: "13px" }}
-                            className="form-control form-control-lg"/></td>
-                        <td>
-                            <select ref="addRole" className="form-control form-control-lg" style={{ fontSize: "12px" }}>
-                                    <option>ADMIN</option>
-                                    <option>PRODUCER</option>
-                                    <option>MEMBER</option>
-                            </select>
-                        </td>
-                    </tr>
-                </tfoot>
-            )
-        }
     }
   
     renderListUsers = () => {
@@ -299,7 +244,6 @@ class UsersList extends Component {
                             <tbody>
                                     {this.renderListUsers()}
                             </tbody>
-                                    {this.adminAddAction()}
                         </table>
                         <Pagination
                             activePage={this.state.activePage}
