@@ -18,7 +18,7 @@ class LoginPage extends Component {
     onBtnSubmit = () => {
       var username = this.refs.username.value;
       var password = this.refs.password.value;
-      this.props.onUserLogin({username, password})
+      this.props.onUserLogin({username, password});
 
       axios.post(API_URL_1 + AUTH_LOGIN, { 
         username, password

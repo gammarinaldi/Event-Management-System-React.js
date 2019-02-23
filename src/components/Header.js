@@ -41,8 +41,8 @@ class HeaderReact extends Component {
             if(this.props.onUserLogout()) {
                 //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Logout'});
+                cookies.remove('usernameCookie', 'emailCookie', 'roleCookie');
             }
-            cookies.remove('usernameCookie', 'emailCookie', 'roleCookie');
         }
     }
 

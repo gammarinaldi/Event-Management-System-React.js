@@ -88,7 +88,7 @@ class BreadCrumb extends Component {
             <div style={{ fontSize: "13px" }}>
                 <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                    <li className="breadcrumb-item"><Link to="/" onClick={() => this.props.refreshSelectProduct()}>Home</Link></li>
                     {previousPage}
                     {previousPage1}
                     <li className="breadcrumb-item active" aria-current="page">{currentPage}</li>
