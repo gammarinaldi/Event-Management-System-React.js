@@ -16,7 +16,6 @@ class App extends Component {
     const username = cookies.get('usernameCookie');
     if(username) {
       this.props.keepLogin(username);
-      this.props.cartCount(username);
     } else {
       this.props.cookieChecked();
     }
@@ -25,7 +24,7 @@ class App extends Component {
   render() {
 
     if(this.props.cookie) {
-
+      this.props.cartCount(this.props.username);
       return (
         <div className="container-fluid">
 

@@ -39,19 +39,28 @@ class HeaderReact extends Component {
     onLogoutSelect = () => {
         if(window.confirm('Are you sure want to Logout?')) {
             if(this.props.onUserLogout()) {
+                //this.props.refreshSelectProduct();
                 //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Logout'});
-                cookies.remove('usernameCookie', 'emailCookie', 'roleCookie');
             }
+            cookies.remove('usernameCookie', 'emailCookie', 'roleCookie');
         }
     }
 
     isAdmin() {
-        if(this.props.myRole === "PRODUCER" || this.props.myRole === "ADMIN") {
+        if( this.props.myRole === "ADMIN") {
             return  (
                 <div>
                     <NavItem>
                         <Link to="/" className="topMenu"><i className="fa fa-cog fa-lg"></i> Admin Dashboard</Link>
+                    </NavItem>
+                </div>
+            )
+        } else if(this.props.myRole === "PRODUCER") {
+            return  (
+                <div>
+                    <NavItem>
+                        <Link to="/" className="topMenu"><i className="fa fa-cog fa-lg"></i> Producer Dashboard</Link>
                     </NavItem>
                 </div>
             )
@@ -60,7 +69,6 @@ class HeaderReact extends Component {
 
     render() {
         if(this.props.username === "") {
-
             return (
                 <div style={{ margin: '0 0 90px 0' }}>
                     <Style>
@@ -98,7 +106,6 @@ class HeaderReact extends Component {
                     </Style>
                 </div>
             )
-
         } else {
             if(this.props.myRole === 'ADMIN' || this.props.myRole === 'PRODUCER') {
                 return (
@@ -152,7 +159,7 @@ class HeaderReact extends Component {
                                 </NavItem>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <NavItem>
-                                <Link to="#" className="topMenu" onClick={this.onLogoutSelect}><i className="fa fa-sign-out fa-lg"></i>&nbsp;Logout</Link>
+                                <Link to="#" className="topMenu" onClick={() => this.onLogoutSelect()}><i className="fa fa-sign-out fa-lg"></i>&nbsp;Logout</Link>
                                 </NavItem>
                             </Nav>
                         </Collapse>

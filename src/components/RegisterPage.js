@@ -99,7 +99,7 @@ class RegisterPage extends Component {
                             <form style={{ paddingBottom: "50px", paddingRight: "50px", paddingLeft: "50px" }}>
                                 <div className="form-group">
                                     <input type="text" id="username" ref="username" className="form-control form-control-lg" 
-                                    placeholder="Username" style={{ fontSize: "14px", marginBottom: "15px" }}/>
+                                    placeholder="Username" style={{ fontSize: "14px", marginBottom: "15px" }} autoFocus/>
                                 </div>
                                 <div className="form-group">
                                     <input type="text" id="fullname" ref="fullname" className="form-control form-control-lg" 

@@ -32,6 +32,7 @@ class ProductsDetails extends Component {
         isWishlist: [], 
         listCategory: [], 
         goToCart: 0,
+        gotToLogin: 0,
         open: false 
     }
 
@@ -178,7 +179,9 @@ class ProductsDetails extends Component {
     onBtnAddToCart = (idProduct, idCategory) => {
         if(this.props.username === "") {
             alert("Please Login First!");
-            window.location = '/login';
+            setTimeout(() => { 
+                this.setState({ goToLogin: 1 });
+            }, 100);
         } else {
             var qty = parseInt(document.getElementById('addQty').value);
             if(!qty || qty === 0 || qty < 0) {
@@ -223,7 +226,8 @@ class ProductsDetails extends Component {
     }
 
     render() {
-        if(this.state.goToCart === 1) return <Redirect to='/cart' />
+        if(this.state.goToCart === 1) return <Redirect to='/cart' />;
+        if(this.state.goToLogin === 1) return <Redirect to='/login' />;
         const { open } = this.state;
         var { id, idCategory, item, price, img, startDate, endDate, startTime, endTime } = this.props.products;
         startDate = moment(startDate).format('DD MMMM YYYY');

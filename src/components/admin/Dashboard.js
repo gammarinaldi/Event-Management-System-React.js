@@ -26,7 +26,8 @@ class Dashboard extends Component {
         bestSeller: '', 
         worstSeller: '', 
         totalConfirmed: 0,
-        leftInCart: 0
+        leftInCart: 0,
+        salesConversion: ''
      }
 
     componentDidMount() {
@@ -38,6 +39,9 @@ class Dashboard extends Component {
         this.worstSeller();
         this.totalConfirmed();
         this.leftInCart();
+        setTimeout(() => { 
+            this.salesConversion();
+        }, 100);
     }
 
     totalUsers = () => {
@@ -143,8 +147,9 @@ class Dashboard extends Component {
         if(sc >= 0 && sc <= 50) result = `${sc}% (Low Performance)`;
         else if(sc >= 60 && sc <= 79) result = `${sc}% (Medium Performance)`;
         else if(sc >= 80) result = `${sc}% (Good Performance)`;
-       
-        return result;
+        this.setState({ 
+            salesConversion: result
+        });
     }
 
     render() {
@@ -196,7 +201,7 @@ class Dashboard extends Component {
                                 <tr>
                                     <td align="left"><h3>Sales Conversion</h3></td>
                                     <td align="center"><h3>:</h3></td>
-                                    <td><h3>{this.salesConversion()}</h3></td>
+                                    <td><h3>{this.state.salesConversion}</h3></td>
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>

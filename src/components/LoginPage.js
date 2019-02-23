@@ -43,7 +43,7 @@ class LoginPage extends Component {
     renderOnKeyPress = (event) => {
       if (event.key === 'Enter'){
           // alert('Enter has been pressed')
-          this.onBtnSubmit()
+          this.onBtnSubmit();
       }
     }
 
@@ -64,7 +64,7 @@ class LoginPage extends Component {
 
         } else {
             load = <center><Button color="primary" style={{ fontSize: "14px" }} 
-            onClick={this.onBtnSubmit}><b>Sign in</b></Button></center>;
+            onClick={() => this.onBtnSubmit()}><b>Sign in</b></Button></center>;
         }
 
         return (
@@ -79,18 +79,18 @@ class LoginPage extends Component {
                 <div className="alert alert-warning" style={{ fontSize: "12px" }}>
                   <center><h4>Demo Account</h4>
                   <br/><b>Admin</b> <br/>Username: admin<br/>Password: admin
-                  <br/><br/><b>Member</b> <br/>Username: member<br/>Password: member
                   <br/><br/><b>Producer</b> <br/>Username: angel<br/>Password: angel
+                  <br/><br/><b>Member</b> <br/>Username: member<br/>Password: member
                   </center>
                 </div>
                 <br/>
                 <div className="form-group">
                   <input ref="username" className="form-control form-control-lg" style={{ fontSize: "14px" }} 
-                  placeholder="Username" type="text" />
+                  placeholder="Username" type="text" autoFocus/>
                 </div>
                 <div className="form-group">
                   <input ref="password" className="form-control form-control-lg" style={{ fontSize: "14px" }} 
-                  placeholder="Password" type="password" onKeyPress={this.renderOnKeyPress}/>
+                  placeholder="Password" type="password" onKeyPress={(event) => this.renderOnKeyPress(event)}/>
                 </div>
                 <br/>
                 {alertLog}

@@ -50,14 +50,14 @@ class UsersList extends Component {
 
     onBtnAddClick = () => {
 
-            const username = this.refs.addUserName.value;
-            const password = this.refs.addPassword.value;
-            const fullname = this.refs.addFullName.value;
-            const email = this.refs.addEmail.value;
-            const phone = this.refs.addPhone.value;
-            const role = this.refs.addRole.value;
+        const username = this.refs.addUserName.value;
+        const password = this.refs.addPassword.value;
+        const fullname = this.refs.addFullName.value;
+        const email = this.refs.addEmail.value;
+        const phone = this.refs.addPhone.value;
+        const role = this.refs.addRole.value;
 
-        if(username && role && fullname && email && phone) {
+        if(username && password && role && fullname && email && phone) {
             axios.post(API_URL_1 + USERS_ADD, {
                 username, password, fullname, email, phone, role
             }).then((res) => {
@@ -73,14 +73,13 @@ class UsersList extends Component {
 
     onBtnSaveClick = (id) => {
         const username = this.refs.updateUserName.value;
-        const password = this.refs.updatePassword.value;
         const fullname = this.refs.updateFullName.value;
         const role = this.refs.updateRole.value;
         const email = this.refs.updateEmail.value;
         const phone = this.refs.updatePhone.value;
 
         axios.put(API_URL_1 + USERS_EDIT + id, {
-            username, password, role, fullname, email, phone
+            username, role, fullname, email, phone
         }).then((res) => {
             //=======> Activity Log
             this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit user: '+username});
@@ -173,9 +172,6 @@ class UsersList extends Component {
                                     <option>MEMBER</option>
                             </select>
                         </td>
-                        <td><center><button className="btn btn-success" style={{ fontSize: "12px" }}
-                        onClick={() => this.onBtnAddClick()}>
-                        <i className="fa fa-plus"></i> Add</button></center></td>
                     </tr>
                 </tfoot>
             )
@@ -197,8 +193,6 @@ class UsersList extends Component {
                     <td><center>{item.id}</center></td>
                     <td><input type="text" defaultValue={item.username} size="4" style={{ fontSize: "12px" }}
                     ref="updateUserName" className="form-control form-control-lg" /></td>
-                    <td><input type="password" size="4" defaultValue={item.password} ref="updatePassword" 
-                    style={{ fontSize: "12px" }} className="form-control form-control-lg" /></td>
                     <td><input type="text" defaultValue={item.fullname} size="4" style={{ fontSize: "12px" }}
                     ref="updateFullName" className="form-control form-control-lg" /></td>
                     <td><input type="email" defaultValue={item.email} size="4" style={{ fontSize: "12px" }}
@@ -236,7 +230,6 @@ class UsersList extends Component {
                 <tr>
                     <td><center>{item.id}</center></td>
                     <td>{item.username}</td>
-                    <td>************</td>
                     <td>{item.fullname}</td>
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
@@ -296,7 +289,6 @@ class UsersList extends Component {
                                 <tr>
                                     <th><center>UID</center></th>
                                     <th><center>Username</center></th>
-                                    <th><center>Password</center></th>
                                     <th><center>Fullname</center></th>
                                     <th><center>Email</center></th>
                                     <th><center>Phone</center></th>

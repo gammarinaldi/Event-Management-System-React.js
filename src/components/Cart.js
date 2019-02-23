@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
-import { convertToRupiah, cartCount } from '../actions';
+import { convertToRupiah, cartCount, refreshSelectProduct } from '../actions';
 import { CART_GETLIST, CART_EDIT, CART_DELETE } from '../supports/api-url/apisuburl';
 
 class Cart extends Component {
@@ -68,14 +68,16 @@ class Cart extends Component {
         var btnCustom;
         if(!this.state.listCart.length) {
             btnCustom = <h5>
-                        <Link to="/productsgridview" className="btn btn-info" style={{ fontSize: "13px" }}>
+                        <Link to="/productsgridview" className="btn btn-info" style={{ fontSize: "13px" }}
+                        onClick={() => this.props.refreshSelectProduct()}>
                         <i className="fa fa-shopping-cart fa-sm"></i>
                         &nbsp; Continue Shopping
                         </Link>
                         </h5>;
         } else {
             btnCustom = <h5>
-                        <Link to="/productsgridview" className="btn btn-info" style={{ fontSize: "13px" }}>
+                        <Link to="/productsgridview" className="btn btn-info" style={{ fontSize: "13px" }}
+                        onClick={() => this.props.refreshSelectProduct()}>
                         <i className="fa fa-shopping-cart fa-sm"></i>
                         &nbsp; Continue Shopping
                         </Link>
@@ -224,4 +226,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { convertToRupiah, cartCount })(Cart);
+export default connect(mapStateToProps, { convertToRupiah, cartCount, refreshSelectProduct })(Cart);
