@@ -339,6 +339,14 @@ class ProductsEditDetails extends Component {
                                                 <td>{id}</td>
                                             </tr>
                                             <tr>
+                                                <td>&nbsp;Item</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <input type="text" defaultValue={item} size="4" style={{ fontSize: "12px" }}
+                                                        ref="updateItem" className="form-control form-control-lg" />    
+                                                &nbsp;</td>
+                                            </tr>
+                                            <tr>
                                                 <td>&nbsp;Category</td>
                                                 <td>:</td>
                                                 <td>
@@ -364,14 +372,6 @@ class ProductsEditDetails extends Component {
                                                 <td>
                                                     <input type="text" defaultValue={address} size="4" style={{ fontSize: "12px" }}
                                                         ref="updateAddress" className="form-control form-control-lg" />    
-                                                &nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;Item</td>
-                                                <td>:</td>
-                                                <td>
-                                                    <input type="text" defaultValue={item} size="4" style={{ fontSize: "12px" }}
-                                                        ref="updateItem" className="form-control form-control-lg" />    
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>

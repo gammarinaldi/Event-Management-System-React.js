@@ -64,7 +64,7 @@ class HistoryDetails extends Component {
                         <td><center>{item.idProduct}</center></td>
                         <td><left>{item.item}</left></td>
                         <td><left>{item.category}</left></td>
-                        <td><left>{item.address}</left></td>
+                        <td><left>{item.address}, {item.city}</left></td>
                         <td><center>Start: {moment(item.startDate).format('DD/MMM/Y')}<br/>
                         End: {moment(item.endDate).format('DD/MMM/Y')}</center></td>
                         <td><center>Start: {item.startTime}<br/>End: {item.endTime}</center></td>
@@ -85,7 +85,7 @@ class HistoryDetails extends Component {
                         <td><center>{item.idProduct}</center></td>
                         <td><left>{item.item}</left></td>
                         <td><left>{item.category}</left></td>
-                        <td><left>{item.address}</left></td>
+                        <td><left>{item.address}, {item.city}</left></td>
                         <td><center>Start: {moment(item.startDate).format('DD/MMM/Y')}<br/>
                         End: {moment(item.endDate).format('DD/MMM/Y')}</center></td>
                         <td><center>Start: {item.startTime}<br/>End: {item.endTime}</center></td>

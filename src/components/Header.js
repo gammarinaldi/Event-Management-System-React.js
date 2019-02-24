@@ -84,7 +84,7 @@ class HeaderReact extends Component {
                     <Navbar color="light" light expand="md" fixed="top" className="shadow">
                     <NavbarBrand style={{ fontSize: "35px", marginBottom: "10px" }}>
                     <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
-                        <b>{this.props.NavBrand}</b>&nbsp;<span style={{ fontSize: "16px" }}>Event Management System</span>
+                        <b>{this.props.NavBrand}</b>&nbsp;
                     </Link>
                     {/* <img src={logo} alt="logo" height={50} width={250} /> */}
                     </NavbarBrand>
@@ -124,7 +124,7 @@ class HeaderReact extends Component {
                         <Navbar color="light" light expand="md" fixed="top" className="shadow">
                         <NavbarBrand style={{ fontSize: "35px", marginBottom: "10px" }}>
                         <Link to="/productsgridview" className="topMenu" onClick={() => this.props.refreshSelectProduct()}>
-                            <b>{this.props.NavBrand}</b>&nbsp;<span style={{ fontSize: "16px" }}>Event Management System</span>
+                            <b>{this.props.NavBrand}</b>&nbsp;
                         </Link>
                         {/* <img src={logo} alt="Purwadhika store logo" height={50} width={250} /> */}
                         </NavbarBrand>

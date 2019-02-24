@@ -216,172 +216,187 @@ class ProductsEditDetails extends Component {
         if(this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") {
             return(
                 <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
-                <style>{"tr{border-top: hidden;}"}</style>
+                    <style>{"tr{border-top: hidden;}"}</style>
                     <div className="row">
+
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
                         <SideBar active='Add Product' />
-                            </div>
-                            <div className="card bg-light col-6" style={{ padding: "20px" }}>
+                        </div>
+                        
+                        <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>
+                        <div className="row">
+                            <div className="col-lg-12">
                             <h2>Add Product</h2>
                             <hr/>
-                            <div className="table-responsive card shadow p-3 mb-5 bg-white rounded">
-
-                                <form ref="formAdd" onSubmit={this.onBtnAddClick}>
-                                <table className="table table-borderless">
-                                    <tbody>
-                                        <tr>
-                                            <td>&nbsp;Category</td>
-                                            <td>:</td>
-                                            <td>
-                                                <select ref="addCategory" className="form-control form-control-lg" style={{ fontSize: "12px" }} required>
-                                                    {this.renderAllCategory()}
-                                                </select>
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;Location</td>
-                                            <td>:</td>
-                                            <td>
-                                                <select ref="addLocation" className="form-control form-control-lg" style={{ fontSize: "12px" }} required>
-                                                    {this.renderListLocation()}
-                                                </select>    
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;Address</td>
-                                            <td>:</td>
-                                            <td>
-                                                <input type="text" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addAddress" className="form-control form-control-lg" required/>    
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;Item</td>
-                                            <td>:</td>
-                                            <td>
-                                                <input type="text" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addItem" className="form-control form-control-lg" required/>    
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;Price</td>
-                                            <td>:</td>
-                                            <td>
-                                                <input type="number" style={{ fontSize: "12px" }} 
-                                                    ref="addPrice" className="form-control form-control-lg" placeholder="Rp." required/>    
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;Image</td>
-                                            <td>:</td>
-                                            <td>
-                                                <input type="file" id="addImg" name="addImg" 
-                                                    label={this.state.addImg} onChange={this.addImgChange} required/>
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;Start Date</td>
-                                            <td>:</td>
-                                            <td>
-                                                <input type="date" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addStartDate" className="form-control form-control-lg" required/>    
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;End Date</td>
-                                            <td>:</td>
-                                            <td>
-                                                <input type="date" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addEndDate" className="form-control form-control-lg" required/>    
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;Start Time</td>
-                                            <td>:</td>
-                                            <td>
-                                                <input type="time" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addStartTime" className="form-control form-control-lg" required/>    
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;End Time</td>
-                                            <td>:</td>
-                                            <td>
-                                                <input type="time" size="4" style={{ fontSize: "12px" }}
-                                                    ref="addEndTime" className="form-control form-control-lg" required/>    
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;Day(s)</td>
-                                            <td>:</td>
-                                            <td>
-                                            <input name="Sunday" type="checkbox" 
-                                                onChange={this.handleInputChange} /> Sunday &nbsp;
-                                            <input name="Monday" type="checkbox" 
-                                                onChange={this.handleInputChange} /> Monday &nbsp;
-                                            <input name="Tuesday" type="checkbox" 
-                                                onChange={this.handleInputChange} /> Tuesday &nbsp;
-                                            <input name="Wednesday" type="checkbox" 
-                                                onChange={this.handleInputChange} /> Wednesday &nbsp;
-                                            <input name="Thursday" type="checkbox" 
-                                                onChange={this.handleInputChange} /> Thursday &nbsp;
-                                            <input name="Friday" type="checkbox" 
-                                                onChange={this.handleInputChange} /> Friday &nbsp;
-                                            <input name="Saturday" type="checkbox" 
-                                                onChange={this.handleInputChange} /> Saturday &nbsp;
-                                            &nbsp;</td>
-                                        </tr>
-                                        <tr><td></td><td></td><td></td></tr>
-                                        <tr>
-                                            <td>&nbsp;Description</td>
-                                            <td>:</td>
-                                            <td>
-                                                {/* <textarea className="form-control" style={{ fontSize: "12px" }}
-                                                    ref="addDesc" rows="4" cols="40">
-                                                </textarea>&nbsp; */}
-                                                <Editor
-                                                    apiKey='rh7l8avejcgd40a81hu5b2e4u9g441bva85ut25b72kkop0a'
-                                                    initialValue={this.state.tinyMCE}
-                                                    init={{
-                                                        height: 300,
-                                                        plugins: [
-                                                            'advlist autolink lists link image charmap print preview anchor textcolor',
-                                                            'searchreplace visualblocks code fullscreen',
-                                                            'insertdatetime media table paste code help wordcount'
-                                                        ],
-                                                        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-                                                        content_css: [
-                                                            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                                                            '//www.tiny.cloud/css/codepen.min.css'
-                                                        ]
-                                                    }}
-                                                    onChange={this.handleEditorChange}
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>
-                                                <br/>
-                                                <button type="submit" className="btn btn-success" style={{ fontSize: "12px" }}>
-                                                    <i className="fa fa-check fa-sm"></i> Submit
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td><div id="message"></div>&nbsp;</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                </form>
-
                             </div>
+                        </div>
+                        <div className="row">
+                            
+                        <div style={{ fontSize: "13px", marginLeft: "20px", marginTop: "10px" }} 
+                            className="col-lg-8 card shadow p-3 mb-5 bg-white rounded">
+                        <br/>
+
+                        <form ref="formAdd" onSubmit={this.onBtnAddClick}>
+                        <div className="table-responsive">
+                            <table className="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>&nbsp;Item</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="text" size="4" style={{ fontSize: "12px" }}
+                                                ref="addItem" className="form-control form-control-lg" required/>    
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Category</td>
+                                        <td>:</td>
+                                        <td>
+                                            <select ref="addCategory" className="form-control form-control-lg" style={{ fontSize: "12px" }} required>
+                                                {this.renderAllCategory()}
+                                            </select>
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Location</td>
+                                        <td>:</td>
+                                        <td>
+                                            <select ref="addLocation" className="form-control form-control-lg" style={{ fontSize: "12px" }} required>
+                                                {this.renderListLocation()}
+                                            </select>    
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Address</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="text" size="4" style={{ fontSize: "12px" }}
+                                                ref="addAddress" className="form-control form-control-lg" required/>    
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Price</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="number" style={{ fontSize: "12px" }} 
+                                                ref="addPrice" className="form-control form-control-lg" placeholder="Rp." required/>    
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Image</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="file" id="addImg" name="addImg" 
+                                                label={this.state.addImg} onChange={this.addImgChange} required/>
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Start Date</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="date" size="4" style={{ fontSize: "12px" }}
+                                                ref="addStartDate" className="form-control form-control-lg" required/>    
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;End Date</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="date" size="4" style={{ fontSize: "12px" }}
+                                                ref="addEndDate" className="form-control form-control-lg" required/>    
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Start Time</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="time" size="4" style={{ fontSize: "12px" }}
+                                                ref="addStartTime" className="form-control form-control-lg" required/>    
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;End Time</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="time" size="4" style={{ fontSize: "12px" }}
+                                                ref="addEndTime" className="form-control form-control-lg" required/>    
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Day(s)</td>
+                                        <td>:</td>
+                                        <td>
+                                        <input name="Sunday" type="checkbox" 
+                                            onChange={this.handleInputChange} /> Sunday &nbsp;
+                                        <input name="Monday" type="checkbox" 
+                                            onChange={this.handleInputChange} /> Monday &nbsp;
+                                        <input name="Tuesday" type="checkbox" 
+                                            onChange={this.handleInputChange} /> Tuesday &nbsp;
+                                        <input name="Wednesday" type="checkbox" 
+                                            onChange={this.handleInputChange} /> Wednesday &nbsp;
+                                        <input name="Thursday" type="checkbox" 
+                                            onChange={this.handleInputChange} /> Thursday &nbsp;
+                                        <input name="Friday" type="checkbox" 
+                                            onChange={this.handleInputChange} /> Friday &nbsp;
+                                        <input name="Saturday" type="checkbox" 
+                                            onChange={this.handleInputChange} /> Saturday &nbsp;
+                                        &nbsp;</td>
+                                    </tr>
+                                    <tr><td></td><td></td><td></td></tr>
+                                    <tr>
+                                        <td>&nbsp;Description</td>
+                                        <td>:</td>
+                                        <td>
+                                            {/* <textarea className="form-control" style={{ fontSize: "12px" }}
+                                                ref="addDesc" rows="4" cols="40">
+                                            </textarea>&nbsp; */}
+                                            <Editor
+                                                apiKey='rh7l8avejcgd40a81hu5b2e4u9g441bva85ut25b72kkop0a'
+                                                initialValue={this.state.tinyMCE}
+                                                init={{
+                                                    height: 300,
+                                                    plugins: [
+                                                        'advlist autolink lists link image charmap print preview anchor textcolor',
+                                                        'searchreplace visualblocks code fullscreen',
+                                                        'insertdatetime media table paste code help wordcount'
+                                                    ],
+                                                    toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                                                    content_css: [
+                                                        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                                                        '//www.tiny.cloud/css/codepen.min.css'
+                                                    ]
+                                                }}
+                                                onChange={this.handleEditorChange}
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>
+                                            <br/>
+                                            <button type="submit" className="btn btn-success" style={{ fontSize: "12px" }}>
+                                                <i className="fa fa-check fa-sm"></i> Submit
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td><div id="message"></div>&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            </form>
 
                         </div>
+                            
+                        </div>
+                        </div>
+
                     </div>
+
                 </div>
             )
         } else {

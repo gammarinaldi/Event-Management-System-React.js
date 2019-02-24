@@ -17,6 +17,7 @@ import {
     WISHLIST_ADD
 } from '../supports/api-url/apisuburl';
 import '../../src/App.css';
+import Truncate from 'react-truncate';
 
 class ProductsItems extends Component {
 
@@ -146,7 +147,7 @@ class ProductsItems extends Component {
 
             return (
                 //====================START >> SHOW ITEM PRODUK=========================//
-                <div className="col-lg-4">
+                <div className="col-sm-4">
                     <Card style={{ marginBottom: "20px", paddingTop: "20px" }}>
                     <center>
                         <Link to="#" onClick={this.onItemClick}>
@@ -156,7 +157,12 @@ class ProductsItems extends Component {
                     </center>
                     <br/>
                     <CardTitle id="cardTitle" style={{ padding: '0 0 0 20px', margin: '0 0 10px 0' }}>
-                        <Link to="#" onClick={this.onItemClick}><b style={{ fontSize: 'medium' }}>{item}</b></Link>
+                        <Link to="#" onClick={this.onItemClick}>
+                        <b style={{ fontSize: 'medium' }}>
+                        <Truncate lines={1} width={300} ellipsis={<span>...</span>}>
+                            {item}
+                        </Truncate>
+                        </b></Link>
                     </CardTitle>
                     <CardText id="cardCategory" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: 'LIMEGREEN' }}>
                         <FontAwesomeIcon icon={faBriefcase} size="md" />&nbsp;<strong>{this.renderCategory(idCategory)}</strong>

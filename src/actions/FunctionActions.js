@@ -39,7 +39,7 @@ export const sideBarMenu = ({ myRole, active }) => {
                         <Link to="/" className={dashboard}>Dashboard</Link>
                         <Link to="/admin/manageproducts" className={manageproducts}>Manage Products</Link>
                         <Link to="/admin/manageusers" className={manageusers}>Manage Users</Link>
-                        <Link to="/admin/managetrx" className={managetrx}>Manage Transactions</Link>
+                        <Link to="/history" className={managetrx}>Manage Transactions</Link>
                         <Link to="/admin/managecategory" className={managecategory}>Manage Category</Link>
                         <Link to="/admin/managelocation" className={managelocation}>Manage Location</Link>  
                         <Link to="/admin/viewactivitylog" className={viewactivitylog}>View Activity Log</Link>

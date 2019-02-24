@@ -93,10 +93,12 @@ class Dashboard extends Component {
     leftInCart = () => {
         axios.get(API_URL_1 + LEFT_IN_CART)
             .then((res) => {
-                console.log(res)
-                this.setState({ 
-                    leftInCart: res.data[0].qty 
-                });
+                console.log(res);
+                if(res.data[0].qty > 0) {
+                    this.setState({ 
+                        leftInCart: res.data[0].qty 
+                    });
+                } 
             }).catch((err) => {
                 console.log(err);
             })
@@ -144,7 +146,7 @@ class Dashboard extends Component {
     salesConversion = () => {
         var sc = Math.ceil(100 - ((this.state.leftInCart / this.state.itemsSold) * 100));
         var result = '';
-        if(sc >= 0 && sc <= 50) result = `${sc}% (Low Performance)`;
+        if(sc <= 50) result = `${sc}% (Low Performance)`;
         else if(sc >= 60 && sc <= 79) result = `${sc}% (Medium Performance)`;
         else if(sc >= 80) result = `${sc}% (Good Performance)`;
         this.setState({ 

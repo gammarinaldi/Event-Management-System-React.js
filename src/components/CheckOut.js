@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../supports/api-url/apiurl';
-import { convertToRupiah } from '../actions';
+import { convertToRupiah, cartCount } from '../actions';
 import { CART_GETLIST, TRX_ADD, TRXDETAILS_ADD, CART_DELETE } from '../supports/api-url/apisuburl';
 import moment from 'moment';
 
@@ -94,6 +94,7 @@ class CheckOut extends Component {
                         axios.delete(API_URL_1 + CART_DELETE + this.state.cartList[i].idCart)
                         .then((res) => {
                             console.log(res);
+                            this.props.cartCount(this.props.username);
                         }).catch((err) => {
                             console.log(err);
                         })
@@ -254,4 +255,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { convertToRupiah })(CheckOut);
+export default connect(mapStateToProps, { convertToRupiah, cartCount })(CheckOut);

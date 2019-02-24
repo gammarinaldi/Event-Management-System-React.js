@@ -228,7 +228,7 @@ class CategoryList extends Component {
                     className="col-lg-8 card shadow p-3 mb-5 bg-white rounded">
                     <br/>
                     <form id="searchForm">
-                    <input type="text" className="form-control form-control-lg" style={{ fontSize: "12px", width: "370px" }} 
+                    <input type="text" className="form-control form-control-lg" style={{ fontSize: "12px" }} 
                             placeholder="Search by name"
                             ref="qName" onKeyUp={() => {this.onKeyUpSearch()}} />
                     </form>

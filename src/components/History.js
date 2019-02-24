@@ -6,6 +6,7 @@ import { Redirect, Link } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import { convertToRupiah, sortingJSON, onActivityLog } from '../actions';
 import { TRX_GET, TRX_GETLIST, TRX_STATUS_UPDATE, TRXDETAILS_BARCODE } from '../supports/api-url/apisuburl';
+import SideBar from './admin/SideBar';
 
 class History extends Component {
 
@@ -174,45 +175,99 @@ class History extends Component {
     render() {
         
         if(this.props.username !== "") {
-            
-            return(
-                <div className="card bg-light" style={{ fontSize: "13px", paddingLeft: "20px" }}>
-                    <div className="col-lg-12 align-self-center">
-                        <div className="col-lg-12 text-center" style={{ paddingTop: "20px" }}>
-                            <h2 className="section-heading">Transaction History</h2>
-                        </div>
-                        <br/>
-                        <div className="table-responsive col-lg-12 shadow p-3 mb-5 bg-white rounded">
-                            <table className="table table-bordered table-hover">
-                                <thead className="thead-dark">
-                                    <tr>
-                                        <th scope="col"><center>TID</center></th>
-                                        <th scope="col"><center>Invoice</center></th>
-                                        <th scope="col"><center>Username</center></th>
-                                        <th scope="col"><center>Bank Name</center></th>
-                                        <th scope="col"><center>Account Number</center></th>
-                                        <th scope="col"><center>Receipt</center></th>
-                                        <th scope="col"><center>Trx Date Time</center></th>
-                                        <th scope="col"><center>Total Qty</center></th>
-                                        <th scope="col"><center>Total Price</center></th>
-                                        <th scope="col" colSpan="2"><center>Status</center></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        {this.renderListOrders()}
-                                </tbody>
-                            </table>
-                            <Pagination
-                                activePage={this.state.activePage}
-                                itemsCountPerPage={this.state.itemPerPage}
-                                totalItemsCount={this.state.listOrders.length}
-                                pageRangeDisplayed={5}
-                                onChange={this.handlePageChange.bind(this)}
-                            />
+
+            if(this.props.myRole === "ADMIN") {
+                return(
+                    <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
+                        <div className="row">
+                            <div className="col-lg-2" style={{ marginBottom: "20px" }}>
+                            <SideBar active='Transaction Details' />
+                            </div>
+                            <div className="col-lg-10 bg-light" style={{ padding: "20px" }}>
+                            <h2>Manage Transactions</h2>
+                            <hr/>
+                            
+                            <div className="card bg-light" style={{ fontSize: "13px", paddingLeft: "20px" }}>
+                                <div className="col-lg-12 align-self-center">
+                                    <div className="col-lg-12 text-center" style={{ paddingTop: "20px" }}>
+                                        <h2 className="section-heading">Transaction History</h2>
+                                    </div>
+                                    <br/>
+                                    <div className="table-responsive col-lg-12 shadow p-3 mb-5 bg-white rounded">
+                                        <table className="table table-bordered table-hover">
+                                            <thead className="thead-dark">
+                                                <tr>
+                                                    <th scope="col"><center>TID</center></th>
+                                                    <th scope="col"><center>Invoice</center></th>
+                                                    <th scope="col"><center>Username</center></th>
+                                                    <th scope="col"><center>Bank Name</center></th>
+                                                    <th scope="col"><center>Account Number</center></th>
+                                                    <th scope="col"><center>Receipt</center></th>
+                                                    <th scope="col"><center>Trx Date Time</center></th>
+                                                    <th scope="col"><center>Total Qty</center></th>
+                                                    <th scope="col"><center>Total Price</center></th>
+                                                    <th scope="col" colSpan="2"><center>Status</center></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    {this.renderListOrders()}
+                                            </tbody>
+                                        </table>
+                                        <Pagination
+                                            activePage={this.state.activePage}
+                                            itemsCountPerPage={this.state.itemPerPage}
+                                            totalItemsCount={this.state.listOrders.length}
+                                            pageRangeDisplayed={5}
+                                            onChange={this.handlePageChange.bind(this)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            )
+                )
+            } else {
+                return(
+                    <div className="card bg-light" style={{ fontSize: "13px", paddingLeft: "20px" }}>
+                        <div className="col-lg-12 align-self-center">
+                            <div className="col-lg-12 text-center" style={{ paddingTop: "20px" }}>
+                                <h2 className="section-heading">Transaction History</h2>
+                            </div>
+                            <br/>
+                            <div className="table-responsive col-lg-12 shadow p-3 mb-5 bg-white rounded">
+                                <table className="table table-bordered table-hover">
+                                    <thead className="thead-dark">
+                                        <tr>
+                                            <th scope="col"><center>TID</center></th>
+                                            <th scope="col"><center>Invoice</center></th>
+                                            <th scope="col"><center>Username</center></th>
+                                            <th scope="col"><center>Bank Name</center></th>
+                                            <th scope="col"><center>Account Number</center></th>
+                                            <th scope="col"><center>Receipt</center></th>
+                                            <th scope="col"><center>Trx Date Time</center></th>
+                                            <th scope="col"><center>Total Qty</center></th>
+                                            <th scope="col"><center>Total Price</center></th>
+                                            <th scope="col" colSpan="2"><center>Status</center></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            {this.renderListOrders()}
+                                    </tbody>
+                                </table>
+                                <Pagination
+                                    activePage={this.state.activePage}
+                                    itemsCountPerPage={this.state.itemPerPage}
+                                    totalItemsCount={this.state.listOrders.length}
+                                    pageRangeDisplayed={5}
+                                    onChange={this.handlePageChange.bind(this)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
         } else {
             return (
                 <Redirect to="/login" />

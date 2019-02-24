@@ -228,7 +228,9 @@ class ProductsDetails extends Component {
                 <div className="row">
                     <div className="col-lg-2"></div>
                     <div className="col-lg-4 text-right" style={{ marginBottom: '20px' }}>
-                        <img src={`${API_URL_1}${img}`} alt={item} width={340}/>
+                        <a href={`${API_URL_1}${img}`} target="_blank" rel="noopener noreferrer">
+                        <img src={`${API_URL_1}${img}`} alt={item} className="img-fluid"/>
+                        </a>
                     </div>
                     <div className="col-lg-3">
                         <h2>{item}</h2>

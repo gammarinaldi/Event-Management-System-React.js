@@ -28,7 +28,7 @@ class ProductsGridView extends Component {
                 idLocation: 0,
                 idCategory: 0,
                 activePage: 1,
-                itemPerPage: 6
+                itemPerPage: 9
     }
 
     handlePageChange(pageNumber) {
@@ -226,7 +226,7 @@ class ProductsGridView extends Component {
                     <br/>
                     <div className="card bg-light" style={{ fontSize: "13px", padding: "30px" }}>
                         <div className="row justify-content-center">
-                        <h1>One-Stop-Shopping for IT event, workshop, & bootcamp.</h1></div>
+                        <h1 align="center">One-Stop-Shopping for IT event, workshop, & training.</h1></div>
                     </div>
                     <br/>
                     <div className="card bg-light" style={{ fontSize: "13px", padding: "30px" }}>
@@ -237,7 +237,7 @@ class ProductsGridView extends Component {
                     <div className="card bg-light" style={{ fontSize: "13px" }}>
 
                         <div className="row justify-content-center" 
-                            style={{ paddingTop: "20px", paddingLeft: "100px", paddingRight: "100px" }}>
+                            style={{ paddingTop: "20px", paddingLeft: "40px", paddingRight: "40px" }}>
 
                             <div className="col-lg-2">
                                 <form ref="searchForm">
@@ -306,7 +306,7 @@ class ProductsGridView extends Component {
                                             activePage={this.state.activePage}
                                             itemsCountPerPage={this.state.itemPerPage}
                                             totalItemsCount={this.state.searchListProducts.length}
-                                            pageRangeDisplayed={6}
+                                            pageRangeDisplayed={9}
                                             onChange={this.handlePageChange.bind(this)}
                                         />
                                     </div>
