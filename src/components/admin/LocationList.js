@@ -51,11 +51,10 @@ class LocationList extends Component {
     onBtnAddClick = () => {
 
         const city = this.refs.addCity.value;
-        const address = this.refs.addAddress.value;
 
         if(city) {
             axios.post(API_URL_1 + LOCATION_ADD, {
-                city, address
+                city
             }).then((res) => {
                 //=======> Activity Log
                 this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Add location: '+city});
@@ -71,10 +70,9 @@ class LocationList extends Component {
 
     onBtnSaveClick = (id) => {
         const city = this.refs.updateCity.value;
-        const address = this.refs.updateAddress.value;
 
         axios.put(API_URL_1 + LOCATION_EDIT + id, {
-            city, address
+            city
         }).then((res) => {
             //=======> Activity Log
             this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit location: '+city});
@@ -113,26 +111,6 @@ class LocationList extends Component {
 
     }
 
-    filterLocation = () => {
-        var filterList;
-
-        filterList = this.state.listLocation.filter((item) => {
-            return (
-                item.city.toLowerCase().includes(this.state.filterForm.toLowerCase())
-            )
-        })
-
-        if(filterList.length === 0) {
-            filterList = this.state.listLocation.filter((item) => {
-                return (
-                    item.city.toLowerCase().includes(this.state.filterForm.toLowerCase())
-                )
-            })
-        }
-
-        return filterList;
-    }
-
     adminAddAction = () => {
         if((this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") && this.props.username !== "") {
             return(
@@ -142,11 +120,6 @@ class LocationList extends Component {
                         <td>
                             <input type="text" size="8" placeholder="Add city" 
                                 ref="addCity" style={{ fontSize: "13px" }} 
-                                className="form-control form-control-lg" />
-                        </td>
-                        <td>
-                            <input type="text" size="8" placeholder="Add address" 
-                                ref="addAddress" style={{ fontSize: "13px" }} 
                                 className="form-control form-control-lg" />
                         </td>
                         <td><center><button className="btn btn-success" style={{ fontSize: "12px" }}
@@ -172,8 +145,6 @@ class LocationList extends Component {
                     <td><center>{item.id}</center></td>
                     <td><input type="text" defaultValue={item.city} size="4" style={{ fontSize: "13px" }}
                     ref="updateCity" className="form-control form-control-lg" /></td>
-                    <td><input type="text" defaultValue={item.address} size="4" style={{ fontSize: "13px" }}
-                    ref="updateAddress" className="form-control form-control-lg" /></td>
                     <td>
                         <center>
                         <button className="btn btn-success"
@@ -197,7 +168,6 @@ class LocationList extends Component {
                 <tr>
                     <td><center>{item.id}</center></td>
                     <td>{item.city}</td>
-                    <td>{item.address}</td>
                     <td>
                         <center>
                         <button className="btn btn-info" 
@@ -244,7 +214,6 @@ class LocationList extends Component {
                                 <tr>
                                     <th><center>LID</center></th>
                                     <th><center>City</center></th>
-                                    <th><center>Address</center></th>
                                     <th colSpan="2"><center>Action</center></th>
                                 </tr>
                             </thead>

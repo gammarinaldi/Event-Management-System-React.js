@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { select_products, convertToRupiah, cartCount } from '../actions';
 import queryString from 'query-string';
 import { API_URL_1 } from '../supports/api-url/apiurl';
@@ -20,7 +20,6 @@ import {
     CART_ADD
 } from '../supports/api-url/apisuburl';
 import ShareButton from './ShareButton';
-import Modal from 'react-responsive-modal';
 
 class ProductsDetails extends Component {
 
@@ -32,17 +31,8 @@ class ProductsDetails extends Component {
         isWishlist: [], 
         listCategory: [], 
         goToCart: 0,
-        gotToLogin: 0,
-        open: false 
+        gotToLogin: 0
     }
-
-    onOpenModal = () => {
-        this.setState({ open: true });
-    };
-
-    onCloseModal = () => {
-        this.setState({ open: false });
-    };
 
     componentDidMount() {
         this.getWishlist();
@@ -228,8 +218,7 @@ class ProductsDetails extends Component {
     render() {
         if(this.state.goToCart === 1) return <Redirect to='/cart' />;
         if(this.state.goToLogin === 1) return <Redirect to='/login' />;
-        const { open } = this.state;
-        var { id, idCategory, item, price, img, startDate, endDate, startTime, endTime } = this.props.products;
+        var { id, idCategory, address, item, price, img, startDate, endDate, startTime, endTime } = this.props.products;
         startDate = moment(startDate).format('DD MMMM YYYY');
         endDate = moment(endDate).format('DD MMMM YYYY');
         
@@ -239,15 +228,7 @@ class ProductsDetails extends Component {
                 <div className="row">
                     <div className="col-lg-2"></div>
                     <div className="col-lg-4 text-right" style={{ marginBottom: '20px' }}>
-                        <Link to='#'><img src={`${API_URL_1}${img}`} alt={item} width={340} onClick={this.onOpenModal}/></Link>
-                        <Modal open={open} onClose={this.onCloseModal} center>
-                            <br/><br/>
-                            <h2 align="center">{item}</h2>
-                            <br/>
-                            <p align="center" style={{ fontSize: "16px" }}>
-                            <img src={`${API_URL_1}${img}`} alt={item} title={item} width='100%' />
-                            </p>
-                        </Modal>
+                        <img src={`${API_URL_1}${img}`} alt={item} width={340}/>
                     </div>
                     <div className="col-lg-3">
                         <h2>{item}</h2>
@@ -262,7 +243,7 @@ class ProductsDetails extends Component {
                             <FontAwesomeIcon icon={faMapMarkerAlt} size="md" />&nbsp;
                             {this.state.location.city}
                         </h4>
-                        <h5 className="section-subheading text-muted">{this.state.location.address}</h5>
+                        <h5 className="section-subheading text-muted">{address}</h5>
                         <br/>
                         <h4 className="section-subheading text-muted">
                             <FontAwesomeIcon icon={faCalendarCheck} size="md" />&nbsp;Schedule:

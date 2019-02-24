@@ -159,6 +159,7 @@ class ProductsEditDetails extends Component {
 
         const category = this.refs.updateCategory.value;
         const location = this.refs.updateLocation.value;
+        const address = this.refs.updateAddress.value;
         const item = this.refs.updateItem.value;
         const price = this.refs.updatePrice.value;
         const startDate = moment(this.refs.updateStartDate.value).format('YYYY-MM-DD');
@@ -173,14 +174,14 @@ class ProductsEditDetails extends Component {
             var data = {
                 idCategory: category, 
                 idLocation: location,
-                item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
+                address, item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
             }
         } else {
             data = {
                 idCategory: category, 
                 idLocation: location,
                 img: this.state.listProduct.img,
-                item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
+                address, item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
             }
         }
 
@@ -313,7 +314,7 @@ class ProductsEditDetails extends Component {
     }
 
     render() {
-        var { id, idCategory, idLocation, item, price, img, startDate, endDate, startTime, endTime } = this.state.listProduct;
+        var { id, idCategory, idLocation, address, item, price, img, startDate, endDate, startTime, endTime } = this.state.listProduct;
 
         //====================START >> EDIT ITEM PRODUK=========================//
         if(this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") {
@@ -355,6 +356,14 @@ class ProductsEditDetails extends Component {
                                                         <option value={idLocation}>{this.renderCity(idLocation)}</option>
                                                         {this.renderListLocation()}
                                                     </select>    
+                                                &nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;Address</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <input type="text" defaultValue={address} size="4" style={{ fontSize: "12px" }}
+                                                        ref="updateAddress" className="form-control form-control-lg" />    
                                                 &nbsp;</td>
                                             </tr>
                                             <tr>

@@ -142,7 +142,7 @@ class Dashboard extends Component {
     }
 
     salesConversion = () => {
-        var sc = 100 - ((this.state.leftInCart / this.state.itemsSold) * 100);
+        var sc = Math.ceil(100 - ((this.state.leftInCart / this.state.itemsSold) * 100));
         var result = '';
         if(sc >= 0 && sc <= 50) result = `${sc}% (Low Performance)`;
         else if(sc >= 60 && sc <= 79) result = `${sc}% (Medium Performance)`;

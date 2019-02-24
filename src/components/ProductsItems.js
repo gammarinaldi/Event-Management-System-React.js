@@ -151,7 +151,7 @@ class ProductsItems extends Component {
                     <center>
                         <Link to="#" onClick={this.onItemClick}>
                         <a href={`${API_URL_1}${img}`} target="_blank" rel="noopener noreferrer">
-                        <img src={`${API_URL_1}${img}`} alt={item} width={180} /></a>
+                        <img src={`${API_URL_1}${img}`} alt={item} height={200} /></a>
                         </Link>
                     </center>
                     <br/>

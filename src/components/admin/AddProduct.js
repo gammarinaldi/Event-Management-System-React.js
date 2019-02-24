@@ -87,6 +87,7 @@ class ProductsEditDetails extends Component {
     
                 const category = this.refs.addCategory.value;
                 const location = this.refs.addLocation.value;
+                const address = this.refs.addAddress.value;
                 const item = this.refs.addItem.value;
                 const price = this.refs.addPrice.value;
                 const startDate = this.refs.addStartDate.value;
@@ -101,7 +102,7 @@ class ProductsEditDetails extends Component {
                     idLocation: location,
                     creator: this.props.myRole,
                     createdBy: this.props.username,
-                    item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
+                    address, item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
                 }
     
                 if(document.getElementById('addImg')){
@@ -244,6 +245,14 @@ class ProductsEditDetails extends Component {
                                                 <select ref="addLocation" className="form-control form-control-lg" style={{ fontSize: "12px" }} required>
                                                     {this.renderListLocation()}
                                                 </select>    
+                                            &nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;Address</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="text" size="4" style={{ fontSize: "12px" }}
+                                                    ref="addAddress" className="form-control form-control-lg" required/>    
                                             &nbsp;</td>
                                         </tr>
                                         <tr>

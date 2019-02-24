@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { InputGroup, Row, Col } from 'reactstrap';
+import Pagination from 'react-js-pagination';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import ProductsItems from './ProductsItems';
 import Carousel from './Carousel';
@@ -14,7 +16,7 @@ import {
     LOCATION_GET, 
     CATEGORY_GET 
 } from '../supports/api-url/apisuburl';
-import { InputGroup, Row, Col } from 'reactstrap';
+
 
 class ProductsGridView extends Component {
     
@@ -24,8 +26,15 @@ class ProductsGridView extends Component {
                 listAllCategory: [], 
                 listLocation: [],
                 idLocation: 0,
-                idCategory: 0 
-            }
+                idCategory: 0,
+                activePage: 1,
+                itemPerPage: 6
+    }
+
+    handlePageChange(pageNumber) {
+        console.log(`active page is ${pageNumber}`);
+        this.setState({activePage: pageNumber});
+    }
 
     componentDidMount() {
         this.showProducts();
@@ -179,8 +188,12 @@ class ProductsGridView extends Component {
     }
 
     renderListProducts = () => {
+        var indexOfLastTodo = this.state.activePage * this.state.itemPerPage;
+        var indexOfFirstTodo = indexOfLastTodo - this.state.itemPerPage;
         var sortedListProducts = this.state.searchListProducts.sort(this.props.sortingJSON('id', 'desc'));
-        var listJSXProducts = sortedListProducts.map((item) => {
+        var renderedProjects = sortedListProducts.slice(indexOfFirstTodo, indexOfLastTodo);
+
+        var listJSXProducts = renderedProjects.map((item) => {
             return (
                 <ProductsItems products={item} />
             )
@@ -285,6 +298,19 @@ class ProductsGridView extends Component {
                             <div className="col-lg-10">
                                 <div className="row">
                                         {this.renderListProducts()}
+                                </div>
+                                <div className="row">
+                                    <div className="col-lg-4"></div>
+                                    <div className="col-lg-4">
+                                        <Pagination
+                                            activePage={this.state.activePage}
+                                            itemsCountPerPage={this.state.itemPerPage}
+                                            totalItemsCount={this.state.searchListProducts.length}
+                                            pageRangeDisplayed={6}
+                                            onChange={this.handlePageChange.bind(this)}
+                                        />
+                                    </div>
+                                    <div className="col-lg-4"></div>
                                 </div>
                             </div>
                             
