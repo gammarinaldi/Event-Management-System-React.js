@@ -181,16 +181,16 @@ class ProductsDetails extends Component {
                     idProduct, idCategory, username: this.props.username, qty
                 }).then((res) => {
                     this.props.cartCount(this.props.username);
+                    setTimeout(() => { 
+                        this.setState({ goToCart: 1 });
+                        this.showProduct();
+                    }, 100);
                     alert(`Success add to cart: ${qty} item(s)`);
                 }).catch((err) => {
                     console.log(err);
                     alert(`Failed add to cart`);
                 })
             }
-            setTimeout(() => { 
-                this.setState({ goToCart: 1 });
-                this.showProduct();
-            }, 100);
         }
     }
 

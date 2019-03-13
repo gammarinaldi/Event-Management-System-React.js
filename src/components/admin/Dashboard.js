@@ -24,6 +24,7 @@ class Dashboard extends Component {
         totalSales: 0, 
         itemsSold: 0, 
         bestSeller: '', 
+        totalPriceBestSeller: 0,
         worstSeller: '', 
         totalConfirmed: 0,
         leftInCart: 0,
@@ -124,7 +125,8 @@ class Dashboard extends Component {
             .then((res) => {
                 console.log(res)
                 this.setState({ 
-                    bestSeller: res.data[0].item
+                    bestSeller: res.data[0].item,
+                    totalPriceBestSeller: res.data[0].totalPrice
                 });
             }).catch((err) => {
                 console.log(err);
@@ -209,7 +211,7 @@ class Dashboard extends Component {
                                 <tr>
                                     <td align="left"><h3>Best Seller</h3></td>
                                     <td align="center"><h3>:</h3></td>
-                                    <td><h3>{this.state.bestSeller}</h3></td>
+                                    <td><h3>{this.state.bestSeller} - {this.state.totalPriceBestSeller}</h3></td>
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
