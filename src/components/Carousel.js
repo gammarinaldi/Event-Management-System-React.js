@@ -14,15 +14,15 @@ class CarouselBro extends Component {
             return (
                 <Carousel autoPlay showThumbs={false} infiniteLoop={true}>
                     <div onClick={() => this.onCarouselClick(0)}>
-                    <img src="http://localhost:1988/img/products/PRD1551020020544.jpg" 
+                    <img src="http://localhost:1988/img/products/Slide-1.png" 
                     alt="Slide 1" width={300} height={280} className="img-responsive" />
                     </div>
                     <div onClick={() => this.onCarouselClick(1)}>
-                    <img src="http://localhost:1988/img/products/PRD1550998932116.jpg" 
+                    <img src="http://localhost:1988/img/products/Slide-2.png" 
                     alt="Slide 2" width={300} height={280} className="img-responsive" />
                     </div>
                     <div onClick={() => this.onCarouselClick(2)}>
-                    <img src="http://localhost:1988/img/products/PRD1551019523689.jpg" 
+                    <img src="http://localhost:1988/img/products/Slide-3.png" 
                     alt="Slide 3" width={300} height={280} className="img-responsive" />
                     </div>
                 </Carousel>
