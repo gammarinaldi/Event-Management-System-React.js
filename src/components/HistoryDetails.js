@@ -46,6 +46,7 @@ class HistoryDetails extends Component {
         axios.post(API_URL_1 + TRXDETAILS_GET, {
             idTrx: this.id()
         }).then((res) => {
+            console.log(res)
             this.setState({
                 listOrderDetails: res.data
             })
