@@ -47,6 +47,10 @@ class BreadCrumb extends Component {
             previousPage = <li className="breadcrumb-item"><Link to="/">Admin</Link></li>;
             currentPage = 'Manage Products';
         }
+        else if(location.pathname === '/admin/manageevents')  {
+            previousPage = <li className="breadcrumb-item"><Link to="/">Admin</Link></li>;
+            currentPage = 'Manage Events';
+        }
         else if(location.pathname === '/admin/managetrx')  {
             previousPage = <li className="breadcrumb-item"><Link to="/">Admin</Link></li>;
             currentPage = 'Manage Transactions';

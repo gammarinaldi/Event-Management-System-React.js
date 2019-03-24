@@ -5,7 +5,7 @@ import { API_URL_1 } from '../supports/api-url/apiurl';
 import { Redirect, Link } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import { convertToRupiah, sortingJSON, onActivityLog } from '../actions';
-import { TRX_GET, TRX_GETLIST, TRX_STATUS_UPDATE, TRXDETAILS_BARCODE } from '../supports/api-url/apisuburl';
+import { TRX_GET, TRX_GETLIST, TRX_STATUS_UPDATE, TRXDETAILS_QRCODE } from '../supports/api-url/apisuburl';
 import SideBar from './admin/SideBar';
 
 class History extends Component {
@@ -57,8 +57,8 @@ class History extends Component {
             axios.put(API_URL_1 + TRX_STATUS_UPDATE + id, {
                 status: 'Confirmed'
             }).then((res) => {
-                //Generate check in barcode
-                axios.put(API_URL_1 + TRXDETAILS_BARCODE + res.data[0].id, {
+                //Generate check in QR code
+                axios.put(API_URL_1 + TRXDETAILS_QRCODE + res.data[0].id, {
                     invoice,
                     email: this.props.email,
                     fullname: this.props.fullname

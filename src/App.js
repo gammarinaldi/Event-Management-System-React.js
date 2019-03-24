@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
-import { keepLogin, cookieChecked, cartCount } from './actions';
+import { keepLogin, cookieChecked, cartCount, trxNotif} from './actions';
 import Header from './components/Header';
 import Spinner from './components/Spinner';
 import Routing from './routers';
@@ -25,10 +25,11 @@ class App extends Component {
 
     if(this.props.cookie) {
       this.props.cartCount(this.props.username);
+      this.props.trxNotif();
       return (
         <div className="container-fluid">
 
-          <Header NavBrand={`EMS`} totalQtyCart={this.props.totalQtyCart} />
+          <Header NavBrand={`My Events`} totalQtyCart={this.props.totalQtyCart} />
 
           <BreadCrumb />
           
@@ -43,6 +44,7 @@ class App extends Component {
         <center><Spinner /></center>
       </div> 
     )
+    
   }
 }
 
@@ -53,4 +55,4 @@ const mapStateToProps = (state) => {
     totalQtyCart: state.cartCount.totalItem
   }
 }
-export default withRouter(connect(mapStateToProps, { keepLogin, cookieChecked, cartCount })(App));
+export default withRouter(connect(mapStateToProps, { keepLogin, cookieChecked, cartCount, trxNotif })(App));

@@ -22,6 +22,8 @@ import WaitVerification from '../components/WaitVerification';
 import Verified from '../components/Verified';
 import Dashboard from '../components/admin/Dashboard';
 import _History from '../components/History';
+import ModalExample from '../components/Modal';
+import ManageEvents from '../components/admin/ManageEvents';
 
 class Routing extends Component {
     render() {
@@ -41,6 +43,7 @@ class Routing extends Component {
                 <Route path="/admin/dashboard" component={Dashboard}/>
                 <Route path="/admin/manageusers" component={ManageUsers}/>
                 <Route path="/admin/manageproducts" component={ManageProducts}/>
+                <Route path="/admin/manageevents" component={ManageEvents}/>
                 <Route path="/admin/managetrx" component={ManageTrx}/>
                 <Route path="/admin/managecategory" component={ManageCategory}/>
                 <Route path="/admin/managelocation" component={ManageLocation}/>
@@ -49,6 +52,7 @@ class Routing extends Component {
                 <Route path="/admin/viewactivitylog" component={ViewActivityLog}/>
                 <Route path="/waitverification" component={WaitVerification}/>
                 <Route path="/verified" component={Verified}/>
+                <Route path="/modal" component={ModalExample}/>
             </Switch>
         )
     }

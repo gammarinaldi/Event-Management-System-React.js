@@ -2,25 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL_1 } from '../supports/api-url/apiurl';
-import { TOTAL_QTY_CART } from '../supports/api-url/apisuburl';
+import { TOTAL_QTY_CART, TRX_NOTIF } from '../supports/api-url/apisuburl';
 import { 
     CONVERT_TO_RUPIAH,
     SORTING_JSON,
     CONVERT_DATE,
     SIDE_BAR_MENU,
-    CART_COUNT
+    CART_COUNT,
+    UNCONFIRMED_TRX
 } from './types';
 
-export const sideBarMenu = ({ myRole, active }) => {
+export const sideBarMenu = ({ myRole, active, trxNotif }) => {
     return (dispatch) => {
 
-        var dashboard, manageproducts, manageusers, managetrx, managecategory, managelocation , viewactivitylog;
+        var dashboard, manageproducts, manageevents, manageusers, managetrx, managecategory, managelocation , viewactivitylog;
 
         if (active === 'Dashboard') dashboard = "list-group-item active"; 
         else dashboard = "list-group-item";
         if (active === 'Manage Products' || active === 'Add Product' || active === 'Edit Product') 
         manageproducts = "list-group-item active"; 
         else manageproducts = "list-group-item";
+        if (active === 'Manage Events') 
+        manageevents = "list-group-item active"; 
+        else manageevents = "list-group-item"; 
         if (active === 'Manage Users') manageusers = "list-group-item active"; 
         else manageusers = "list-group-item";
         if (active === 'Manage Transactions' || active === 'Transaction Details') 
@@ -38,8 +42,11 @@ export const sideBarMenu = ({ myRole, active }) => {
             return <div className="list-group">
                         <Link to="/" className={dashboard}>Dashboard</Link>
                         <Link to="/admin/manageproducts" className={manageproducts}>Manage Products</Link>
+                        <Link to="/admin/manageevents" className={manageevents}>Manage Events</Link>
                         <Link to="/admin/manageusers" className={manageusers}>Manage Users</Link>
-                        <Link to="/history" className={managetrx}>Manage Transactions</Link>
+                        <Link to="/history" className={managetrx}>Manage Transactions
+                        &nbsp;<span className="badge badge-primary">{trxNotif}</span>
+                        </Link>
                         <Link to="/admin/managecategory" className={managecategory}>Manage Category</Link>
                         <Link to="/admin/managelocation" className={managelocation}>Manage Location</Link>  
                         <Link to="/admin/viewactivitylog" className={viewactivitylog}>View Activity Log</Link>
@@ -48,6 +55,7 @@ export const sideBarMenu = ({ myRole, active }) => {
             dispatch({type: SIDE_BAR_MENU});
             return <div className="list-group">
                         <Link to="/admin/manageproducts" className={manageproducts}>Manage Products</Link>
+                        <Link to="/admin/manageevents" className={manageevents}>Manage Events</Link>
                         <Link to="/admin/managecategory" className={managecategory}>Manage Category</Link>
                         <Link to="/admin/managelocation" className={managelocation}>Manage Location</Link>
                     </div>;
@@ -120,11 +128,31 @@ export const cartCount = (username) => {
             // res.data.forEach(item => {
             //     totalQty += item.qty;
             // });
-            console.log('Total qty: '+res.data.totalQty);
+            console.log(res);
             dispatch({
                 type: CART_COUNT,
                 payload: res.data.totalQty
             })
+        })
+    }
+};
+
+export const trxNotif = () => {
+    return (dispatch) => {
+        axios.get(API_URL_1 + TRX_NOTIF)
+        .then((res) => {
+            console.log(res);
+            if(res.data[0].unconfirmed === 0) {
+                dispatch({
+                    type: UNCONFIRMED_TRX,
+                    payload: undefined
+                })
+            } else {
+                dispatch({
+                    type: UNCONFIRMED_TRX,
+                    payload: res.data[0].unconfirmed
+                })
+            }
         })
     }
 };

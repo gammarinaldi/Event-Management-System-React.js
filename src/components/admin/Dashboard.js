@@ -211,7 +211,7 @@ class Dashboard extends Component {
                                 <tr>
                                     <td align="left"><h3>Best Seller</h3></td>
                                     <td align="center"><h3>:</h3></td>
-                                    <td><h3>{this.state.bestSeller} - {this.state.totalPriceBestSeller}</h3></td>
+                                    <td><h3>{this.state.bestSeller}</h3></td>
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>

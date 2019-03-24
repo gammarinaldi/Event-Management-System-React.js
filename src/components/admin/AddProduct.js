@@ -100,8 +100,8 @@ class ProductsEditDetails extends Component {
                 var data = {
                     idCategory: category, 
                     idLocation: location,
-                    creator: this.props.myRole,
-                    createdBy: this.props.username,
+                    creatorRole: this.props.myRole,
+                    creatorName: this.props.username,
                     address, item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
                 }
     

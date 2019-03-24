@@ -16,3 +16,4 @@ export const SIDE_BAR_MENU = 'Side bar menu';
 export const GET_ALL_PRODUCTS_SUCCESS = 'Get all products success';
 export const REFRESH_SELECT_PRODUCT = 'Refresh select product';
 export const CART_COUNT = 'Cart count';
+export const UNCONFIRMED_TRX = 'Unconfirmed trx';

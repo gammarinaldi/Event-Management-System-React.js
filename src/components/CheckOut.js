@@ -104,7 +104,7 @@ class CheckOut extends Component {
                 }
 
                 document.getElementById("change").innerHTML = 
-                '<div className="alert alert-primary"><h3>Payment confirmation success, your order will be proceed, Thank you!</h3></div>';
+                '<div className="alert alert-primary"><h3>Payment success, your order will be proceed, Thank you!</h3></div>';
             })
             .catch((err) =>{
                 console.log(err);
@@ -223,15 +223,15 @@ class CheckOut extends Component {
                                                     <div className="col-lg-3">&nbsp;</div>
                                                 </div>
                                                 <br/><br/>
-                                                
-                                                <button className="btn btn-success" style={{ fontSize: "12px" }}
-                                                    onClick={ () => this.onBtnConfirm() }>
-                                                <i className="fa fa-check fa-sm"></i>
-                                                &nbsp; Submit
-                                                </button>
-                                                <br/><br/>
 
-                                                <div id="change"></div>
+                                                <div id="change">
+                                                    <button className="btn btn-success" style={{ fontSize: "12px" }}
+                                                        onClick={ () => this.onBtnConfirm() }>
+                                                    <i className="fa fa-check fa-sm"></i>
+                                                    &nbsp; Submit
+                                                    </button>
+                                                </div>
+                                                
                                             </div>
                                         </td>
                                     </tr>

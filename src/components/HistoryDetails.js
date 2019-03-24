@@ -8,8 +8,8 @@ import { convertToRupiah, sideBarMenu } from '../actions';
 import { TRXDETAILS_GET } from '../supports/api-url/apisuburl';
 import moment from 'moment';
 import Modal from 'react-responsive-modal';
-import Barcode from 'react-barcode';
 import SideBar from './admin/SideBar';
+import QRCode from 'qrcode.react';
 
 const styles = {
     fontFamily: "sans-serif",
@@ -59,7 +59,7 @@ class HistoryDetails extends Component {
         const { open } = this.state;
         var listJSXOrderDetails = this.state.listOrderDetails.map((item) => {
 
-            if(item.barcode === '0') {
+            if(item.qrcode === '0') {
                 return (
                     <tr>   
                         <td><center>{item.idProduct}</center></td>
@@ -95,13 +95,15 @@ class HistoryDetails extends Component {
                         <td>
                             <center>
                                 <div style={styles}>
-                                <button onClick={this.onOpenModal}>Show Barcode</button>
+                                <button onClick={this.onOpenModal} className="btn btn-primary">Show QR Code</button>
                                 <Modal open={open} onClose={this.onCloseModal} center>
                                 <br/><br/><br/>
-                                <h2>Show this barcode when you check in</h2>
+                                <h2>Show this QR Code when you check in</h2>
                                 <br/>
                                 <p align="center" style={{ fontSize: "16px" }}>
-                                    <Barcode value={item.barcode} />
+                                    <QRCode value={item.qrcode} />
+                                    <br/>
+                                    {item.qrcode}
                                 </p>
                                 </Modal>
                                 </div>
@@ -150,7 +152,7 @@ class HistoryDetails extends Component {
                                                     <th scope="col"><center>Time</center></th>
                                                     <th scope="col"><center>Price</center></th>
                                                     <th scope="col"><center>Qty</center></th>
-                                                    <th scope="col"><center>Barcode</center></th>
+                                                    <th scope="col"><center>QR Code</center></th>
                                                 </tr>
                                             </thead>
                                             <tbody>

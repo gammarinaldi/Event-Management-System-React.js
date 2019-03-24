@@ -30,11 +30,12 @@ export const PRODUCTS_GET = "/products/getproduct";
 export const PRODUCTS_ADD = "/products/addproduct";
 export const PRODUCTS_EDIT = "/products/editproduct/";
 export const PRODUCTS_DELETE = "/products/deleteproduct/";
+export const PRODUCTS_PARTICIPANT = "/products/getparticipant";
 
 export const TRXDETAILS_GETLIST= "/trxdetails/getlisttrxdetails";
 export const TRXDETAILS_GET = "/trxdetails/gettrxdetails";
 export const TRXDETAILS_ADD = "/trxdetails/addtrxdetail";
-export const TRXDETAILS_BARCODE = "/trxdetails/barcode/";
+export const TRXDETAILS_QRCODE = "/trxdetails/qrcode/";
 export const BEST_SELLER = "/trxdetails/bestseller";
 export const WORST_SELLER = "/trxdetails/worstseller";
 export const TOTAL_TRX = "/trxdetails/totaltrx";
@@ -44,6 +45,7 @@ export const TRX_GET = "/trx/gettrx";
 export const TRX_ADD = "/trx/addtrx";
 export const TRX_STATUS_UPDATE = "/trx/statusupdate/";
 export const TOTAL_CONFIRMED = "/trx/totalconfirmed";
+export const TRX_NOTIF = "/trx/unconfirmedtrxcounter";
 
 export const USERS_GETLIST = "/users/getlistusers";
 export const USERS_ADD = "/users/adduser";

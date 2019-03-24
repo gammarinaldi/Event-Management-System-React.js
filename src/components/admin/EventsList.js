@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { InputGroup, Row, Col } from 'reactstrap';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
@@ -12,13 +12,11 @@ import {
     PRODUCTS_GET, 
     LOCATION_GET, 
     CATEGORY_GET,
-    PRODUCTS_EDIT, 
-    PRODUCTS_DELETE, 
-    LOCATION_GETLIST
+    LOCATION_GETLIST ,
+    PRODUCTS_PARTICIPANT
 } from '../../supports/api-url/apisuburl';
-import moment from 'moment';
 
-class ProductsListView extends Component {
+class EventsList extends Component {
 
     state = { 
                 listProducts: [], 
@@ -33,7 +31,8 @@ class ProductsListView extends Component {
                 listCategory: [],
                 listAllCategory: [],
                 idLocation: 0,
-                idCategory: 0
+                idCategory: 0,
+                listParticipant: []
             }
 
     componentDidMount() {
@@ -41,11 +40,43 @@ class ProductsListView extends Component {
         this.showLocation();
         this.showCity();
         this.showCategory();
+        this.showParticipant();
     }
 
     handlePageChange(pageNumber) {
         console.log(`active page is ${pageNumber}`);
         this.setState({activePage: pageNumber});
+    }
+
+    showParticipant = () => {
+        axios.get(API_URL_1 + PRODUCTS_PARTICIPANT)
+        .then((res) => {
+            console.log(res);
+            this.setState({
+                listParticipant: res.data
+            })
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    getParticipant = (idProduct) => {
+        var listJSXParticipant = this.state.listParticipant.map((item) => {
+            var participant = item.participant;
+            if(idProduct === item.idProduct) {
+                return participant;
+            } else return false;
+        })
+        return listJSXParticipant;
+    }
+
+    sales = (idProduct) => {
+        var listJSXParticipant = this.state.listParticipant.map((item) => {
+            if(idProduct === item.idProduct) {
+                return this.props.convertToRupiah(item.sales);
+            } else return false;
+         })
+         return listJSXParticipant;
     }
 
     showCategory = () => {
@@ -144,66 +175,6 @@ class ProductsListView extends Component {
                     selectedIdEdit: 0 
                 });
             }).catch((err) => {
-                console.log(err);
-            })
-        }
-    }
-
-    onBtnSaveClick = (id) => {
-
-        const category = this.refs.updateCategory.value;
-        const location = this.refs.updateLocation.value;
-        const item = this.refs.updateItem.value;
-        const price = this.refs.updatePrice.value;
-        const startDate = this.refs.updateStartDate.value;
-        const endDate = this.refs.updateEndDate.value;
-
-        axios.post(API_URL_1 + LOCATION_GET, {
-            city: location
-        }).then((res) => {
-            this.setState({ 
-                idLocation: res.data.id 
-            });
-
-            axios.post(API_URL_1 + CATEGORY_GET, {
-                name: category
-            }).then((res) => {
-                this.setState({ 
-                    idCategory: res.data.id
-                });
-
-                axios.put(API_URL_1 + PRODUCTS_EDIT + id, {
-                    idCategory: this.state.idCategory, 
-                    idLocation: this.state.idLocation,
-                    img: this.state.listProducts.img,
-                    item, price, startDate, endDate
-                }).then((res) => {
-                    //=======> Activity Log
-                    this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Edit product: '+item});
-                    this.showProducts();
-                }).catch((err) => {
-                    console.log(err);
-                })
-
-            }).catch((err) => {
-                console.log(err);
-            })
-
-        }).catch((err) => {
-            console.log(err);
-        })
-        
-    }
-
-    onBtnDeleteClick = (id, item) => {
-        if(window.confirm(`Are you sure want to delete: ${item} ?`)) {
-            axios.delete(API_URL_1 + PRODUCTS_DELETE + id)
-            .then((res) => {
-                //=======> Activity Log
-                this.props.onActivityLog({username: this.props.username, role: this.props.myRole, desc: 'Delete product: '+item});
-                this.showProducts();
-            })
-            .catch((err) => {
                 console.log(err);
             })
         }
@@ -313,30 +284,11 @@ class ProductsListView extends Component {
                 return (
                     <tr>
                         <td><center>{item.id}</center></td>
-                        <td><strong>
-                            <Link to={`/admin/producteditdetails?id=${item.id}`} alt={item.item} 
-                                title="Click to edit this item">{item.item}</Link>
-                            </strong></td>
+                        <td><strong>{item.item}</strong></td>
                         <td>{this.getCategory(item.idCategory)}</td>
                         <td>{this.getCity(item.idLocation)}</td>
-                        <td>{this.props.convertToRupiah(item.price)}</td>
-                        <td>
-                            <center>
-                            <a href={`${API_URL_1}${item.img}`} target="_blank" rel="noopener noreferrer">
-                            <img src={`${API_URL_1}${item.img}`} alt={item.item} width={100} /></a>
-                            </center>
-                        </td>
-                        <td>Start:<br/> {moment(item.startDate).format('D MMM YYYY')}<br/>End:<br/> {moment(item.endDate).format('D MMM YYYY')}</td>
-                        <td>{item.creatorRole}</td>
-                        <td>{item.creatorName}</td>
-                        <td>
-                            <center>
-                                <button className="btn btn-danger"
-                                    onClick={ () => this.onBtnDeleteClick(item.id, item.item) }>
-                                    <i className="fa fa-trash fa-sm"></i>
-                                </button>
-                            </center>
-                        </td>
+                        <td align="right">{this.getParticipant(item.id)} pax</td>
+                        <td align="right">{this.sales(item.id)}</td>
                     </tr>
                 )
             } else return false;
@@ -404,12 +356,8 @@ class ProductsListView extends Component {
                                     <th><center>Item</center></th>
                                     <th><center>Category</center></th>
                                     <th><center>Location</center></th>
-                                    <th><center>Price</center></th>
-                                    <th><center>Image</center></th>
-                                    <th><center>Schedule</center></th>
-                                    <th><center>Creator Role</center></th>
-                                    <th><center>Creator Name</center></th>
-                                    <th><center>Action</center></th>
+                                    <th><center>Participant</center></th>
+                                    <th><center>Sales</center></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -439,4 +387,4 @@ const mapStateToProps = (state) => {
     return { username: state.auth.username, myRole: state.auth.role }
 }
 
-export default connect(mapStateToProps, { select_products, onActivityLog, convertToRupiah, sortingJSON })(ProductsListView);
+export default connect(mapStateToProps, { select_products, onActivityLog, convertToRupiah, sortingJSON })(EventsList);
