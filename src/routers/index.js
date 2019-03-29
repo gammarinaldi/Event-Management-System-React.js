@@ -23,6 +23,7 @@ import Verified from '../components/Verified';
 import Dashboard from '../components/admin/Dashboard';
 import _History from '../components/History';
 import ModalExample from '../components/Modal';
+import TableSort from '../components/TableSort';
 import ManageEvents from '../components/admin/ManageEvents';
 
 class Routing extends Component {
@@ -36,6 +37,7 @@ class Routing extends Component {
                 <Route path="/productsgridview" component={ProductsGridView}/>
                 <Route path="/productsdetails" component={ProductsDetails}/>
                 <Route path="/cart" component={Cart}/>
+                <Route path="/tablesort" component={TableSort}/>
                 <Route path="/history" component={_History}/>
                 <Route path="/wishlist" component={Wishlist}/>
                 <Route path="/historydetails" component={HistoryDetails}/>
