@@ -263,7 +263,7 @@ class ProductsDetails extends Component {
                     <div className="col-lg-3"></div>
                 </div>
                 <div className="row">
-                    <div className="col-lg-6 mx-auto" align="justify" style={{ fontSize: "14px" }}>
+                    <div className="col-lg-6 mx-auto" align="justify" style={{ fontSize: "14px", color: "GREY" }}>
                         <hr/>
                         {this.MyComponent()}
                         <hr/>

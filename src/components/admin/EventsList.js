@@ -7,11 +7,7 @@ import { API_URL_1 } from '../../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
 import { select_products, onActivityLog, convertToRupiah, sortingJSON } from '../../actions';
 import { 
-    CATEGORY_GETLIST, 
-    PRODUCTS_GETLIST, 
-    PRODUCTS_GET, 
-    LOCATION_GET, 
-    CATEGORY_GET,
+    CATEGORY_GETLIST,
     LOCATION_GETLIST ,
     PRODUCTS_PARTICIPANT
 } from '../../supports/api-url/apisuburl';
@@ -19,9 +15,6 @@ import {
 class EventsList extends Component {
 
     state = { 
-                listProducts: [], 
-                selectedIdEdit: 0, 
-                searchListProducts: [], 
                 filterForm: '', 
                 value: '', 
                 activePage: 1,
@@ -30,13 +23,13 @@ class EventsList extends Component {
                 locationDetails: [],
                 listCategory: [],
                 listAllCategory: [],
-                idLocation: 0,
-                idCategory: 0,
-                listParticipant: []
+                city: '',
+                category: '',
+                listParticipant: [],
+                searchListParticipant: []
             }
 
     componentDidMount() {
-        this.showProducts();
         this.showLocation();
         this.showCity();
         this.showCategory();
@@ -53,7 +46,8 @@ class EventsList extends Component {
         .then((res) => {
             console.log(res);
             this.setState({
-                listParticipant: res.data
+                listParticipant: res.data,
+                searchListParticipant: res.data
             })
         }).catch((err) => {
             console.log(err);
@@ -104,7 +98,7 @@ class EventsList extends Component {
     renderAllCategory = () => {
         var listJSXAllCategory = this.state.listAllCategory.map((item) => {
             return (
-                <option value={item.id}>{item.name}</option>
+                <option value={item.name}>{item.name}</option>
             )
         })
         return listJSXAllCategory;
@@ -145,39 +139,10 @@ class EventsList extends Component {
     renderListLocation = () => {
         var listJSXLocation = this.state.listLocation.map((item) => {
             return (
-                <option value={item.id}>{item.city}</option>
+                <option value={item.city}>{item.city}</option>
             )
         })
         return listJSXLocation;
-    }
-
-    showProducts = () => {
-        if(this.props.myRole === "ADMIN") {
-            axios.get(API_URL_1 + PRODUCTS_GETLIST)
-            .then((res) => {
-                console.log(res);
-                this.setState({ 
-                    listProducts: res.data, 
-                    searchListProducts: res.data, 
-                    selectedIdEdit: 0 
-                });
-            }).catch((err) => {
-                console.log(err);
-            })
-        } else if(this.props.myRole === "PRODUCER") {
-            axios.post(API_URL_1 + PRODUCTS_GET, {
-                creatorRole: 'PRODUCER', creatorName: this.props.username
-            })
-            .then((res) => {
-                this.setState({ 
-                    listProducts: res.data, 
-                    searchListProducts: res.data, 
-                    selectedIdEdit: 0 
-                });
-            }).catch((err) => {
-                console.log(err);
-            })
-        }
     }
 
     onKeyUpSearch = () => {
@@ -186,86 +151,45 @@ class EventsList extends Component {
         var item = this.refs.qItem.value;
         var hargaMin = parseInt(this.refs.qHargaMin.value);
         var hargaMax = parseInt(this.refs.qHargaMax.value);
+        var arrSearch = [];
 
         if(location !== "" && category === "") {
-            axios.post(API_URL_1 + LOCATION_GET, {
-                id: location
-            }).then((res) => {
-                this.setState({ 
-                    idLocation: res.data[0].id 
-                });
+            console.log(location);
+            arrSearch = this.state.listParticipant.filter((e) => {
+                return      e.sales >= hargaMin
+                        &&  e.sales <= hargaMax
+                        &&  e.item.toLowerCase().includes(item.toLowerCase())
+                        &&  e.city === location
+            });
 
-                var arrSearch = this.state.listProducts.filter((e) => {
-                    return      e.price >= hargaMin
-                            &&  e.price <= hargaMax
-                            &&  e.item.toLowerCase().includes(item.toLowerCase())
-                            &&  e.idLocation === this.state.idLocation
-                })
-        
-                this.setState({ searchListProducts: arrSearch })
-
-            }).catch((err) => {
-                console.log(err);
-            })
+            this.setState({ searchListParticipant: arrSearch });
         } else if(category !== "" && location === "") {
-            axios.post(API_URL_1 + CATEGORY_GET, {
-                id: category
-            }).then((res) => {
-                this.setState({ 
-                    idCategory: res.data[0].id
-                });
-    
-                var arrSearch = this.state.listProducts.filter((e) => {
-                    return      e.price >= hargaMin
-                            &&  e.price <= hargaMax
-                            &&  e.item.toLowerCase().includes(item.toLowerCase())
-                            &&  e.idCategory === this.state.idCategory
-                })
-        
-                this.setState({ searchListProducts: arrSearch })
-    
-            }).catch((err) => {
-                console.log(err);
+            arrSearch = this.state.listParticipant.filter((e) => {
+                return      e.sales >= hargaMin
+                        &&  e.sales <= hargaMax
+                        &&  e.item.toLowerCase().includes(item.toLowerCase())
+                        &&  e.category === category
             })
+    
+            this.setState({ searchListParticipant: arrSearch });
         } else if(location !== "" && category !== "") {
-            axios.post(API_URL_1 + LOCATION_GET, {
-                id: location
-            }).then((res) => {
-                this.setState({ 
-                    idLocation: res.data[0].id 
-                });
-
-                axios.post(API_URL_1 + CATEGORY_GET, {
-                    id: category
-                }).then((res) => {
-                    this.setState({ 
-                        idCategory: res.data[0].id
-                    });
-        
-                    var arrSearch = this.state.listProducts.filter((e) => {
-                        return      e.price >= hargaMin
-                                &&  e.price <= hargaMax
-                                &&  e.item.toLowerCase().includes(item.toLowerCase())
-                                &&  e.idCategory === this.state.idCategory
-                                &&  e.idLocation === this.state.idLocation
-                    })
-            
-                    this.setState({ searchListProducts: arrSearch })
-        
-                }).catch((err) => {
-                    console.log(err);
-                })
-            }).catch((err) => {
-                console.log(err);
+            arrSearch = this.state.listParticipant.filter((e) => {
+                return      e.sales >= hargaMin
+                        &&  e.sales <= hargaMax
+                        &&  e.item.toLowerCase().includes(item.toLowerCase())
+                        &&  e.category === category
+                        &&  e.city === location
             })
+    
+            this.setState({ searchListParticipant: arrSearch });
         } else if (category === "" && location === "") {
-            var arrSearch = this.state.listProducts.filter((e) => {
-                return      e.price >= hargaMin
-                        &&  e.price <= hargaMax
+            arrSearch = this.state.listParticipant.filter((e) => {
+                return      e.sales >= hargaMin
+                        &&  e.sales <= hargaMax
                         &&  e.item.toLowerCase().includes(item.toLowerCase())
             })
     
-            this.setState({ searchListProducts: arrSearch })
+            this.setState({ searchListParticipant: arrSearch });
         }
     }
 
@@ -276,19 +200,19 @@ class EventsList extends Component {
     renderListProducts = () => {
         var indexOfLastTodo = this.state.activePage * this.state.itemPerPage;
         var indexOfFirstTodo = indexOfLastTodo - this.state.itemPerPage;
-        var sortedListProducts = this.state.searchListProducts.sort(this.props.sortingJSON('id', 'desc'));
+        var sortedListProducts = this.state.searchListParticipant.sort(this.props.sortingJSON('participant', 'desc'));
         var renderedProjects = sortedListProducts.slice(indexOfFirstTodo, indexOfLastTodo);
 
         var listJSXProducts = renderedProjects.map((item, index) => {
             if(this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") {
                 return (
                     <tr>
-                        <td><center>{item.id}</center></td>
+                        <td><center>{item.idProduct}</center></td>
                         <td><strong>{item.item}</strong></td>
-                        <td>{this.getCategory(item.idCategory)}</td>
-                        <td>{this.getCity(item.idLocation)}</td>
-                        <td align="right">{this.getParticipant(item.id)} pax</td>
-                        <td align="right">{this.sales(item.id)}</td>
+                        <td>{item.category}</td>
+                        <td>{item.city}</td>
+                        <td align="right">{item.participant} pax</td>
+                        <td align="right">{this.props.convertToRupiah(item.sales)}</td>
                     </tr>
                 )
             } else return false;
@@ -299,7 +223,11 @@ class EventsList extends Component {
     }
         
     render() {
-        
+        console.log('List participant:');
+        console.log(this.state.listParticipant);
+        console.log('List search list: ');
+        console.log(this.state.searchListParticipant);
+        console.log(this.state.city);
         if(this.props.username !== "" && (this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER")) {
             
             return(
@@ -367,7 +295,7 @@ class EventsList extends Component {
                         <Pagination
                             activePage={this.state.activePage}
                             itemsCountPerPage={this.state.itemPerPage}
-                            totalItemsCount={this.state.searchListProducts.length}
+                            totalItemsCount={this.state.searchListParticipant.length}
                             pageRangeDisplayed={5}
                             onChange={this.handlePageChange.bind(this)}
                         />

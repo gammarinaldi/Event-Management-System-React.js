@@ -214,7 +214,7 @@ class ProductsGridView extends Component {
             return (
                 <div>
 
-                    <div className="card bg-light" style={{ fontSize: "13px", padding: "30px" }}>
+                    {/* <div className="card bg-light" style={{ fontSize: "13px", padding: "30px" }}>
                         <div className="row justify-content-center">
                             <div className="col-lg-6">
                                 <Carousel 
@@ -222,7 +222,7 @@ class ProductsGridView extends Component {
                                 />
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <br/>
                     <div className="card bg-light" style={{ fontSize: "13px", padding: "30px" }}>
                         <div className="row justify-content-center">
