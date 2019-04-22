@@ -51,6 +51,7 @@ export const USERS_GETLIST = "/users/getlistusers";
 export const USERS_ADD = "/users/adduser";
 export const USERS_EDIT = "/users/edituser/";
 export const USERS_DELETE = "/users/deleteuser/";
+export const USERS_PARTICIPANT = "/users/getparticipant";
 
 export const WISHLIST_GETLIST = "/wishlist/getlistwishlist";
 export const WISHLIST_GET = "/wishlist/getwishlist";

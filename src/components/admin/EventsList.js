@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { InputGroup, Row, Col } from 'reactstrap';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
@@ -208,7 +208,13 @@ class EventsList extends Component {
                 return (
                     <tr>
                         <td><center>{item.idProduct}</center></td>
-                        <td><strong>{item.item}</strong></td>
+                        <td>
+                            <strong>
+                                <Link to={`/admin/participantlist?id=${item.idProduct}&item=${item.item}&totalParticipant=${item.participant}`} alt={item.item} 
+                                    title="Click to edit this item">{item.item}
+                                </Link>
+                            </strong>
+                        </td>
                         <td>{item.category}</td>
                         <td>{item.city}</td>
                         <td align="right">{item.participant} pax</td>

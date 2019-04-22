@@ -25,6 +25,7 @@ import _History from '../components/History';
 import ModalExample from '../components/Modal';
 import TableSort from '../components/TableSort';
 import ManageEvents from '../components/admin/ManageEvents';
+import ParticipantList from '../components/admin/ParticipantList';
 
 class Routing extends Component {
     render() {
@@ -52,6 +53,7 @@ class Routing extends Component {
                 <Route path="/admin/producteditdetails" component={ProductEditDetails}/>
                 <Route path="/admin/addproduct" component={AddProduct}/>
                 <Route path="/admin/viewactivitylog" component={ViewActivityLog}/>
+                <Route path="/admin/participantlist" component={ParticipantList}/>
                 <Route path="/waitverification" component={WaitVerification}/>
                 <Route path="/verified" component={Verified}/>
                 <Route path="/modal" component={ModalExample}/>

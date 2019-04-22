@@ -92,7 +92,7 @@ class ProductsEditDetails extends Component {
              }
         }
 
-        console.log(this.state.days)
+        console.log(this.state.days);
 
     }
 
