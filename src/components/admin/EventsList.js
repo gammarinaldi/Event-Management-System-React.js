@@ -42,7 +42,9 @@ class EventsList extends Component {
     }
 
     showParticipant = () => {
-        axios.get(API_URL_1 + PRODUCTS_PARTICIPANT)
+        axios.post(API_URL_1 + PRODUCTS_PARTICIPANT, {
+            creatorName: this.props.username
+        })
         .then((res) => {
             console.log(res);
             this.setState({
@@ -96,9 +98,9 @@ class EventsList extends Component {
     }
 
     renderAllCategory = () => {
-        var listJSXAllCategory = this.state.listAllCategory.map((item) => {
+        var listJSXAllCategory = this.state.listAllCategory.map((item, index) => {
             return (
-                <option value={item.name}>{item.name}</option>
+                <option key={index} value={item.name}>{item.name}</option>
             )
         })
         return listJSXAllCategory;
@@ -137,9 +139,9 @@ class EventsList extends Component {
     }
 
     renderListLocation = () => {
-        var listJSXLocation = this.state.listLocation.map((item) => {
+        var listJSXLocation = this.state.listLocation.map((item, index) => {
             return (
-                <option value={item.city}>{item.city}</option>
+                <option key={index} value={item.city}>{item.city}</option>
             )
         })
         return listJSXLocation;
@@ -206,18 +208,25 @@ class EventsList extends Component {
         var listJSXProducts = renderedProjects.map((item, index) => {
             if(this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") {
                 return (
-                    <tr>
+                    <tr key={index}>
                         <td><center>{item.idProduct}</center></td>
                         <td>
                             <strong>
-                                <Link to={`/admin/participantlist?id=${item.idProduct}&item=${item.item}&totalParticipant=${item.participant}`} alt={item.item} 
-                                    title="Click to edit this item">{item.item}
+                                <Link to={`/admin/managebracket?id=${item.idProduct}&item=${item.item}&totalParticipant=${item.participant}`} alt={item.item} 
+                                title="Click to manage bracket">{item.item}
                                 </Link>
                             </strong>
                         </td>
+                        <td>{item.creatorName}</td>
                         <td>{item.category}</td>
                         <td>{item.city}</td>
-                        <td align="right">{item.participant} pax</td>
+                        <td align="center">
+                            <strong>
+                                <Link to={`/admin/participantlist?id=${item.idProduct}&item=${item.item}&totalParticipant=${item.participant}`} alt={item.item} 
+                                title="Click to view list of participants">{item.participant} pax
+                                </Link>
+                            </strong>
+                        </td>
                         <td align="right">{this.props.convertToRupiah(item.sales)}</td>
                     </tr>
                 )
@@ -261,8 +270,8 @@ class EventsList extends Component {
                         </Col>
                         <Col lg="3">
                         <InputGroup>
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Rp</div>
+                            <div className="input-group-prepend">
+                                <div className="input-group-text">Rp</div>
                             </div>
                             <input type="number" className="form-control form-control-lg" 
                             ref="qHargaMin" defaultValue="0" style={{ fontSize: "12px" }}
@@ -271,8 +280,8 @@ class EventsList extends Component {
                         </Col>
                         <Col lg="3">
                         <InputGroup>
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Rp</div>
+                            <div className="input-group-prepend">
+                                <div className="input-group-text">Rp</div>
                             </div>
                             <input type="number" className="form-control form-control-lg" 
                             ref="qHargaMax" defaultValue="99999999" style={{ fontSize: "12px" }} 
@@ -288,6 +297,7 @@ class EventsList extends Component {
                                 <tr>
                                     <th><center>PID</center></th>
                                     <th><center>Item</center></th>
+                                    <th><center>Creator Name</center></th>
                                     <th><center>Category</center></th>
                                     <th><center>Location</center></th>
                                     <th><center>Participant</center></th>

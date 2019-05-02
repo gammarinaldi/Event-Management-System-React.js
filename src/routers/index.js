@@ -26,6 +26,7 @@ import ModalExample from '../components/Modal';
 import TableSort from '../components/TableSort';
 import ManageEvents from '../components/admin/ManageEvents';
 import ParticipantList from '../components/admin/ParticipantList';
+import ManageBracket from '../components/admin/ManageBracket';
 
 class Routing extends Component {
     render() {
@@ -57,6 +58,7 @@ class Routing extends Component {
                 <Route path="/waitverification" component={WaitVerification}/>
                 <Route path="/verified" component={Verified}/>
                 <Route path="/modal" component={ModalExample}/>
+                <Route path="/admin/managebracket" component={ManageBracket}/>
             </Switch>
         )
     }

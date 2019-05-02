@@ -37,6 +37,7 @@ class ParticipantList extends Component {
         this.setState({
             eventName: params.item
         });
+        
         this.setState({
             totalParticipant: params.totalParticipant
         });
@@ -90,15 +91,27 @@ class ParticipantList extends Component {
         var sortedListActivity = this.state.searchListParticipant.sort(this.props.sortingJSON('id', 'desc'));
         var renderedProjects = sortedListActivity.slice(indexOfFirstTodo, indexOfLastTodo);
 
-        var listJSXActivity = renderedProjects.map((item) => {
+        var arr = [];
+        for(var i = 0; i < renderedProjects.length; i++) {
+            arr.push(renderedProjects[i].id);
+            arr.push(renderedProjects[i].username);
+        }
+        console.log(arr);
+        
+        console.log('Print renderedProjects: ');
+        console.log(renderedProjects);
+
+        var listJSXActivity = renderedProjects.map((item, index) => {
 
             return (
-                <tr>   
-                    <td><center>{item.id}</center></td>
-                    <td>{item.username}</td>
-                    <td>{item.fullname}</td>
-                    <td>{item.email}</td>
-                    <td>{item.phone}</td>
+                <tr key={index}>   
+                    <td align="center">{index}</td>
+                    <td align="center">{item.id}</td>
+                    <td align="center">{item.username}</td>
+                    <td align="center"><strong>VS</strong></td>
+                    <td align="center">{item.id}</td>
+                    <td align="center">{item.username}</td>
+                    <td align="center"><select><option value=""></option></select></td>
                 </tr>
             )
 
@@ -124,7 +137,7 @@ class ParticipantList extends Component {
                             
                         <div className="row">
                             <div className="col-lg-12">
-                            <h2>Participant List of <strong>{this.state.eventName}</strong></h2>
+                            <h2>Manage Bracket of <strong>{this.state.eventName}</strong></h2>
                             <hr/>
                             </div>
                         </div>
@@ -145,11 +158,13 @@ class ParticipantList extends Component {
                                 <table className="table table-bordered table-hover">
                                     <thead className="thead-dark">
                                         <tr>
-                                            <th><center>UID</center></th>
-                                            <th><center>Username</center></th>
-                                            <th><center>Fullname</center></th>
-                                            <th><center>Email</center></th>
-                                            <th><center>Phone</center></th>
+                                            <th><center>Match ID</center></th>
+                                            <th><center>UID_1</center></th>
+                                            <th><center>Username_1</center></th>
+                                            <th><center>Versus</center></th>
+                                            <th><center>UID_2</center></th>
+                                            <th><center>Username_2</center></th>
+                                            <th><center>Winner</center></th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -63,6 +63,7 @@ class CheckOut extends Component {
             `INV/${this.props.username}/${currentdate.getFullYear()}/${currentdate.getMonth()}/${currentdate.getDate()}/${currentdate.getHours()}${currentdate.getMinutes()}${currentdate.getSeconds()}`;
 
             var data = {
+                userID: this.props.userID,
                 username: this.props.username,
                 bankName: this.refs.bankName.value,
                 accNumber: this.refs.accNo.value,
@@ -252,7 +253,7 @@ class CheckOut extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { username: state.auth.username, myRole: state.auth.role }
+    return { userID: state.auth.id, username: state.auth.username, myRole: state.auth.role }
 }
 
 export default connect(mapStateToProps, { convertToRupiah, cartCount })(CheckOut);
