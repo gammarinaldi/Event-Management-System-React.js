@@ -311,7 +311,7 @@ class ProductsListView extends Component {
         var listJSXProducts = renderedProjects.map((item, index) => {
             if(this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") {
                 return (
-                    <tr>
+                    <tr key={index}>
                         <td><center>{item.id}</center></td>
                         <td><strong>
                             <Link to={`/admin/producteditdetails?id=${item.id}`} alt={item.item} 

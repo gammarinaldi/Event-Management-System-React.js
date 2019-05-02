@@ -115,10 +115,10 @@ class CheckOut extends Component {
   
     renderListCart = () => {
         
-        var listJSXCart = this.state.cartList.map((item) => {
+        var listJSXCart = this.state.cartList.map((item, index) => {
 
             return (
-                <tr>
+                <tr key={index}>
                     <td><center>{item.idProduct}</center></td>
                     <td>{item.item}</td>
                     <td>{item.categoryName}</td>

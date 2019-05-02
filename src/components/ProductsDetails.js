@@ -185,7 +185,7 @@ class ProductsDetails extends Component {
                         this.setState({ goToCart: 1 });
                         this.showProduct();
                     }, 100);
-                    alert(`Success add to cart: ${qty} item(s)`);
+                    //alert(`Success add to cart: ${qty} item(s)`);
                 }).catch((err) => {
                     console.log(err);
                     alert(`Failed add to cart`);
@@ -285,7 +285,7 @@ class ProductsDetails extends Component {
                         <br/>
                         <table>
                             <tr>
-                                <td>
+                                {/* <td>
                                     <input type="number" placeholder="Input Qty" ref="addQty" id="addQty" defaultValue="1"
                                         style={{ fontSize: "13px" }} className="form-control form-control-lg" />
                                 </td>
@@ -295,6 +295,15 @@ class ProductsDetails extends Component {
                                         onClick={ () => this.onBtnAddToCart(id, idCategory) }>
                                     <i className="fa fa-shopping-cart fa-sm"></i>
                                     &nbsp;&nbsp; Add to Cart
+                                    </button>
+                                </td> */}
+                                <td>
+                                    <input type="hidden" placeholder="Input Qty" ref="addQty" id="addQty" defaultValue="1"
+                                        style={{ fontSize: "13px" }} className="form-control form-control-lg" />
+                                    <button className="btn btn-success" style={{ fontSize: "14px" }}
+                                        onClick={ () => this.onBtnAddToCart(id, idCategory) }>
+                                    <i className="fa fa-shopping-cart fa-sm"></i>
+                                    &nbsp;&nbsp; Register to this event
                                     </button>
                                 </td>
                             </tr>
