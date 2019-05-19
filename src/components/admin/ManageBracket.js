@@ -5,7 +5,7 @@ import { API_URL_1 } from '../../supports/api-url/apiurl';
 import { Redirect } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import { sortingJSON } from '../../actions';
-import { USERS_PARTICIPANT } from '../../supports/api-url/apisuburl';
+import { USERS_PARTICIPANT, MATCHES_ADD, MATCHES_SHOW } from '../../supports/api-url/apisuburl';
 import SideBar from './SideBar';
 import queryString from 'query-string';
 
@@ -17,7 +17,11 @@ class ParticipantList extends Component {
         activePage: 1,
         itemPerPage: 10,
         eventName: '',
-        totalParticipant: 0
+        totalParticipant: 0,
+        matches: [],
+        searchMatches: [],
+        userID_1: 0,
+        userID_2: 0
      }
 
     handlePageChange(pageNumber) {
@@ -33,7 +37,6 @@ class ParticipantList extends Component {
 
     showParticipant = () => {
         var params = queryString.parse(this.props.location.search);
-        console.log(params.id);
         this.setState({
             eventName: params.item
         });
@@ -41,15 +44,53 @@ class ParticipantList extends Component {
         this.setState({
             totalParticipant: params.totalParticipant
         });
+
         axios.post(API_URL_1 + USERS_PARTICIPANT, {
             id: params.id
         })
         .then((res) => {
-            console.log(res);
+            console.log(res)
             this.setState({ 
                 listParticipant: res.data,
                 searchListParticipant: res.data
             });
+
+            axios.post(API_URL_1 + MATCHES_SHOW, {
+                productID: params.id
+            })
+            .then((res2) => {
+                this.setState({
+                    matches: res2.data,
+                    searchMatches: res2.data
+                });
+            })
+
+            if(res.data.length === 0) {
+                axios.post(API_URL_1 + MATCHES_ADD, {
+                    productID: res.data[0].productID,
+                    userID_1: res.data[0].id,
+                    username_1: res.data[0].username
+                })
+            } else if(res.data.length === 1) {
+                axios.post(API_URL_1 + MATCHES_ADD, {
+                    productID: res.data[0].productID,
+                    userID_2: res.data[0].id,
+                    username_2: res.data[0].username
+                })
+            } else if(res.data.length % 2 !== 0) {
+                axios.post(API_URL_1 + MATCHES_ADD, {
+                    productID: res.data[0].productID,
+                    userID_1: res.data[0].id,
+                    username_1: res.data[0].username
+                })
+            } else if(res.data.length % 2 === 0) {
+                axios.post(API_URL_1 + MATCHES_ADD, {
+                    productID: res.data[0].productID,
+                    userID_2: res.data[0].id,
+                    username_2: res.data[0].username
+                })
+            }
+
         }).catch((err) => {
             console.log(err);
         })
@@ -58,7 +99,6 @@ class ParticipantList extends Component {
     onKeyUpSearch = () => {
         var query = this.refs.query.value;
         var arrSearch;
-        console.log(this.state.listParticipant);
 
         arrSearch = this.state.listParticipant.filter((e) => {
             return e.username.toLowerCase().includes(query.toLowerCase())
@@ -88,34 +128,34 @@ class ParticipantList extends Component {
     renderListParticipant = () => {
         var indexOfLastTodo = this.state.activePage * this.state.itemPerPage;
         var indexOfFirstTodo = indexOfLastTodo - this.state.itemPerPage;
-        var sortedListActivity = this.state.searchListParticipant.sort(this.props.sortingJSON('id', 'desc'));
-        var renderedProjects = sortedListActivity.slice(indexOfFirstTodo, indexOfLastTodo);
+        var sortedListMatches = this.state.searchMatches.sort(this.props.sortingJSON('id', 'asc'));
+        var renderedMatches = sortedListMatches.slice(indexOfFirstTodo, indexOfLastTodo);
 
-        var arr = [];
-        for(var i = 0; i < renderedProjects.length; i++) {
-            arr.push(renderedProjects[i].id);
-            arr.push(renderedProjects[i].username);
-        }
-        console.log(arr);
-        
-        console.log('Print renderedProjects: ');
-        console.log(renderedProjects);
-
-        var listJSXActivity = renderedProjects.map((item, index) => {
+        var listJSXActivity = renderedMatches.map((item, index) => {
 
             return (
                 <tr key={index}>   
                     <td align="center">{index}</td>
-                    <td align="center">{item.id}</td>
-                    <td align="center">{item.username}</td>
+                    <td align="center">{item.userID_1}</td>
+                    <td align="center">{item.username_1}</td>
                     <td align="center"><strong>VS</strong></td>
-                    <td align="center">{item.id}</td>
-                    <td align="center">{item.username}</td>
-                    <td align="center"><select><option value=""></option></select></td>
+                    <td align="center">{item.userID_2}</td>
+                    <td align="center">{item.username_2}</td>
+                    <td align="center">
+                        <select>
+                        <option value="">--Choose Winner--</option>
+                        <option value={item.userID_1}>{item.userID_1}</option>
+                        <option value={item.userID_2}>{item.userID_2}</option>
+                        </select>
+                        <br/><br/>
+                        <button type="submit" className="btn btn-primary" 
+                        style={{ fontSize: "12px" }}
+                        onClick={() => this.onSubmitWinner(item.id)}>Submit</button>
+                    </td>
                 </tr>
             )
 
-        })
+        });
         
         return listJSXActivity;
     }
@@ -159,11 +199,11 @@ class ParticipantList extends Component {
                                     <thead className="thead-dark">
                                         <tr>
                                             <th><center>Match ID</center></th>
-                                            <th><center>UID_1</center></th>
-                                            <th><center>Username_1</center></th>
+                                            <th><center>UID #1</center></th>
+                                            <th><center>Username #1</center></th>
                                             <th><center>Versus</center></th>
-                                            <th><center>UID_2</center></th>
-                                            <th><center>Username_2</center></th>
+                                            <th><center>UID #2</center></th>
+                                            <th><center>Username #2</center></th>
                                             <th><center>Winner</center></th>
                                         </tr>
                                     </thead>

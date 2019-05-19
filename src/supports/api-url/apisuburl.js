@@ -58,3 +58,6 @@ export const WISHLIST_GET = "/wishlist/getwishlist";
 export const WISHLIST_ADD = "/wishlist/addwishlist";
 export const WISHLIST_EDIT = "/wishlist/editwishlist/";
 export const WISHLIST_DELETE = "/wishlist/deletewishlist/";
+
+export const MATCHES_ADD = "/matches/add";
+export const MATCHES_SHOW = "/matches/show";

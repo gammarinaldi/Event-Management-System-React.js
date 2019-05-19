@@ -104,7 +104,7 @@ class CheckOut extends Component {
                 }
 
                 document.getElementById("change").innerHTML = 
-                '<div className="alert alert-primary"><h3>Payment success, your order will be proceed, Thank you!</h3></div>';
+                '<div align="center"><br/><h3><strong>Payment success, your order will be proceed, Thank you!</strong></h3><br/></div>';
             })
             .catch((err) =>{
                 console.log(err);
@@ -138,7 +138,7 @@ class CheckOut extends Component {
         if(this.props.username !== "") {
             
             return(
-                <div className="card bg-light" style={{ fontSize: "13px" }}>
+                <div className="card bg-light" style={{ fontSize: "13px" }} id="change">
                     <div className="col-lg-6 align-self-center">
                         <div className="col-lg-12 text-center" style={{ paddingTop: "20px" }}>
                             <h2 className="section-heading text-uppercase">Checkout</h2>
@@ -224,7 +224,7 @@ class CheckOut extends Component {
                                                 </div>
                                                 <br/><br/>
 
-                                                <div id="change">
+                                                <div id="confirm">
                                                     <button className="btn btn-success" style={{ fontSize: "12px" }}
                                                         onClick={ () => this.onBtnConfirm() }>
                                                     <i className="fa fa-check fa-sm"></i>

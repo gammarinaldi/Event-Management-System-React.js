@@ -142,11 +142,11 @@ class Cart extends Component {
                     <td>{this.props.convertToRupiah(item.price*item.qty)}</td>
                     <td>
                         <center>
-                        <button className="btn btn-info" 
+                        {/* <button className="btn btn-info" 
                             onClick={ () => this.setState({ selectedIdEdit: item.idCart }) }>
                             <i className="fa fa-edit fa-sm"></i>
                         </button>
-                        &nbsp;
+                        &nbsp; */}
                         <button className="btn btn-danger"
                             onClick={ () => this.onBtnDeleteClick(item.idCart, item.item) }>
                             <i className="fa fa-trash fa-sm"></i>

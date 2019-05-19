@@ -26,7 +26,7 @@ class ParticipantList extends Component {
     }
 
     componentDidMount() {
-        if(this.props.myRole === "ADMIN") {
+        if(this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER") {
             this.showParticipant();
         }
     }
