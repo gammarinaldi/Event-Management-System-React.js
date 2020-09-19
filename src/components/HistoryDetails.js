@@ -54,14 +54,14 @@ class HistoryDetails extends Component {
             console.log(err)
         })
     }
-  
+
     renderListOrderDetails = () => {
         const { open } = this.state;
         var listJSXOrderDetails = this.state.listOrderDetails.map((item) => {
 
             if(item.qrcode === '0') {
                 return (
-                    <tr>   
+                    <tr>
                         <td><center>{item.idProduct}</center></td>
                         <td><left>{item.item}</left></td>
                         <td><left>{item.category}</left></td>
@@ -82,7 +82,7 @@ class HistoryDetails extends Component {
                 )
             } else {
                 return (
-                    <tr>   
+                    <tr>
                         <td><center>{item.idProduct}</center></td>
                         <td><left>{item.item}</left></td>
                         <td><left>{item.category}</left></td>
@@ -114,10 +114,10 @@ class HistoryDetails extends Component {
             }
 
         })
-        
+
         return listJSXOrderDetails;
     }
-        
+
     render() {
 
         if(this.props.username !== "") {
@@ -132,7 +132,7 @@ class HistoryDetails extends Component {
                             <div className="col-lg-10 bg-light" style={{ padding: "20px" }}>
                             <h2>Manage Transactions</h2>
                             <hr/>
-                            
+
                             <div className="card bg-light" style={{ fontSize: "13px", paddingLeft: "20px" }}>
                                 <div className="col-lg-12 align-self-center">
                                     <div className="col-lg-12 text-center" style={{ paddingTop: "20px" }}>
@@ -188,7 +188,7 @@ class HistoryDetails extends Component {
                                         <th scope="col"><center>Time</center></th>
                                         <th scope="col"><center>Price</center></th>
                                         <th scope="col"><center>Qty</center></th>
-                                        <th scope="col"><center>Barcode</center></th>
+                                        <th scope="col"><center>QR Code</center></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -200,8 +200,8 @@ class HistoryDetails extends Component {
                     </div>
                 )
             }
-            
-            
+
+
         } else {
             return (
                 <Redirect to="/login" />
