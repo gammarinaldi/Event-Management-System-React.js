@@ -11,7 +11,7 @@ import queryString from 'query-string';
 
 class ParticipantList extends Component {
 
-    state = { 
+    state = {
         listParticipant: [],
         searchListParticipant: [],
         activePage: 1,
@@ -40,17 +40,16 @@ class ParticipantList extends Component {
         this.setState({
             eventName: params.item
         });
-        
+
         this.setState({
             totalParticipant: params.totalParticipant
         });
-
         axios.post(API_URL_1 + USERS_PARTICIPANT, {
             id: params.id
         })
         .then((res) => {
             console.log(res)
-            this.setState({ 
+            this.setState({
                 listParticipant: res.data,
                 searchListParticipant: res.data
             });
@@ -112,19 +111,19 @@ class ParticipantList extends Component {
 
         if(arrSearch.length === 0) {
             arrSearch = this.state.listParticipant.filter((e) => {
-                return e.email.toLowerCase().includes(query.toLowerCase())  
+                return e.email.toLowerCase().includes(query.toLowerCase())
             })
         }
 
         if(arrSearch.length === 0) {
             arrSearch = this.state.listParticipant.filter((e) => {
-                return e.phone.toLowerCase().includes(query.toLowerCase())  
+                return e.phone.toLowerCase().includes(query.toLowerCase())
             })
         }
-        
+
         this.setState({ searchListParticipant: arrSearch })
     }
-  
+
     renderListParticipant = () => {
         var indexOfLastTodo = this.state.activePage * this.state.itemPerPage;
         var indexOfFirstTodo = indexOfLastTodo - this.state.itemPerPage;
@@ -134,7 +133,7 @@ class ParticipantList extends Component {
         var listJSXActivity = renderedMatches.map((item, index) => {
 
             return (
-                <tr key={index}>   
+                <tr key={index}>
                     <td align="center">{index}</td>
                     <td align="center">{item.userID_1}</td>
                     <td align="center">{item.username_1}</td>
@@ -148,7 +147,7 @@ class ParticipantList extends Component {
                         <option value={item.userID_2}>{item.userID_2}</option>
                         </select>
                         <br/><br/>
-                        <button type="submit" className="btn btn-primary" 
+                        <button type="submit" className="btn btn-primary"
                         style={{ fontSize: "12px" }}
                         onClick={() => this.onSubmitWinner(item.id)}>Submit</button>
                     </td>
@@ -156,14 +155,14 @@ class ParticipantList extends Component {
             )
 
         });
-        
+
         return listJSXActivity;
     }
-        
+
     render() {
-        
+
         if(this.props.username !== "") {
-            
+
             return(
                 <div className="card bg-light" style={{ padding: "20px", fontSize: "13px" }}>
 
@@ -174,7 +173,7 @@ class ParticipantList extends Component {
                         </div>
 
                         <div className="col-10 card bg-light" style={{ padding: "20px" }}>
-                            
+
                         <div className="row">
                             <div className="col-lg-12">
                             <h2>Manage Bracket of <strong>{this.state.eventName}</strong></h2>
@@ -182,14 +181,14 @@ class ParticipantList extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            
-                        <div style={{ fontSize: "13px", marginLeft: "20px", marginTop: "10px" }} 
+
+                        <div style={{ fontSize: "13px", marginLeft: "20px", marginTop: "10px" }}
                             className="col-lg-8 card shadow p-3 mb-5 bg-white rounded">
                             <br/>
                             <div style={{ fontSize: "16px" }}>Total Participant: {this.state.totalParticipant} pax</div>
                             <br/><br/>
                             <form id="searchForm">
-                            <input type="text" className="form-control form-control-lg" style={{ fontSize: "12px" }} 
+                            <input type="text" className="form-control form-control-lg" style={{ fontSize: "12px" }}
                                     placeholder="Search"
                                     ref="query" onKeyUp={() => {this.onKeyUpSearch()}} />
                             </form>

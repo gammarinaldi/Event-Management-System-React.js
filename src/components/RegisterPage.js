@@ -18,7 +18,7 @@ class RegisterPage extends Component {
             document.getElementById("error").innerHTML = "Password do not match.";
         } else {
             this.props.onUserRegister({username, fullname, email, phone, password});
-            this.props.onActivityLog({username, role: 'MEMBER', desc: 'Register'});
+            if(this.props.errorRegister) this.props.onActivityLog({username, role: 'MEMBER', desc: 'Register'});
         }
     }
 

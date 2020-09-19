@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
 import Pagination from 'react-js-pagination';
 import { select_products, onActivityLog, convertToRupiah, sortingJSON } from '../../actions';
-import { 
+import {
     CATEGORY_GETLIST,
     LOCATION_GETLIST ,
     PRODUCTS_PARTICIPANT
@@ -14,9 +14,9 @@ import {
 
 class EventsList extends Component {
 
-    state = { 
-                filterForm: '', 
-                value: '', 
+    state = {
+                filterForm: '',
+                value: '',
                 activePage: 1,
                 itemPerPage: 5,
                 listLocation: [],
@@ -79,7 +79,7 @@ class EventsList extends Component {
         axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
             console.log(res);
-            this.setState({ 
+            this.setState({
                 listCategory: res.data,
                 listAllCategory: res.data
             });
@@ -109,10 +109,10 @@ class EventsList extends Component {
     showCity = () => {
         axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
-            this.setState({ 
-                locationDetails: res.data 
+            this.setState({
+                locationDetails: res.data
             });
-            
+
         }).catch((err) => {
             console.log(err);
         })
@@ -130,8 +130,8 @@ class EventsList extends Component {
     showLocation = () => {
         axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
-            this.setState({ 
-                listLocation: res.data 
+            this.setState({
+                listLocation: res.data
             });
         }).catch((err) => {
             console.log(err);
@@ -172,7 +172,7 @@ class EventsList extends Component {
                         &&  e.item.toLowerCase().includes(item.toLowerCase())
                         &&  e.category === category
             })
-    
+
             this.setState({ searchListParticipant: arrSearch });
         } else if(location !== "" && category !== "") {
             arrSearch = this.state.listParticipant.filter((e) => {
@@ -182,7 +182,7 @@ class EventsList extends Component {
                         &&  e.category === category
                         &&  e.city === location
             })
-    
+
             this.setState({ searchListParticipant: arrSearch });
         } else if (category === "" && location === "") {
             arrSearch = this.state.listParticipant.filter((e) => {
@@ -190,7 +190,7 @@ class EventsList extends Component {
                         &&  e.sales <= hargaMax
                         &&  e.item.toLowerCase().includes(item.toLowerCase())
             })
-    
+
             this.setState({ searchListParticipant: arrSearch });
         }
     }
@@ -212,7 +212,7 @@ class EventsList extends Component {
                         <td><center>{item.idProduct}</center></td>
                         <td>
                             <strong>
-                                <Link to={`/admin/managebracket?id=${item.idProduct}&item=${item.item}&totalParticipant=${item.participant}`} alt={item.item} 
+                                <Link to={`/admin/managebracket?id=${item.idProduct}&item=${item.item}&totalParticipant=${item.participant}`} alt={item.item}
                                 title="Click to manage brackets">{item.item}
                                 </Link>
                             </strong>
@@ -222,7 +222,7 @@ class EventsList extends Component {
                         <td>{item.city}</td>
                         <td align="center">
                             <strong>
-                                <Link to={`/admin/participantlist?id=${item.idProduct}&item=${item.item}&totalParticipant=${item.participant}`} alt={item.item} 
+                                <Link to={`/admin/participantlist?id=${item.idProduct}&item=${item.item}&totalParticipant=${item.participant}`} alt={item.item}
                                 title="Click to view list of participants">{item.participant} pax
                                 </Link>
                             </strong>
@@ -233,10 +233,10 @@ class EventsList extends Component {
             } else return false;
 
         })
-        
+
         return listJSXProducts;
     }
-        
+
     render() {
         console.log('List participant:');
         console.log(this.state.listParticipant);
@@ -244,7 +244,7 @@ class EventsList extends Component {
         console.log(this.state.searchListParticipant);
         console.log(this.state.city);
         if(this.props.username !== "" && (this.props.myRole === "ADMIN" || this.props.myRole === "PRODUCER")) {
-            
+
             return(
                 <div style={{ fontSize: "13px" }} className="card shadow p-3 mb-5 bg-white rounded">
                     <form id="searchForm">
@@ -264,7 +264,7 @@ class EventsList extends Component {
                             </select>
                         </Col>
                         <Col lg="2">
-                            <input type="text" className="form-control form-control-lg" 
+                            <input type="text" className="form-control form-control-lg"
                             placeholder="Search by item" style={{ fontSize: "12px" }}
                             ref="qItem" onKeyUp={() => {this.onKeyUpSearch()}} />
                         </Col>
@@ -273,7 +273,7 @@ class EventsList extends Component {
                             <div className="input-group-prepend">
                                 <div className="input-group-text">Rp</div>
                             </div>
-                            <input type="number" className="form-control form-control-lg" 
+                            <input type="number" className="form-control form-control-lg"
                             ref="qHargaMin" defaultValue="0" style={{ fontSize: "12px" }}
                             onKeyUp={() => {this.onKeyUpSearch()}} />
                         </InputGroup>
@@ -283,8 +283,8 @@ class EventsList extends Component {
                             <div className="input-group-prepend">
                                 <div className="input-group-text">Rp</div>
                             </div>
-                            <input type="number" className="form-control form-control-lg" 
-                            ref="qHargaMax" defaultValue="99999999" style={{ fontSize: "12px" }} 
+                            <input type="number" className="form-control form-control-lg"
+                            ref="qHargaMax" defaultValue="99999999" style={{ fontSize: "12px" }}
                             onKeyUp={() => {this.onKeyUpSearch()}} />
                         </InputGroup>
                         </Col>

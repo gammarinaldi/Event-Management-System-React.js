@@ -8,14 +8,14 @@ import { API_URL_1 } from '../supports/api-url/apiurl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarCheck, faMapMarkerAlt, faBriefcase, faCalculator } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
-import { 
-    PRODUCTS_GET, 
-    CATEGORY_GET, 
-    LOCATION_GET, 
-    CATEGORY_GETLIST, 
-    WISHLIST_ADD, 
-    WISHLIST_DELETE, 
-    WISHLIST_GETLIST, 
+import {
+    PRODUCTS_GET,
+    CATEGORY_GET,
+    LOCATION_GET,
+    CATEGORY_GETLIST,
+    WISHLIST_ADD,
+    WISHLIST_DELETE,
+    WISHLIST_GETLIST,
     WISHLIST_GET,
     CART_ADD
 } from '../supports/api-url/apisuburl';
@@ -23,13 +23,13 @@ import ShareButton from './ShareButton';
 
 class ProductsDetails extends Component {
 
-    state = { 
-        totalQty: 0, 
-        category: '', 
-        location: [], 
+    state = {
+        totalQty: 0,
+        category: '',
+        location: [],
         days: [],
-        isWishlist: [], 
-        listCategory: [], 
+        isWishlist: [],
+        listCategory: [],
         goToCart: 0,
         gotToLogin: 0
     }
@@ -59,7 +59,7 @@ class ProductsDetails extends Component {
             })
             .then((res) => {
                 console.log('Category: '+res.data[0].name);
-                this.setState({ 
+                this.setState({
                     category: res.data[0].name
                 });
             }).catch((err) => {
@@ -70,7 +70,7 @@ class ProductsDetails extends Component {
                 id: res.data[0].idLocation
             })
             .then((res) => {
-                this.setState({ 
+                this.setState({
                     location: res.data[0]
                 });
             }).catch((err) => {
@@ -86,7 +86,7 @@ class ProductsDetails extends Component {
     showCategory = () => {
         axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
-            this.setState({ 
+            this.setState({
                 listCategory: res.data
             });
         }).catch((err) => {
@@ -123,15 +123,15 @@ class ProductsDetails extends Component {
         } else {
             if(this.state.isWishlist.filter((item) => item.idProduct === idProduct).length > 0) {
                 wishlistBtn =   <button className="btn btn-danger btn-sm" style={{ fontSize: "12px" }}
-                                    onClick={ () => 
+                                    onClick={ () =>
                                         this.onWishlistDelete(idProduct) }>
                                 <i className="fa fa-check fa-sm"></i> Saved
                                 </button>;
             } else {
                 wishlistBtn =   <button className="btn btn-outline-primary btn-sm" style={{ fontSize: "12px" }}
-                                    onClick={ () => 
+                                    onClick={ () =>
                                     this.onWishlistClick(
-                                        this.props.products.id, 
+                                        this.props.products.id,
                                         this.props.products.idCategory
                                         ) }>
                                 <i className="fa fa-heart fa-sm"></i> Wishlist
@@ -169,7 +169,7 @@ class ProductsDetails extends Component {
     onBtnAddToCart = (idProduct, idCategory) => {
         if(this.props.username === "") {
             alert("Please Login First!");
-            setTimeout(() => { 
+            setTimeout(() => {
                 this.setState({ goToLogin: 1 });
             }, 100);
         } else {
@@ -181,7 +181,7 @@ class ProductsDetails extends Component {
                     idProduct, idCategory, username: this.props.username, qty
                 }).then((res) => {
                     this.props.cartCount(this.props.username);
-                    setTimeout(() => { 
+                    setTimeout(() => {
                         this.setState({ goToCart: 1 });
                         this.showProduct();
                     }, 100);
@@ -210,7 +210,7 @@ class ProductsDetails extends Component {
         // }
 
         // temp.splice(-1,1); //=====> Remove last item of array
-        
+
         // return temp;
         return this.state.days;
     }
@@ -221,7 +221,7 @@ class ProductsDetails extends Component {
         var { id, idCategory, address, item, price, img, startDate, endDate, startTime, endTime } = this.props.products;
         startDate = moment(startDate).format('DD MMMM YYYY');
         endDate = moment(endDate).format('DD MMMM YYYY');
-        
+
         return(
             <div className="col-lg-12 card shadow p-3 mb-5 bg-white rounded">
                 <br/><br/>
@@ -274,7 +274,7 @@ class ProductsDetails extends Component {
                 <center>{this.renderWishlist(id)}</center>
                 <br/>
                 <br/>
-                
+
                 <center>
                 <div className="row">
                     <div className="col-lg-12">
