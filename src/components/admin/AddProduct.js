@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import queryString from 'query-string';
 import { API_URL_1 } from '../../supports/api-url/apiurl';
-import { 
-    PRODUCTS_ADD, 
+import {
+    PRODUCTS_ADD,
     PRODUCTS_GET,
     PRODUCTS_DELETE,
     LOCATION_GETLIST,
@@ -28,25 +28,42 @@ class ProductsEditDetails extends Component {
             idLocation: 0,
             idCategory: 0,
             days: [],
-            tinyMCE: ''
+            tinyMCE: '',
+            addressDisabled: true,
+            priceDisabled: false
         };
 
-        this.handleInputChange = this.handleInputChange.bind(this);
+        // this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleInputChange(event) { 
-
-        if(event.target.type === 'checkbox' && event.target.checked) {
-            this.state.days.push(event.target.name);
-        } else if(event.target.type === 'checkbox' && !event.target.checked) {
+    handleInputChange = (e) => {
+        if(e.target.type === 'checkbox' && e.target.checked) {
+            this.state.days.push(e.target.name);
+        } else if(e.target.type === 'checkbox' && !e.target.checked) {
             var index = 0;
-            index = this.state.days.indexOf(event.target.name);
+            index = this.state.days.indexOf(e.target.name);
             if (index > -1) {
                 this.state.days.splice(index, 1);
              }
         }
-
         console.log(this.state.days)
+    }
+
+    handleLocationChange = (e) => {
+        var index = e.nativeEvent.target.selectedIndex;
+        if (e.nativeEvent.target[index].text === "Online") {
+            this.setState({ addressDisabled: true })
+        } else {
+            this.setState({ addressDisabled: false })
+        }
+    }
+
+    handlePriceChange = (e) => {
+        if(e.target.type === 'checkbox' && e.target.checked) {
+            this.setState({ priceDisabled: true })
+        } else {
+            this.setState({ priceDisabled: false })
+        }
     }
 
     handleEditorChange = (e) => {
@@ -81,10 +98,10 @@ class ProductsEditDetails extends Component {
             if(document.getElementById("addImg").files[0] !== undefined) {
                 var formData = new FormData();
                 var headers = {
-                    headers: 
+                    headers:
                     {'Content-Type': 'multipart/form-data'}
                 }
-    
+
                 const category = this.refs.addCategory.value;
                 const location = this.refs.addLocation.value;
                 const address = this.refs.addAddress.value;
@@ -96,21 +113,21 @@ class ProductsEditDetails extends Component {
                 const endTime = this.refs.addEndTime.value;
                 const desc = this.state.tinyMCE;
                 const days = this.state.days;
-    
+
                 var data = {
-                    idCategory: category, 
+                    idCategory: category,
                     idLocation: location,
                     creatorRole: this.props.myRole,
-                    creatorName: this.props.username,
+                    createdBy: this.props.username,
                     address, item, price, startDate, endDate, startTime, endTime, desc, days: days.toString()
                 }
-    
+
                 if(document.getElementById('addImg')){
                     formData.append('img', document.getElementById('addImg').files[0]);
                 }
-    
+
                 formData.append('data', JSON.stringify(data)); //Convert object javascript menjadi JSON
-    
+                console.log(formData)
                 axios.post(API_URL_1 + PRODUCTS_ADD, formData, headers)
                 .then((res) => {
                     console.log(res);
@@ -143,10 +160,10 @@ class ProductsEditDetails extends Component {
         axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
             console.log(res);
-            this.setState({ 
+            this.setState({
                 locationDetails: res.data
             });
-            
+
         }).catch((err) => {
             console.log(err);
         })
@@ -164,7 +181,7 @@ class ProductsEditDetails extends Component {
     showLocation = () => {
         axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
-            this.setState({ 
+            this.setState({
                 listLocation: res.data
             });
         }).catch((err) => {
@@ -184,7 +201,7 @@ class ProductsEditDetails extends Component {
     showCategory = () => {
         axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
-            this.setState({ 
+            this.setState({
                 listCategory: res.data,
                 listAllCategory: res.data
             });
@@ -222,7 +239,7 @@ class ProductsEditDetails extends Component {
                         <div className="col-lg-2" style={{ marginBottom: "20px" }}>
                         <SideBar active='Add Product' />
                         </div>
-                        
+
                         <div className="col-lg-10 card bg-light" style={{ padding: "20px" }}>
                         <div className="row">
                             <div className="col-lg-12">
@@ -231,8 +248,8 @@ class ProductsEditDetails extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            
-                        <div style={{ fontSize: "13px", marginLeft: "20px", marginTop: "10px" }} 
+
+                        <div style={{ fontSize: "13px", marginLeft: "20px", marginTop: "10px" }}
                             className="col-lg-8 card shadow p-3 mb-5 bg-white rounded">
                         <br/>
 
@@ -245,7 +262,7 @@ class ProductsEditDetails extends Component {
                                         <td>:</td>
                                         <td>
                                             <input type="text" size="4" style={{ fontSize: "12px" }}
-                                                ref="addItem" className="form-control form-control-lg" required/>    
+                                                ref="addItem" className="form-control form-control-lg" required/>
                                         &nbsp;</td>
                                     </tr>
                                     <tr>
@@ -261,32 +278,34 @@ class ProductsEditDetails extends Component {
                                         <td>&nbsp;Location</td>
                                         <td>:</td>
                                         <td>
-                                            <select ref="addLocation" className="form-control form-control-lg" style={{ fontSize: "12px" }} required>
+                                            <select ref="addLocation" className="form-control form-control-lg" style={{ fontSize: "12px" }} onChange={this.handleLocationChange} required>
                                                 {this.renderListLocation()}
-                                            </select>    
+                                            </select>
                                         &nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Address</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="text" size="4" style={{ fontSize: "12px" }}
-                                                ref="addAddress" className="form-control form-control-lg" required/>    
+                                            <input type="text" size="4" style={{ fontSize: "12px" }} ref="addAddress" className="form-control form-control-lg"
+                                                disabled={this.state.addressDisabled}/>
                                         &nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Price</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="number" style={{ fontSize: "12px" }} 
-                                                ref="addPrice" className="form-control form-control-lg" placeholder="Rp." required/>    
+                                            {/* <input name="free" type="checkbox" onChange={this.handlePriceChange} /> Free &nbsp;
+                                            <br/><br/> */}
+                                            <input type="number" style={{ fontSize: "12px" }}
+                                                ref="addPrice" className="form-control form-control-lg" placeholder="Rp." disabled={this.state.priceDisabled} required/> *Input 0 if Free
                                         &nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Image</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="file" id="addImg" name="addImg" 
+                                            <input type="file" id="addImg" name="addImg"
                                                 label={this.state.addImg} onChange={this.addImgChange} required/>
                                         &nbsp;</td>
                                     </tr>
@@ -295,7 +314,7 @@ class ProductsEditDetails extends Component {
                                         <td>:</td>
                                         <td>
                                             <input type="date" size="4" style={{ fontSize: "12px" }}
-                                                ref="addStartDate" className="form-control form-control-lg" required/>    
+                                                ref="addStartDate" className="form-control form-control-lg" required/>
                                         &nbsp;</td>
                                     </tr>
                                     <tr>
@@ -303,7 +322,7 @@ class ProductsEditDetails extends Component {
                                         <td>:</td>
                                         <td>
                                             <input type="date" size="4" style={{ fontSize: "12px" }}
-                                                ref="addEndDate" className="form-control form-control-lg" required/>    
+                                                ref="addEndDate" className="form-control form-control-lg" required/>
                                         &nbsp;</td>
                                     </tr>
                                     <tr>
@@ -311,7 +330,7 @@ class ProductsEditDetails extends Component {
                                         <td>:</td>
                                         <td>
                                             <input type="time" size="4" style={{ fontSize: "12px" }}
-                                                ref="addStartTime" className="form-control form-control-lg" required/>    
+                                                ref="addStartTime" className="form-control form-control-lg" required/>
                                         &nbsp;</td>
                                     </tr>
                                     <tr>
@@ -319,26 +338,26 @@ class ProductsEditDetails extends Component {
                                         <td>:</td>
                                         <td>
                                             <input type="time" size="4" style={{ fontSize: "12px" }}
-                                                ref="addEndTime" className="form-control form-control-lg" required/>    
+                                                ref="addEndTime" className="form-control form-control-lg" required/>
                                         &nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Day(s)</td>
                                         <td>:</td>
                                         <td>
-                                        <input name="Sunday" type="checkbox" 
+                                        <input name="Sunday" type="checkbox"
                                             onChange={this.handleInputChange} /> Sunday &nbsp;
-                                        <input name="Monday" type="checkbox" 
+                                        <input name="Monday" type="checkbox"
                                             onChange={this.handleInputChange} /> Monday &nbsp;
-                                        <input name="Tuesday" type="checkbox" 
+                                        <input name="Tuesday" type="checkbox"
                                             onChange={this.handleInputChange} /> Tuesday &nbsp;
-                                        <input name="Wednesday" type="checkbox" 
+                                        <input name="Wednesday" type="checkbox"
                                             onChange={this.handleInputChange} /> Wednesday &nbsp;
-                                        <input name="Thursday" type="checkbox" 
+                                        <input name="Thursday" type="checkbox"
                                             onChange={this.handleInputChange} /> Thursday &nbsp;
-                                        <input name="Friday" type="checkbox" 
+                                        <input name="Friday" type="checkbox"
                                             onChange={this.handleInputChange} /> Friday &nbsp;
-                                        <input name="Saturday" type="checkbox" 
+                                        <input name="Saturday" type="checkbox"
                                             onChange={this.handleInputChange} /> Saturday &nbsp;
                                         &nbsp;</td>
                                     </tr>
@@ -391,7 +410,7 @@ class ProductsEditDetails extends Component {
                             </form>
 
                         </div>
-                            
+
                         </div>
                         </div>
 

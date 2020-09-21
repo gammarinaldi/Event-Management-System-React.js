@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import axios from 'axios';
 import moment from 'moment';
-import { 
+import {
     WISHLIST_GETLIST,
-    WISHLIST_DELETE, 
+    WISHLIST_DELETE,
     CATEGORY_GETLIST,
     LOCATION_GETLIST,
     WISHLIST_GET,
@@ -48,7 +48,7 @@ class ProductsItems extends Component {
     showCategory = () => {
         axios.get(API_URL_1 + CATEGORY_GETLIST)
         .then((res) => {
-            this.setState({ 
+            this.setState({
                 listCategory: res.data
             });
         }).catch((err) => {
@@ -68,10 +68,10 @@ class ProductsItems extends Component {
     showCity = () => {
         axios.get(API_URL_1 + LOCATION_GETLIST)
         .then((res) => {
-            this.setState({ 
-                locationDetails: res.data 
+            this.setState({
+                locationDetails: res.data
             });
-            
+
         }).catch((err) => {
             console.log(err);
         })
@@ -97,15 +97,15 @@ class ProductsItems extends Component {
         } else {
             if(this.state.isWishlist.filter((item) => item.idProduct === idProduct).length > 0) {
                 wishlistBtn =   <button className="btn btn-danger btn-sm" style={{ fontSize: "12px" }}
-                                    onClick={ () => 
+                                    onClick={ () =>
                                         this.onWishlistDelete(idProduct) }>
                                 <i className="fa fa-check fa-sm"></i> Saved
                                 </button>;
             } else {
                 wishlistBtn =   <button className="btn btn-outline-primary btn-sm" style={{ fontSize: "12px" }}
-                                    onClick={ () => 
+                                    onClick={ () =>
                                     this.onWishlistClick(
-                                        this.props.products.id, 
+                                        this.props.products.id,
                                         this.props.products.idCategory
                                         ) }>
                                 <i className="fa fa-heart fa-sm"></i> Wishlist
@@ -180,8 +180,11 @@ class ProductsItems extends Component {
                     <CardText id="id" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#898989' }}>
                         ID Product: {id}
                     </CardText>
-                    <CardText id="cardPrice" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#ea7f1c' }}>
+                    {/* <CardText id="cardPrice" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#ea7f1c' }}>
                     <FontAwesomeIcon icon={faCalculator} size="md" />&nbsp;{this.props.convertToRupiah(price)}
+                    </CardText> */}
+                    <CardText id="cardPrice" style={{ padding: '0 0 0 20px', margin: '0 0 5px 0', color: '#ea7f1c' }}>
+                    HTM {(price === 0) ? `FREE` : this.props.convertToRupiah(price)}
                     </CardText>
                     <br/>
                     <CardText id="eventBookShare" style={{ padding: '0 20px 0 20px', margin: '0 0 10px 0', color: '#898989' }}>
@@ -190,7 +193,7 @@ class ProductsItems extends Component {
                         </div>
                     </CardText>
                     <Button style={{ margin: '0 10px 10px 10px', fontSize: "14px" }}
-                        onClick={this.onItemClick} 
+                        onClick={this.onItemClick}
                         color="success"><strong>View Details</strong>
                     </Button>
                     </Card>
